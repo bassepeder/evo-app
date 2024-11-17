@@ -109,11 +109,6 @@ class SignInScreen extends ConsumerWidget {
   }
 }
 
-const authOutlineInputBorder = OutlineInputBorder(
-  borderSide: BorderSide(color: Color(0xFF757575)),
-  borderRadius: BorderRadius.all(Radius.circular(100)),
-);
-
 class SignInForm extends StatelessWidget {
   final VoidCallback onLoginClick;
   final Function(String) onEmailChanged;
@@ -121,6 +116,11 @@ class SignInForm extends StatelessWidget {
   final bool isLoading;
 
   final formKey = GlobalKey<FormState>();
+
+  static const authOutlineInputBorder = OutlineInputBorder(
+    borderSide: BorderSide(color: Color(0xFF757575)),
+    borderRadius: BorderRadius.all(Radius.circular(100)),
+  );
 
   SignInForm({
     super.key,
