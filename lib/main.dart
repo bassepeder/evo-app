@@ -1,10 +1,11 @@
 import 'package:evo/constants.dart';
-import 'package:evo/features/auth/presentation/sign_in_screen.dart';
+import 'package:evo/features/auth/views/sign_in_screen.dart';
 import 'package:evo/utils/navigation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'i18n/translations.g.dart';
 
@@ -26,7 +27,11 @@ void main() async {
     );
   }
 
-  runApp(TranslationProvider(child: const EvoApp()));
+  runApp(ProviderScope(
+    child: TranslationProvider(
+      child: const EvoApp(),
+    ),
+  ));
 }
 
 class EvoApp extends StatelessWidget {
