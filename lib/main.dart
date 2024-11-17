@@ -3,8 +3,14 @@ import 'package:evo/utils/navigation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'i18n/translations.g.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  LocaleSettings.useDeviceLocale();
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   if (defaultTargetPlatform == TargetPlatform.android) {
@@ -19,7 +25,7 @@ void main() async {
     );
   }
 
-  runApp(const EvoApp());
+  runApp(TranslationProvider(child: const EvoApp()));
 }
 
 class EvoApp extends StatelessWidget {
@@ -29,6 +35,9 @@ class EvoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'EVO',
+      locale: TranslationProvider.of(context).flutterLocale,
+      supportedLocales: AppLocaleUtils.supportedLocales,
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFFC00080)),
@@ -39,69 +48,13 @@ class EvoApp extends StatelessWidget {
   }
 }
 
-class EmptyNotificationsScreen extends StatelessWidget {
-  const EmptyNotificationsScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          Image.asset(
-            'assets/images/showcase.jpg',
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.7,
-            fit: BoxFit.cover,
-          ),
-          Expanded(
-            child: SafeArea(
-              top: false,
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/logo.png',
-                    width: 125,
-                    height: 125,
-                  ),
-                  Text(
-                    'Styrken du trenger',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 32),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).colorScheme.primary,
-                        foregroundColor:
-                            Theme.of(context).colorScheme.onPrimary,
-                        minimumSize: const Size(double.infinity, 40),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      child: Text("Logg inn".toUpperCase()),
-                    ),
-                  ),
-                  const Spacer(),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final t = Translations.of(context);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -117,7 +70,7 @@ class WelcomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Velkommen til ",
+                t.welcomeScreen.welcomeHeader,
                 textAlign: TextAlign.center,
                 style: Theme.of(context)
                     .textTheme
@@ -133,7 +86,7 @@ class WelcomeScreen extends StatelessWidget {
             ],
           ),
           Text(
-            "Styrken du trenger",
+            t.welcomeScreen.subtitle,
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Theme.of(context)
@@ -159,7 +112,7 @@ class WelcomeScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              child: Text("Logg inn".toUpperCase()),
+              child: Text(t.welcomeScreen.signInButton.toUpperCase()),
             ),
           ),
         ],
