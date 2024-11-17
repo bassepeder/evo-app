@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'common/widgets/evo_elevated_button.dart';
 import 'i18n/translations.g.dart';
 
 void main() async {
@@ -60,6 +61,7 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = Translations.of(context);
+    final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -74,51 +76,38 @@ class WelcomeScreen extends StatelessWidget {
           const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 t.welcomeScreen.welcomeHeader,
                 textAlign: TextAlign.center,
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineSmall!
-                    .copyWith(fontWeight: FontWeight.bold),
+                style: textTheme.headlineLarge!
+                    .copyWith(fontWeight: FontWeight.w500),
               ),
               const SizedBox(width: 4),
               Image.asset(
                 'assets/images/logo.png',
-                width: 55,
-                height: 55,
+                width: 60,
+                height: 60,
               ),
             ],
           ),
           Text(
             t.welcomeScreen.subtitle,
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Theme.of(context)
-                  .textTheme
-                  .bodyLarge!
-                  .color!
-                  .withOpacity(0.64),
+            style: textTheme.bodyLarge!.copyWith(
+              color: textTheme.bodyLarge!.color!.withOpacity(0.64),
             ),
           ),
           const SizedBox(height: 48),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: ElevatedButton(
+            child: EvoElevatedButton(
               onPressed: () => pushPlatformRoute(
                 context,
                 builder: (_) => SignInScreen(),
               ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                minimumSize: const Size(double.infinity, 40),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              child: Text(t.welcomeScreen.signInButton.toUpperCase()),
+              text: t.welcomeScreen.signInButton.toUpperCase(),
             ),
           ),
         ],
