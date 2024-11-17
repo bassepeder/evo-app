@@ -87,6 +87,15 @@ class SignInForm extends StatelessWidget {
             autocorrect: false,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "Vennligst skriv inn e-postadressen din";
+              } else if (!RegExp(r'^[^@]+@[^@]+\.[@]+').hasMatch(value)) {
+                return "Vennligst skriv inn en gyldig e-post";
+              }
+
+              return null;
+            },
             decoration: InputDecoration(
                 hintText: "Skriv inn e-postadressen din",
                 labelText: "E-post",
