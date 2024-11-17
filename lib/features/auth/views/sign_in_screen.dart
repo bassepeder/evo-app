@@ -54,17 +54,18 @@ class SignInScreen extends ConsumerWidget {
               const SizedBox(height: 16),
               Text(
                 t.signInScreen.header,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               const SizedBox(height: 8),
               Text(
                 t.signInScreen.subtitle,
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Color(0xFF757575)),
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      color: Color(0xFF757575),
+                    ),
               ),
               Expanded(
                 child: SingleChildScrollView(
@@ -89,8 +90,7 @@ class SignInScreen extends ConsumerWidget {
                         label: t.signInScreen.forgotPassword,
                       ),
                       /*
-                      //SizedBox(height: screenHeight * 0.075),
-                      SizedBox(height: screenHeight * 0.3),
+                      SizedBox(height: screenHeight * 0.075),
                       Image.asset(
                         'assets/images/logo.png',
                         width: 100,
