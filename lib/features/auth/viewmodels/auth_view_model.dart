@@ -1,4 +1,4 @@
-import 'package:riverpod/riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/auth_state.dart';
 import '../repositories/auth_repository.dart';
@@ -15,7 +15,6 @@ class AuthViewModel extends StateNotifier<AuthState> {
     );
 
     try {
-      await Future.delayed(Duration(seconds: 5));
       final response = await _authRepository.signInWithEmailAndPassword(
         state.email,
         state.password,
@@ -25,12 +24,13 @@ class AuthViewModel extends StateNotifier<AuthState> {
       state = state.copyWith(
         success: true,
         loading: false,
-        errorMessage: '',
+        errorMessage: null,
       );
 
       // Optionally, you can save the token to SharedPreferences or use another state management strategy
     } catch (e) {
       state = state.copyWith(
+        success: false,
         loading: false,
         errorMessage: e.toString(),
       );

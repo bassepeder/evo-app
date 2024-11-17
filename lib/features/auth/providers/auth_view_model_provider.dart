@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/auth_state.dart';
 
 final authViewModelProvider =
-    StateNotifierProvider<AuthViewModel, AuthState>((ref) {
+    StateNotifierProvider.autoDispose<AuthViewModel, AuthState>((ref) {
   final authRepository = ref.read(authRepositoryProvider);
   return AuthViewModel(authRepository);
 });
