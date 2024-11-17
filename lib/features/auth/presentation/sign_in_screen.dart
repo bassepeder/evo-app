@@ -39,11 +39,15 @@ class SignInScreen extends StatelessWidget {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.05,
                       ),
-                      SignInForm(),
+                      SignInForm(
+                        onLoginClick: () {},
+                        onEmailChanged: (email) {},
+                        onPasswordChanged: (password) {},
+                      ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.025,
                       ),
-                      const ForgotPasswordTextButton(),
+                      ForgotPasswordTextButton(onClick: () {}),
                     ],
                   ),
                 ),
@@ -62,7 +66,16 @@ const authOutlineInputBorder = OutlineInputBorder(
 );
 
 class SignInForm extends StatelessWidget {
-  const SignInForm({super.key});
+  final VoidCallback onLoginClick;
+  final Function(String) onEmailChanged;
+  final Function(String) onPasswordChanged;
+
+  const SignInForm({
+    super.key,
+    required this.onLoginClick,
+    required this.onEmailChanged,
+    required this.onPasswordChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +83,7 @@ class SignInForm extends StatelessWidget {
       child: Column(
         children: [
           TextFormField(
-            onSaved: (email) {},
-            onChanged: (email) {},
+            onChanged: (email) => onEmailChanged(email),
             autocorrect: false,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
@@ -95,8 +107,7 @@ class SignInForm extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 24),
             child: TextFormField(
-              onSaved: (password) {},
-              onChanged: (password) {},
+              onChanged: (password) => onPasswordChanged(password),
               obscureText: true,
               decoration: InputDecoration(
                   hintText: "Skriv inn passordet ditt",
@@ -118,7 +129,7 @@ class SignInForm extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () => onLoginClick,
             style: ElevatedButton.styleFrom(
               elevation: 0,
               backgroundColor: Theme.of(context).colorScheme.primary,
@@ -137,14 +148,17 @@ class SignInForm extends StatelessWidget {
 }
 
 class ForgotPasswordTextButton extends StatelessWidget {
+  final VoidCallback onClick;
+
   const ForgotPasswordTextButton({
     super.key,
+    required this.onClick,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: () => onClick,
       child: Text(
         'Glemt passord?',
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
