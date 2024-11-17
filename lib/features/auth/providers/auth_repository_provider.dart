@@ -1,5 +1,5 @@
 import 'package:evo/http_provider.dart';
-import 'package:riverpod/riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../repositories/auth_repository.dart';
 import '../repositories/auth_repository_impl.dart';
