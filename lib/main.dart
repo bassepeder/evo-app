@@ -1,3 +1,4 @@
+import 'package:evo/constants.dart';
 import 'package:evo/features/auth/presentation/sign_in_screen.dart';
 import 'package:evo/utils/navigation.dart';
 import 'package:flutter/foundation.dart';
@@ -40,7 +41,7 @@ class EvoApp extends StatelessWidget {
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFFC00080)),
+        colorScheme: ColorScheme.fromSeed(seedColor: kPrimaryColor),
         useMaterial3: true,
       ),
       home: const WelcomeScreen(),
