@@ -1,9 +1,10 @@
 import 'package:evo/common/widgets/evo_elevated_button.dart';
-import 'package:evo/features/auth/providers/auth_view_model_provider.dart';
+import 'package:evo/features/auth/models/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../i18n/translations.g.dart';
+import '../providers/auth_view_model_provider.dart';
 
 class SignInScreen extends ConsumerWidget {
   const SignInScreen({super.key});
@@ -12,7 +13,32 @@ class SignInScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final t = Translations.of(context);
     final isLoading =
-        ref.read(authViewModelProvider.select((it) => it.loading));
+        ref.watch(authViewModelProvider.select((it) => it.loading));
+
+    ref.listen<AuthState>(authViewModelProvider, (previous, next) {
+      if (next.success == true) {
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(
+              content: Text('You are signed in'),
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+      } else if (next.errorMessage != previous?.errorMessage) {
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(
+              content: Text(next.errorMessage!),
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+      }
+    });
+
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -22,7 +48,7 @@ class SignInScreen extends ConsumerWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
           child: Column(
             children: [
               const SizedBox(height: 16),
@@ -40,17 +66,15 @@ class SignInScreen extends ConsumerWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Color(0xFF757575)),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.05),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
-                    children: [
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.05,
-                      ),
+                    children: <Widget>[
+                      SizedBox(height: screenHeight * 0.1),
                       SignInForm(
-                        onLoginClick: () =>
-                            ref.read(authViewModelProvider.notifier).signIn(),
+                        onLoginClick: () async => await ref
+                            .read(authViewModelProvider.notifier)
+                            .signIn(),
                         onEmailChanged: (email) => ref
                             .read(authViewModelProvider.notifier)
                             .setEmail(email),
@@ -59,13 +83,20 @@ class SignInScreen extends ConsumerWidget {
                             .setPassword(password),
                         isLoading: isLoading,
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.025,
-                      ),
+                      SizedBox(height: screenHeight * 0.025),
                       ForgotPasswordTextButton(
                         onClick: () {},
                         label: t.signInScreen.forgotPassword,
                       ),
+                      /*
+                      //SizedBox(height: screenHeight * 0.075),
+                      SizedBox(height: screenHeight * 0.3),
+                      Image.asset(
+                        'assets/images/logo.png',
+                        width: 100,
+                        height: 100,
+                      ),
+                       */
                     ],
                   ),
                 ),
@@ -106,11 +137,11 @@ class SignInForm extends StatelessWidget {
     return Form(
       key: formKey,
       child: Column(
-        children: [
+        children: <Widget>[
           TextFormField(
             onChanged: (email) => onEmailChanged(email),
             autocorrect: false,
-            enabled: !isLoading,
+            readOnly: isLoading,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             validator: (value) {
@@ -146,7 +177,7 @@ class SignInForm extends StatelessWidget {
             child: TextFormField(
               onChanged: (password) => onPasswordChanged(password),
               obscureText: true,
-              enabled: !isLoading,
+              readOnly: isLoading,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return t.validation.forms.inputFields.password.empty;
@@ -174,8 +205,11 @@ class SignInForm extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           EvoElevatedButton(
-            onPressed: () =>
-                {if (formKey.currentState!.validate()) onLoginClick()},
+            onPressed: () {
+              if (formKey.currentState!.validate()) {
+                onLoginClick();
+              }
+            },
             text: t.signInScreen.signInButton,
             isLoading: isLoading,
           )
