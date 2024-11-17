@@ -13,7 +13,7 @@ class SignInScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: const Text("Logg inn"),
+        title: Text(t.signInScreen.title),
       ),
       body: SafeArea(
         child: Padding(
@@ -77,7 +77,9 @@ class SignInForm extends StatelessWidget {
   final Function(String) onEmailChanged;
   final Function(String) onPasswordChanged;
 
-  const SignInForm({
+  final formKey = GlobalKey<FormState>();
+
+  SignInForm({
     super.key,
     required this.onLoginClick,
     required this.onEmailChanged,
@@ -89,6 +91,7 @@ class SignInForm extends StatelessWidget {
     final t = Translations.of(context);
 
     return Form(
+      key: formKey,
       child: Column(
         children: [
           TextFormField(
@@ -99,7 +102,9 @@ class SignInForm extends StatelessWidget {
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return t.validation.forms.inputFields.email.empty;
-              } else if (!RegExp(r'^[^@]+@[^@]+\.[@]+').hasMatch(value)) {
+              } else if (!RegExp(
+                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                  .hasMatch(value)) {
                 return t.validation.forms.inputFields.email.invalid;
               }
 
@@ -154,7 +159,19 @@ class SignInForm extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           ElevatedButton(
-            onPressed: () => onLoginClick,
+            onPressed: () => {
+              if (formKey.currentState!.validate())
+                {
+                  ScaffoldMessenger.of(context)
+                    ..hideCurrentSnackBar()
+                    ..showSnackBar(
+                      SnackBar(
+                        content: Text('Signing you in...'),
+                        behavior: SnackBarBehavior.floating,
+                      ),
+                    )
+                }
+            },
             style: ElevatedButton.styleFrom(
               elevation: 0,
               backgroundColor: Theme.of(context).colorScheme.primary,

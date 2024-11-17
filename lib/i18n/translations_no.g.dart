@@ -49,6 +49,7 @@ class TranslationsSignInScreenNo {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+	String get title => 'Logg inn';
 	String get header => 'Velkommen tilbake!';
 	String get subtitle => 'Logg inn med e-posten og passordet ditt.';
 	late final TranslationsSignInScreenFormNo form = TranslationsSignInScreenFormNo.internal(_root);
@@ -158,6 +159,7 @@ class TranslationsValidationFormsInputFieldsPasswordNo {
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
+			case 'signInScreen.title': return 'Logg inn';
 			case 'signInScreen.header': return 'Velkommen tilbake!';
 			case 'signInScreen.subtitle': return 'Logg inn med e-posten og passordet ditt.';
 			case 'signInScreen.form.email.label': return 'E-post';

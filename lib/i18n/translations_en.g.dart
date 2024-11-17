@@ -47,6 +47,7 @@ class _TranslationsSignInScreenEn extends TranslationsSignInScreenNo {
 	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
+	@override String get title => 'Sign in';
 	@override String get header => 'Welcome back!';
 	@override String get subtitle => 'Sign in with your e-mail and password.';
 	@override late final _TranslationsSignInScreenFormEn form = _TranslationsSignInScreenFormEn._(_root);
@@ -156,6 +157,7 @@ class _TranslationsValidationFormsInputFieldsPasswordEn extends TranslationsVali
 extension on TranslationsEn {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
+			case 'signInScreen.title': return 'Sign in';
 			case 'signInScreen.header': return 'Welcome back!';
 			case 'signInScreen.subtitle': return 'Sign in with your e-mail and password.';
 			case 'signInScreen.form.email.label': return 'Email';
