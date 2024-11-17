@@ -1,0 +1,13 @@
+{
+  "forms": {
+    "inputFields": {
+      "email": {
+        "empty": "Please enter your e-mail",
+        "invalid": "Please enter a valid e-mail"
+      },
+      "password": {
+        "empty": "Please enter password"
+      }
+    }
+  }
+}

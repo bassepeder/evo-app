@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../../../i18n/translations.g.dart';
+
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final t = Translations.of(context);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -17,8 +21,8 @@ class SignInScreen extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 16),
-              const Text(
-                "Velkommen tilbake!",
+              Text(
+                t.signInScreen.header,
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 24,
@@ -26,8 +30,8 @@ class SignInScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              const Text(
-                "Logg inn med e-posten og passordet ditt.",
+              Text(
+                t.signInScreen.subtitle,
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Color(0xFF757575)),
               ),
@@ -47,7 +51,10 @@ class SignInScreen extends StatelessWidget {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.025,
                       ),
-                      ForgotPasswordTextButton(onClick: () {}),
+                      ForgotPasswordTextButton(
+                        onClick: () {},
+                        label: t.signInScreen.forgotPassword,
+                      ),
                     ],
                   ),
                 ),
@@ -79,6 +86,8 @@ class SignInForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = Translations.of(context);
+
     return Form(
       child: Column(
         children: [
@@ -89,16 +98,16 @@ class SignInForm extends StatelessWidget {
             textInputAction: TextInputAction.next,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return "Vennligst skriv inn e-postadressen din";
+                return t.validation.forms.inputFields.email.empty;
               } else if (!RegExp(r'^[^@]+@[^@]+\.[@]+').hasMatch(value)) {
-                return "Vennligst skriv inn en gyldig e-post";
+                return t.validation.forms.inputFields.email.invalid;
               }
 
               return null;
             },
             decoration: InputDecoration(
-                hintText: "Skriv inn e-postadressen din",
-                labelText: "E-post",
+                hintText: t.signInScreen.form.email.hint,
+                labelText: t.signInScreen.form.email.label,
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 hintStyle: const TextStyle(color: Color(0xFF757575)),
                 contentPadding: const EdgeInsets.symmetric(
@@ -118,9 +127,16 @@ class SignInForm extends StatelessWidget {
             child: TextFormField(
               onChanged: (password) => onPasswordChanged(password),
               obscureText: true,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return t.validation.forms.inputFields.password.empty;
+                }
+
+                return null;
+              },
               decoration: InputDecoration(
-                  hintText: "Skriv inn passordet ditt",
-                  labelText: "Passord",
+                  hintText: t.signInScreen.form.password.hint,
+                  labelText: t.signInScreen.form.password.label,
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                   hintStyle: const TextStyle(color: Color(0xFF757575)),
                   contentPadding: const EdgeInsets.symmetric(
@@ -148,7 +164,7 @@ class SignInForm extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(16)),
               ),
             ),
-            child: const Text("Logg inn"),
+            child: Text(t.signInScreen.signInButton),
           )
         ],
       ),
@@ -158,10 +174,12 @@ class SignInForm extends StatelessWidget {
 
 class ForgotPasswordTextButton extends StatelessWidget {
   final VoidCallback onClick;
+  final String label;
 
   const ForgotPasswordTextButton({
     super.key,
     required this.onClick,
+    required this.label,
   });
 
   @override
@@ -169,7 +187,7 @@ class ForgotPasswordTextButton extends StatelessWidget {
     return TextButton(
       onPressed: () => onClick,
       child: Text(
-        'Glemt passord?',
+        label,
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               color: Theme.of(context)
                   .textTheme

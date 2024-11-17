@@ -1,0 +1,16 @@
+{
+  "header": "Welcome back!",
+  "subtitle": "Sign in with your e-mail and password.",
+  "form": {
+    "email": {
+      "label": "Email",
+      "hint": "Type your e-mail"
+    },
+    "password": {
+      "label": "Password",
+      "hint": "Type your password"
+    }
+  },
+  "signInButton": "Sign in",
+  "forgotPassword": "Forgot password?"
+}
