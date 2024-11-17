@@ -38,7 +38,14 @@ class EvoElevatedButton extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(16)),
             ),
       ),
-      child: isLoading ? const CircularProgressIndicator() : Text(text),
+      child: isLoading
+          ? SizedBox(
+              width: 25,
+              height: 25,
+              child: const CircularProgressIndicator(
+                strokeWidth: 2.5,
+              ))
+          : Text(text),
     );
   }
 }
