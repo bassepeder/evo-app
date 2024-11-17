@@ -1,13 +1,18 @@
+import 'package:evo/common/widgets/evo_elevated_button.dart';
+import 'package:evo/features/auth/providers/auth_view_model_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../i18n/translations.g.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends ConsumerWidget {
   const SignInScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final t = Translations.of(context);
+    final isLoading =
+        ref.read(authViewModelProvider.select((it) => it.loading));
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -44,9 +49,15 @@ class SignInScreen extends StatelessWidget {
                         height: MediaQuery.of(context).size.height * 0.05,
                       ),
                       SignInForm(
-                        onLoginClick: () {},
-                        onEmailChanged: (email) {},
-                        onPasswordChanged: (password) {},
+                        onLoginClick: () =>
+                            ref.read(authViewModelProvider.notifier).signIn(),
+                        onEmailChanged: (email) => ref
+                            .read(authViewModelProvider.notifier)
+                            .setEmail(email),
+                        onPasswordChanged: (password) => ref
+                            .read(authViewModelProvider.notifier)
+                            .setPassword(password),
+                        isLoading: isLoading,
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.025,
@@ -76,6 +87,7 @@ class SignInForm extends StatelessWidget {
   final VoidCallback onLoginClick;
   final Function(String) onEmailChanged;
   final Function(String) onPasswordChanged;
+  final bool isLoading;
 
   final formKey = GlobalKey<FormState>();
 
@@ -84,6 +96,7 @@ class SignInForm extends StatelessWidget {
     required this.onLoginClick,
     required this.onEmailChanged,
     required this.onPasswordChanged,
+    required this.isLoading,
   });
 
   @override
@@ -97,6 +110,7 @@ class SignInForm extends StatelessWidget {
           TextFormField(
             onChanged: (email) => onEmailChanged(email),
             autocorrect: false,
+            enabled: !isLoading,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             validator: (value) {
@@ -132,6 +146,7 @@ class SignInForm extends StatelessWidget {
             child: TextFormField(
               onChanged: (password) => onPasswordChanged(password),
               obscureText: true,
+              enabled: !isLoading,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return t.validation.forms.inputFields.password.empty;
@@ -158,30 +173,11 @@ class SignInForm extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          ElevatedButton(
-            onPressed: () => {
-              if (formKey.currentState!.validate())
-                {
-                  ScaffoldMessenger.of(context)
-                    ..hideCurrentSnackBar()
-                    ..showSnackBar(
-                      SnackBar(
-                        content: Text('Signing you in...'),
-                        behavior: SnackBarBehavior.floating,
-                      ),
-                    )
-                }
-            },
-            style: ElevatedButton.styleFrom(
-              elevation: 0,
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              foregroundColor: Theme.of(context).colorScheme.onPrimary,
-              minimumSize: const Size(double.infinity, 48),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
-              ),
-            ),
-            child: Text(t.signInScreen.signInButton),
+          EvoElevatedButton(
+            onPressed: () =>
+                {if (formKey.currentState!.validate()) onLoginClick()},
+            text: t.signInScreen.signInButton,
+            isLoading: isLoading,
           )
         ],
       ),
@@ -202,7 +198,7 @@ class ForgotPasswordTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () => onClick,
+      onPressed: onClick,
       child: Text(
         label,
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
