@@ -37,9 +37,6 @@ class SignInScreen extends ConsumerWidget {
       }
     });
 
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -48,7 +45,7 @@ class SignInScreen extends ConsumerWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+          padding: EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
               const SizedBox(height: 16),
@@ -71,11 +68,10 @@ class SignInScreen extends ConsumerWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      SizedBox(height: screenHeight * 0.1),
+                      SizedBox(height: 80),
                       SignInForm(
-                        onLoginClick: () async => await ref
-                            .read(authViewModelProvider.notifier)
-                            .signIn(),
+                        onLoginClick: () =>
+                            ref.read(authViewModelProvider.notifier).signIn(),
                         onEmailChanged: (email) => ref
                             .read(authViewModelProvider.notifier)
                             .setEmail(email),
@@ -84,7 +80,7 @@ class SignInScreen extends ConsumerWidget {
                             .setPassword(password),
                         isLoading: isLoading,
                       ),
-                      SizedBox(height: screenHeight * 0.025),
+                      SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
@@ -98,7 +94,7 @@ class SignInScreen extends ConsumerWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: screenHeight * 0.05),
+                      SizedBox(height: 40),
                       Image.asset(
                         'assets/images/logo.png',
                         width: 100,
