@@ -20,7 +20,6 @@ class AuthViewModel extends StateNotifier<AuthState> {
         state.password,
       );
 
-      // Update state with the new token and set loading to false
       state = state.copyWith(
         success: true,
         loading: false,

@@ -12,6 +12,9 @@
       "hint": "Type your password"
     }
   },
-  "signInButton": "Sign in",
-  "forgotPassword": "Forgot password?"
+  "buttons": {
+    "signIn": "Sign in",
+    "forgotPassword": "Forgot password?",
+    "becomeMember": "Become member"
+  }
 }

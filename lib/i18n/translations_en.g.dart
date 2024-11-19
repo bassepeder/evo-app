@@ -51,8 +51,7 @@ class _TranslationsSignInScreenEn extends TranslationsSignInScreenNo {
 	@override String get header => 'Welcome back!';
 	@override String get subtitle => 'Sign in with your e-mail and password.';
 	@override late final _TranslationsSignInScreenFormEn form = _TranslationsSignInScreenFormEn._(_root);
-	@override String get signInButton => 'Sign in';
-	@override String get forgotPassword => 'Forgot password?';
+	@override late final _TranslationsSignInScreenButtonsEn buttons = _TranslationsSignInScreenButtonsEn._(_root);
 }
 
 // Path: validation
@@ -86,6 +85,18 @@ class _TranslationsSignInScreenFormEn extends TranslationsSignInScreenFormNo {
 	// Translations
 	@override late final _TranslationsSignInScreenFormEmailEn email = _TranslationsSignInScreenFormEmailEn._(_root);
 	@override late final _TranslationsSignInScreenFormPasswordEn password = _TranslationsSignInScreenFormPasswordEn._(_root);
+}
+
+// Path: signInScreen.buttons
+class _TranslationsSignInScreenButtonsEn extends TranslationsSignInScreenButtonsNo {
+	_TranslationsSignInScreenButtonsEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get signIn => 'Sign in';
+	@override String get forgotPassword => 'Forgot password?';
+	@override String get becomeMember => 'Become member';
 }
 
 // Path: validation.forms
@@ -164,8 +175,9 @@ extension on TranslationsEn {
 			case 'signInScreen.form.email.hint': return 'Type your e-mail';
 			case 'signInScreen.form.password.label': return 'Password';
 			case 'signInScreen.form.password.hint': return 'Type your password';
-			case 'signInScreen.signInButton': return 'Sign in';
-			case 'signInScreen.forgotPassword': return 'Forgot password?';
+			case 'signInScreen.buttons.signIn': return 'Sign in';
+			case 'signInScreen.buttons.forgotPassword': return 'Forgot password?';
+			case 'signInScreen.buttons.becomeMember': return 'Become member';
 			case 'validation.forms.inputFields.email.empty': return 'Please enter your e-mail';
 			case 'validation.forms.inputFields.email.invalid': return 'Please enter a valid e-mail';
 			case 'validation.forms.inputFields.password.empty': return 'Please enter password';
