@@ -12,6 +12,9 @@
       "hint": "Skriv inn passordet ditt"
     }
   },
-  "signInButton": "Logg inn",
-  "forgotPassword": "Glemt passord?"
+  "buttons": {
+    "signIn": "Logg inn",
+    "forgotPassword": "Glemt passord?",
+    "becomeMember": "Bli medlem"
+  }
 }

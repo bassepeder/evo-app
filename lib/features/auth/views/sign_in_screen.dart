@@ -85,18 +85,25 @@ class SignInScreen extends ConsumerWidget {
                         isLoading: isLoading,
                       ),
                       SizedBox(height: screenHeight * 0.025),
-                      ForgotPasswordTextButton(
-                        onClick: () {},
-                        label: t.signInScreen.forgotPassword,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          BecomeMemberTextButton(
+                            onClick: () {},
+                            label: t.signInScreen.buttons.becomeMember,
+                          ),
+                          ForgotPasswordTextButton(
+                            onClick: () {},
+                            label: t.signInScreen.buttons.forgotPassword,
+                          ),
+                        ],
                       ),
-                      /*
-                      SizedBox(height: screenHeight * 0.075),
+                      SizedBox(height: screenHeight * 0.05),
                       Image.asset(
                         'assets/images/logo.png',
                         width: 100,
                         height: 100,
                       ),
-                       */
                     ],
                   ),
                 ),
@@ -210,7 +217,7 @@ class SignInForm extends StatelessWidget {
                 onLoginClick();
               }
             },
-            text: t.signInScreen.signInButton,
+            text: t.signInScreen.buttons.signIn,
             isLoading: isLoading,
           )
         ],
@@ -241,6 +248,30 @@ class ForgotPasswordTextButton extends StatelessWidget {
                   .bodyLarge!
                   .color!
                   .withOpacity(0.64),
+            ),
+      ),
+    );
+  }
+}
+
+class BecomeMemberTextButton extends StatelessWidget {
+  final VoidCallback onClick;
+  final String label;
+
+  const BecomeMemberTextButton({
+    super.key,
+    required this.onClick,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: onClick,
+      child: Text(
+        label,
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
             ),
       ),
     );

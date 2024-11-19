@@ -53,8 +53,7 @@ class TranslationsSignInScreenNo {
 	String get header => 'Velkommen tilbake!';
 	String get subtitle => 'Logg inn med e-posten og passordet ditt.';
 	late final TranslationsSignInScreenFormNo form = TranslationsSignInScreenFormNo.internal(_root);
-	String get signInButton => 'Logg inn';
-	String get forgotPassword => 'Glemt passord?';
+	late final TranslationsSignInScreenButtonsNo buttons = TranslationsSignInScreenButtonsNo.internal(_root);
 }
 
 // Path: validation
@@ -88,6 +87,18 @@ class TranslationsSignInScreenFormNo {
 	// Translations
 	late final TranslationsSignInScreenFormEmailNo email = TranslationsSignInScreenFormEmailNo.internal(_root);
 	late final TranslationsSignInScreenFormPasswordNo password = TranslationsSignInScreenFormPasswordNo.internal(_root);
+}
+
+// Path: signInScreen.buttons
+class TranslationsSignInScreenButtonsNo {
+	TranslationsSignInScreenButtonsNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get signIn => 'Logg inn';
+	String get forgotPassword => 'Glemt passord?';
+	String get becomeMember => 'Bli medlem';
 }
 
 // Path: validation.forms
@@ -166,8 +177,9 @@ extension on Translations {
 			case 'signInScreen.form.email.hint': return 'Skriv inn e-postaddressen din';
 			case 'signInScreen.form.password.label': return 'Passord';
 			case 'signInScreen.form.password.hint': return 'Skriv inn passordet ditt';
-			case 'signInScreen.signInButton': return 'Logg inn';
-			case 'signInScreen.forgotPassword': return 'Glemt passord?';
+			case 'signInScreen.buttons.signIn': return 'Logg inn';
+			case 'signInScreen.buttons.forgotPassword': return 'Glemt passord?';
+			case 'signInScreen.buttons.becomeMember': return 'Bli medlem';
 			case 'validation.forms.inputFields.email.empty': return 'Vennligst skriv inn e-postadressen din';
 			case 'validation.forms.inputFields.email.invalid': return 'Vennligst skriv inn en gyldig e-post';
 			case 'validation.forms.inputFields.password.empty': return 'Vennligst skriv inn passordet ditt';
