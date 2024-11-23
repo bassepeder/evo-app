@@ -41,12 +41,22 @@ dependencies:
   slang_flutter: ^4.2.0
   dio: ^5.7.0
   flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
+  flutter_secure_storage: ^9.2.2
+  device_info_plus: ^11.1.1
+  package_info_plus: ^8.1.1
+  pub_semver: ^2.1.4
+  shared_preferences: ^2.3.3
+  flutter_displaymode: ^0.6.0
 
 dev_dependencies:
   freezed: ^2.3.0
   build_runner: ^2.4.6
+  json_serializable: ^6.5.4
+  riverpod_generator: ^2.1.0
+  riverpod_lint: ^2.3.3
 
   flutter_test:
     sdk: flutter

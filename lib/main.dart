@@ -1,5 +1,7 @@
+import 'package:evo/binding.dart';
 import 'package:evo/constants.dart';
 import 'package:evo/features/auth/views/sign_in_screen.dart';
+import 'package:evo/init.dart';
 import 'package:evo/utils/navigation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +13,21 @@ import 'common/widgets/evo_elevated_button.dart';
 import 'i18n/translations.g.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  final evoBinding = AppEvoBinding.ensureInitialized();
+
   LocaleSettings.useDeviceLocale();
+
+  await evoBinding.preloadSharedPreferences();
+
+  await setupFirstLaunch();
+
+  // Lock orientation to portrait.
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  if (defaultTargetPlatform == TargetPlatform.android) {
+    await androidDisplayInitialization(widgetsBinding);
+  }
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
