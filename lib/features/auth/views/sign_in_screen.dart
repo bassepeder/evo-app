@@ -7,14 +7,37 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../i18n/translations.g.dart';
 
-class SignInScreen extends ConsumerWidget {
+class SignInScreen extends ConsumerStatefulWidget {
   const SignInScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends ConsumerState<SignInScreen> {
+  late final TextEditingController emailController;
+  late final TextEditingController passwordController;
+
+  @override
+  void initState() {
+    super.initState();
+    final authState = ref.read(authViewModelProvider);
+    emailController = TextEditingController(text: authState.email);
+    passwordController = TextEditingController(text: authState.password);
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final t = Translations.of(context);
     final isLoading =
-        ref.watch(authViewModelProvider.select((it) => it.loading));
+        ref.watch(authViewModelProvider.select((state) => state.loading));
 
     ref.listen<AuthState>(authViewModelProvider, (previous, next) {
       if (next.success == true) {
@@ -39,6 +62,10 @@ class SignInScreen extends ConsumerWidget {
               behavior: SnackBarBehavior.floating,
             ),
           );
+
+        if (next.error is InvalidCredentialsException) {
+          passwordController.clear();
+        }
       }
     });
 
@@ -75,14 +102,17 @@ class SignInScreen extends ConsumerWidget {
                     children: <Widget>[
                       SizedBox(height: 80),
                       SignInForm(
-                        onLoginClick: () =>
-                            ref.read(authViewModelProvider.notifier).signIn(),
-                        onEmailChanged: (email) => ref
-                            .read(authViewModelProvider.notifier)
-                            .setEmail(email),
-                        onPasswordChanged: (password) => ref
-                            .read(authViewModelProvider.notifier)
-                            .setPassword(password),
+                        emailController: emailController,
+                        passwordController: passwordController,
+                        onLoginClick: () {
+                          ref
+                              .read(authViewModelProvider.notifier)
+                              .setEmail(emailController.text);
+                          ref
+                              .read(authViewModelProvider.notifier)
+                              .setPassword(passwordController.text);
+                          ref.read(authViewModelProvider.notifier).signIn();
+                        },
                         isLoading: isLoading,
                       ),
                       SizedBox(height: 20),
@@ -118,9 +148,9 @@ class SignInScreen extends ConsumerWidget {
 }
 
 class SignInForm extends StatelessWidget {
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
   final VoidCallback onLoginClick;
-  final Function(String) onEmailChanged;
-  final Function(String) onPasswordChanged;
   final bool isLoading;
 
   final formKey = GlobalKey<FormState>();
@@ -133,9 +163,9 @@ class SignInForm extends StatelessWidget {
   SignInForm({
     super.key,
     required this.onLoginClick,
-    required this.onEmailChanged,
-    required this.onPasswordChanged,
     required this.isLoading,
+    required this.emailController,
+    required this.passwordController,
   });
 
   @override
@@ -147,7 +177,7 @@ class SignInForm extends StatelessWidget {
       child: Column(
         children: <Widget>[
           TextFormField(
-            onChanged: (email) => onEmailChanged(email),
+            controller: emailController,
             autocorrect: false,
             readOnly: isLoading,
             keyboardType: TextInputType.emailAddress,
@@ -183,7 +213,7 @@ class SignInForm extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 24),
             child: TextFormField(
-              onChanged: (password) => onPasswordChanged(password),
+              controller: passwordController,
               obscureText: true,
               readOnly: isLoading,
               validator: (value) {

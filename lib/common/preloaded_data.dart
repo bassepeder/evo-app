@@ -1,10 +1,9 @@
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:evo/features/auth/providers/auth_session.dart';
 import 'package:evo/features/auth/session_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import '../features/auth/providers/auth_session.dart';
 
 part 'preloaded_data.g.dart';
 

@@ -1,15 +1,15 @@
+import 'package:evo/app.dart';
 import 'package:evo/binding.dart';
-import 'package:evo/constants.dart';
+import 'package:evo/common/widgets/evo_elevated_button.dart';
 import 'package:evo/features/auth/views/sign_in_screen.dart';
 import 'package:evo/init.dart';
+import 'package:evo/log.dart';
 import 'package:evo/utils/navigation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'common/widgets/evo_elevated_button.dart';
 import 'i18n/translations.g.dart';
 
 void main() async {
@@ -44,30 +44,13 @@ void main() async {
   }
 
   runApp(ProviderScope(
+    observers: [
+      ProviderLogger(),
+    ],
     child: TranslationProvider(
-      child: const EvoApp(),
+      child: const AppInitializationScreen(),
     ),
   ));
-}
-
-class EvoApp extends StatelessWidget {
-  const EvoApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'EVO',
-      locale: TranslationProvider.of(context).flutterLocale,
-      supportedLocales: AppLocaleUtils.supportedLocales,
-      localizationsDelegates: GlobalMaterialLocalizations.delegates,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: kPrimaryColor),
-        useMaterial3: true,
-      ),
-      home: const WelcomeScreen(),
-    );
-  }
 }
 
 class WelcomeScreen extends StatelessWidget {
