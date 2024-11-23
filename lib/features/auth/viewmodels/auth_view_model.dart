@@ -1,8 +1,8 @@
 import 'package:evo/common/exceptions/http_exceptions.dart';
-import 'package:evo/dio_provider.dart';
 import 'package:evo/features/auth/models/auth_state.dart';
 import 'package:evo/features/auth/providers/auth_session.dart';
 import 'package:evo/features/auth/repositories/auth_repository_impl.dart';
+import 'package:evo/network/http.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_view_model.g.dart';
