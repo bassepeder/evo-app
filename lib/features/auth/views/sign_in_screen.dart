@@ -4,6 +4,7 @@ import 'package:evo/features/auth/models/auth_state.dart';
 import 'package:evo/features/auth/viewmodels/auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../i18n/translations.g.dart';
 
@@ -119,7 +120,10 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
                           BecomeMemberTextButton(
-                            onClick: () {},
+                            onClick: () {
+                              launchUrl(Uri.parse(
+                                  'https://evofitness.no/velg-medlemskap/'));
+                            },
                             label: t.signInScreen.buttons.becomeMember,
                           ),
                           ForgotPasswordTextButton(
