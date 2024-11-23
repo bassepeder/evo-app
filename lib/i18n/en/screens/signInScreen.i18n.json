@@ -16,5 +16,9 @@
     "signIn": "Sign in",
     "forgotPassword": "Forgot password?",
     "becomeMember": "Become member"
+  },
+  "errorMessages": {
+    "invalidCredentials": "Username or password is incorrect.",
+    "genericError": "An error occured. Please try again."
   }
 }

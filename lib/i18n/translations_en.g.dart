@@ -52,6 +52,7 @@ class _TranslationsSignInScreenEn extends TranslationsSignInScreenNo {
 	@override String get subtitle => 'Sign in with your e-mail and password.';
 	@override late final _TranslationsSignInScreenFormEn form = _TranslationsSignInScreenFormEn._(_root);
 	@override late final _TranslationsSignInScreenButtonsEn buttons = _TranslationsSignInScreenButtonsEn._(_root);
+	@override late final _TranslationsSignInScreenErrorMessagesEn errorMessages = _TranslationsSignInScreenErrorMessagesEn._(_root);
 }
 
 // Path: validation
@@ -97,6 +98,17 @@ class _TranslationsSignInScreenButtonsEn extends TranslationsSignInScreenButtons
 	@override String get signIn => 'Sign in';
 	@override String get forgotPassword => 'Forgot password?';
 	@override String get becomeMember => 'Become member';
+}
+
+// Path: signInScreen.errorMessages
+class _TranslationsSignInScreenErrorMessagesEn extends TranslationsSignInScreenErrorMessagesNo {
+	_TranslationsSignInScreenErrorMessagesEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get invalidCredentials => 'Username or password is incorrect.';
+	@override String get genericError => 'An error occured. Please try again.';
 }
 
 // Path: validation.forms
@@ -178,6 +190,8 @@ extension on TranslationsEn {
 			case 'signInScreen.buttons.signIn': return 'Sign in';
 			case 'signInScreen.buttons.forgotPassword': return 'Forgot password?';
 			case 'signInScreen.buttons.becomeMember': return 'Become member';
+			case 'signInScreen.errorMessages.invalidCredentials': return 'Username or password is incorrect.';
+			case 'signInScreen.errorMessages.genericError': return 'An error occured. Please try again.';
 			case 'validation.forms.inputFields.email.empty': return 'Please enter your e-mail';
 			case 'validation.forms.inputFields.email.invalid': return 'Please enter a valid e-mail';
 			case 'validation.forms.inputFields.password.empty': return 'Please enter password';

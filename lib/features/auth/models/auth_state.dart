@@ -9,6 +9,6 @@ class AuthState with _$AuthState {
     @Default(false) bool success,
     @Default('') String email,
     @Default('') String password,
-    @Default(null) String? errorMessage,
+    @Default(null) Exception? error,
   }) = _AuthState;
 }

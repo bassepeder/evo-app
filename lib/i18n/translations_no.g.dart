@@ -54,6 +54,7 @@ class TranslationsSignInScreenNo {
 	String get subtitle => 'Logg inn med e-posten og passordet ditt.';
 	late final TranslationsSignInScreenFormNo form = TranslationsSignInScreenFormNo.internal(_root);
 	late final TranslationsSignInScreenButtonsNo buttons = TranslationsSignInScreenButtonsNo.internal(_root);
+	late final TranslationsSignInScreenErrorMessagesNo errorMessages = TranslationsSignInScreenErrorMessagesNo.internal(_root);
 }
 
 // Path: validation
@@ -99,6 +100,17 @@ class TranslationsSignInScreenButtonsNo {
 	String get signIn => 'Logg inn';
 	String get forgotPassword => 'Glemt passord?';
 	String get becomeMember => 'Bli medlem';
+}
+
+// Path: signInScreen.errorMessages
+class TranslationsSignInScreenErrorMessagesNo {
+	TranslationsSignInScreenErrorMessagesNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get invalidCredentials => 'Brukernavn eller passord samsvarer ikke.';
+	String get genericError => 'En feil oppstod. Prøv igjen senere.';
 }
 
 // Path: validation.forms
@@ -180,6 +192,8 @@ extension on Translations {
 			case 'signInScreen.buttons.signIn': return 'Logg inn';
 			case 'signInScreen.buttons.forgotPassword': return 'Glemt passord?';
 			case 'signInScreen.buttons.becomeMember': return 'Bli medlem';
+			case 'signInScreen.errorMessages.invalidCredentials': return 'Brukernavn eller passord samsvarer ikke.';
+			case 'signInScreen.errorMessages.genericError': return 'En feil oppstod. Prøv igjen senere.';
 			case 'validation.forms.inputFields.email.empty': return 'Vennligst skriv inn e-postadressen din';
 			case 'validation.forms.inputFields.email.invalid': return 'Vennligst skriv inn en gyldig e-post';
 			case 'validation.forms.inputFields.password.empty': return 'Vennligst skriv inn passordet ditt';

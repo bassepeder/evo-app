@@ -20,7 +20,7 @@ mixin _$AuthState {
   bool get success => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
-  String? get errorMessage => throw _privateConstructorUsedError;
+  Exception? get error => throw _privateConstructorUsedError;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -39,7 +39,7 @@ abstract class $AuthStateCopyWith<$Res> {
       bool success,
       String email,
       String password,
-      String? errorMessage});
+      Exception? error});
 }
 
 /// @nodoc
@@ -61,7 +61,7 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
     Object? success = null,
     Object? email = null,
     Object? password = null,
-    Object? errorMessage = freezed,
+    Object? error = freezed,
   }) {
     return _then(_value.copyWith(
       loading: null == loading
@@ -80,10 +80,10 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      errorMessage: freezed == errorMessage
-          ? _value.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Exception?,
     ) as $Val);
   }
 }
@@ -101,7 +101,7 @@ abstract class _$$AuthStateImplCopyWith<$Res>
       bool success,
       String email,
       String password,
-      String? errorMessage});
+      Exception? error});
 }
 
 /// @nodoc
@@ -121,7 +121,7 @@ class __$$AuthStateImplCopyWithImpl<$Res>
     Object? success = null,
     Object? email = null,
     Object? password = null,
-    Object? errorMessage = freezed,
+    Object? error = freezed,
   }) {
     return _then(_$AuthStateImpl(
       loading: null == loading
@@ -140,10 +140,10 @@ class __$$AuthStateImplCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      errorMessage: freezed == errorMessage
-          ? _value.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Exception?,
     ));
   }
 }
@@ -156,7 +156,7 @@ class _$AuthStateImpl implements _AuthState {
       this.success = false,
       this.email = '',
       this.password = '',
-      this.errorMessage = null});
+      this.error = null});
 
   @override
   @JsonKey()
@@ -172,11 +172,11 @@ class _$AuthStateImpl implements _AuthState {
   final String password;
   @override
   @JsonKey()
-  final String? errorMessage;
+  final Exception? error;
 
   @override
   String toString() {
-    return 'AuthState(loading: $loading, success: $success, email: $email, password: $password, errorMessage: $errorMessage)';
+    return 'AuthState(loading: $loading, success: $success, email: $email, password: $password, error: $error)';
   }
 
   @override
@@ -189,13 +189,12 @@ class _$AuthStateImpl implements _AuthState {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
                 other.password == password) &&
-            (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, loading, success, email, password, errorMessage);
+      Object.hash(runtimeType, loading, success, email, password, error);
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -212,7 +211,7 @@ abstract class _AuthState implements AuthState {
       final bool success,
       final String email,
       final String password,
-      final String? errorMessage}) = _$AuthStateImpl;
+      final Exception? error}) = _$AuthStateImpl;
 
   @override
   bool get loading;
@@ -223,7 +222,7 @@ abstract class _AuthState implements AuthState {
   @override
   String get password;
   @override
-  String? get errorMessage;
+  Exception? get error;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
