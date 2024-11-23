@@ -1,11 +1,11 @@
 import 'package:evo/common/exceptions/http_exceptions.dart';
 import 'package:evo/common/widgets/evo_elevated_button.dart';
 import 'package:evo/features/auth/models/auth_state.dart';
+import 'package:evo/features/auth/viewmodels/auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../i18n/translations.g.dart';
-import '../providers/auth_view_model_provider.dart';
 
 class SignInScreen extends ConsumerWidget {
   const SignInScreen({super.key});

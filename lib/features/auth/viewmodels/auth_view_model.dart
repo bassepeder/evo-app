@@ -1,13 +1,18 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:evo/common/exceptions/http_exceptions.dart';
+import 'package:evo/dio_provider.dart';
+import 'package:evo/features/auth/models/auth_state.dart';
+import 'package:evo/features/auth/providers/auth_session.dart';
+import 'package:evo/features/auth/repositories/auth_repository_impl.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../common/exceptions/http_exceptions.dart';
-import '../models/auth_state.dart';
-import '../repositories/auth_repository.dart';
+part 'auth_view_model.g.dart';
 
-class AuthViewModel extends StateNotifier<AuthState> {
-  final AuthRepository _authRepository;
-
-  AuthViewModel(this._authRepository) : super(const AuthState());
+@riverpod
+class AuthViewModel extends _$AuthViewModel {
+  @override
+  AuthState build() {
+    return const AuthState();
+  }
 
   Future<void> signIn() async {
     state = state.copyWith(
@@ -16,10 +21,16 @@ class AuthViewModel extends StateNotifier<AuthState> {
     );
 
     try {
-      final response = await _authRepository.signInWithEmailAndPassword(
-        state.email,
-        state.password,
+      final response = await ref.withClient(
+        (client) => AuthRepositoryImpl(client).signInWithEmailAndPassword(
+          state.email,
+          state.password,
+        ),
       );
+
+      await ref
+          .read(authSessionProvider.notifier)
+          .update(AuthSessionState(token: response.token));
 
       state = state.copyWith(
         success: true,
