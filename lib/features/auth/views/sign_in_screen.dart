@@ -82,7 +82,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
             children: [
               const SizedBox(height: 16),
               Text(
-                t.signInScreen.header,
+                context.t.signInScreen.header,
                 style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -90,7 +90,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
               ),
               const SizedBox(height: 8),
               Text(
-                t.signInScreen.subtitle,
+                context.t.signInScreen.subtitle,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                       color: Color(0xFF757575),
@@ -124,11 +124,12 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                               launchUrl(Uri.parse(
                                   'https://evofitness.no/velg-medlemskap/'));
                             },
-                            label: t.signInScreen.buttons.becomeMember,
+                            label: context.t.signInScreen.buttons.becomeMember,
                           ),
                           ForgotPasswordTextButton(
                             onClick: () {},
-                            label: t.signInScreen.buttons.forgotPassword,
+                            label:
+                                context.t.signInScreen.buttons.forgotPassword,
                           ),
                         ],
                       ),
@@ -187,18 +188,18 @@ class SignInForm extends StatelessWidget {
             textInputAction: TextInputAction.next,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return t.validation.forms.inputFields.email.empty;
+                return context.t.validation.forms.inputFields.email.empty;
               } else if (!RegExp(
                       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                   .hasMatch(value)) {
-                return t.validation.forms.inputFields.email.invalid;
+                return context.t.validation.forms.inputFields.email.invalid;
               }
 
               return null;
             },
             decoration: InputDecoration(
-                hintText: t.signInScreen.form.email.hint,
-                labelText: t.signInScreen.form.email.label,
+                hintText: context.t.signInScreen.form.email.hint,
+                labelText: context.t.signInScreen.form.email.label,
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 hintStyle: const TextStyle(color: Color(0xFF757575)),
                 contentPadding: const EdgeInsets.symmetric(
