@@ -35,7 +35,6 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final t = Translations.of(context);
     final isLoading =
         ref.watch(authViewModelProvider.select((state) => state.loading));
 
@@ -51,8 +50,8 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
           );
       } else if (next.error != null && next.error != previous?.error) {
         var message = next.error is InvalidCredentialsException
-            ? t.signInScreen.errorMessages.invalidCredentials
-            : t.signInScreen.errorMessages.genericError;
+            ? context.t.signInScreen.errorMessages.invalidCredentials
+            : context.t.signInScreen.errorMessages.genericError;
 
         ScaffoldMessenger.of(context)
           ..hideCurrentSnackBar()
