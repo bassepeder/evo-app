@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../common/exceptions/http_exceptions.dart';
 import '../models/auth_state.dart';
 import '../repositories/auth_repository.dart';
 
@@ -11,7 +12,7 @@ class AuthViewModel extends StateNotifier<AuthState> {
   Future<void> signIn() async {
     state = state.copyWith(
       loading: true,
-      errorMessage: null,
+      error: null,
     );
 
     try {
@@ -23,15 +24,19 @@ class AuthViewModel extends StateNotifier<AuthState> {
       state = state.copyWith(
         success: true,
         loading: false,
-        errorMessage: null,
+        error: null,
       );
-
-      // Optionally, you can save the token to SharedPreferences or use another state management strategy
+    } on InvalidCredentialsException {
+      state = state.copyWith(
+        success: false,
+        loading: false,
+        error: InvalidCredentialsException(),
+      );
     } catch (e) {
       state = state.copyWith(
         success: false,
         loading: false,
-        errorMessage: e.toString(),
+        error: ServerErrorException(),
       );
     }
   }

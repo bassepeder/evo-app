@@ -16,5 +16,9 @@
     "signIn": "Logg inn",
     "forgotPassword": "Glemt passord?",
     "becomeMember": "Bli medlem"
+  },
+  "errorMessages": {
+    "invalidCredentials": "Brukernavn eller passord samsvarer ikke.",
+    "genericError": "En feil oppstod. Prøv igjen senere."
   }
 }

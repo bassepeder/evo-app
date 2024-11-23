@@ -1,3 +1,4 @@
+import 'package:evo/common/exceptions/http_exceptions.dart';
 import 'package:evo/common/widgets/evo_elevated_button.dart';
 import 'package:evo/features/auth/models/auth_state.dart';
 import 'package:flutter/material.dart';
@@ -25,12 +26,16 @@ class SignInScreen extends ConsumerWidget {
               behavior: SnackBarBehavior.floating,
             ),
           );
-      } else if (next.errorMessage != previous?.errorMessage) {
+      } else if (next.error != null && next.error != previous?.error) {
+        var message = next.error is InvalidCredentialsException
+            ? t.signInScreen.errorMessages.invalidCredentials
+            : t.signInScreen.errorMessages.genericError;
+
         ScaffoldMessenger.of(context)
           ..hideCurrentSnackBar()
           ..showSnackBar(
             SnackBar(
-              content: Text(next.errorMessage!),
+              content: Text(message),
               behavior: SnackBarBehavior.floating,
             ),
           );
