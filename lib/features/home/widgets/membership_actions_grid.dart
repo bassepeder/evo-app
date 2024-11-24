@@ -5,6 +5,17 @@ import 'package:flutter/material.dart';
 class MembershipActionsGrid extends StatelessWidget {
   const MembershipActionsGrid({super.key});
 
+  static List<MembershipAction> actions = [
+    MembershipAction(
+      title: 'Your keys',
+      svgIcon:
+          '''<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#626262" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z" />
+</svg>
+''',
+    )
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,7 +32,7 @@ class MembershipActionsGrid extends StatelessWidget {
           child: GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: demoProducts.length,
+            itemCount: actions.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 16,
@@ -30,7 +41,7 @@ class MembershipActionsGrid extends StatelessWidget {
             ),
             itemBuilder: (context, index) {
               return MembershipActionCard(
-                product: demoProducts[index],
+                action: actions[index],
                 onPress: () {},
               );
             },
@@ -73,75 +84,3 @@ class SectionTitle extends StatelessWidget {
     );
   }
 }
-
-List<Product> demoProducts = [
-  Product(
-    id: 1,
-    images: ['https://i.postimg.cc/c19zpJ6f/Image-Popular-Product-1.png'],
-    colors: [
-      const Color(0xFFF6625E),
-      const Color(0xFF836DB8),
-      const Color(0xFFDECB9C),
-      Colors.white,
-    ],
-    title: 'Wireless Controller for PS4™',
-    price: 64.99,
-    description: 'Some description',
-    rating: 4.8,
-    isFavourite: true,
-    isPopular: true,
-  ),
-  Product(
-    id: 2,
-    images: [
-      'https://i.postimg.cc/CxD6nH74/Image-Popular-Product-2.png',
-    ],
-    colors: [
-      const Color(0xFFF6625E),
-      const Color(0xFF836DB8),
-      const Color(0xFFDECB9C),
-      Colors.white,
-    ],
-    title: 'Nike Sport White - Man Pant',
-    price: 50.5,
-    description: 'Some description',
-    rating: 4.1,
-    isPopular: true,
-  ),
-  Product(
-    id: 3,
-    images: [
-      'https://i.postimg.cc/1XjYwvbv/glap.png',
-    ],
-    colors: [
-      const Color(0xFFF6625E),
-      const Color(0xFF836DB8),
-      const Color(0xFFDECB9C),
-      Colors.white,
-    ],
-    title: 'Gloves XC Omega - Polygon',
-    price: 36.55,
-    description: 'Some description',
-    rating: 4.1,
-    isFavourite: true,
-    isPopular: true,
-  ),
-  Product(
-    id: 4,
-    images: [
-      'https://i.postimg.cc/d1QWXMYW/Image-Popular-Product-3.png',
-    ],
-    colors: [
-      const Color(0xFFF6625E),
-      const Color(0xFF836DB8),
-      const Color(0xFFDECB9C),
-      Colors.white,
-    ],
-    title: 'Gloves XC Omega - Polygon',
-    price: 36.55,
-    description: 'Some description',
-    rating: 4.1,
-    isFavourite: false,
-    isPopular: true,
-  ),
-];
