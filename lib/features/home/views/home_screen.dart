@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
 class HomeScreen extends ConsumerWidget {
-  static String routeName = '/home';
-
   const HomeScreen({super.key});
 
   @override
