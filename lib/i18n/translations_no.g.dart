@@ -37,9 +37,41 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final Translations _root = this; // ignore: unused_field
 
 	// Translations
+	late final TranslationsHomeScreenNo homeScreen = TranslationsHomeScreenNo.internal(_root);
+	late final TranslationsMembershipStatusesNo membershipStatuses = TranslationsMembershipStatusesNo.internal(_root);
 	late final TranslationsSignInScreenNo signInScreen = TranslationsSignInScreenNo.internal(_root);
 	late final TranslationsValidationNo validation = TranslationsValidationNo.internal(_root);
 	late final TranslationsWelcomeScreenNo welcomeScreen = TranslationsWelcomeScreenNo.internal(_root);
+}
+
+// Path: homeScreen
+class TranslationsHomeScreenNo {
+	TranslationsHomeScreenNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get membershipStatus => 'Ditt medlemsskap er';
+	String get explore => 'Utforsk medlemsskap';
+}
+
+// Path: membershipStatuses
+class TranslationsMembershipStatusesNo {
+	TranslationsMembershipStatusesNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get presale => 'Før salg';
+	String get inTrial => 'I prøveperiode';
+	String get active => 'Aktiv';
+	String get freezed => 'Fryst';
+	String get pendingCancellation => 'Under kansellering';
+	String get cancelled => 'Kansellert';
+	String get cancelledInPresale => 'Kansellert i før salg';
+	String get cancelledInTrial => 'Kansellert i prøveperiode';
+	String get stopped => 'Stoppet';
+	String get unknown => 'Ukjent';
 }
 
 // Path: signInScreen
@@ -182,6 +214,18 @@ class TranslationsValidationFormsInputFieldsPasswordNo {
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
+			case 'homeScreen.membershipStatus': return 'Ditt medlemsskap er';
+			case 'homeScreen.explore': return 'Utforsk medlemsskap';
+			case 'membershipStatuses.presale': return 'Før salg';
+			case 'membershipStatuses.inTrial': return 'I prøveperiode';
+			case 'membershipStatuses.active': return 'Aktiv';
+			case 'membershipStatuses.freezed': return 'Fryst';
+			case 'membershipStatuses.pendingCancellation': return 'Under kansellering';
+			case 'membershipStatuses.cancelled': return 'Kansellert';
+			case 'membershipStatuses.cancelledInPresale': return 'Kansellert i før salg';
+			case 'membershipStatuses.cancelledInTrial': return 'Kansellert i prøveperiode';
+			case 'membershipStatuses.stopped': return 'Stoppet';
+			case 'membershipStatuses.unknown': return 'Ukjent';
 			case 'signInScreen.title': return 'Logg inn';
 			case 'signInScreen.header': return 'Velkommen tilbake!';
 			case 'signInScreen.subtitle': return 'Logg inn med e-posten og passordet ditt.';
