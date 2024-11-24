@@ -28,9 +28,12 @@ class AuthViewModel extends _$AuthViewModel {
         ),
       );
 
-      await ref
-          .read(authSessionProvider.notifier)
-          .update(AuthSessionState(token: response.token));
+      final session = AuthSessionState(
+        token: response.token,
+        email: state.email,
+        password: state.password,
+      );
+      await ref.read(authSessionProvider.notifier).update(session);
 
       state = state.copyWith(
         success: true,
