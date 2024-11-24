@@ -1,5 +1,7 @@
 import 'package:evo/common/preloaded_data.dart';
 import 'package:evo/constants.dart';
+import 'package:evo/features/auth/providers/auth_session.dart';
+import 'package:evo/features/home/views/home_screen.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:evo/main.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +68,9 @@ class _AppState extends ConsumerState<Application> {
 
   @override
   Widget build(BuildContext context) {
+    final hasSession = ref.read(
+        authSessionProvider.select((it) => it?.token.isNotEmpty ?? false));
+
     return MaterialApp(
       title: 'EVO',
       locale: TranslationProvider.of(context).flutterLocale,
@@ -76,7 +81,7 @@ class _AppState extends ConsumerState<Application> {
         colorScheme: ColorScheme.fromSeed(seedColor: kPrimaryColor),
         useMaterial3: true,
       ),
-      home: const WelcomeScreen(),
+      home: hasSession ? const HomeScreen() : const WelcomeScreen(),
     );
   }
 }

@@ -1,5 +1,5 @@
-package com.bastianpedersen.app
+package com.bastianpedersen.evo
 
 import io.flutter.embedding.android.FlutterActivity
 
-class MainActivity: FlutterActivity()
+class MainActivity : FlutterActivity()

@@ -2,6 +2,8 @@ import 'package:evo/common/exceptions/http_exceptions.dart';
 import 'package:evo/common/widgets/evo_elevated_button.dart';
 import 'package:evo/features/auth/models/auth_state.dart';
 import 'package:evo/features/auth/viewmodels/auth_view_model.dart';
+import 'package:evo/features/home/views/home_screen.dart';
+import 'package:evo/utils/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -41,14 +43,11 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
 
     ref.listen<AuthState>(authViewModelProvider, (previous, next) {
       if (next.success == true) {
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(
-            SnackBar(
-              content: Text('You are signed in'),
-              behavior: SnackBarBehavior.floating,
-            ),
-          );
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        pushAndRemoveUntilPlatformRoute(
+          context,
+          builder: (_) => const HomeScreen(),
+        );
       } else if (next.error != null && next.error != previous?.error) {
         var message = next.error is InvalidCredentialsException
             ? context.t.signInScreen.errorMessages.invalidCredentials
@@ -74,6 +73,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(context.t.signInScreen.title),
+        centerTitle: true,
       ),
       body: SafeArea(
         child: Padding(
@@ -121,6 +121,8 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         children: <Widget>[
                           BecomeMemberTextButton(
                             onClick: () {
+                              ScaffoldMessenger.of(context)
+                                  .hideCurrentSnackBar();
                               launchUrl(Uri.parse(
                                   'https://evofitness.no/velg-medlemskap/'));
                             },
