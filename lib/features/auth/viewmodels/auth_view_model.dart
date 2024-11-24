@@ -23,8 +23,8 @@ class AuthViewModel extends _$AuthViewModel {
     try {
       final response = await ref.withClient(
         (client) => AuthRepositoryImpl(client).signInWithEmailAndPassword(
-          state.email,
-          state.password,
+          state.email.trim(),
+          state.password.trim(),
         ),
       );
 
