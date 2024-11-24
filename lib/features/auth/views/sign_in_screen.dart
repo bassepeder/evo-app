@@ -73,7 +73,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(t.signInScreen.title),
+        title: Text(context.t.signInScreen.title),
       ),
       body: SafeArea(
         child: Padding(
@@ -174,8 +174,6 @@ class SignInForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final t = Translations.of(context);
-
     return Form(
       key: formKey,
       child: Column(
@@ -222,14 +220,14 @@ class SignInForm extends StatelessWidget {
               readOnly: isLoading,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return t.validation.forms.inputFields.password.empty;
+                  return context.t.validation.forms.inputFields.password.empty;
                 }
 
                 return null;
               },
               decoration: InputDecoration(
-                  hintText: t.signInScreen.form.password.hint,
-                  labelText: t.signInScreen.form.password.label,
+                  hintText: context.t.signInScreen.form.password.hint,
+                  labelText: context.t.signInScreen.form.password.label,
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                   hintStyle: const TextStyle(color: Color(0xFF757575)),
                   contentPadding: const EdgeInsets.symmetric(
