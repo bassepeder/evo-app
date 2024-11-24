@@ -1,0 +1,12 @@
+{
+  "presale": "Før salg",
+  "inTrial": "I prøveperiode",
+  "active": "Aktiv",
+  "freezed": "Fryst",
+  "pendingCancellation": "Under kansellering",
+  "cancelled": "Kansellert",
+  "cancelledInPresale": "Kansellert i før salg",
+  "cancelledInTrial": "Kansellert i prøveperiode",
+  "stopped": "Stoppet",
+  "unknown": "Ukjent"
+}

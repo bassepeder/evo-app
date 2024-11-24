@@ -4,10 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 
-// to see http requests and websocket connections in terminal
 const _loggersToShowInTerminal = {
   'HttpClient',
-  'Socket',
 };
 
 /// Setup logging

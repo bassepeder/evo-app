@@ -35,9 +35,41 @@ class TranslationsEn extends Translations {
 	late final TranslationsEn _root = this; // ignore: unused_field
 
 	// Translations
+	@override late final _TranslationsHomeScreenEn homeScreen = _TranslationsHomeScreenEn._(_root);
+	@override late final _TranslationsMembershipStatusesEn membershipStatuses = _TranslationsMembershipStatusesEn._(_root);
 	@override late final _TranslationsSignInScreenEn signInScreen = _TranslationsSignInScreenEn._(_root);
 	@override late final _TranslationsValidationEn validation = _TranslationsValidationEn._(_root);
 	@override late final _TranslationsWelcomeScreenEn welcomeScreen = _TranslationsWelcomeScreenEn._(_root);
+}
+
+// Path: homeScreen
+class _TranslationsHomeScreenEn extends TranslationsHomeScreenNo {
+	_TranslationsHomeScreenEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get membershipStatus => 'Your membership is';
+	@override String get explore => 'Explore membership';
+}
+
+// Path: membershipStatuses
+class _TranslationsMembershipStatusesEn extends TranslationsMembershipStatusesNo {
+	_TranslationsMembershipStatusesEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get presale => 'Pre-sale';
+	@override String get inTrial => 'In trial';
+	@override String get active => 'Active';
+	@override String get freezed => 'Freezed';
+	@override String get pendingCancellation => 'Pending cancellation';
+	@override String get cancelled => 'Cancelled';
+	@override String get cancelledInPresale => 'Cancelled in pre-sale';
+	@override String get cancelledInTrial => 'Cancelled in trial';
+	@override String get stopped => 'Stopped';
+	@override String get uknonwn => 'Unknown';
 }
 
 // Path: signInScreen
@@ -180,6 +212,18 @@ class _TranslationsValidationFormsInputFieldsPasswordEn extends TranslationsVali
 extension on TranslationsEn {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
+			case 'homeScreen.membershipStatus': return 'Your membership is';
+			case 'homeScreen.explore': return 'Explore membership';
+			case 'membershipStatuses.presale': return 'Pre-sale';
+			case 'membershipStatuses.inTrial': return 'In trial';
+			case 'membershipStatuses.active': return 'Active';
+			case 'membershipStatuses.freezed': return 'Freezed';
+			case 'membershipStatuses.pendingCancellation': return 'Pending cancellation';
+			case 'membershipStatuses.cancelled': return 'Cancelled';
+			case 'membershipStatuses.cancelledInPresale': return 'Cancelled in pre-sale';
+			case 'membershipStatuses.cancelledInTrial': return 'Cancelled in trial';
+			case 'membershipStatuses.stopped': return 'Stopped';
+			case 'membershipStatuses.uknonwn': return 'Unknown';
 			case 'signInScreen.title': return 'Sign in';
 			case 'signInScreen.header': return 'Welcome back!';
 			case 'signInScreen.subtitle': return 'Sign in with your e-mail and password.';

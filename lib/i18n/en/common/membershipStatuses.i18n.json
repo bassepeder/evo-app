@@ -1,0 +1,12 @@
+{
+  "presale": "Pre-sale",
+  "inTrial": "In trial",
+  "active": "Active",
+  "freezed": "Freezed",
+  "pendingCancellation": "Pending cancellation",
+  "cancelled": "Cancelled",
+  "cancelledInPresale": "Cancelled in pre-sale",
+  "cancelledInTrial": "Cancelled in trial",
+  "stopped": "Stopped",
+  "uknonwn": "Unknown"
+}
