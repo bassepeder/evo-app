@@ -3,12 +3,11 @@ import 'package:evo/common/widgets/evo_elevated_button.dart';
 import 'package:evo/features/auth/models/auth_state.dart';
 import 'package:evo/features/auth/viewmodels/auth_view_model.dart';
 import 'package:evo/features/home/views/home_screen.dart';
+import 'package:evo/i18n/translations.g.dart';
 import 'package:evo/utils/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../../i18n/translations.g.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
   const SignInScreen({super.key});
