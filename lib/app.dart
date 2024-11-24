@@ -81,7 +81,7 @@ class _AppState extends ConsumerState<Application> {
         colorScheme: ColorScheme.fromSeed(seedColor: kPrimaryColor),
         useMaterial3: true,
       ),
-      home: hasSession ? HomeScreen() : const WelcomeScreen(),
+      home: hasSession ? const HomeScreen() : const WelcomeScreen(),
     );
   }
 }
