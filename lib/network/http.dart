@@ -190,6 +190,7 @@ class EvoClient implements Client {
   /// Checks if the session token is still valid, and delete session if it's not.
   Future<void> _checkSessionToken(AuthSessionState session) async {
     final defaultClient = _ref.read(defaultClientProvider);
+    // TODO: Implement this
     final data = await defaultClient
         .postReadJson(
           evoUri('/api/token/test'),
