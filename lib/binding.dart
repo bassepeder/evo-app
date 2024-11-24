@@ -33,14 +33,10 @@ abstract class EvoBinding {
     assert(() {
       if (instance == null) {
         throw FlutterError.fromParts([
-          ErrorSummary('Lichess binding has not yet been initialized.'),
+          ErrorSummary('EVO binding has not yet been initialized.'),
           ErrorHint(
-            'In the app, this is done by the `AppLichessBinding.ensureInitialized()` call '
+            'In the app, this is done by the `AppEvoBinding.ensureInitialized()` call '
             'in the `void main()` method.',
-          ),
-          ErrorHint(
-            'In a test, one can call `TestLichessBinding.ensureInitialized()` as the '
-            "first line in the test's `main()` method to initialize the binding.",
           ),
         ]);
       }

@@ -30,6 +30,8 @@ class AuthSession extends _$AuthSession {
 class AuthSessionState with _$AuthSessionState {
   const factory AuthSessionState({
     required String token,
+    required String email,
+    required String password,
   }) = _AuthSessionState;
 
   factory AuthSessionState.fromJson(Map<String, dynamic> json) =>
