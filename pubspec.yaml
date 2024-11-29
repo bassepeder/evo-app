@@ -120,8 +120,14 @@ flutter:
   # see https://flutter.dev/to/font-from-package
 
 flutter_native_splash:
+  android: true
+  ios: true
+
   color: '#ffffff'
   image: assets/icons/favicon-270x270.png
 
   color_dark: '#000000'
   image_dark: assets/icons/favicon-270x270.png
+
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/icons/favicon-270x270.png"
