@@ -1,4 +1,5 @@
 import 'package:evo/features/home/widgets/home_header.dart';
+import 'package:evo/features/home/widgets/home_shortcuts.dart';
 import 'package:evo/features/home/widgets/membership_actions_grid.dart';
 import 'package:evo/features/home/widgets/membership_status_banner.dart';
 import 'package:evo/features/membership/membership_repository.dart';
@@ -22,6 +23,7 @@ class HomeScreen extends ConsumerWidget {
                 children: [
                   HomeHeader(),
                   MembershipStatusBanner(details: details!),
+                  HomeShortcuts(),
                   MembershipActionsGrid(),
                 ],
               ),
