@@ -1,4 +1,6 @@
 import 'package:evo/common/widgets/icon_button_with_counter.dart';
+import 'package:evo/features/settings/views/settings_screen.dart';
+import 'package:evo/utils/navigation.dart';
 import 'package:flutter/material.dart';
 
 class HomeHeader extends StatelessWidget {
@@ -27,7 +29,10 @@ class HomeHeader extends StatelessWidget {
           const SizedBox(width: 8),
           IconButtonWithCounter(
             svgSrc: settingsIcon,
-            press: () {},
+            press: () => pushPlatformRoute(
+              context,
+              builder: (_) => const SettingsScreen(),
+            ),
           ),
         ],
       ),
