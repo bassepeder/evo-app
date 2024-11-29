@@ -68,9 +68,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     });
 
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         title: Text(context.t.signInScreen.title),
         centerTitle: true,
       ),
