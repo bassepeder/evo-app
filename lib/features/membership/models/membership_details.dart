@@ -207,7 +207,7 @@ class Product with _$Product {
 @freezed
 class Location with _$Location {
   const factory Location({
-    required String id,
+    required LocationId id,
     required String name,
   }) = _Location;
 
@@ -216,7 +216,7 @@ class Location with _$Location {
 
   factory Location.fromPick(RequiredPick pick) {
     return Location(
-      id: pick('id').asStringOrThrow(),
+      id: pick('id').asLocationIdOrThrow(),
       name: pick('name').asStringOrThrow(),
     );
   }
