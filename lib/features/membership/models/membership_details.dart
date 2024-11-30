@@ -1,4 +1,5 @@
 import 'package:deep_pick/deep_pick.dart';
+import 'package:evo/common/id.dart';
 import 'package:evo/common/pick.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,7 +30,7 @@ class MembershipDetails with _$MembershipDetails {
   factory MembershipDetails.fromPick(RequiredPick pick) {
     return MembershipDetails(
       membershipDetails: MembershipSummary(
-        id: pick('membership_details', 'id').asStringOrThrow(),
+        id: MembershipId(pick('membership_details', 'id').asStringOrThrow()),
         number: pick('membership_details', 'number').asIntOrThrow(),
         status: MembershipStatusExtensions.fromString(
           pick('membership_details', 'status').asStringOrThrow(),
@@ -58,7 +59,7 @@ class MembershipDetails with _$MembershipDetails {
 @freezed
 class MembershipSummary with _$MembershipSummary {
   const factory MembershipSummary({
-    required String id,
+    required MembershipId id,
     required int number,
     required MembershipStatus status,
     required DateTime createdAt,
