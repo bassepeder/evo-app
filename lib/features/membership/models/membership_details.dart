@@ -30,7 +30,7 @@ class MembershipDetails with _$MembershipDetails {
   factory MembershipDetails.fromPick(RequiredPick pick) {
     return MembershipDetails(
       membershipDetails: MembershipSummary(
-        id: MembershipId(pick('membership_details', 'id').asStringOrThrow()),
+        id: pick('membership_details', 'id').asMembershipIdOrThrow(),
         number: pick('membership_details', 'number').asIntOrThrow(),
         status: MembershipStatusExtensions.fromString(
           pick('membership_details', 'status').asStringOrThrow(),

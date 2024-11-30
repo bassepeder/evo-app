@@ -19,6 +19,16 @@ extension type const LocationId(String value) implements StringId {
 }
 
 extension IDPick on Pick {
+  MembershipId asMembershipIdOrThrow() {
+    final value = required().value;
+    if (value is String) {
+      return MembershipId(value);
+    }
+    throw PickException(
+      "Value $value at $debugParsingExit can't be casted to MembershipId",
+    );
+  }
+
   LocationId asLocationIdOrThrow() {
     final value = required().value;
     if (value is String) {
