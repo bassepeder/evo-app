@@ -72,7 +72,10 @@ class CurrentLocationOverview extends ConsumerWidget {
               );
             },
             loading: () => const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                color: Colors.white,
+                strokeWidth: 3,
+              ),
             ),
             error: (error, stack) => Center(
               child: Text(
@@ -84,7 +87,10 @@ class CurrentLocationOverview extends ConsumerWidget {
         );
       },
       loading: () => const Center(
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(
+          color: Colors.white,
+          strokeWidth: 3,
+        ),
       ),
       error: (error, stack) => Center(
         child: Text(
