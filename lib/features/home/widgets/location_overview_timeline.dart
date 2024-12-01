@@ -74,10 +74,9 @@ class LocationOverviewTimeline extends ConsumerWidget {
                             barRods: [
                               BarChartRodData(
                                 toY: item.percentageUsed,
-                                // Filled percentage
-                                width: 20,
+                                width: 40,
                                 borderRadius: const BorderRadius.vertical(
-                                    top: Radius.circular(5)),
+                                    top: Radius.circular(10)),
                                 color: isCurrent
                                     ? colorScheme.primary
                                         .withGreen(1)
