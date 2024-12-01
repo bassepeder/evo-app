@@ -51,6 +51,8 @@ class _TranslationsHomeScreenEn extends TranslationsHomeScreenNo {
 	// Translations
 	@override String get membershipStatus => 'Your membership is';
 	@override String get explore => 'Explore membership';
+	@override String get currentLocationStatisticsTitle => 'Number of people now at';
+	@override String get locationTimelineTitle => 'Expected visits today at';
 }
 
 // Path: membershipStatuses
@@ -214,6 +216,8 @@ extension on TranslationsEn {
 		switch (path) {
 			case 'homeScreen.membershipStatus': return 'Your membership is';
 			case 'homeScreen.explore': return 'Explore membership';
+			case 'homeScreen.currentLocationStatisticsTitle': return 'Number of people now at';
+			case 'homeScreen.locationTimelineTitle': return 'Expected visits today at';
 			case 'membershipStatuses.presale': return 'Pre-sale';
 			case 'membershipStatuses.inTrial': return 'In trial';
 			case 'membershipStatuses.active': return 'Active';

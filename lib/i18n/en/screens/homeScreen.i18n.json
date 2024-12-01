@@ -1,4 +1,6 @@
 {
   "membershipStatus": "Your membership is",
-  "explore": "Explore membership"
+  "explore": "Explore membership",
+  "currentLocationStatisticsTitle": "Number of people now at",
+  "locationTimelineTitle": "Expected visits today at"
 }

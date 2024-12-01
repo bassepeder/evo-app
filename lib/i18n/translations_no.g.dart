@@ -53,6 +53,8 @@ class TranslationsHomeScreenNo {
 	// Translations
 	String get membershipStatus => 'Ditt medlemsskap er';
 	String get explore => 'Utforsk medlemsskap';
+	String get currentLocationStatisticsTitle => 'Antall personer nå inne på';
+	String get locationTimelineTitle => 'Forventet besøk i dag hos';
 }
 
 // Path: membershipStatuses
@@ -216,6 +218,8 @@ extension on Translations {
 		switch (path) {
 			case 'homeScreen.membershipStatus': return 'Ditt medlemsskap er';
 			case 'homeScreen.explore': return 'Utforsk medlemsskap';
+			case 'homeScreen.currentLocationStatisticsTitle': return 'Antall personer nå inne på';
+			case 'homeScreen.locationTimelineTitle': return 'Forventet besøk i dag hos';
 			case 'membershipStatuses.presale': return 'Før salg';
 			case 'membershipStatuses.inTrial': return 'I prøveperiode';
 			case 'membershipStatuses.active': return 'Aktiv';

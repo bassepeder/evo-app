@@ -1,5 +1,6 @@
 import 'package:evo/features/home/location_repository.dart';
 import 'package:evo/features/membership/membership_repository.dart';
+import 'package:evo/i18n/translations.g.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -45,7 +46,7 @@ class LocationOverviewTimeline extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Forvented besøk i dag hos',
+                    context.t.homeScreen.locationTimelineTitle,
                     style: TextStyle(color: colorScheme.onPrimary),
                   ),
                   Text(
