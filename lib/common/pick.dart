@@ -9,7 +9,8 @@ extension PickDateParsing on Pick {
       return DateTime.parse(dateString);
     } catch (e) {
       throw PickException(
-          'Expected a valid date in "YYYY-MM-DD" format, but got: $dateString');
+        'Expected a valid date in "YYYY-MM-DD" format, but got: $dateString',
+      );
     }
   }
 

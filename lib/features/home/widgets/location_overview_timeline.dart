@@ -77,7 +77,8 @@ class LocationOverviewTimeline extends ConsumerWidget {
                                 toY: item.percentageUsed,
                                 width: 40,
                                 borderRadius: const BorderRadius.vertical(
-                                    top: Radius.circular(10)),
+                                  top: Radius.circular(10),
+                                ),
                                 color: isCurrent
                                     ? colorScheme.primary
                                         .withGreen(1)
@@ -116,13 +117,13 @@ class LocationOverviewTimeline extends ConsumerWidget {
                               reservedSize: 20,
                             ),
                           ),
-                          leftTitles: AxisTitles(
+                          leftTitles: const AxisTitles(
                             sideTitles: SideTitles(showTitles: false),
                           ),
-                          topTitles: AxisTitles(
+                          topTitles: const AxisTitles(
                             sideTitles: SideTitles(showTitles: false),
                           ),
-                          rightTitles: AxisTitles(
+                          rightTitles: const AxisTitles(
                             sideTitles: SideTitles(showTitles: false),
                           ),
                         ),
@@ -132,8 +133,7 @@ class LocationOverviewTimeline extends ConsumerWidget {
                             getTooltipColor: (_) =>
                                 Colors.black.withOpacity(0.75),
                             getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                              final interval =
-                                  timeline.intervals[group.x.toInt()];
+                              final interval = timeline.intervals[group.x];
                               return BarTooltipItem(
                                 '${interval.percentageUsed.toStringAsFixed(1)}%',
                                 const TextStyle(color: Colors.white),
@@ -141,7 +141,7 @@ class LocationOverviewTimeline extends ConsumerWidget {
                             },
                           ),
                         ),
-                        gridData: FlGridData(show: false),
+                        gridData: const FlGridData(show: false),
                         borderData: FlBorderData(show: false),
                       ),
                     ),

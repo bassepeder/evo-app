@@ -19,21 +19,21 @@ class HomeScreen extends ConsumerWidget {
         data: (details) {
           return SafeArea(
             child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(vertical: 16),
+              padding: const EdgeInsets.symmetric(vertical: 16),
               child: Column(
                 children: [
-                  HomeHeader(),
+                  const HomeHeader(),
                   MembershipStatusBanner(details: details!),
-                  HomeShortcuts(),
-                  CurrentLocationOverview(),
-                  LocationOverviewTimeline(),
+                  const HomeShortcuts(),
+                  const CurrentLocationOverview(),
+                  const LocationOverviewTimeline(),
                 ],
               ),
             ),
           );
         },
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, _) => Center(
+        error: (error, _) => const Center(
           child: Text('En feil oppstod'),
         ),
       ),

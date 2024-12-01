@@ -69,7 +69,8 @@ class _AppState extends ConsumerState<Application> {
   @override
   Widget build(BuildContext context) {
     final hasSession = ref.read(
-        authSessionProvider.select((it) => it?.token.isNotEmpty ?? false));
+      authSessionProvider.select((it) => it?.token.isNotEmpty ?? false),
+    );
 
     return MaterialApp(
       title: 'EVO',

@@ -53,7 +53,7 @@ class WelcomeScreen extends StatelessWidget {
             child: EvoElevatedButton(
               onPressed: () => pushPlatformRoute(
                 context,
-                builder: (_) => SignInScreen(),
+                builder: (_) => const SignInScreen(),
               ),
               text: context.t.welcomeScreen.signInButton.toUpperCase(),
             ),

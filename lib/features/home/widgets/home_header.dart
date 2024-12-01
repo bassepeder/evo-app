@@ -22,7 +22,7 @@ class HomeHeader extends StatelessWidget {
               height: 72,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           IconButtonWithCounter(
             svgSrc: userIcon,
             press: () {},

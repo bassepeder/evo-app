@@ -60,7 +60,8 @@ class LocationRepository {
   }
 
   Future<EvoLocationStatisticsTimeline?> getLocationStatisticsTimeline(
-      LocationId id) {
+    LocationId id,
+  ) {
     return client.readJson(
       evoUri('api/v1/locations/${id.value}/timeline'),
       mapper: EvoLocationStatisticsTimeline.fromJson,

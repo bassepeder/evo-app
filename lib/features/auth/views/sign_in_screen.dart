@@ -48,7 +48,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
           builder: (_) => const HomeScreen(),
         );
       } else if (next.error != null && next.error != previous?.error) {
-        var message = next.error is InvalidCredentialsException
+        final message = next.error is InvalidCredentialsException
             ? context.t.signInScreen.errorMessages.invalidCredentials
             : context.t.signInScreen.errorMessages.genericError;
 
@@ -74,7 +74,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
               const SizedBox(height: 16),
@@ -90,14 +90,14 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 context.t.signInScreen.subtitle,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: Color(0xFF757575),
+                      color: const Color(0xFF757575),
                     ),
               ),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      SizedBox(height: 80),
+                      const SizedBox(height: 80),
                       SignInForm(
                         emailController: emailController,
                         passwordController: passwordController,
@@ -112,7 +112,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         },
                         isLoading: isLoading,
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
@@ -120,8 +120,11 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                             onClick: () {
                               ScaffoldMessenger.of(context)
                                   .hideCurrentSnackBar();
-                              launchUrl(Uri.parse(
-                                  'https://evofitness.no/velg-medlemskap/'));
+                              launchUrl(
+                                Uri.parse(
+                                  'https://evofitness.no/velg-medlemskap/',
+                                ),
+                              );
                             },
                             label: context.t.signInScreen.buttons.becomeMember,
                           ),
@@ -132,7 +135,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 40),
+                      const SizedBox(height: 40),
                       Image.asset(
                         'assets/images/logo.png',
                         width: 100,
@@ -187,29 +190,30 @@ class SignInForm extends StatelessWidget {
               if (value == null || value.isEmpty) {
                 return context.t.validation.forms.inputFields.email.empty;
               } else if (!RegExp(
-                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                  .hasMatch(value)) {
+                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+              ).hasMatch(value)) {
                 return context.t.validation.forms.inputFields.email.invalid;
               }
 
               return null;
             },
             decoration: InputDecoration(
-                hintText: context.t.signInScreen.form.email.hint,
-                labelText: context.t.signInScreen.form.email.label,
-                floatingLabelBehavior: FloatingLabelBehavior.always,
-                hintStyle: const TextStyle(color: Color(0xFF757575)),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 16,
-                ),
-                suffix: const Icon(Icons.mail_outline),
-                border: authOutlineInputBorder,
-                enabledBorder: authOutlineInputBorder,
-                focusedBorder: authOutlineInputBorder.copyWith(
-                  borderSide:
-                      BorderSide(color: Theme.of(context).colorScheme.primary),
-                )),
+              hintText: context.t.signInScreen.form.email.hint,
+              labelText: context.t.signInScreen.form.email.label,
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              hintStyle: const TextStyle(color: Color(0xFF757575)),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 24,
+                vertical: 16,
+              ),
+              suffix: const Icon(Icons.mail_outline),
+              border: authOutlineInputBorder,
+              enabledBorder: authOutlineInputBorder,
+              focusedBorder: authOutlineInputBorder.copyWith(
+                borderSide:
+                    BorderSide(color: Theme.of(context).colorScheme.primary),
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 24),
@@ -225,21 +229,23 @@ class SignInForm extends StatelessWidget {
                 return null;
               },
               decoration: InputDecoration(
-                  hintText: context.t.signInScreen.form.password.hint,
-                  labelText: context.t.signInScreen.form.password.label,
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                  hintStyle: const TextStyle(color: Color(0xFF757575)),
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 24,
-                    vertical: 16,
+                hintText: context.t.signInScreen.form.password.hint,
+                labelText: context.t.signInScreen.form.password.label,
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                hintStyle: const TextStyle(color: Color(0xFF757575)),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 16,
+                ),
+                suffix: const Icon(Icons.lock_outline),
+                border: authOutlineInputBorder,
+                enabledBorder: authOutlineInputBorder,
+                focusedBorder: authOutlineInputBorder.copyWith(
+                  borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.primary,
                   ),
-                  suffix: const Icon(Icons.lock_outline),
-                  border: authOutlineInputBorder,
-                  enabledBorder: authOutlineInputBorder,
-                  focusedBorder: authOutlineInputBorder.copyWith(
-                    borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.primary),
-                  )),
+                ),
+              ),
             ),
           ),
           const SizedBox(height: 8),
@@ -251,7 +257,7 @@ class SignInForm extends StatelessWidget {
             },
             text: t.signInScreen.buttons.signIn,
             isLoading: isLoading,
-          )
+          ),
         ],
       ),
     );
