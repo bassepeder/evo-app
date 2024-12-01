@@ -1,4 +1,6 @@
 {
   "membershipStatus": "Ditt medlemsskap er",
-  "explore": "Utforsk medlemsskap"
+  "explore": "Utforsk medlemsskap",
+  "currentLocationStatisticsTitle": "Antall personer nå inne på",
+  "locationTimelineTitle": "Forventet besøk i dag hos"
 }
