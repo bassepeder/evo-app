@@ -5,6 +5,7 @@ import 'package:evo/features/home/models/location_statistics_timeline.dart';
 import 'package:evo/network/http.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'location_repository.g.dart';
@@ -31,10 +32,13 @@ Future<EvoLocationStatistics?> currentLocationStatistics(
 Future<EvoLocationStatisticsTimeline?> locationStatisticsTimeline(
   Ref ref,
   LocationId locationId,
+  DateTime fromDate,
 ) async =>
     ref.withClientCacheFor(
-      (client) =>
-          LocationRepository(client).getLocationStatisticsTimeline(locationId),
+      (client) => LocationRepository(client).getLocationStatisticsTimeline(
+        locationId,
+        fromDate,
+      ),
       const Duration(minutes: 15),
     );
 
@@ -42,6 +46,7 @@ class LocationRepository {
   LocationRepository(this.client);
 
   final EvoClient client;
+  static DateFormat defaultDateFormat = DateFormat('yyyy-MM-dd');
 
   Future<IList<EvoLocation>> getLocations() {
     return client.readJsonList(
@@ -50,7 +55,9 @@ class LocationRepository {
     );
   }
 
-  Future<EvoLocationStatistics?> getCurrentLocationStatistics(LocationId id) {
+  Future<EvoLocationStatistics?> getCurrentLocationStatistics(
+    LocationId id,
+  ) async {
     return client.readJson(
       evoUri('api/v1/locations/${id.value}'),
       mapper: EvoLocationStatistics.fromJson,
@@ -59,9 +66,13 @@ class LocationRepository {
 
   Future<EvoLocationStatisticsTimeline?> getLocationStatisticsTimeline(
     LocationId id,
-  ) {
+    DateTime from,
+  ) async {
     return client.readJson(
-      evoUri('api/v1/locations/${id.value}/timeline/current'),
+      evoUri(
+        'api/v1/locations/${id.value}/timeline',
+        {'date': defaultDateFormat.format(from)},
+      ),
       mapper: EvoLocationStatisticsTimeline.fromJson,
     );
   }
