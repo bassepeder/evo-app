@@ -5,7 +5,6 @@ import 'package:evo/features/home/models/location_statistics_timeline.dart';
 import 'package:evo/network/http.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logging/logging.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'location_repository.g.dart';
@@ -43,7 +42,6 @@ class LocationRepository {
   LocationRepository(this.client);
 
   final EvoClient client;
-  final Logger _log = Logger('LocationRepository');
 
   Future<IList<EvoLocation>> getLocations() {
     return client.readJsonList(
@@ -54,7 +52,7 @@ class LocationRepository {
 
   Future<EvoLocationStatistics?> getCurrentLocationStatistics(LocationId id) {
     return client.readJson(
-      evoUri('api/v1/locations/${id.value}'),
+      evoUri('api/v1/locations/${id.value}/current'),
       mapper: EvoLocationStatistics.fromJson,
     );
   }
