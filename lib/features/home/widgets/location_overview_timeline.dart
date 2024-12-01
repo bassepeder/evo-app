@@ -4,8 +4,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LocationOverview extends ConsumerWidget {
-  const LocationOverview({super.key});
+class LocationOverviewTimeline extends ConsumerWidget {
+  const LocationOverviewTimeline({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -16,8 +16,8 @@ class LocationOverview extends ConsumerWidget {
     return membershipAsync.when(
       data: (membership) {
         final locationId = membership!.location.id;
-        final locationStatsAsync =
-            ref.watch(locationStatisticsProvider(locationId));
+        final timelineAsync =
+            ref.watch(locationStatisticsTimelineProvider(locationId));
 
         return Container(
           width: double.infinity,
@@ -30,9 +30,9 @@ class LocationOverview extends ConsumerWidget {
             color: colorScheme.primary.withOpacity(0.5),
             borderRadius: BorderRadius.circular(20),
           ),
-          child: locationStatsAsync.when(
-            data: (stats) {
-              if (stats == null) {
+          child: timelineAsync.when(
+            data: (timeline) {
+              if (timeline == null) {
                 return Center(
                   child: Text(
                     'No data available',
@@ -41,18 +41,15 @@ class LocationOverview extends ConsumerWidget {
                 );
               }
 
-              final double currentValue = stats.current.toDouble();
-              final double percentage = stats.percentageUsed;
-
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Antall personer nå inne på',
+                    'Forvented besøk hos',
                     style: TextStyle(color: colorScheme.onPrimary),
                   ),
                   Text(
-                    stats.name,
+                    timeline.name,
                     style: TextStyle(
                       fontSize: 24,
                       color: colorScheme.onPrimary,
@@ -60,45 +57,95 @@ class LocationOverview extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      SizedBox(
-                        width: double.infinity,
-                        height: 225,
-                        child: PieChart(
-                          PieChartData(
-                            startDegreeOffset: 270,
-                            sections: [
-                              PieChartSectionData(
-                                value: percentage,
-                                color: colorScheme.primary,
-                                radius: 50,
-                                title: '',
-                              ),
-                              PieChartSectionData(
-                                value: 100 - percentage,
-                                color: Colors.grey.shade300,
-                                radius: 50,
-                                title: '',
+                  SizedBox(
+                    width: double.infinity,
+                    height: 225,
+                    child: BarChart(
+                      BarChartData(
+                        maxY: 100,
+                        barGroups:
+                            timeline.intervals.asMap().entries.map((entry) {
+                          final index = entry.key;
+                          final item = entry.value;
+                          final isCurrent = item.status == 'current';
+
+                          return BarChartGroupData(
+                            x: index,
+                            barRods: [
+                              BarChartRodData(
+                                toY: item.percentageUsed,
+                                // Filled percentage
+                                width: 20,
+                                borderRadius: const BorderRadius.vertical(
+                                    top: Radius.circular(5)),
+                                color: isCurrent
+                                    ? colorScheme.primary
+                                        .withGreen(1)
+                                        .withOpacity(0.9)
+                                    : colorScheme.primary,
+                                // Highlight current bar
+                                backDrawRodData: BackgroundBarChartRodData(
+                                  show: true,
+                                  toY: 100,
+                                  color: Colors.grey.shade300,
+                                ),
                               ),
                             ],
-                            centerSpaceRadius: 70,
-                            sectionsSpace: 0,
+                          );
+                        }).toList(),
+                        titlesData: FlTitlesData(
+                          show: true,
+                          bottomTitles: AxisTitles(
+                            sideTitles: SideTitles(
+                              showTitles: true,
+                              getTitlesWidget: (value, meta) {
+                                final index = value.toInt();
+                                if (index >= 0 &&
+                                    index < timeline.intervals.length) {
+                                  return Text(
+                                    timeline.intervals[index].name,
+                                    // Display time (e.g., "06-10")
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: colorScheme.onSurface,
+                                    ),
+                                  );
+                                }
+                                return const SizedBox.shrink();
+                              },
+                              reservedSize: 24,
+                            ),
                           ),
-                          duration: const Duration(milliseconds: 150),
-                          curve: Curves.linear,
+                          leftTitles: AxisTitles(
+                            sideTitles: SideTitles(showTitles: false),
+                          ),
+                          topTitles: AxisTitles(
+                            sideTitles: SideTitles(showTitles: false),
+                          ),
+                          rightTitles: AxisTitles(
+                            sideTitles: SideTitles(showTitles: false),
+                          ),
                         ),
-                      ),
-                      Text(
-                        currentValue.toStringAsFixed(0),
-                        style: TextStyle(
-                          fontSize: 32,
-                          color: colorScheme.onPrimary,
-                          fontWeight: FontWeight.bold,
+                        barTouchData: BarTouchData(
+                          enabled: true,
+                          touchTooltipData: BarTouchTooltipData(
+                            getTooltipColor: (_) =>
+                                Colors.black.withOpacity(0.75),
+                            getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                              final interval =
+                                  timeline.intervals[group.x.toInt()];
+                              return BarTooltipItem(
+                                '${interval.percentageUsed.toStringAsFixed(1)}%',
+                                const TextStyle(color: Colors.white),
+                              );
+                            },
+                          ),
                         ),
+                        gridData: FlGridData(show: false),
+                        borderData: FlBorderData(show: false),
                       ),
-                    ],
+                    ),
                   ),
                 ],
               );

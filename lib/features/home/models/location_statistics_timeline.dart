@@ -37,6 +37,7 @@ class LocationStatisticsTimelineEntry with _$LocationStatisticsTimelineEntry {
 
   const factory LocationStatisticsTimelineEntry({
     required String name,
+    required String status,
     required int begin,
     required int end,
     required int maxCapacity,
@@ -49,6 +50,7 @@ class LocationStatisticsTimelineEntry with _$LocationStatisticsTimelineEntry {
   factory LocationStatisticsTimelineEntry.fromPick(RequiredPick pick) {
     return LocationStatisticsTimelineEntry(
       name: pick('name').asStringOrThrow(),
+      status: pick('status').asStringOrThrow(),
       begin: pick('begin').asIntOrThrow(),
       end: pick('end').asIntOrThrow(),
       maxCapacity: pick('max_capacity').asIntOrThrow(),

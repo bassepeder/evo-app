@@ -1,8 +1,8 @@
+import 'package:evo/features/home/widgets/current_location_overview.dart';
 import 'package:evo/features/home/widgets/home_header.dart';
 import 'package:evo/features/home/widgets/home_shortcuts.dart';
-import 'package:evo/features/home/widgets/membership_actions_grid.dart';
+import 'package:evo/features/home/widgets/location_overview_timeline.dart';
 import 'package:evo/features/home/widgets/membership_status_banner.dart';
-import 'package:evo/features/home/widgets/location_overview.dart';
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,7 +25,8 @@ class HomeScreen extends ConsumerWidget {
                   HomeHeader(),
                   MembershipStatusBanner(details: details!),
                   HomeShortcuts(),
-                  LocationOverview(),
+                  CurrentLocationOverview(),
+                  LocationOverviewTimeline(),
                 ],
               ),
             ),
