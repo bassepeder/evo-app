@@ -52,7 +52,7 @@ class LocationRepository {
 
   Future<EvoLocationStatistics?> getCurrentLocationStatistics(LocationId id) {
     return client.readJson(
-      evoUri('api/v1/locations/${id.value}/current'),
+      evoUri('api/v1/locations/${id.value}'),
       mapper: EvoLocationStatistics.fromJson,
     );
   }
@@ -61,7 +61,7 @@ class LocationRepository {
     LocationId id,
   ) {
     return client.readJson(
-      evoUri('api/v1/locations/${id.value}/timeline'),
+      evoUri('api/v1/locations/${id.value}/timeline/current'),
       mapper: EvoLocationStatisticsTimeline.fromJson,
     );
   }
