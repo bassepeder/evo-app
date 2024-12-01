@@ -45,7 +45,7 @@ class LocationOverviewTimeline extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Forvented besøk hos',
+                    'Forvented besøk i dag hos',
                     style: TextStyle(color: colorScheme.onPrimary),
                   ),
                   Text(
@@ -103,7 +103,6 @@ class LocationOverviewTimeline extends ConsumerWidget {
                                     index < timeline.intervals.length) {
                                   return Text(
                                     timeline.intervals[index].name,
-                                    // Display time (e.g., "06-10")
                                     style: TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold,
@@ -113,7 +112,7 @@ class LocationOverviewTimeline extends ConsumerWidget {
                                 }
                                 return const SizedBox.shrink();
                               },
-                              reservedSize: 24,
+                              reservedSize: 20,
                             ),
                           ),
                           leftTitles: AxisTitles(
