@@ -4,6 +4,7 @@ import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LocationOverviewTimeline extends ConsumerWidget {
@@ -48,8 +49,8 @@ class LocationOverviewTimeline extends ConsumerWidget {
                 children: [
                   Header(
                     name: timeline.name,
-                    onBackClicked: () {},
-                    onForwardClicked: () {},
+                    onBackClicked: () => HapticFeedback.mediumImpact(),
+                    onForwardClicked: () => HapticFeedback.mediumImpact(),
                   ),
                   const SizedBox(height: 20),
                   SizedBox(
