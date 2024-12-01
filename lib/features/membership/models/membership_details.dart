@@ -39,19 +39,25 @@ class MembershipDetails with _$MembershipDetails {
         beganAt: pick('membership_details', 'began_at').asDateOrThrow(),
         endsAt: pick('membership_details', 'ends_at').asDateOrThrow(),
         freezes: pick('membership_details', 'freezes').asListOrEmpty(
-            (freezePick) => FreezePeriod.fromPick(freezePick.required())),
+          (freezePick) => FreezePeriod.fromPick(
+            freezePick.required(),
+          ),
+        ),
       ),
       profile: Profile.fromPick(pick('profile').required()),
-      keys: pick('keys')
-          .asListOrEmpty((pick) => KeyInfo.fromPick(pick.required()))
-          .toList(),
+      keys: pick('keys').asListOrEmpty(
+        (pick) => KeyInfo.fromPick(
+          pick.required(),
+        ),
+      ),
       product: Product.fromPick(pick('product').required()),
       location: Location.fromPick(pick('location').required()),
       referralCode: pick('referral_code').asStringOrThrow(),
       locale: pick('locale').asStringOrThrow(),
       gdprConsentGiven: pick('gdpr_consent_given').asBoolOrThrow(),
-      currentPaymentMethod:
-          PaymentMethod.fromPick(pick('current_payment_method').required()),
+      currentPaymentMethod: PaymentMethod.fromPick(
+        pick('current_payment_method').required(),
+      ),
     );
   }
 }
