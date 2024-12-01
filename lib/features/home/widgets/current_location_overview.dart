@@ -1,4 +1,5 @@
 import 'package:evo/features/home/location_repository.dart';
+import 'package:evo/features/home/models/location_statistics.dart';
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -43,23 +44,11 @@ class CurrentLocationOverview extends ConsumerWidget {
               }
 
               final double currentValue = stats.current.toDouble();
-              final double percentage = stats.percentageUsed;
 
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    context.t.homeScreen.currentLocationStatisticsTitle,
-                    style: TextStyle(color: colorScheme.onPrimary),
-                  ),
-                  Text(
-                    stats.name,
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: colorScheme.onPrimary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  Header(name: stats.name),
                   const SizedBox(height: 20),
                   Stack(
                     alignment: Alignment.center,
@@ -67,29 +56,7 @@ class CurrentLocationOverview extends ConsumerWidget {
                       SizedBox(
                         width: double.infinity,
                         height: 225,
-                        child: PieChart(
-                          PieChartData(
-                            startDegreeOffset: 270,
-                            sections: [
-                              PieChartSectionData(
-                                value: percentage,
-                                color: colorScheme.primary,
-                                radius: 50,
-                                title: '',
-                              ),
-                              PieChartSectionData(
-                                value: 100 - percentage,
-                                color: Colors.grey.shade300,
-                                radius: 50,
-                                title: '',
-                              ),
-                            ],
-                            centerSpaceRadius: 70,
-                            sectionsSpace: 0,
-                          ),
-                          duration: const Duration(milliseconds: 150),
-                          curve: Curves.linear,
-                        ),
+                        child: Chart(stats: stats),
                       ),
                       Text(
                         currentValue.toStringAsFixed(0),
@@ -125,6 +92,71 @@ class CurrentLocationOverview extends ConsumerWidget {
           style: TextStyle(color: colorScheme.onPrimary),
         ),
       ),
+    );
+  }
+}
+
+class Chart extends StatelessWidget {
+  final EvoLocationStatistics stats;
+
+  const Chart({super.key, required this.stats});
+
+  @override
+  Widget build(BuildContext context) {
+    return PieChart(
+      PieChartData(
+        startDegreeOffset: 270,
+        sections: [
+          PieChartSectionData(
+            value: stats.percentageUsed,
+            color: Theme.of(context).colorScheme.primary,
+            radius: 50,
+            showTitle: false,
+          ),
+          PieChartSectionData(
+            value: 100 - stats.percentageUsed,
+            color: Colors.grey.shade300,
+            radius: 50,
+            showTitle: false,
+          ),
+        ],
+        centerSpaceRadius: 70,
+        sectionsSpace: 3,
+      ),
+      duration: const Duration(milliseconds: 150),
+      curve: Curves.linear,
+    );
+  }
+}
+
+class Header extends StatelessWidget {
+  final String name;
+
+  const Header({
+    super.key,
+    required this.name,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          context.t.homeScreen.currentLocationStatisticsTitle,
+          style: TextStyle(color: colorScheme.onPrimary),
+        ),
+        Text(
+          name,
+          style: TextStyle(
+            fontSize: 24,
+            color: colorScheme.onPrimary,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:evo/features/home/location_repository.dart';
+import 'package:evo/features/home/models/location_statistics_timeline.dart';
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -45,129 +46,16 @@ class LocationOverviewTimeline extends ConsumerWidget {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Column(
-                        children: [
-                          Text(
-                            context.t.homeScreen.locationTimelineTitle,
-                            style: TextStyle(color: colorScheme.onPrimary),
-                          ),
-                          Text(
-                            timeline.name,
-                            style: TextStyle(
-                              fontSize: 24,
-                              color: colorScheme.onPrimary,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const Spacer(),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.arrow_back_ios),
-                        color: colorScheme.onPrimary,
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.arrow_forward_ios),
-                        color: colorScheme.onPrimary,
-                      ),
-                    ],
+                  Header(
+                    name: timeline.name,
+                    onBackClicked: () {},
+                    onForwardClicked: () {},
                   ),
                   const SizedBox(height: 20),
                   SizedBox(
                     width: double.infinity,
                     height: 225,
-                    child: BarChart(
-                      BarChartData(
-                        maxY: 100,
-                        barGroups:
-                            timeline.intervals.asMap().entries.map((entry) {
-                          final index = entry.key;
-                          final item = entry.value;
-                          final isCurrent = item.status == 'current';
-                          final isHistoric = item.status == 'historic';
-                          final barColor = isCurrent
-                              ? colorScheme.primary
-                                  .withGreen(1)
-                                  .withOpacity(0.9)
-                              : isHistoric
-                                  ? Colors.grey.shade600
-                                  : colorScheme.primary;
-
-                          return BarChartGroupData(
-                            x: index,
-                            barRods: [
-                              BarChartRodData(
-                                toY: item.percentageUsed,
-                                width: 40,
-                                borderRadius: const BorderRadius.vertical(
-                                  top: Radius.circular(10),
-                                ),
-                                color: barColor,
-                                // Highlight current bar
-                                backDrawRodData: BackgroundBarChartRodData(
-                                  show: true,
-                                  toY: 100,
-                                  color: Colors.grey.shade300,
-                                ),
-                              ),
-                            ],
-                          );
-                        }).toList(),
-                        titlesData: FlTitlesData(
-                          show: true,
-                          bottomTitles: AxisTitles(
-                            sideTitles: SideTitles(
-                              showTitles: true,
-                              getTitlesWidget: (value, meta) {
-                                final index = value.toInt();
-                                if (index >= 0 &&
-                                    index < timeline.intervals.length) {
-                                  return Text(
-                                    timeline.intervals[index].name,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      color: colorScheme.onSurface,
-                                    ),
-                                  );
-                                }
-                                return const SizedBox.shrink();
-                              },
-                              reservedSize: 20,
-                            ),
-                          ),
-                          leftTitles: const AxisTitles(
-                            sideTitles: SideTitles(showTitles: false),
-                          ),
-                          topTitles: const AxisTitles(
-                            sideTitles: SideTitles(showTitles: false),
-                          ),
-                          rightTitles: const AxisTitles(
-                            sideTitles: SideTitles(showTitles: false),
-                          ),
-                        ),
-                        barTouchData: BarTouchData(
-                          enabled: true,
-                          touchTooltipData: BarTouchTooltipData(
-                            getTooltipColor: (_) =>
-                                Colors.black.withOpacity(0.75),
-                            getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                              final interval = timeline.intervals[group.x];
-                              return BarTooltipItem(
-                                '${interval.percentageUsed.toStringAsFixed(1)}%',
-                                const TextStyle(color: Colors.white),
-                              );
-                            },
-                          ),
-                        ),
-                        gridData: const FlGridData(show: false),
-                        borderData: FlBorderData(show: false),
-                      ),
-                    ),
+                    child: Chart(intervals: timeline.intervals),
                   ),
                 ],
               );
@@ -193,6 +81,151 @@ class LocationOverviewTimeline extends ConsumerWidget {
           style: TextStyle(color: colorScheme.onPrimary),
         ),
       ),
+    );
+  }
+}
+
+class Chart extends StatelessWidget {
+  final List<LocationStatisticsTimelineEntry> intervals;
+
+  const Chart({super.key, required this.intervals});
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return BarChart(
+      BarChartData(
+        maxY: 100,
+        barGroups: intervals.asMap().entries.map((entry) {
+          final index = entry.key;
+          final item = entry.value;
+          final isCurrent = item.status == 'current';
+          final isHistoric = item.status == 'historic';
+          final barColor = isCurrent
+              ? colorScheme.primary.withGreen(1).withOpacity(0.9)
+              : isHistoric
+                  ? Colors.grey.shade600
+                  : colorScheme.primary;
+
+          return BarChartGroupData(
+            x: index,
+            barRods: [
+              BarChartRodData(
+                toY: item.percentageUsed,
+                width: 40,
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(10),
+                ),
+                color: barColor,
+                // Highlight current bar
+                backDrawRodData: BackgroundBarChartRodData(
+                  show: true,
+                  toY: 100,
+                  color: Colors.grey.shade300,
+                ),
+              ),
+            ],
+          );
+        }).toList(),
+        titlesData: FlTitlesData(
+          show: true,
+          bottomTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              getTitlesWidget: (value, meta) {
+                final index = value.toInt();
+                if (index >= 0 && index < intervals.length) {
+                  return Text(
+                    intervals[index].name,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onSurface,
+                    ),
+                  );
+                }
+                return const SizedBox.shrink();
+              },
+              reservedSize: 20,
+            ),
+          ),
+          leftTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          topTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          rightTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+        ),
+        barTouchData: BarTouchData(
+          enabled: true,
+          touchTooltipData: BarTouchTooltipData(
+            getTooltipColor: (_) => Colors.black.withOpacity(0.75),
+            getTooltipItem: (group, groupIndex, rod, rodIndex) {
+              final interval = intervals[group.x];
+              return BarTooltipItem(
+                '${interval.percentageUsed.toStringAsFixed(1)}%',
+                const TextStyle(color: Colors.white),
+              );
+            },
+          ),
+        ),
+        gridData: const FlGridData(show: false),
+        borderData: FlBorderData(show: false),
+      ),
+    );
+  }
+}
+
+class Header extends StatelessWidget {
+  final String name;
+  final VoidCallback onBackClicked;
+  final VoidCallback onForwardClicked;
+
+  const Header({
+    super.key,
+    required this.name,
+    required this.onBackClicked,
+    required this.onForwardClicked,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Row(
+      children: [
+        Column(
+          children: [
+            Text(
+              context.t.homeScreen.locationTimelineTitle,
+              style: TextStyle(color: colorScheme.onPrimary),
+            ),
+            Text(
+              name,
+              style: TextStyle(
+                fontSize: 24,
+                color: colorScheme.onPrimary,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        const Spacer(),
+        IconButton(
+          onPressed: onBackClicked,
+          icon: const Icon(Icons.arrow_back_ios),
+          color: colorScheme.onPrimary,
+        ),
+        IconButton(
+          onPressed: onForwardClicked,
+          icon: const Icon(Icons.arrow_forward_ios),
+          color: colorScheme.onPrimary,
+        ),
+      ],
     );
   }
 }
