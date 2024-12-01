@@ -4,8 +4,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LocationOverview extends ConsumerWidget {
-  const LocationOverview({super.key});
+class CurrentLocationOverview extends ConsumerWidget {
+  const CurrentLocationOverview({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -17,7 +17,7 @@ class LocationOverview extends ConsumerWidget {
       data: (membership) {
         final locationId = membership!.location.id;
         final locationStatsAsync =
-            ref.watch(locationStatisticsProvider(locationId));
+            ref.watch(currentLocationStatisticsProvider(locationId));
 
         return Container(
           width: double.infinity,
