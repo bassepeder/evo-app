@@ -45,17 +45,36 @@ class LocationOverviewTimeline extends ConsumerWidget {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    context.t.homeScreen.locationTimelineTitle,
-                    style: TextStyle(color: colorScheme.onPrimary),
-                  ),
-                  Text(
-                    timeline.name,
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: colorScheme.onPrimary,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            context.t.homeScreen.locationTimelineTitle,
+                            style: TextStyle(color: colorScheme.onPrimary),
+                          ),
+                          Text(
+                            timeline.name,
+                            style: TextStyle(
+                              fontSize: 24,
+                              color: colorScheme.onPrimary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.arrow_back_ios),
+                        color: colorScheme.onPrimary,
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.arrow_forward_ios),
+                        color: colorScheme.onPrimary,
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 20),
                   SizedBox(
