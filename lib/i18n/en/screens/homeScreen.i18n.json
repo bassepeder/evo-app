@@ -2,5 +2,9 @@
   "membershipStatus": "Your membership is",
   "explore": "Explore membership",
   "currentLocationStatisticsTitle": "Number of people now at",
-  "locationTimelineTitle": "Expected visits today at"
+  "locationTimelineTitle": "Expected visits today at",
+  "shortcuts": [
+    "Your keys",
+    "Workouts"
+  ]
 }

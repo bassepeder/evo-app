@@ -2,5 +2,9 @@
   "membershipStatus": "Ditt medlemsskap er",
   "explore": "Utforsk medlemsskap",
   "currentLocationStatisticsTitle": "Antall personer nå inne på",
-  "locationTimelineTitle": "Forventet besøk i dag hos"
+  "locationTimelineTitle": "Forventet besøk i dag hos",
+  "shortcuts": [
+    "Dine nøkler",
+    "Treningsøkter"
+  ]
 }
