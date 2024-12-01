@@ -1,10 +1,7 @@
 import 'package:evo/app.dart';
 import 'package:evo/binding.dart';
-import 'package:evo/common/widgets/evo_elevated_button.dart';
-import 'package:evo/features/auth/views/sign_in_screen.dart';
 import 'package:evo/init.dart';
 import 'package:evo/log.dart';
-import 'package:evo/utils/navigation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -43,12 +40,14 @@ void main() async {
     );
   }
 
-  runApp(ProviderScope(
-    observers: [
-      ProviderLogger(),
-    ],
-    child: TranslationProvider(
-      child: const AppInitializationScreen(),
+  runApp(
+    ProviderScope(
+      observers: [
+        ProviderLogger(),
+      ],
+      child: TranslationProvider(
+        child: const AppInitializationScreen(),
+      ),
     ),
-  ));
+  );
 }

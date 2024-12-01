@@ -51,7 +51,7 @@ class MembershipActionCard extends StatelessWidget {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

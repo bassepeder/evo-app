@@ -59,8 +59,10 @@ dependencies:
   deep_pick: ^1.1.0
   fl_chart: ^0.69.2
 
+  http: any
 dev_dependencies:
   freezed: ^2.5.7
+  lint: ^2.0.1
   build_runner: ^2.4.13
   json_serializable: ^6.9.0
   riverpod_generator: ^2.1.0

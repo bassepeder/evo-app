@@ -28,5 +28,8 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Apply Dart fixes
+        run:  dart fix --apply
+
       - name: Format files
         run:  dart format .

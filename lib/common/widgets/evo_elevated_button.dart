@@ -39,10 +39,10 @@ class EvoElevatedButton extends StatelessWidget {
             ),
       ),
       child: isLoading
-          ? SizedBox(
+          ? const SizedBox(
               width: 25,
               height: 25,
-              child: const CircularProgressIndicator(
+              child: CircularProgressIndicator(
                 strokeWidth: 2.5,
               ),
             )

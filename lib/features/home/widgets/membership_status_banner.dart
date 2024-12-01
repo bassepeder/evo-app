@@ -28,7 +28,7 @@ class MembershipStatusBanner extends StatelessWidget {
       ),
       child: Text.rich(
         TextSpan(
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
           children: [
             TextSpan(text: '${context.t.homeScreen.membershipStatus}\n'),
             TextSpan(
@@ -36,7 +36,7 @@ class MembershipStatusBanner extends StatelessWidget {
                 details.membershipDetails.status,
                 context,
               ),
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),

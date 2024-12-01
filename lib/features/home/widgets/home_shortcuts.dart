@@ -7,7 +7,7 @@ class HomeShortcuts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Shortcut> shortcuts = [
+    final List<Shortcut> shortcuts = [
       Shortcut(svgIcon: keyIcon, title: context.t.homeScreen.shortcuts[0]),
       Shortcut(svgIcon: workoutIcon, title: context.t.homeScreen.shortcuts[1]),
     ];
@@ -31,7 +31,8 @@ class HomeShortcuts extends StatelessWidget {
 }
 
 class ShortcutCard extends StatelessWidget {
-  final String icon, text;
+  final String icon;
+  final String text;
   final GestureTapCallback press;
 
   const ShortcutCard({
@@ -60,7 +61,7 @@ class ShortcutCard extends StatelessWidget {
               children: [
                 SvgPicture.string(icon),
                 const SizedBox(width: 8),
-                Text(text, textAlign: TextAlign.center)
+                Text(text, textAlign: TextAlign.center),
               ],
             ),
           ),
@@ -80,16 +81,16 @@ class Shortcut {
   });
 }
 
-const workoutIcon =
-    '''<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#C00080" class="size-6">
+const workoutIcon = '''
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#C00080" class="size-6">
       <g fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M15.5 9v6c0 .465 0 .697.051.888a1.5 1.5 0 0 0 1.06 1.06c.191.052.424.052.889.052s.698 0 .888-.051a1.5 1.5 0 0 0 1.06-1.06c.052-.191.052-.424.052-.889V9c0-.465 0-.697-.051-.888a1.5 1.5 0 0 0-1.06-1.06C18.197 7 17.964 7 17.5 7s-.698 0-.888.051a1.5 1.5 0 0 0-1.06 1.06c-.052.192-.052.424-.052.889Zm-11 0v6c0 .465 0 .697.051.888a1.5 1.5 0 0 0 1.06 1.06c.192.052.424.052.889.052s.697 0 .888-.051a1.5 1.5 0 0 0 1.06-1.06c.052-.191.052-.424.052-.889V9c0-.465 0-.697-.051-.888a1.5 1.5 0 0 0-1.06-1.06C7.196 7 6.964 7 6.5 7s-.697 0-.888.051a1.5 1.5 0 0 0-1.06 1.06C4.5 8.304 4.5 8.536 4.5 9Z"/>
         <path d="M5 10H4a2 2 0 1 0 0 4h1m4-2h6m4 2h1a2 2 0 1 0 0-4h-1"/>
       </g>
     </svg>''';
 
-const keyIcon =
-    '''<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+const keyIcon = '''
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
   <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z" />
 </svg>
 ''';
