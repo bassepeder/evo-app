@@ -53,6 +53,10 @@ class _TranslationsHomeScreenEn extends TranslationsHomeScreenNo {
 	@override String get explore => 'Explore membership';
 	@override String get currentLocationStatisticsTitle => 'Number of people now at';
 	@override String get locationTimelineTitle => 'Expected visits today at';
+	@override List<String> get shortcuts => [
+		'Your keys',
+		'Workouts',
+	];
 }
 
 // Path: membershipStatuses
@@ -218,6 +222,8 @@ extension on TranslationsEn {
 			case 'homeScreen.explore': return 'Explore membership';
 			case 'homeScreen.currentLocationStatisticsTitle': return 'Number of people now at';
 			case 'homeScreen.locationTimelineTitle': return 'Expected visits today at';
+			case 'homeScreen.shortcuts.0': return 'Your keys';
+			case 'homeScreen.shortcuts.1': return 'Workouts';
 			case 'membershipStatuses.presale': return 'Pre-sale';
 			case 'membershipStatuses.inTrial': return 'In trial';
 			case 'membershipStatuses.active': return 'Active';
