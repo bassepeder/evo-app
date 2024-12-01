@@ -69,6 +69,14 @@ class LocationOverviewTimeline extends ConsumerWidget {
                           final index = entry.key;
                           final item = entry.value;
                           final isCurrent = item.status == 'current';
+                          final isHistoric = item.status == 'historic';
+                          final barColor = isCurrent
+                              ? colorScheme.primary
+                                  .withGreen(1)
+                                  .withOpacity(0.9)
+                              : isHistoric
+                                  ? Colors.grey.shade600
+                                  : colorScheme.primary;
 
                           return BarChartGroupData(
                             x: index,
@@ -79,11 +87,7 @@ class LocationOverviewTimeline extends ConsumerWidget {
                                 borderRadius: const BorderRadius.vertical(
                                   top: Radius.circular(10),
                                 ),
-                                color: isCurrent
-                                    ? colorScheme.primary
-                                        .withGreen(1)
-                                        .withOpacity(0.9)
-                                    : colorScheme.primary,
+                                color: barColor,
                                 // Highlight current bar
                                 backDrawRodData: BackgroundBarChartRodData(
                                   show: true,
