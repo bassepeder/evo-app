@@ -105,6 +105,7 @@ String userAgent(Ref ref) {
   final session = ref.watch(authSessionProvider);
 
   return makeUserAgent(
+    session,
     ref.read(preloadedDataProvider).requireValue.packageInfo,
     ref.read(preloadedDataProvider).requireValue.deviceInfo,
   );
@@ -112,10 +113,11 @@ String userAgent(Ref ref) {
 
 /// Creates a user-agent string with the app version, build number, and device info and possibly the user ID if a user is logged in.
 String makeUserAgent(
+  AuthSessionState? session,
   PackageInfo info,
   BaseDeviceInfo deviceInfo,
 ) {
-  final base = 'EVO Mobile/${info.version} as:${'anon'}';
+  final base = 'EVO Mobile/${info.version} as:${session?.email ?? 'anon'}';
 
   if (deviceInfo is AndroidDeviceInfo) {
     return '$base os:Android/${deviceInfo.version.release} dev:${deviceInfo.model}';
@@ -163,6 +165,7 @@ class EvoClient implements Client {
       request.headers['Authorization'] = session.token;
     }
     request.headers['User-Agent'] = makeUserAgent(
+      session,
       _ref.read(preloadedDataProvider).requireValue.packageInfo,
       _ref.read(preloadedDataProvider).requireValue.deviceInfo,
     );
