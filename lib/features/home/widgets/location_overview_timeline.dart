@@ -199,6 +199,7 @@ class Header extends StatelessWidget {
     return Row(
       children: [
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               context.t.homeScreen.locationTimelineTitle,
