@@ -22,7 +22,7 @@ class HomeScreen extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: Column(
                 children: [
-                  const HomeHeader(),
+                  const HomeHeader(disableButtons: false),
                   MembershipStatusBanner(details: details!),
                   const HomeShortcuts(),
                   const CurrentLocationOverview(),
@@ -32,7 +32,21 @@ class HomeScreen extends ConsumerWidget {
             ),
           );
         },
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () {
+          return const SafeArea(
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                  child: HomeHeader(disableButtons: true),
+                ),
+                Expanded(
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+              ],
+            ),
+          );
+        },
         error: (error, _) => const Center(
           child: Text('En feil oppstod'),
         ),

@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class HomeHeader extends StatelessWidget {
-  const HomeHeader({super.key});
+  final bool disableButtons;
+
+  const HomeHeader({super.key, required this.disableButtons});
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class HomeHeader extends StatelessWidget {
           IconButtonWithCounter(
             svgSrc: settingsIcon,
             press: () {
+              if (disableButtons) return;
               HapticFeedback.mediumImpact();
               pushPlatformRoute(
                 context,
