@@ -70,7 +70,6 @@ class TranslationsHomeScreenNo {
 	TextSpan locationTimelineTitle({required InlineSpan formattedDate}) => TextSpan(children: [
 		const TextSpan(text: 'Forventet besøk '),
 		formattedDate,
-		const TextSpan(text: ' hos'),
 	]);
 	List<String> get shortcuts => [
 		'Dine nøkler',
@@ -246,7 +245,6 @@ extension on Translations {
 			case 'homeScreen.locationTimelineTitle': return ({required InlineSpan formattedDate}) => TextSpan(children: [
 				const TextSpan(text: 'Forventet besøk '),
 				formattedDate,
-				const TextSpan(text: ' hos'),
 			]);
 			case 'homeScreen.shortcuts.0': return 'Dine nøkler';
 			case 'homeScreen.shortcuts.1': return 'Treningsøkter';

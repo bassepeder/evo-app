@@ -68,7 +68,6 @@ class _TranslationsHomeScreenEn extends TranslationsHomeScreenNo {
 	@override TextSpan locationTimelineTitle({required InlineSpan formattedDate}) => TextSpan(children: [
 		const TextSpan(text: 'Expected visits '),
 		formattedDate,
-		const TextSpan(text: ' at'),
 	]);
 	@override List<String> get shortcuts => [
 		'Your keys',
@@ -244,7 +243,6 @@ extension on TranslationsEn {
 			case 'homeScreen.locationTimelineTitle': return ({required InlineSpan formattedDate}) => TextSpan(children: [
 				const TextSpan(text: 'Expected visits '),
 				formattedDate,
-				const TextSpan(text: ' at'),
 			]);
 			case 'homeScreen.shortcuts.0': return 'Your keys';
 			case 'homeScreen.shortcuts.1': return 'Workouts';

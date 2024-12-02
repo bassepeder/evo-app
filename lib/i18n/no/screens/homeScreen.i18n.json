@@ -2,7 +2,7 @@
   "membershipStatus": "Ditt medlemsskap er",
   "explore": "Utforsk medlemsskap",
   "currentLocationStatisticsTitle": "Antall personer nå inne på",
-  "locationTimelineTitle(rich)": "Forventet besøk $formattedDate hos",
+  "locationTimelineTitle(rich)": "Forventet besøk $formattedDate",
   "shortcuts": [
     "Dine nøkler",
     "Treningsøkter"
