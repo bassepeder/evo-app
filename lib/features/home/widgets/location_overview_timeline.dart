@@ -1,7 +1,8 @@
-import 'package:evo/features/home/location_repository.dart';
 import 'package:evo/features/home/models/location_statistics_timeline.dart';
+import 'package:evo/features/home/viewmodels/home_view_model.dart';
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/i18n/translations.g.dart';
+import 'package:evo/utils/formatting.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,9 +19,16 @@ class LocationOverviewTimeline extends ConsumerWidget {
 
     return membershipAsync.when(
       data: (membership) {
-        final locationId = membership!.location.id;
-        final timelineAsync =
-            ref.watch(locationStatisticsTimelineProvider(locationId));
+        final homeState = ref.watch(homeViewModelProvider);
+        final dateToDisplay = ref
+            .watch(homeViewModelProvider.select((state) => state.currentDate));
+
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (homeState.timelineData.isLoading ||
+              homeState.timelineData.asData == null) {
+            ref.read(homeViewModelProvider.notifier).fetchTimelineData();
+          }
+        });
 
         return Container(
           width: double.infinity,
@@ -33,7 +41,7 @@ class LocationOverviewTimeline extends ConsumerWidget {
             color: colorScheme.primary.withOpacity(0.5),
             borderRadius: BorderRadius.circular(20),
           ),
-          child: timelineAsync.when(
+          child: homeState.timelineData.when(
             data: (timeline) {
               if (timeline == null) {
                 return Center(
@@ -49,8 +57,17 @@ class LocationOverviewTimeline extends ConsumerWidget {
                 children: [
                   Header(
                     name: timeline.name,
-                    onBackClicked: () => HapticFeedback.mediumImpact(),
-                    onForwardClicked: () => HapticFeedback.mediumImpact(),
+                    date: dateToDisplay,
+                    onBackClicked: () {
+                      HapticFeedback.mediumImpact();
+                      ref
+                          .read(homeViewModelProvider.notifier)
+                          .goToPreviousDay();
+                    },
+                    onForwardClicked: () {
+                      HapticFeedback.mediumImpact();
+                      ref.read(homeViewModelProvider.notifier).goToNextDay();
+                    },
                   ),
                   const SizedBox(height: 20),
                   SizedBox(
@@ -61,12 +78,33 @@ class LocationOverviewTimeline extends ConsumerWidget {
                 ],
               );
             },
-            loading: () => const Center(
-              child: CircularProgressIndicator(
-                color: Colors.white,
-                strokeWidth: 3,
-              ),
-            ),
+            loading: () {
+              return SizedBox(
+                width: double.infinity,
+                height: 225,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Header(
+                      name: 'EVO Strømsø',
+                      // TODO: this needs to be fetched from session
+                      date: dateToDisplay,
+                      onBackClicked: () {},
+                      onForwardClicked: () {},
+                    ),
+                    const SizedBox(height: 20),
+                    const Expanded(
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 3,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
             error: (error, stack) => Center(
               child: Text(
                 'Error loading data',
@@ -119,7 +157,7 @@ class Chart extends StatelessWidget {
             x: index,
             barRods: [
               BarChartRodData(
-                toY: item.percentageUsed,
+                toY: item.percentageUsed > 100 ? 100 : item.percentageUsed,
                 width: 40,
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(10),
@@ -189,12 +227,14 @@ class Chart extends StatelessWidget {
 
 class Header extends StatelessWidget {
   final String name;
+  final DateTime date;
   final VoidCallback onBackClicked;
   final VoidCallback onForwardClicked;
 
   const Header({
     super.key,
     required this.name,
+    required this.date,
     required this.onBackClicked,
     required this.onForwardClicked,
   });
@@ -208,8 +248,13 @@ class Header extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              context.t.homeScreen.locationTimelineTitle,
+            Text.rich(
+              context.t.homeScreen.locationTimelineTitle(
+                formattedDate: TextSpan(
+                  text: formatDateTime(date),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
               style: TextStyle(color: colorScheme.onPrimary),
             ),
             Text(
