@@ -78,12 +78,33 @@ class LocationOverviewTimeline extends ConsumerWidget {
                 ],
               );
             },
-            loading: () => const Center(
-              child: CircularProgressIndicator(
-                color: Colors.white,
-                strokeWidth: 3,
-              ),
-            ),
+            loading: () {
+              return SizedBox(
+                width: double.infinity,
+                height: 225,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Header(
+                      name: 'EVO Strømsø',
+                      // TODO: this needs to be fetched from session
+                      date: dateToDisplay,
+                      onBackClicked: () {},
+                      onForwardClicked: () {},
+                    ),
+                    const SizedBox(height: 20),
+                    const Expanded(
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 3,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
             error: (error, stack) => Center(
               child: Text(
                 'Error loading data',
