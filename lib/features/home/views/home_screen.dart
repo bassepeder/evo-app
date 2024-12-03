@@ -18,6 +18,7 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       body: membership.when(
+        skipLoadingOnRefresh: false,
         data: (details) {
           return SafeArea(
             child: SingleChildScrollView(
@@ -60,7 +61,8 @@ class HomeScreen extends ConsumerWidget {
                 Expanded(
                   child: ErrorScreen(
                     subtitle: context.t.errors.failedToLoadMembershipError,
-                    onRetryClicked: () {},
+                    onRetryClicked: () =>
+                        ref.invalidate(membershipDetailsProvider),
                   ),
                 ),
               ],
