@@ -22,7 +22,7 @@ class HomeScreen extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: Column(
                 children: [
-                  const HomeHeader(disableButtons: false),
+                  const HomeHeader(),
                   MembershipStatusBanner(details: details!),
                   const HomeShortcuts(),
                   const CurrentLocationOverview(),
@@ -38,7 +38,7 @@ class HomeScreen extends ConsumerWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 16),
-                  child: HomeHeader(disableButtons: true),
+                  child: HomeHeader(),
                 ),
                 Expanded(
                   child: Center(child: CircularProgressIndicator()),
