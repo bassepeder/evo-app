@@ -11,9 +11,8 @@ Future<MembershipDetails?> membershipDetails(Ref ref) async {
   final session = ref.watch(authSessionProvider);
   if (session == null) return null;
 
-  return ref.withClientCacheFor(
+  return ref.withClient(
     (client) => MembershipRepository(client).getMembershipDetails(),
-    const Duration(hours: 1),
   );
 }
 
