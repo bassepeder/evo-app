@@ -35,12 +35,26 @@ class TranslationsEn extends Translations {
 	late final TranslationsEn _root = this; // ignore: unused_field
 
 	// Translations
+	@override late final _TranslationsErrorsEn errors = _TranslationsErrorsEn._(_root);
 	@override late final _TranslationsFormatEn format = _TranslationsFormatEn._(_root);
 	@override late final _TranslationsHomeScreenEn homeScreen = _TranslationsHomeScreenEn._(_root);
 	@override late final _TranslationsMembershipStatusesEn membershipStatuses = _TranslationsMembershipStatusesEn._(_root);
 	@override late final _TranslationsSignInScreenEn signInScreen = _TranslationsSignInScreenEn._(_root);
 	@override late final _TranslationsValidationEn validation = _TranslationsValidationEn._(_root);
 	@override late final _TranslationsWelcomeScreenEn welcomeScreen = _TranslationsWelcomeScreenEn._(_root);
+}
+
+// Path: errors
+class _TranslationsErrorsEn extends TranslationsErrorsNo {
+	_TranslationsErrorsEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get generalTitle => 'Oops! Something went wrong';
+	@override String get generalDescription => 'Something broke, but we\'re fixing it. Try again in a moment.';
+	@override String get generalRetryButtonText => 'Retry';
+	@override String get failedToLoadMembershipError => 'Failed to retrieve information about your membership.';
 }
 
 // Path: format
@@ -234,6 +248,10 @@ class _TranslationsValidationFormsInputFieldsPasswordEn extends TranslationsVali
 extension on TranslationsEn {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
+			case 'errors.generalTitle': return 'Oops! Something went wrong';
+			case 'errors.generalDescription': return 'Something broke, but we\'re fixing it. Try again in a moment.';
+			case 'errors.generalRetryButtonText': return 'Retry';
+			case 'errors.failedToLoadMembershipError': return 'Failed to retrieve information about your membership.';
 			case 'format.yesterday': return 'yesterday';
 			case 'format.today': return 'today';
 			case 'format.tomorrow': return 'tomorrow';
