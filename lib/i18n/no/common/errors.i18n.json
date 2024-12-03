@@ -1,0 +1,6 @@
+{
+  "generalTitle": "Oi! Noe gikk galt",
+  "generalDescription": "Noe gikk i stykker, men vi jobber med det. Prøv igjen om litt.",
+  "generalRetryButtonText": "Prøv igjen",
+  "failedToLoadMembershipError": "Kunne ikke hente informasjon om medlemskapet ditt."
+}

@@ -1,16 +1,18 @@
 import 'package:evo/common/widgets/icon_button_with_counter.dart';
+import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/features/settings/views/settings_screen.dart';
 import 'package:evo/utils/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeHeader extends StatelessWidget {
-  final bool disableButtons;
-
-  const HomeHeader({super.key, required this.disableButtons});
+class HomeHeader extends ConsumerWidget {
+  const HomeHeader({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final membership = ref.read(membershipDetailsProvider);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
@@ -33,7 +35,8 @@ class HomeHeader extends StatelessWidget {
           IconButtonWithCounter(
             svgSrc: settingsIcon,
             press: () {
-              if (disableButtons) return;
+              if (!membership.hasValue) return;
+
               HapticFeedback.mediumImpact();
               pushPlatformRoute(
                 context,

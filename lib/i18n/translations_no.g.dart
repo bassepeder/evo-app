@@ -37,12 +37,26 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final Translations _root = this; // ignore: unused_field
 
 	// Translations
+	late final TranslationsErrorsNo errors = TranslationsErrorsNo.internal(_root);
 	late final TranslationsFormatNo format = TranslationsFormatNo.internal(_root);
 	late final TranslationsHomeScreenNo homeScreen = TranslationsHomeScreenNo.internal(_root);
 	late final TranslationsMembershipStatusesNo membershipStatuses = TranslationsMembershipStatusesNo.internal(_root);
 	late final TranslationsSignInScreenNo signInScreen = TranslationsSignInScreenNo.internal(_root);
 	late final TranslationsValidationNo validation = TranslationsValidationNo.internal(_root);
 	late final TranslationsWelcomeScreenNo welcomeScreen = TranslationsWelcomeScreenNo.internal(_root);
+}
+
+// Path: errors
+class TranslationsErrorsNo {
+	TranslationsErrorsNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get generalTitle => 'Oi! Noe gikk galt';
+	String get generalDescription => 'Noe gikk i stykker, men vi jobber med det. Prøv igjen om litt.';
+	String get generalRetryButtonText => 'Prøv igjen';
+	String get failedToLoadMembershipError => 'Kunne ikke hente informasjon om medlemskapet ditt.';
 }
 
 // Path: format
@@ -236,6 +250,10 @@ class TranslationsValidationFormsInputFieldsPasswordNo {
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
+			case 'errors.generalTitle': return 'Oi! Noe gikk galt';
+			case 'errors.generalDescription': return 'Noe gikk i stykker, men vi jobber med det. Prøv igjen om litt.';
+			case 'errors.generalRetryButtonText': return 'Prøv igjen';
+			case 'errors.failedToLoadMembershipError': return 'Kunne ikke hente informasjon om medlemskapet ditt.';
 			case 'format.yesterday': return 'i går';
 			case 'format.today': return 'i dag';
 			case 'format.tomorrow': return 'i morgen';

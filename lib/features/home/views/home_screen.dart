@@ -1,9 +1,11 @@
+import 'package:evo/common/widgets/error_screen.dart';
 import 'package:evo/features/home/widgets/current_location_overview.dart';
 import 'package:evo/features/home/widgets/home_header.dart';
 import 'package:evo/features/home/widgets/home_shortcuts.dart';
 import 'package:evo/features/home/widgets/location_overview_timeline.dart';
 import 'package:evo/features/home/widgets/membership_status_banner.dart';
 import 'package:evo/features/membership/membership_repository.dart';
+import 'package:evo/i18n/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,13 +18,14 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       body: membership.when(
+        skipLoadingOnRefresh: false,
         data: (details) {
           return SafeArea(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: Column(
                 children: [
-                  const HomeHeader(disableButtons: false),
+                  const HomeHeader(),
                   MembershipStatusBanner(details: details!),
                   const HomeShortcuts(),
                   const CurrentLocationOverview(),
@@ -38,7 +41,7 @@ class HomeScreen extends ConsumerWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 16),
-                  child: HomeHeader(disableButtons: true),
+                  child: HomeHeader(),
                 ),
                 Expanded(
                   child: Center(child: CircularProgressIndicator()),
@@ -47,9 +50,25 @@ class HomeScreen extends ConsumerWidget {
             ),
           );
         },
-        error: (error, _) => const Center(
-          child: Text('En feil oppstod'),
-        ),
+        error: (error, _) {
+          return SafeArea(
+            child: Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                  child: HomeHeader(),
+                ),
+                Expanded(
+                  child: ErrorScreen(
+                    subtitle: context.t.errors.failedToLoadMembershipError,
+                    onRetryClicked: () =>
+                        ref.invalidate(membershipDetailsProvider),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
