@@ -35,7 +35,7 @@ class HomeHeader extends ConsumerWidget {
           IconButtonWithCounter(
             svgSrc: settingsIcon,
             press: () {
-              if (membership.hasValue) return;
+              if (!membership.hasValue) return;
 
               HapticFeedback.mediumImpact();
               pushPlatformRoute(
