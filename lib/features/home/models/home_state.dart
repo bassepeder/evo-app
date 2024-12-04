@@ -7,7 +7,7 @@ part 'home_state.freezed.dart';
 @freezed
 class HomeState with _$HomeState {
   const factory HomeState({
-    required DateTime currentDate,
+    required DateTime timelineOverviewDateFilter,
     required AsyncValue<EvoLocationStatisticsTimeline?> timelineData,
   }) = _HomeState;
 }
