@@ -1,5 +1,5 @@
 import 'package:evo/features/home/models/location_statistics_timeline.dart';
-import 'package:evo/features/home/viewmodels/home_view_model.dart';
+import 'package:evo/features/home/viewmodels/home_controller.dart';
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:evo/utils/formatting.dart';
@@ -19,14 +19,14 @@ class LocationOverviewTimeline extends ConsumerWidget {
 
     return membershipAsync.when(
       data: (membership) {
-        final homeState = ref.watch(homeViewModelProvider);
-        final dateToDisplay = ref.watch(homeViewModelProvider
+        final homeState = ref.watch(homeControllerProvider);
+        final dateToDisplay = ref.watch(homeControllerProvider
             .select((state) => state.timelineOverviewDateFilter));
 
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (homeState.timelineData.isLoading ||
               homeState.timelineData.asData == null) {
-            ref.read(homeViewModelProvider.notifier).fetchTimelineData();
+            ref.read(homeControllerProvider.notifier).fetchTimelineData();
           }
         });
 
@@ -43,30 +43,21 @@ class LocationOverviewTimeline extends ConsumerWidget {
           ),
           child: homeState.timelineData.when(
             data: (timeline) {
-              if (timeline == null) {
-                return Center(
-                  child: Text(
-                    'No data available',
-                    style: TextStyle(color: colorScheme.onPrimary),
-                  ),
-                );
-              }
-
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Header(
-                    name: timeline.name,
+                    name: timeline!.name,
                     date: dateToDisplay,
                     onBackClicked: () {
                       HapticFeedback.mediumImpact();
                       ref
-                          .read(homeViewModelProvider.notifier)
+                          .read(homeControllerProvider.notifier)
                           .goToPreviousDay();
                     },
                     onForwardClicked: () {
                       HapticFeedback.mediumImpact();
-                      ref.read(homeViewModelProvider.notifier).goToNextDay();
+                      ref.read(homeControllerProvider.notifier).goToNextDay();
                     },
                   ),
                   const SizedBox(height: 20),

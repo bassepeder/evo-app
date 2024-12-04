@@ -1,12 +1,14 @@
 import 'package:evo/features/home/location_repository.dart';
-import 'package:evo/features/home/models/home_state.dart';
+import 'package:evo/features/home/models/location_statistics_timeline.dart';
 import 'package:evo/features/membership/membership_repository.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'home_view_model.g.dart';
+part 'home_controller.freezed.dart';
+part 'home_controller.g.dart';
 
 @riverpod
-class HomeViewModel extends _$HomeViewModel {
+class HomeController extends _$HomeController {
   @override
   HomeState build() {
     return HomeState(
@@ -41,4 +43,12 @@ class HomeViewModel extends _$HomeViewModel {
     state = state.copyWith(timelineOverviewDateFilter: prevDay);
     fetchTimelineData();
   }
+}
+
+@freezed
+class HomeState with _$HomeState {
+  const factory HomeState({
+    required DateTime timelineOverviewDateFilter,
+    required AsyncValue<EvoLocationStatisticsTimeline?> timelineData,
+  }) = _HomeState;
 }
