@@ -34,16 +34,7 @@ class CurrentLocationOverview extends ConsumerWidget {
           ),
           child: locationStatsAsync.when(
             data: (stats) {
-              if (stats == null) {
-                return Center(
-                  child: Text(
-                    'No data available',
-                    style: TextStyle(color: colorScheme.onPrimary),
-                  ),
-                );
-              }
-
-              final double currentValue = stats.current.toDouble();
+              final double currentValue = stats!.current.toDouble();
 
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,12 +62,22 @@ class CurrentLocationOverview extends ConsumerWidget {
                 ],
               );
             },
-            loading: () => const Center(
-              child: CircularProgressIndicator(
-                color: Colors.white,
-                strokeWidth: 3,
-              ),
-            ),
+            loading: () {
+              return const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Header(name: 'EVO Strømsø'),
+                  SizedBox(height: 20),
+                  Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                      strokeWidth: 3,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                ],
+              );
+            },
             error: (error, stack) => Center(
               child: Text(
                 'Error loading data',
