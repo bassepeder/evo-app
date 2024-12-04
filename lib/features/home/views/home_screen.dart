@@ -1,4 +1,5 @@
 import 'package:evo/common/widgets/error_screen.dart';
+import 'package:evo/features/home/location_repository.dart';
 import 'package:evo/features/home/widgets/current_location_overview.dart';
 import 'package:evo/features/home/widgets/home_header.dart';
 import 'package:evo/features/home/widgets/home_shortcuts.dart';
@@ -15,6 +16,10 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final membership = ref.watch(membershipDetailsProvider);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(getLocationsProvider);
+    });
 
     return Scaffold(
       body: membership.when(
