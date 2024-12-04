@@ -1,4 +1,8 @@
+import 'package:evo/common/id.dart';
+import 'package:evo/common/widgets/adaptive_bottom_sheet.dart';
 import 'package:evo/common/widgets/icon_button_with_counter.dart';
+import 'package:evo/common/widgets/list.dart';
+import 'package:evo/features/home/location_repository.dart';
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/features/settings/views/settings_screen.dart';
 import 'package:evo/utils/navigation.dart';
@@ -29,7 +33,22 @@ class HomeHeader extends ConsumerWidget {
           const Spacer(),
           IconButtonWithCounter(
             svgSrc: mapPinIcon,
-            press: () {},
+            press: () {
+              if (!membership.hasValue) return;
+
+              final double screenHeight = MediaQuery.sizeOf(context).height;
+
+              showAdaptiveBottomSheet<int>(
+                context: context,
+                isScrollControlled: true,
+                constraints: BoxConstraints(
+                  maxHeight: screenHeight * 0.6,
+                ),
+                builder: (_) => _LocationPickerMenu(
+                  id: membership.requireValue!.location.id,
+                ),
+              );
+            },
           ),
           const SizedBox(width: 8),
           IconButtonWithCounter(
@@ -63,3 +82,64 @@ const mapPinIcon = '''
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
 </svg>
 ''';
+
+class _LocationPickerMenu extends ConsumerStatefulWidget {
+  const _LocationPickerMenu({
+    required this.id,
+  });
+
+  final LocationId id;
+
+  @override
+  ConsumerState<_LocationPickerMenu> createState() =>
+      _LocationPickerMenuState();
+}
+
+class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
+  final currentLocationKey = GlobalKey();
+
+  @override
+  Widget build(BuildContext context) {
+    final locationsProvider = ref.read(getLocationsProvider);
+
+    // Scroll to the current chapter
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (currentLocationKey.currentContext != null) {
+        Scrollable.ensureVisible(
+          currentLocationKey.currentContext!,
+          alignment: 0.5,
+        );
+      }
+    });
+
+    return locationsProvider.when(
+      data: (locations) => BottomSheetScrollableContainer(
+        padding: const EdgeInsets.all(16.0),
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Velg senter',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 16),
+              for (final location in locations)
+                PlatformListTile(
+                  key: location.id == widget.id ? currentLocationKey : null,
+                  title: Text(location.name, maxLines: 2),
+                  onTap: () {},
+                  selected: location.id == widget.id,
+                ),
+            ],
+          ),
+        ],
+      ),
+      error: (e, _) => Text('Error'),
+      loading: () => const Column(children: [CircularProgressIndicator()]),
+    );
+  }
+}
