@@ -102,7 +102,7 @@ class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
   Widget build(BuildContext context) {
     final locationsProvider = ref.read(getLocationsProvider);
 
-    // Scroll to the current chapter
+    // Scroll to the current location.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (currentLocationKey.currentContext != null) {
         Scrollable.ensureVisible(
