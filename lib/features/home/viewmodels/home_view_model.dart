@@ -10,7 +10,7 @@ class HomeViewModel extends _$HomeViewModel {
   @override
   HomeState build() {
     return HomeState(
-      currentDate: DateTime.now(),
+      timelineOverviewDateFilter: DateTime.now(),
       timelineData: const AsyncValue.loading(),
     );
   }
@@ -20,20 +20,25 @@ class HomeViewModel extends _$HomeViewModel {
     state = state.copyWith(timelineData: const AsyncValue.loading());
 
     final data = await ref.read(
-      locationStatisticsTimelineProvider(locationId, state.currentDate).future,
+      locationStatisticsTimelineProvider(
+        locationId,
+        state.timelineOverviewDateFilter,
+      ).future,
     );
     state = state.copyWith(timelineData: AsyncValue.data(data));
   }
 
   void goToNextDay() {
-    final nextDay = state.currentDate.add(const Duration(days: 1));
-    state = state.copyWith(currentDate: nextDay);
+    final nextDay =
+        state.timelineOverviewDateFilter.add(const Duration(days: 1));
+    state = state.copyWith(timelineOverviewDateFilter: nextDay);
     fetchTimelineData();
   }
 
   void goToPreviousDay() {
-    final prevDay = state.currentDate.subtract(const Duration(days: 1));
-    state = state.copyWith(currentDate: prevDay);
+    final prevDay =
+        state.timelineOverviewDateFilter.subtract(const Duration(days: 1));
+    state = state.copyWith(timelineOverviewDateFilter: prevDay);
     fetchTimelineData();
   }
 }

@@ -20,8 +20,8 @@ class LocationOverviewTimeline extends ConsumerWidget {
     return membershipAsync.when(
       data: (membership) {
         final homeState = ref.watch(homeViewModelProvider);
-        final dateToDisplay = ref
-            .watch(homeViewModelProvider.select((state) => state.currentDate));
+        final dateToDisplay = ref.watch(homeViewModelProvider
+            .select((state) => state.timelineOverviewDateFilter));
 
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (homeState.timelineData.isLoading ||
