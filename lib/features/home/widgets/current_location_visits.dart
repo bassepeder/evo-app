@@ -1,5 +1,5 @@
-import 'package:evo/features/home/location_repository.dart';
 import 'package:evo/features/home/models/location_statistics.dart';
+import 'package:evo/features/home/viewmodels/location_controller.dart';
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -17,9 +17,14 @@ class CurrentLocationVisits extends ConsumerWidget {
 
     return membershipAsync.when(
       data: (membership) {
-        final locationId = membership!.location.id;
-        final locationStatsAsync =
-            ref.watch(currentLocationStatisticsProvider(locationId));
+        final locationState = ref.watch(locationControllerProvider);
+
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (locationState.currentLocationData.isLoading ||
+              locationState.currentLocationData.asData == null) {
+            ref.read(locationControllerProvider.notifier).fetchCurrentData();
+          }
+        });
 
         return Container(
           width: double.infinity,
@@ -32,7 +37,8 @@ class CurrentLocationVisits extends ConsumerWidget {
             color: colorScheme.primary.withOpacity(0.5),
             borderRadius: BorderRadius.circular(20),
           ),
-          child: locationStatsAsync.when(
+          child: locationState.currentLocationData.when(
+            skipLoadingOnRefresh: false,
             data: (stats) {
               final double currentValue = stats!.current.toDouble();
 
@@ -63,18 +69,20 @@ class CurrentLocationVisits extends ConsumerWidget {
               );
             },
             loading: () {
-              return const Column(
+              return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Header(name: 'EVO Strømsø'),
-                  SizedBox(height: 20),
-                  Center(
+                  Header(
+                    name: ref.read(locationControllerProvider).locationName,
+                  ),
+                  const SizedBox(height: 20),
+                  const Center(
                     child: CircularProgressIndicator(
                       color: Colors.white,
                       strokeWidth: 3,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                 ],
               );
             },

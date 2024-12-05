@@ -3,6 +3,7 @@ import 'package:evo/common/widgets/adaptive_bottom_sheet.dart';
 import 'package:evo/common/widgets/icon_button_with_counter.dart';
 import 'package:evo/common/widgets/list.dart';
 import 'package:evo/features/home/location_repository.dart';
+import 'package:evo/features/home/viewmodels/location_controller.dart';
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/features/settings/views/settings_screen.dart';
 import 'package:evo/utils/navigation.dart';
@@ -45,7 +46,7 @@ class HomeHeader extends ConsumerWidget {
                   maxHeight: screenHeight * 0.6,
                 ),
                 builder: (_) => _LocationPickerMenu(
-                  id: membership.requireValue!.location.id,
+                  id: ref.read(locationControllerProvider).locationId!,
                 ),
               );
             },
@@ -131,7 +132,15 @@ class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
                 PlatformListTile(
                   key: location.id == widget.id ? currentLocationKey : null,
                   title: Text(location.name, maxLines: 2),
-                  onTap: () {},
+                  onTap: () {
+                    ref
+                        .read(locationControllerProvider.notifier)
+                        .setNewLocation(
+                          location.id,
+                          location.name,
+                        );
+                    Navigator.pop(context);
+                  },
                   selected: location.id == widget.id,
                 ),
             ],
