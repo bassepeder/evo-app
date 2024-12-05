@@ -1,3 +1,4 @@
+import 'package:evo/common/id.dart';
 import 'package:evo/features/home/location_repository.dart';
 import 'package:evo/features/home/models/location_statistics.dart';
 import 'package:evo/features/home/models/location_statistics_timeline.dart';
@@ -12,24 +13,52 @@ part 'location_controller.g.dart';
 class LocationController extends _$LocationController {
   @override
   LocationState build() {
+    final initialLocation = ref.read(membershipDetailsProvider).value!.location;
     return LocationState(
+      locationId: initialLocation.id,
+      locationName: initialLocation.name,
       timelineDateFilter: DateTime.now(),
       currentLocationData: const AsyncValue.loading(),
       locationTimelineData: const AsyncValue.loading(),
     );
   }
 
+  Future<void> fetchCurrentData() async {
+    state = state.copyWith(currentLocationData: const AsyncValue.loading());
+
+    await Future.delayed(const Duration(seconds: 1));
+
+    final data = await ref.read(
+      currentLocationStatisticsProvider(
+        state.locationId!,
+      ).future,
+    );
+
+    state = state.copyWith(currentLocationData: AsyncValue.data(data));
+  }
+
   Future<void> fetchTimelineData() async {
-    final locationId = ref.read(membershipDetailsProvider).value!.location.id;
     state = state.copyWith(locationTimelineData: const AsyncValue.loading());
+
+    await Future.delayed(const Duration(seconds: 1));
 
     final data = await ref.read(
       locationStatisticsTimelineProvider(
-        locationId,
+        state.locationId!,
         state.timelineDateFilter,
       ).future,
     );
+
     state = state.copyWith(locationTimelineData: AsyncValue.data(data));
+  }
+
+  void setNewLocation(
+    LocationId id,
+    String name,
+  ) {
+    state = state.copyWith(locationId: id, locationName: name);
+    fetchCurrentData();
+    fetchTimelineData();
   }
 
   void goToNextDay() {
@@ -48,6 +77,8 @@ class LocationController extends _$LocationController {
 @freezed
 class LocationState with _$LocationState {
   const factory LocationState({
+    required LocationId? locationId,
+    required String locationName,
     required DateTime timelineDateFilter,
     required AsyncValue<EvoLocationStatistics?> currentLocationData,
     required AsyncValue<EvoLocationStatisticsTimeline?> locationTimelineData,
