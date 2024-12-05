@@ -50,13 +50,15 @@ class LocationController extends _$LocationController {
     state = state.copyWith(locationTimelineData: AsyncValue.data(data));
   }
 
-  void setNewLocation(
+  Future<void> setNewLocation(
     LocationId id,
     String name,
-  ) {
+  ) async {
     state = state.copyWith(locationId: id, locationName: name);
-    fetchCurrentData();
-    fetchTimelineData();
+    await Future.wait([
+      fetchCurrentData(),
+      fetchTimelineData(),
+    ]);
   }
 
   void goToNextDay() {
