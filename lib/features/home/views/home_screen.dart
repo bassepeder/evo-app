@@ -1,9 +1,9 @@
 import 'package:evo/common/widgets/error_screen.dart';
 import 'package:evo/features/home/location_repository.dart';
-import 'package:evo/features/home/widgets/current_location_overview.dart';
+import 'package:evo/features/home/widgets/current_location_visits.dart';
 import 'package:evo/features/home/widgets/home_header.dart';
 import 'package:evo/features/home/widgets/home_shortcuts.dart';
-import 'package:evo/features/home/widgets/location_overview_timeline.dart';
+import 'package:evo/features/home/widgets/location_visits_timeline.dart';
 import 'package:evo/features/home/widgets/membership_status_banner.dart';
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/i18n/translations.g.dart';
@@ -33,8 +33,8 @@ class HomeScreen extends ConsumerWidget {
                   const HomeHeader(),
                   MembershipStatusBanner(details: details!),
                   const HomeShortcuts(),
-                  const CurrentLocationOverview(),
-                  const LocationOverviewTimeline(),
+                  const CurrentLocationVisits(),
+                  const LocationVisitsTimeline(),
                 ],
               ),
             ),
