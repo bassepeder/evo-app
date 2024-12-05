@@ -42,6 +42,7 @@ class LocationVisitsTimeline extends ConsumerWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           child: locationState.locationTimelineData.when(
+            skipLoadingOnRefresh: false,
             data: (timeline) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,8 +80,7 @@ class LocationVisitsTimeline extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Header(
-                      name: 'EVO Strømsø',
-                      // TODO: this needs to be fetched from session
+                      name: ref.read(locationControllerProvider).locationName,
                       date: dateToDisplay,
                       onBackClicked: () {},
                       onForwardClicked: () {},
@@ -238,29 +238,34 @@ class Header extends StatelessWidget {
 
     return Row(
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text.rich(
-              context.t.homeScreen.locationTimelineTitle(
-                formattedDate: TextSpan(
-                  text: formatDateTime(date),
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text.rich(
+                context.t.homeScreen.locationTimelineTitle(
+                  formattedDate: TextSpan(
+                    text: formatDateTime(date),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1, // Truncate the text
+                style: TextStyle(color: colorScheme.onPrimary),
+              ),
+              Text(
+                name,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1, // Truncate the name
+                style: TextStyle(
+                  fontSize: 24,
+                  color: colorScheme.onPrimary,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              style: TextStyle(color: colorScheme.onPrimary),
-            ),
-            Text(
-              name,
-              style: TextStyle(
-                fontSize: 24,
-                color: colorScheme.onPrimary,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
-        const Spacer(),
         IconButton(
           onPressed: onBackClicked,
           icon: const Icon(Icons.arrow_back_ios),
