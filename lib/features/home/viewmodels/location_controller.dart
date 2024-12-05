@@ -26,7 +26,6 @@ class LocationController extends _$LocationController {
   Future<void> fetchCurrentData() async {
     state = state.copyWith(currentLocationData: const AsyncValue.loading());
 
-    await Future.delayed(const Duration(seconds: 1));
 
     final data = await ref.read(
       currentLocationStatisticsProvider(
@@ -40,7 +39,6 @@ class LocationController extends _$LocationController {
   Future<void> fetchTimelineData() async {
     state = state.copyWith(locationTimelineData: const AsyncValue.loading());
 
-    await Future.delayed(const Duration(seconds: 1));
 
     final data = await ref.read(
       locationStatisticsTimelineProvider(
