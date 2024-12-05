@@ -26,28 +26,36 @@ class LocationController extends _$LocationController {
   Future<void> fetchCurrentData() async {
     state = state.copyWith(currentLocationData: const AsyncValue.loading());
 
+    try {
+      final data = await ref.read(
+        currentLocationStatisticsProvider(
+          state.locationId!,
+        ).future,
+      );
 
-    final data = await ref.read(
-      currentLocationStatisticsProvider(
-        state.locationId!,
-      ).future,
-    );
-
-    state = state.copyWith(currentLocationData: AsyncValue.data(data));
+      state = state.copyWith(currentLocationData: AsyncValue.data(data));
+    } catch (e, stackTrace) {
+      state =
+          state.copyWith(currentLocationData: AsyncValue.error(e, stackTrace));
+    }
   }
 
   Future<void> fetchTimelineData() async {
     state = state.copyWith(locationTimelineData: const AsyncValue.loading());
 
+    try {
+      final data = await ref.read(
+        locationStatisticsTimelineProvider(
+          state.locationId!,
+          state.timelineDateFilter,
+        ).future,
+      );
 
-    final data = await ref.read(
-      locationStatisticsTimelineProvider(
-        state.locationId!,
-        state.timelineDateFilter,
-      ).future,
-    );
-
-    state = state.copyWith(locationTimelineData: AsyncValue.data(data));
+      state = state.copyWith(locationTimelineData: AsyncValue.data(data));
+    } catch (e, stackTrace) {
+      state =
+          state.copyWith(locationTimelineData: AsyncValue.error(e, stackTrace));
+    }
   }
 
   Future<void> setNewLocation(
