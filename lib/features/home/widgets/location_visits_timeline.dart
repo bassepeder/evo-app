@@ -1,5 +1,5 @@
 import 'package:evo/features/home/models/location_statistics_timeline.dart';
-import 'package:evo/features/home/viewmodels/home_controller.dart';
+import 'package:evo/features/home/viewmodels/location_controller.dart';
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:evo/utils/formatting.dart';
@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LocationOverviewTimeline extends ConsumerWidget {
-  const LocationOverviewTimeline({super.key});
+class LocationVisitsTimeline extends ConsumerWidget {
+  const LocationVisitsTimeline({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,14 +19,14 @@ class LocationOverviewTimeline extends ConsumerWidget {
 
     return membershipAsync.when(
       data: (membership) {
-        final homeState = ref.watch(homeControllerProvider);
-        final dateToDisplay = ref.watch(homeControllerProvider
-            .select((state) => state.timelineOverviewDateFilter));
+        final locationState = ref.watch(locationControllerProvider);
+        final dateToDisplay = ref.watch(locationControllerProvider
+            .select((state) => state.timelineDateFilter));
 
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (homeState.timelineData.isLoading ||
-              homeState.timelineData.asData == null) {
-            ref.read(homeControllerProvider.notifier).fetchTimelineData();
+          if (locationState.locationTimelineData.isLoading ||
+              locationState.locationTimelineData.asData == null) {
+            ref.read(locationControllerProvider.notifier).fetchTimelineData();
           }
         });
 
@@ -41,7 +41,7 @@ class LocationOverviewTimeline extends ConsumerWidget {
             color: colorScheme.primary.withOpacity(0.5),
             borderRadius: BorderRadius.circular(20),
           ),
-          child: homeState.timelineData.when(
+          child: locationState.locationTimelineData.when(
             data: (timeline) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,12 +52,14 @@ class LocationOverviewTimeline extends ConsumerWidget {
                     onBackClicked: () {
                       HapticFeedback.mediumImpact();
                       ref
-                          .read(homeControllerProvider.notifier)
+                          .read(locationControllerProvider.notifier)
                           .goToPreviousDay();
                     },
                     onForwardClicked: () {
                       HapticFeedback.mediumImpact();
-                      ref.read(homeControllerProvider.notifier).goToNextDay();
+                      ref
+                          .read(locationControllerProvider.notifier)
+                          .goToNextDay();
                     },
                   ),
                   const SizedBox(height: 20),
