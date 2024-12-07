@@ -1,6 +1,5 @@
 import 'package:evo/features/home/models/location_statistics_timeline.dart';
 import 'package:evo/features/home/viewmodels/location_controller.dart';
-import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:evo/utils/formatting.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -15,108 +14,81 @@ class LocationVisitsTimeline extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    final membershipAsync = ref.watch(membershipDetailsProvider);
+    final locationState = ref.watch(locationControllerProvider);
+    final dateToDisplay = ref.watch(
+        locationControllerProvider.select((state) => state.timelineDateFilter));
 
-    return membershipAsync.when(
-      data: (membership) {
-        final locationState = ref.watch(locationControllerProvider);
-        final dateToDisplay = ref.watch(locationControllerProvider
-            .select((state) => state.timelineDateFilter));
-
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (locationState.locationTimelineData.isLoading ||
-              locationState.locationTimelineData.asData == null) {
-            ref.read(locationControllerProvider.notifier).fetchTimelineData();
-          }
-        });
-
-        return Container(
-          width: double.infinity,
-          margin: const EdgeInsets.all(20),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 16,
-          ),
-          decoration: BoxDecoration(
-            color: colorScheme.primary.withOpacity(0.5),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: locationState.locationTimelineData.when(
-            skipLoadingOnRefresh: false,
-            data: (timeline) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Header(
-                    name: timeline!.name,
-                    date: dateToDisplay,
-                    onBackClicked: () {
-                      HapticFeedback.mediumImpact();
-                      ref
-                          .read(locationControllerProvider.notifier)
-                          .goToPreviousDay();
-                    },
-                    onForwardClicked: () {
-                      HapticFeedback.mediumImpact();
-                      ref
-                          .read(locationControllerProvider.notifier)
-                          .goToNextDay();
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 225,
-                    child: Chart(intervals: timeline.intervals),
-                  ),
-                ],
-              );
-            },
-            loading: () {
-              return SizedBox(
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.all(20),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 16,
+      ),
+      decoration: BoxDecoration(
+        color: colorScheme.primary.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: locationState.locationTimelineData.when(
+        skipLoadingOnRefresh: false,
+        data: (timeline) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Header(
+                name: timeline!.name,
+                date: dateToDisplay,
+                onBackClicked: () {
+                  HapticFeedback.mediumImpact();
+                  ref
+                      .read(locationControllerProvider.notifier)
+                      .goToPreviousDay();
+                },
+                onForwardClicked: () {
+                  HapticFeedback.mediumImpact();
+                  ref.read(locationControllerProvider.notifier).goToNextDay();
+                },
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
                 width: double.infinity,
                 height: 225,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Header(
-                      name: ref.read(locationControllerProvider).locationName,
-                      date: dateToDisplay,
-                      onBackClicked: () {},
-                      onForwardClicked: () {},
-                    ),
-                    const SizedBox(height: 20),
-                    const Expanded(
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                          strokeWidth: 3,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-            error: (error, stack) => Center(
-              child: Text(
-                'Error loading data',
-                style: TextStyle(color: colorScheme.onPrimary),
+                child: Chart(intervals: timeline.intervals),
               ),
+            ],
+          );
+        },
+        loading: () {
+          return SizedBox(
+            width: double.infinity,
+            height: 225,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Header(
+                  name: ref.read(locationControllerProvider).locationName,
+                  date: dateToDisplay,
+                  onBackClicked: () {},
+                  onForwardClicked: () {},
+                ),
+                const SizedBox(height: 20),
+                const Expanded(
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                      strokeWidth: 3,
+                    ),
+                  ),
+                ),
+              ],
             ),
+          );
+        },
+        error: (error, stack) => Center(
+          child: Text(
+            context.t.errors.failedToLoadLocationData,
+            style: TextStyle(color: colorScheme.onPrimary),
           ),
-        );
-      },
-      loading: () => const Center(
-        child: CircularProgressIndicator(
-          color: Colors.white,
-          strokeWidth: 3,
-        ),
-      ),
-      error: (error, stack) => Center(
-        child: Text(
-          'Error loading membership data',
-          style: TextStyle(color: colorScheme.onPrimary),
         ),
       ),
     );

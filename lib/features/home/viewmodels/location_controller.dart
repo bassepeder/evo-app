@@ -3,6 +3,7 @@ import 'package:evo/features/home/location_repository.dart';
 import 'package:evo/features/home/models/location_statistics.dart';
 import 'package:evo/features/home/models/location_statistics_timeline.dart';
 import 'package:evo/features/membership/membership_repository.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -13,14 +14,23 @@ part 'location_controller.g.dart';
 class LocationController extends _$LocationController {
   @override
   LocationState build() {
-    final initialLocation = ref.read(membershipDetailsProvider).value!.location;
-    return LocationState(
+    final membership = ref.read(membershipDetailsProvider).requireValue!;
+
+    final initialLocation = membership.location;
+    final initialState = LocationState(
       locationId: initialLocation.id,
       locationName: initialLocation.name,
       timelineDateFilter: DateTime.now(),
       currentLocationData: const AsyncValue.loading(),
       locationTimelineData: const AsyncValue.loading(),
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      fetchCurrentData();
+      fetchTimelineData();
+    });
+
+    return initialState;
   }
 
   Future<void> fetchCurrentData() async {
