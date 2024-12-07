@@ -3,5 +3,6 @@
   "generalDescription": "Something broke, but we're fixing it. Try again in a moment.",
   "generalRetryButtonText": "Retry",
   "failedToLoadMembershipError": "Failed to retrieve information about your membership.",
-  "failedToLoadLocationData": "Failed to load location data."
+  "failedToLoadLocationData": "Failed to load location data.",
+  "failedToLoadLocations": "Failed to fetch all EVO locations"
 }

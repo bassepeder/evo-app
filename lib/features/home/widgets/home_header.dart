@@ -6,6 +6,7 @@ import 'package:evo/features/home/location_repository.dart';
 import 'package:evo/features/home/viewmodels/location_controller.dart';
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/features/settings/views/settings_screen.dart';
+import 'package:evo/i18n/translations.g.dart';
 import 'package:evo/utils/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -120,9 +121,9 @@ class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Velg senter',
-                style: TextStyle(
+              Text(
+                context.t.homeScreen.chooseLocation,
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -147,7 +148,7 @@ class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
           ),
         ],
       ),
-      error: (e, _) => Text('Error'),
+      error: (e, _) => Text(context.t.errors.failedToLoadLocations),
       loading: () => const Column(children: [CircularProgressIndicator()]),
     );
   }

@@ -56,6 +56,7 @@ class _TranslationsErrorsEn extends TranslationsErrorsNo {
 	@override String get generalRetryButtonText => 'Retry';
 	@override String get failedToLoadMembershipError => 'Failed to retrieve information about your membership.';
 	@override String get failedToLoadLocationData => 'Failed to load location data.';
+	@override String get failedToLoadLocations => 'Failed to fetch all EVO locations';
 }
 
 // Path: format
@@ -88,6 +89,7 @@ class _TranslationsHomeScreenEn extends TranslationsHomeScreenNo {
 		'Your keys',
 		'Workouts',
 	];
+	@override String get chooseLocation => 'Choose EVO location';
 }
 
 // Path: membershipStatuses
@@ -254,6 +256,7 @@ extension on TranslationsEn {
 			case 'errors.generalRetryButtonText': return 'Retry';
 			case 'errors.failedToLoadMembershipError': return 'Failed to retrieve information about your membership.';
 			case 'errors.failedToLoadLocationData': return 'Failed to load location data.';
+			case 'errors.failedToLoadLocations': return 'Failed to fetch all EVO locations';
 			case 'format.yesterday': return 'yesterday';
 			case 'format.today': return 'today';
 			case 'format.tomorrow': return 'tomorrow';
@@ -266,6 +269,7 @@ extension on TranslationsEn {
 			]);
 			case 'homeScreen.shortcuts.0': return 'Your keys';
 			case 'homeScreen.shortcuts.1': return 'Workouts';
+			case 'homeScreen.chooseLocation': return 'Choose EVO location';
 			case 'membershipStatuses.presale': return 'Pre-sale';
 			case 'membershipStatuses.inTrial': return 'In trial';
 			case 'membershipStatuses.active': return 'Active';
