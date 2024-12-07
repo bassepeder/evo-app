@@ -16,7 +16,8 @@ class LocationVisitsTimeline extends ConsumerWidget {
 
     final locationState = ref.watch(locationControllerProvider);
     final dateToDisplay = ref.watch(
-        locationControllerProvider.select((state) => state.timelineDateFilter),);
+      locationControllerProvider.select((state) => state.timelineDateFilter),
+    );
 
     return Container(
       width: double.infinity,
@@ -72,11 +73,11 @@ class LocationVisitsTimeline extends ConsumerWidget {
                   onForwardClicked: () {},
                 ),
                 const SizedBox(height: 20),
-                const Expanded(
+                Expanded(
                   child: Center(
                     child: CircularProgressIndicator(
-                      color: Colors.white,
-                      strokeWidth: 3,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      strokeWidth: 2,
                     ),
                   ),
                 ),
