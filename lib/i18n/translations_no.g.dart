@@ -58,6 +58,7 @@ class TranslationsErrorsNo {
 	String get generalRetryButtonText => 'Prøv igjen';
 	String get failedToLoadMembershipError => 'Kunne ikke hente informasjon om medlemskapet ditt.';
 	String get failedToLoadLocationData => 'Klarte ikke å hente lokasjonsdata.';
+	String get failedToLoadLocations => 'Klarte ikke å hente alle EVO lokasjoner.';
 }
 
 // Path: format
@@ -90,6 +91,7 @@ class TranslationsHomeScreenNo {
 		'Dine nøkler',
 		'Treningsøkter',
 	];
+	String get chooseLocation => 'Velg EVO senter';
 }
 
 // Path: membershipStatuses
@@ -256,6 +258,7 @@ extension on Translations {
 			case 'errors.generalRetryButtonText': return 'Prøv igjen';
 			case 'errors.failedToLoadMembershipError': return 'Kunne ikke hente informasjon om medlemskapet ditt.';
 			case 'errors.failedToLoadLocationData': return 'Klarte ikke å hente lokasjonsdata.';
+			case 'errors.failedToLoadLocations': return 'Klarte ikke å hente alle EVO lokasjoner.';
 			case 'format.yesterday': return 'i går';
 			case 'format.today': return 'i dag';
 			case 'format.tomorrow': return 'i morgen';
@@ -268,6 +271,7 @@ extension on Translations {
 			]);
 			case 'homeScreen.shortcuts.0': return 'Dine nøkler';
 			case 'homeScreen.shortcuts.1': return 'Treningsøkter';
+			case 'homeScreen.chooseLocation': return 'Velg EVO senter';
 			case 'membershipStatuses.presale': return 'Før salg';
 			case 'membershipStatuses.inTrial': return 'I prøveperiode';
 			case 'membershipStatuses.active': return 'Aktiv';
