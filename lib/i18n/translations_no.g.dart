@@ -57,6 +57,7 @@ class TranslationsErrorsNo {
 	String get generalDescription => 'Noe gikk i stykker, men vi jobber med det. Prøv igjen om litt.';
 	String get generalRetryButtonText => 'Prøv igjen';
 	String get failedToLoadMembershipError => 'Kunne ikke hente informasjon om medlemskapet ditt.';
+	String get failedToLoadLocationData => 'Klarte ikke å hente lokasjonsdata.';
 }
 
 // Path: format
@@ -254,6 +255,7 @@ extension on Translations {
 			case 'errors.generalDescription': return 'Noe gikk i stykker, men vi jobber med det. Prøv igjen om litt.';
 			case 'errors.generalRetryButtonText': return 'Prøv igjen';
 			case 'errors.failedToLoadMembershipError': return 'Kunne ikke hente informasjon om medlemskapet ditt.';
+			case 'errors.failedToLoadLocationData': return 'Klarte ikke å hente lokasjonsdata.';
 			case 'format.yesterday': return 'i går';
 			case 'format.today': return 'i dag';
 			case 'format.tomorrow': return 'i morgen';
