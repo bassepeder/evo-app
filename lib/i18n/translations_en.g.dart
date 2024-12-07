@@ -38,6 +38,7 @@ class TranslationsEn extends Translations {
 	@override late final _TranslationsErrorsEn errors = _TranslationsErrorsEn._(_root);
 	@override late final _TranslationsFormatEn format = _TranslationsFormatEn._(_root);
 	@override late final _TranslationsHomeScreenEn homeScreen = _TranslationsHomeScreenEn._(_root);
+	@override late final _TranslationsKeyTypesEn keyTypes = _TranslationsKeyTypesEn._(_root);
 	@override late final _TranslationsMembershipStatusesEn membershipStatuses = _TranslationsMembershipStatusesEn._(_root);
 	@override late final _TranslationsSignInScreenEn signInScreen = _TranslationsSignInScreenEn._(_root);
 	@override late final _TranslationsValidationEn validation = _TranslationsValidationEn._(_root);
@@ -90,6 +91,18 @@ class _TranslationsHomeScreenEn extends TranslationsHomeScreenNo {
 		'Workouts',
 	];
 	@override String get chooseLocation => 'Choose EVO location';
+}
+
+// Path: keyTypes
+class _TranslationsKeyTypesEn extends TranslationsKeyTypesNo {
+	_TranslationsKeyTypesEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get rfid => 'RFID chip';
+	@override String get pinCode => 'PIN code';
+	@override String get unknown => 'Unknown key type';
 }
 
 // Path: membershipStatuses
@@ -270,6 +283,9 @@ extension on TranslationsEn {
 			case 'homeScreen.shortcuts.0': return 'Your keys';
 			case 'homeScreen.shortcuts.1': return 'Workouts';
 			case 'homeScreen.chooseLocation': return 'Choose EVO location';
+			case 'keyTypes.rfid': return 'RFID chip';
+			case 'keyTypes.pinCode': return 'PIN code';
+			case 'keyTypes.unknown': return 'Unknown key type';
 			case 'membershipStatuses.presale': return 'Pre-sale';
 			case 'membershipStatuses.inTrial': return 'In trial';
 			case 'membershipStatuses.active': return 'Active';

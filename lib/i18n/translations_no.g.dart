@@ -40,6 +40,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsErrorsNo errors = TranslationsErrorsNo.internal(_root);
 	late final TranslationsFormatNo format = TranslationsFormatNo.internal(_root);
 	late final TranslationsHomeScreenNo homeScreen = TranslationsHomeScreenNo.internal(_root);
+	late final TranslationsKeyTypesNo keyTypes = TranslationsKeyTypesNo.internal(_root);
 	late final TranslationsMembershipStatusesNo membershipStatuses = TranslationsMembershipStatusesNo.internal(_root);
 	late final TranslationsSignInScreenNo signInScreen = TranslationsSignInScreenNo.internal(_root);
 	late final TranslationsValidationNo validation = TranslationsValidationNo.internal(_root);
@@ -92,6 +93,18 @@ class TranslationsHomeScreenNo {
 		'Treningsøkter',
 	];
 	String get chooseLocation => 'Velg EVO senter';
+}
+
+// Path: keyTypes
+class TranslationsKeyTypesNo {
+	TranslationsKeyTypesNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get rfid => 'RFID brikke';
+	String get pinCode => 'PIN kode';
+	String get unknown => 'Ukjent nøkkeltype';
 }
 
 // Path: membershipStatuses
@@ -272,6 +285,9 @@ extension on Translations {
 			case 'homeScreen.shortcuts.0': return 'Dine nøkler';
 			case 'homeScreen.shortcuts.1': return 'Treningsøkter';
 			case 'homeScreen.chooseLocation': return 'Velg EVO senter';
+			case 'keyTypes.rfid': return 'RFID brikke';
+			case 'keyTypes.pinCode': return 'PIN kode';
+			case 'keyTypes.unknown': return 'Ukjent nøkkeltype';
 			case 'membershipStatuses.presale': return 'Før salg';
 			case 'membershipStatuses.inTrial': return 'I prøveperiode';
 			case 'membershipStatuses.active': return 'Aktiv';
