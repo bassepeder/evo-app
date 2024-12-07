@@ -16,7 +16,7 @@ class LocationVisitsTimeline extends ConsumerWidget {
 
     final locationState = ref.watch(locationControllerProvider);
     final dateToDisplay = ref.watch(
-        locationControllerProvider.select((state) => state.timelineDateFilter));
+        locationControllerProvider.select((state) => state.timelineDateFilter),);
 
     return Container(
       width: double.infinity,
