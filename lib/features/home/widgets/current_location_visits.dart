@@ -1,6 +1,5 @@
 import 'package:evo/features/home/models/location_statistics.dart';
 import 'package:evo/features/home/viewmodels/location_controller.dart';
-import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -13,98 +12,73 @@ class CurrentLocationVisits extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    final membershipAsync = ref.watch(membershipDetailsProvider);
+    final locationState = ref.watch(locationControllerProvider);
 
-    return membershipAsync.when(
-      data: (membership) {
-        final locationState = ref.watch(locationControllerProvider);
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.all(20),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 16,
+      ),
+      decoration: BoxDecoration(
+        color: colorScheme.primary.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: locationState.currentLocationData.when(
+        skipLoadingOnRefresh: false,
+        data: (stats) {
+          final double currentValue = stats!.current.toDouble();
 
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (locationState.currentLocationData.isLoading ||
-              locationState.currentLocationData.asData == null) {
-            ref.read(locationControllerProvider.notifier).fetchCurrentData();
-          }
-        });
-
-        return Container(
-          width: double.infinity,
-          margin: const EdgeInsets.all(20),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 16,
-          ),
-          decoration: BoxDecoration(
-            color: colorScheme.primary.withOpacity(0.5),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: locationState.currentLocationData.when(
-            skipLoadingOnRefresh: false,
-            data: (stats) {
-              final double currentValue = stats!.current.toDouble();
-
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Header(name: stats.name),
+              const SizedBox(height: 20),
+              Stack(
+                alignment: Alignment.center,
                 children: [
-                  Header(name: stats.name),
-                  const SizedBox(height: 20),
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      SizedBox(
-                        width: double.infinity,
-                        height: 225,
-                        child: Chart(stats: stats),
-                      ),
-                      Text(
-                        currentValue.toStringAsFixed(0),
-                        style: TextStyle(
-                          fontSize: 32,
-                          color: colorScheme.onPrimary,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+                  SizedBox(
+                    width: double.infinity,
+                    height: 225,
+                    child: Chart(stats: stats),
                   ),
-                ],
-              );
-            },
-            loading: () {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Header(
-                    name: ref.read(locationControllerProvider).locationName,
-                  ),
-                  const SizedBox(height: 20),
-                  const Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.white,
-                      strokeWidth: 3,
+                  Text(
+                    currentValue.toStringAsFixed(0),
+                    style: TextStyle(
+                      fontSize: 32,
+                      color: colorScheme.onPrimary,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 20),
                 ],
-              );
-            },
-            error: (error, stack) => Center(
-              child: Text(
-                'Error loading data',
-                style: TextStyle(color: colorScheme.onPrimary),
               ),
-            ),
+            ],
+          );
+        },
+        loading: () {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Header(
+                name: ref.read(locationControllerProvider).locationName,
+              ),
+              const SizedBox(height: 20),
+              const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                  strokeWidth: 3,
+                ),
+              ),
+              const SizedBox(height: 20),
+            ],
+          );
+        },
+        error: (error, stack) => Center(
+          child: Text(
+            context.t.errors.failedToLoadLocationData,
+            style: TextStyle(color: colorScheme.onPrimary),
           ),
-        );
-      },
-      loading: () => const Center(
-        child: CircularProgressIndicator(
-          color: Colors.white,
-          strokeWidth: 3,
-        ),
-      ),
-      error: (error, stack) => Center(
-        child: Text(
-          'Error loading membership data',
-          style: TextStyle(color: colorScheme.onPrimary),
         ),
       ),
     );
