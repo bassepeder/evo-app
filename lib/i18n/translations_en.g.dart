@@ -56,7 +56,7 @@ class _TranslationsErrorsEn extends TranslationsErrorsNo {
 	@override String get generalRetryButtonText => 'Retry';
 	@override String get failedToLoadMembershipError => 'Failed to retrieve information about your membership.';
 	@override String get failedToLoadLocationData => 'Failed to load location data.';
-	@override String get failedToLoadLocations => 'Failed to fetch all EVO locations';
+	@override String get failedToLoadLocations => 'Failed to fetch all EVO locations.';
 }
 
 // Path: format
@@ -256,7 +256,7 @@ extension on TranslationsEn {
 			case 'errors.generalRetryButtonText': return 'Retry';
 			case 'errors.failedToLoadMembershipError': return 'Failed to retrieve information about your membership.';
 			case 'errors.failedToLoadLocationData': return 'Failed to load location data.';
-			case 'errors.failedToLoadLocations': return 'Failed to fetch all EVO locations';
+			case 'errors.failedToLoadLocations': return 'Failed to fetch all EVO locations.';
 			case 'format.yesterday': return 'yesterday';
 			case 'format.today': return 'today';
 			case 'format.tomorrow': return 'tomorrow';
