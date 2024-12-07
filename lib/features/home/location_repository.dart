@@ -22,10 +22,9 @@ Future<EvoLocationStatistics?> currentLocationStatistics(
   Ref ref,
   LocationId locationId,
 ) async =>
-    ref.withClientCacheFor(
+    ref.withClient(
       (client) =>
           LocationRepository(client).getCurrentLocationStatistics(locationId),
-      const Duration(minutes: 15),
     );
 
 @riverpod
