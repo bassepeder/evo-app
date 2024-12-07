@@ -1,3 +1,5 @@
+import 'package:evo/common/widgets/adaptive_bottom_sheet.dart';
+import 'package:evo/features/home/widgets/keys_menu.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,8 +10,16 @@ class HomeShortcuts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Shortcut> shortcuts = [
-      Shortcut(svgIcon: keyIcon, title: context.t.homeScreen.shortcuts[0]),
-      Shortcut(svgIcon: workoutIcon, title: context.t.homeScreen.shortcuts[1]),
+      Shortcut(
+        id: 'keys',
+        svgIcon: keyIcon,
+        title: context.t.homeScreen.shortcuts[0],
+      ),
+      Shortcut(
+        id: 'workouts',
+        svgIcon: workoutIcon,
+        title: context.t.homeScreen.shortcuts[1],
+      ),
     ];
 
     return Padding(
@@ -22,7 +32,18 @@ class HomeShortcuts extends StatelessWidget {
           (index) => ShortcutCard(
             icon: shortcuts[index].svgIcon,
             text: shortcuts[index].title,
-            press: () {},
+            press: () {
+              final id = shortcuts[index].id;
+
+              if (id == 'keys') {
+                showAdaptiveBottomSheet<int>(
+                  context: context,
+                  builder: (_) => KeysMenu(),
+                );
+              } else {
+                // TODO: implement workouts
+              }
+            },
           ),
         ),
       ),
@@ -72,10 +93,12 @@ class ShortcutCard extends StatelessWidget {
 }
 
 class Shortcut {
+  final String id;
   final String svgIcon;
   final String title;
 
   const Shortcut({
+    required this.id,
     required this.svgIcon,
     required this.title,
   });

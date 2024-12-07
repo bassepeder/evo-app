@@ -149,7 +149,13 @@ class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
         ],
       ),
       error: (e, _) => Text(context.t.errors.failedToLoadLocations),
-      loading: () => const Column(children: [CircularProgressIndicator()]),
+      loading: () => const Column(
+        children: [
+          CircularProgressIndicator(
+            strokeWidth: 2,
+          ),
+        ],
+      ),
     );
   }
 }

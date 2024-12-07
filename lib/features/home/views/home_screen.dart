@@ -49,7 +49,11 @@ class HomeScreen extends ConsumerWidget {
                   child: HomeHeader(),
                 ),
                 Expanded(
-                  child: Center(child: CircularProgressIndicator()),
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                    ),
+                  ),
                 ),
               ],
             ),

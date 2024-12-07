@@ -1,5 +1,5 @@
 import 'package:evo/common/preloaded_data.dart';
-import 'package:evo/constants.dart';
+import 'package:evo/common/styles.dart';
 import 'package:evo/features/auth/providers/auth_session.dart';
 import 'package:evo/features/home/views/home_screen.dart';
 import 'package:evo/features/welcome_screen.dart';
@@ -79,7 +79,7 @@ class _AppState extends ConsumerState<Application> {
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: kPrimaryColor),
+        colorScheme: ColorScheme.fromSeed(seedColor: evoCustomColors.primary),
         useMaterial3: true,
       ),
       home: hasSession ? const HomeScreen() : const WelcomeScreen(),

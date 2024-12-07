@@ -1,6 +1,9 @@
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+import 'evo_colors.dart';
 
 // ignore: avoid_classes_with_only_static_members
 abstract class Styles {
@@ -211,3 +214,60 @@ abstract class Styles {
 /// Retrieve the default text color and apply an opacity to it.
 Color? textShade(BuildContext context, double opacity) =>
     DefaultTextStyle.of(context).style.color?.withOpacity(opacity);
+
+@immutable
+class CustomColors extends ThemeExtension<CustomColors> {
+  const CustomColors({
+    required this.good,
+    required this.error,
+    required this.primary,
+  });
+
+  final Color good;
+  final Color error;
+  final Color primary;
+
+  @override
+  CustomColors copyWith({
+    Color? good,
+    Color? error,
+    Color? primary,
+  }) {
+    return CustomColors(
+      good: good ?? this.good,
+      error: error ?? this.error,
+      primary: primary ?? this.primary,
+    );
+  }
+
+  @override
+  CustomColors lerp(ThemeExtension<CustomColors>? other, double t) {
+    if (other is! CustomColors) {
+      return this;
+    }
+    return CustomColors(
+      good: Color.lerp(good, other.good, t) ?? good,
+      error: Color.lerp(error, other.error, t) ?? error,
+      primary: Color.lerp(primary, other.primary, t) ?? primary,
+    );
+  }
+
+  CustomColors harmonized(ColorScheme colorScheme) {
+    return copyWith(
+      good: good.harmonizeWith(colorScheme.primary),
+      error: error.harmonizeWith(colorScheme.primary),
+      primary: primary.harmonizeWith(colorScheme.primary),
+    );
+  }
+}
+
+const evoCustomColors = CustomColors(
+  good: EvoColors.good,
+  error: EvoColors.error,
+  primary: EvoColors.primary,
+);
+
+extension CustomColorsBuildContext on BuildContext {
+  CustomColors get evoColors =>
+      Theme.of(this).extension<CustomColors>() ?? evoCustomColors;
+}
