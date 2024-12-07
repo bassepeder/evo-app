@@ -55,6 +55,7 @@ class _TranslationsErrorsEn extends TranslationsErrorsNo {
 	@override String get generalDescription => 'Something broke, but we\'re fixing it. Try again in a moment.';
 	@override String get generalRetryButtonText => 'Retry';
 	@override String get failedToLoadMembershipError => 'Failed to retrieve information about your membership.';
+	@override String get failedToLoadLocationData => 'Failed to load location data.';
 }
 
 // Path: format
@@ -252,6 +253,7 @@ extension on TranslationsEn {
 			case 'errors.generalDescription': return 'Something broke, but we\'re fixing it. Try again in a moment.';
 			case 'errors.generalRetryButtonText': return 'Retry';
 			case 'errors.failedToLoadMembershipError': return 'Failed to retrieve information about your membership.';
+			case 'errors.failedToLoadLocationData': return 'Failed to load location data.';
 			case 'format.yesterday': return 'yesterday';
 			case 'format.today': return 'today';
 			case 'format.tomorrow': return 'tomorrow';
