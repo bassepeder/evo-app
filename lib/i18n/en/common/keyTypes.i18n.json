@@ -1,0 +1,5 @@
+{
+  "rfid": "RFID chip",
+  "pinCode": "PIN code",
+  "unknown": "Unknown key type"
+}
