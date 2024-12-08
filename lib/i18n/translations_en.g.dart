@@ -92,6 +92,7 @@ class _TranslationsHomeScreenEn extends TranslationsHomeScreenNo {
 		'Workouts',
 	];
 	@override String get chooseLocation => 'Choose EVO location';
+	@override String get primaryMembershipLocation => 'Your primary location';
 }
 
 // Path: keyStatuses
@@ -295,6 +296,7 @@ extension on TranslationsEn {
 			case 'homeScreen.shortcuts.0': return 'Your keys';
 			case 'homeScreen.shortcuts.1': return 'Workouts';
 			case 'homeScreen.chooseLocation': return 'Choose EVO location';
+			case 'homeScreen.primaryMembershipLocation': return 'Your primary location';
 			case 'keyStatuses.active': return 'Active';
 			case 'keyStatuses.inactive': return 'Inactive';
 			case 'keyTypes.rfid': return 'RFID chip';

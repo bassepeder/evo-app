@@ -94,6 +94,7 @@ class TranslationsHomeScreenNo {
 		'Treningsøkter',
 	];
 	String get chooseLocation => 'Velg EVO senter';
+	String get primaryMembershipLocation => 'Ditt primærsenter';
 }
 
 // Path: keyStatuses
@@ -297,6 +298,7 @@ extension on Translations {
 			case 'homeScreen.shortcuts.0': return 'Dine nøkler';
 			case 'homeScreen.shortcuts.1': return 'Treningsøkter';
 			case 'homeScreen.chooseLocation': return 'Velg EVO senter';
+			case 'homeScreen.primaryMembershipLocation': return 'Ditt primærsenter';
 			case 'keyStatuses.active': return 'Aktiv';
 			case 'keyStatuses.inactive': return 'Inaktiv';
 			case 'keyTypes.rfid': return 'RFID brikke';
