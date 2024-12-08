@@ -64,10 +64,10 @@ class CurrentLocationVisits extends ConsumerWidget {
                 name: ref.read(locationControllerProvider).locationName,
               ),
               const SizedBox(height: 20),
-              const Center(
+              Center(
                 child: CircularProgressIndicator(
-                  color: Colors.white,
-                  strokeWidth: 3,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                  strokeWidth: 2,
                 ),
               ),
               const SizedBox(height: 20),
