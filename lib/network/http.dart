@@ -33,6 +33,7 @@ part 'http.g.dart';
 final _logger = Logger('HttpClient');
 
 const _maxCacheSize = 2 * 1024 * 1024;
+const _defaultTimeout = Duration(seconds: 10);
 
 Uri evoUri(String path, [Map<String, dynamic>? queryParameters]) =>
     Uri.https(kBaseApiUrl, path, queryParameters);
@@ -175,7 +176,7 @@ class EvoClient implements Client {
     );
 
     try {
-      final response = await _inner.send(request);
+      final response = await _inner.send(request).timeout(_defaultTimeout);
 
       _logIfError(response);
 
@@ -200,7 +201,7 @@ class EvoClient implements Client {
           mapper: (json) => json,
           body: session.token,
         )
-        .timeout(const Duration(seconds: 5));
+        .timeout(_defaultTimeout);
     if (data[session.token] == null) {
       _logger.fine('Session is not active. Deleting it.');
       await _ref.read(authSessionProvider.notifier).delete();
