@@ -40,6 +40,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsErrorsNo errors = TranslationsErrorsNo.internal(_root);
 	late final TranslationsFormatNo format = TranslationsFormatNo.internal(_root);
 	late final TranslationsHomeScreenNo homeScreen = TranslationsHomeScreenNo.internal(_root);
+	late final TranslationsKeyStatusesNo keyStatuses = TranslationsKeyStatusesNo.internal(_root);
 	late final TranslationsKeyTypesNo keyTypes = TranslationsKeyTypesNo.internal(_root);
 	late final TranslationsMembershipStatusesNo membershipStatuses = TranslationsMembershipStatusesNo.internal(_root);
 	late final TranslationsSignInScreenNo signInScreen = TranslationsSignInScreenNo.internal(_root);
@@ -93,6 +94,17 @@ class TranslationsHomeScreenNo {
 		'Treningsøkter',
 	];
 	String get chooseLocation => 'Velg EVO senter';
+}
+
+// Path: keyStatuses
+class TranslationsKeyStatusesNo {
+	TranslationsKeyStatusesNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get active => 'Aktiv';
+	String get inactive => 'Inaktiv';
 }
 
 // Path: keyTypes
@@ -285,6 +297,8 @@ extension on Translations {
 			case 'homeScreen.shortcuts.0': return 'Dine nøkler';
 			case 'homeScreen.shortcuts.1': return 'Treningsøkter';
 			case 'homeScreen.chooseLocation': return 'Velg EVO senter';
+			case 'keyStatuses.active': return 'Aktiv';
+			case 'keyStatuses.inactive': return 'Inaktiv';
 			case 'keyTypes.rfid': return 'RFID brikke';
 			case 'keyTypes.pinCode': return 'PIN kode';
 			case 'keyTypes.unknown': return 'Ukjent nøkkeltype';
