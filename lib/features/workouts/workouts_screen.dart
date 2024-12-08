@@ -9,14 +9,14 @@ class WorkoutsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final workoutStatistics = ref.watch(workoutsControllerProvider);
+    final state = ref.watch(workoutsControllerProvider);
 
     return Scaffold(
       appBar: AppBar(
         title: Text(context.t.workoutsScreen.title),
         centerTitle: true,
       ),
-      body: workoutStatistics.workoutStatistics.when(
+      body: state.workoutStatistics.when(
         data: (statistics) {
           return SafeArea(
             child: SingleChildScrollView(
