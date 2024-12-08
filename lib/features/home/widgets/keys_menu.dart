@@ -9,16 +9,27 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class KeysMenu extends ConsumerWidget {
+  static const keyStatusOrder = {
+    KeyStatus.unknown: 2,
+    KeyStatus.inactive: 1,
+    KeyStatus.active: 0,
+  };
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final keys = ref.read(membershipDetailsProvider).requireValue!.keys;
+
+    final sortedKeys = List<KeyInfo>.from(keys)
+      ..sort((a, b) {
+        return keyStatusOrder[a.status]!.compareTo(keyStatusOrder[b.status]!);
+      });
 
     return BottomSheetScrollableContainer(
       padding: const EdgeInsets.all(16.0),
       children: [
         ListSection(
           header: Text(context.t.homeScreen.shortcuts[0]),
-          children: keys.map((key) {
+          children: sortedKeys.map((key) {
             return _KeyInfoListTile(keyInfo: key);
           }).toList(),
         ),
