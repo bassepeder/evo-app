@@ -102,6 +102,8 @@ class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
 
   @override
   Widget build(BuildContext context) {
+    final primaryMembershipLocationId =
+        ref.read(membershipDetailsProvider).requireValue!.location.id;
     final locationsProvider = ref.read(getLocationsProvider);
 
     // Scroll to the current location.
@@ -133,6 +135,9 @@ class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
                 PlatformListTile(
                   key: location.id == widget.id ? currentLocationKey : null,
                   title: Text(location.name, maxLines: 2),
+                  subtitle: primaryMembershipLocationId == location.id
+                      ? Text(context.t.homeScreen.primaryMembershipLocation)
+                      : null,
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   leading: const Icon(Icons.pin_drop),
                   onTap: () {
