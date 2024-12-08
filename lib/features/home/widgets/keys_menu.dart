@@ -1,3 +1,4 @@
+import 'package:evo/common/styles.dart';
 import 'package:evo/common/widgets/adaptive_bottom_sheet.dart';
 import 'package:evo/common/widgets/list.dart';
 import 'package:evo/features/membership/membership_repository.dart';
@@ -44,12 +45,50 @@ class _KeyInfoListTile extends StatelessWidget {
             : EdgeInsets.zero,
         child: _KeyIcon(type: keyInfo.type),
       ),
+      trailing: _KeyStatusChip(status: keyInfo.status),
       title: Padding(
         padding: const EdgeInsets.only(right: 5.0),
         child: _KeyTypeText(type: keyInfo.type),
       ),
       subtitle: Text(keyInfo.code),
     );
+  }
+}
+
+class _KeyStatusChip extends StatelessWidget {
+  final KeyStatus status;
+
+  const _KeyStatusChip({required this.status});
+
+  @override
+  Widget build(BuildContext context) {
+    return Chip(
+      label: Text(
+        translatedStatus(context, status),
+        style: const TextStyle(color: Colors.white),
+      ),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 4,
+        vertical: 2,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      backgroundColor: status == KeyStatus.active
+          ? evoCustomColors.good
+          : evoCustomColors.error,
+    );
+  }
+
+  String translatedStatus(BuildContext context, KeyStatus status) {
+    switch (status) {
+      case KeyStatus.active:
+        return context.t.keyStatuses.active;
+      case KeyStatus.inactive:
+        return context.t.keyStatuses.inactive;
+      case KeyStatus.unknown:
+        return 'Unknown'; // We don't show this status.
+    }
   }
 }
 
