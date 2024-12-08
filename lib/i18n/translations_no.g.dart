@@ -85,8 +85,12 @@ class TranslationsHomeScreenNo {
 	String get membershipStatus => 'Ditt medlemsskap er';
 	String get explore => 'Utforsk medlemsskap';
 	String get currentLocationStatisticsTitle => 'Antall personer nå inne på';
-	TextSpan locationTimelineTitle({required InlineSpan formattedDate}) => TextSpan(children: [
+	TextSpan presentOrFutureLocationTimelineTitle({required InlineSpan formattedDate}) => TextSpan(children: [
 		const TextSpan(text: 'Forventet besøk '),
+		formattedDate,
+	]);
+	TextSpan oldLocationTimelineTitle({required InlineSpan formattedDate}) => TextSpan(children: [
+		const TextSpan(text: 'Brukt kapasitet '),
 		formattedDate,
 	]);
 	List<String> get shortcuts => [
@@ -291,8 +295,12 @@ extension on Translations {
 			case 'homeScreen.membershipStatus': return 'Ditt medlemsskap er';
 			case 'homeScreen.explore': return 'Utforsk medlemsskap';
 			case 'homeScreen.currentLocationStatisticsTitle': return 'Antall personer nå inne på';
-			case 'homeScreen.locationTimelineTitle': return ({required InlineSpan formattedDate}) => TextSpan(children: [
+			case 'homeScreen.presentOrFutureLocationTimelineTitle': return ({required InlineSpan formattedDate}) => TextSpan(children: [
 				const TextSpan(text: 'Forventet besøk '),
+				formattedDate,
+			]);
+			case 'homeScreen.oldLocationTimelineTitle': return ({required InlineSpan formattedDate}) => TextSpan(children: [
+				const TextSpan(text: 'Brukt kapasitet '),
 				formattedDate,
 			]);
 			case 'homeScreen.shortcuts.0': return 'Dine nøkler';

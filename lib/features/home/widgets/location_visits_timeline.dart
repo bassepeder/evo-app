@@ -208,6 +208,10 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final dateFilterIsFromYesterdayOrOlder =
+        DateTime(date.year, date.month, date.day).isBefore(
+      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+    );
 
     return Row(
       children: [
@@ -216,12 +220,19 @@ class Header extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text.rich(
-                context.t.homeScreen.locationTimelineTitle(
-                  formattedDate: TextSpan(
-                    text: formatDateTime(date),
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
+                dateFilterIsFromYesterdayOrOlder
+                    ? context.t.homeScreen.oldLocationTimelineTitle(
+                        formattedDate: TextSpan(
+                          text: formatDateTime(date),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    : context.t.homeScreen.presentOrFutureLocationTimelineTitle(
+                        formattedDate: TextSpan(
+                          text: formatDateTime(date),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1, // Truncate the text
                 style: TextStyle(color: colorScheme.onPrimary),
@@ -229,7 +240,7 @@ class Header extends StatelessWidget {
               Text(
                 name,
                 overflow: TextOverflow.ellipsis,
-                maxLines: 1, // Truncate the name
+                maxLines: 1,
                 style: TextStyle(
                   fontSize: 24,
                   color: colorScheme.onPrimary,

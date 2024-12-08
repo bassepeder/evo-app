@@ -2,7 +2,8 @@
   "membershipStatus": "Your membership is",
   "explore": "Explore membership",
   "currentLocationStatisticsTitle": "Number of people now at",
-  "locationTimelineTitle(rich)": "Expected visits $formattedDate",
+  "presentOrFutureLocationTimelineTitle(rich)": "Expected visits $formattedDate",
+  "oldLocationTimelineTitle(rich)": "Used capacity $formattedDate",
   "shortcuts": [
     "Your keys",
     "Workouts"

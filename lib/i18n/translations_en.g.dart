@@ -83,8 +83,12 @@ class _TranslationsHomeScreenEn extends TranslationsHomeScreenNo {
 	@override String get membershipStatus => 'Your membership is';
 	@override String get explore => 'Explore membership';
 	@override String get currentLocationStatisticsTitle => 'Number of people now at';
-	@override TextSpan locationTimelineTitle({required InlineSpan formattedDate}) => TextSpan(children: [
+	@override TextSpan presentOrFutureLocationTimelineTitle({required InlineSpan formattedDate}) => TextSpan(children: [
 		const TextSpan(text: 'Expected visits '),
+		formattedDate,
+	]);
+	@override TextSpan oldLocationTimelineTitle({required InlineSpan formattedDate}) => TextSpan(children: [
+		const TextSpan(text: 'Used capacity '),
 		formattedDate,
 	]);
 	@override List<String> get shortcuts => [
@@ -289,8 +293,12 @@ extension on TranslationsEn {
 			case 'homeScreen.membershipStatus': return 'Your membership is';
 			case 'homeScreen.explore': return 'Explore membership';
 			case 'homeScreen.currentLocationStatisticsTitle': return 'Number of people now at';
-			case 'homeScreen.locationTimelineTitle': return ({required InlineSpan formattedDate}) => TextSpan(children: [
+			case 'homeScreen.presentOrFutureLocationTimelineTitle': return ({required InlineSpan formattedDate}) => TextSpan(children: [
 				const TextSpan(text: 'Expected visits '),
+				formattedDate,
+			]);
+			case 'homeScreen.oldLocationTimelineTitle': return ({required InlineSpan formattedDate}) => TextSpan(children: [
+				const TextSpan(text: 'Used capacity '),
 				formattedDate,
 			]);
 			case 'homeScreen.shortcuts.0': return 'Your keys';
