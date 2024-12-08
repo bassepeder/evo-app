@@ -46,6 +46,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsSignInScreenNo signInScreen = TranslationsSignInScreenNo.internal(_root);
 	late final TranslationsValidationNo validation = TranslationsValidationNo.internal(_root);
 	late final TranslationsWelcomeScreenNo welcomeScreen = TranslationsWelcomeScreenNo.internal(_root);
+	late final TranslationsWorkoutsScreenNo workoutsScreen = TranslationsWorkoutsScreenNo.internal(_root);
 }
 
 // Path: errors
@@ -178,6 +179,30 @@ class TranslationsWelcomeScreenNo {
 	String get welcomeHeader => 'Velkommen til ';
 	String get subtitle => 'Styrken du trenger';
 	String get signInButton => 'Logg inn';
+}
+
+// Path: workoutsScreen
+class TranslationsWorkoutsScreenNo {
+	TranslationsWorkoutsScreenNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Treningsøkter';
+	List<String> get months => [
+		'Januar',
+		'Februar',
+		'Mars',
+		'April',
+		'Mai',
+		'Juni',
+		'Juli',
+		'August',
+		'September',
+		'Oktober',
+		'November',
+		'Desember',
+	];
 }
 
 // Path: signInScreen.form
@@ -340,6 +365,19 @@ extension on Translations {
 			case 'welcomeScreen.welcomeHeader': return 'Velkommen til ';
 			case 'welcomeScreen.subtitle': return 'Styrken du trenger';
 			case 'welcomeScreen.signInButton': return 'Logg inn';
+			case 'workoutsScreen.title': return 'Treningsøkter';
+			case 'workoutsScreen.months.0': return 'Januar';
+			case 'workoutsScreen.months.1': return 'Februar';
+			case 'workoutsScreen.months.2': return 'Mars';
+			case 'workoutsScreen.months.3': return 'April';
+			case 'workoutsScreen.months.4': return 'Mai';
+			case 'workoutsScreen.months.5': return 'Juni';
+			case 'workoutsScreen.months.6': return 'Juli';
+			case 'workoutsScreen.months.7': return 'August';
+			case 'workoutsScreen.months.8': return 'September';
+			case 'workoutsScreen.months.9': return 'Oktober';
+			case 'workoutsScreen.months.10': return 'November';
+			case 'workoutsScreen.months.11': return 'Desember';
 			default: return null;
 		}
 	}

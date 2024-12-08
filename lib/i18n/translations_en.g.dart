@@ -44,6 +44,7 @@ class TranslationsEn extends Translations {
 	@override late final _TranslationsSignInScreenEn signInScreen = _TranslationsSignInScreenEn._(_root);
 	@override late final _TranslationsValidationEn validation = _TranslationsValidationEn._(_root);
 	@override late final _TranslationsWelcomeScreenEn welcomeScreen = _TranslationsWelcomeScreenEn._(_root);
+	@override late final _TranslationsWorkoutsScreenEn workoutsScreen = _TranslationsWorkoutsScreenEn._(_root);
 }
 
 // Path: errors
@@ -176,6 +177,30 @@ class _TranslationsWelcomeScreenEn extends TranslationsWelcomeScreenNo {
 	@override String get welcomeHeader => 'Welcome to ';
 	@override String get subtitle => 'The strength you need';
 	@override String get signInButton => 'Sign in';
+}
+
+// Path: workoutsScreen
+class _TranslationsWorkoutsScreenEn extends TranslationsWorkoutsScreenNo {
+	_TranslationsWorkoutsScreenEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Workouts';
+	@override List<String> get months => [
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December',
+	];
 }
 
 // Path: signInScreen.form
@@ -338,6 +363,19 @@ extension on TranslationsEn {
 			case 'welcomeScreen.welcomeHeader': return 'Welcome to ';
 			case 'welcomeScreen.subtitle': return 'The strength you need';
 			case 'welcomeScreen.signInButton': return 'Sign in';
+			case 'workoutsScreen.title': return 'Workouts';
+			case 'workoutsScreen.months.0': return 'January';
+			case 'workoutsScreen.months.1': return 'February';
+			case 'workoutsScreen.months.2': return 'March';
+			case 'workoutsScreen.months.3': return 'April';
+			case 'workoutsScreen.months.4': return 'May';
+			case 'workoutsScreen.months.5': return 'June';
+			case 'workoutsScreen.months.6': return 'July';
+			case 'workoutsScreen.months.7': return 'August';
+			case 'workoutsScreen.months.8': return 'September';
+			case 'workoutsScreen.months.9': return 'October';
+			case 'workoutsScreen.months.10': return 'November';
+			case 'workoutsScreen.months.11': return 'December';
 			default: return null;
 		}
 	}
