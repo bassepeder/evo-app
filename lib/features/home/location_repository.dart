@@ -18,7 +18,7 @@ Future<IList<EvoLocation>> getLocations(Ref ref) async =>
     );
 
 @riverpod
-Future<EvoLocationStatistics?> currentLocationStatistics(
+Future<EvoLocationStatistics> currentLocationStatistics(
   Ref ref,
   LocationId locationId,
 ) async =>
@@ -57,7 +57,7 @@ class LocationRepository {
     );
   }
 
-  Future<EvoLocationStatistics?> getCurrentLocationStatistics(
+  Future<EvoLocationStatistics> getCurrentLocationStatistics(
     LocationId id,
   ) async {
     return client.readJson(
