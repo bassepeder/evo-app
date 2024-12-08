@@ -133,6 +133,8 @@ class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
                 PlatformListTile(
                   key: location.id == widget.id ? currentLocationKey : null,
                   title: Text(location.name, maxLines: 2),
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  leading: const Icon(Icons.pin_drop),
                   onTap: () {
                     ref
                         .read(locationControllerProvider.notifier)
