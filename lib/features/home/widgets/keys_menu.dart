@@ -53,41 +53,6 @@ class _KeyInfoListTile extends StatelessWidget {
   }
 }
 
-class _KeyInfoCard extends StatelessWidget {
-  final KeyInfo keyInfo;
-
-  const _KeyInfoCard({required this.keyInfo});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.all(10),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 16,
-      ),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.onPrimary,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Row(
-        children: [
-          _KeyIcon(type: keyInfo.type),
-          const SizedBox(width: 16),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(keyInfo.code),
-              _KeyTypeText(type: keyInfo.type),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
-
 class _KeyTypeText extends StatelessWidget {
   final String type;
 
