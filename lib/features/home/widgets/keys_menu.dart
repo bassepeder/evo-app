@@ -54,7 +54,7 @@ class _KeyInfoListTile extends StatelessWidget {
 }
 
 class _KeyTypeText extends StatelessWidget {
-  final String type;
+  final KeyType type;
 
   const _KeyTypeText({required this.type});
 
@@ -63,11 +63,11 @@ class _KeyTypeText extends StatelessWidget {
     return Text(getTranslatedKeyType(context, type));
   }
 
-  String getTranslatedKeyType(BuildContext context, String type) {
+  String getTranslatedKeyType(BuildContext context, KeyType type) {
     switch (type) {
-      case 'Rfid':
+      case KeyType.rfid:
         return context.t.keyTypes.rfid;
-      case 'PinCode':
+      case KeyType.pinCode:
         return context.t.keyTypes.pinCode;
       default:
         return context.t.keyTypes.unknown;
@@ -76,7 +76,7 @@ class _KeyTypeText extends StatelessWidget {
 }
 
 class _KeyIcon extends StatelessWidget {
-  final String type;
+  final KeyType type;
 
   const _KeyIcon({required this.type});
 
@@ -85,11 +85,11 @@ class _KeyIcon extends StatelessWidget {
     return SvgPicture.string(getIconForKeyType(type));
   }
 
-  String getIconForKeyType(String type) {
+  String getIconForKeyType(KeyType type) {
     switch (type) {
-      case 'Rfid':
+      case KeyType.rfid:
         return rfidIcon;
-      case 'PinCode':
+      case KeyType.pinCode:
         return pinCodeIcon;
       default:
         return keyIcon;

@@ -162,13 +162,47 @@ class Mobile with _$Mobile {
   }
 }
 
+enum KeyType {
+  rfid,
+  pinCode,
+  unknown;
+}
+
+enum KeyStatus {
+  active,
+  inactive,
+  unknown;
+}
+
+KeyType parseKeyType(String type) {
+  switch (type) {
+    case 'Rfid':
+      return KeyType.rfid;
+    case 'PinCode':
+      return KeyType.pinCode;
+    default:
+      return KeyType.unknown;
+  }
+}
+
+KeyStatus parseKeyStatus(String status) {
+  switch (status) {
+    case 'Active':
+      return KeyStatus.active;
+    case 'Inactive':
+      return KeyStatus.inactive;
+    default:
+      return KeyStatus.unknown;
+  }
+}
+
 @freezed
 class KeyInfo with _$KeyInfo {
   const factory KeyInfo({
     required String id,
     required String code,
-    required String type,
-    required String status,
+    required KeyType type,
+    required KeyStatus status,
     required DateTime createdAt,
     required DateTime validFrom,
     DateTime? validTo,
@@ -181,8 +215,8 @@ class KeyInfo with _$KeyInfo {
     return KeyInfo(
       id: pick('id').asStringOrThrow(),
       code: pick('code').asStringOrThrow(),
-      type: pick('type').asStringOrThrow(),
-      status: pick('status').asStringOrThrow(),
+      type: parseKeyType(pick('type').asStringOrThrow()),
+      status: parseKeyStatus(pick('status').asStringOrThrow()),
       createdAt: pick('created_at').asDateTimeOrThrow(),
       validFrom: pick('valid_from').asDateOrThrow(),
       validTo: pick('valid_to').asDateOrNull(),
