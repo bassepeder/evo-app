@@ -1,5 +1,6 @@
 import 'package:evo/common/widgets/error_screen.dart';
 import 'package:evo/features/home/location_repository.dart';
+import 'package:evo/features/home/viewmodels/location_controller.dart';
 import 'package:evo/features/home/widgets/current_location_visits.dart';
 import 'package:evo/features/home/widgets/home_header.dart';
 import 'package:evo/features/home/widgets/home_shortcuts.dart';
@@ -26,16 +27,20 @@ class HomeScreen extends ConsumerWidget {
         skipLoadingOnRefresh: false,
         data: (details) {
           return SafeArea(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: Column(
-                children: [
-                  const HomeHeader(),
-                  MembershipStatusBanner(details: details!),
-                  const HomeShortcuts(),
-                  const CurrentLocationVisits(),
-                  const LocationVisitsTimeline(),
-                ],
+            child: RefreshIndicator(
+              onRefresh: () =>
+                  ref.read(locationControllerProvider.notifier).refreshData(),
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: Column(
+                  children: [
+                    const HomeHeader(),
+                    MembershipStatusBanner(details: details!),
+                    const HomeShortcuts(),
+                    const CurrentLocationVisits(),
+                    const LocationVisitsTimeline(),
+                  ],
+                ),
               ),
             ),
           );

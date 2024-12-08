@@ -8,6 +8,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'location_controller.freezed.dart';
+
 part 'location_controller.g.dart';
 
 @riverpod
@@ -32,6 +33,11 @@ class LocationController extends _$LocationController {
 
     return initialState;
   }
+
+  Future<void> refreshData() async => await Future.wait([
+        fetchCurrentData(),
+        fetchTimelineData(),
+      ]);
 
   Future<void> fetchCurrentData() async {
     state = state.copyWith(currentLocationData: const AsyncValue.loading());
