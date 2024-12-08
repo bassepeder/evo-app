@@ -188,7 +188,12 @@ class TranslationsWorkoutsScreenNo {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get title => 'Treningsøkter';
+	String get appBar => 'Treningsøkter';
+	TextSpan title({required InlineSpan totalWorkoutsCount}) => TextSpan(children: [
+		totalWorkoutsCount,
+		const TextSpan(text: ' treningsøkter'),
+	]);
+	String get subtitle => 'Du har totalt utført';
 	List<String> get months => [
 		'Januar',
 		'Februar',
@@ -365,7 +370,12 @@ extension on Translations {
 			case 'welcomeScreen.welcomeHeader': return 'Velkommen til ';
 			case 'welcomeScreen.subtitle': return 'Styrken du trenger';
 			case 'welcomeScreen.signInButton': return 'Logg inn';
-			case 'workoutsScreen.title': return 'Treningsøkter';
+			case 'workoutsScreen.appBar': return 'Treningsøkter';
+			case 'workoutsScreen.title': return ({required InlineSpan totalWorkoutsCount}) => TextSpan(children: [
+				totalWorkoutsCount,
+				const TextSpan(text: ' treningsøkter'),
+			]);
+			case 'workoutsScreen.subtitle': return 'Du har totalt utført';
 			case 'workoutsScreen.months.0': return 'Januar';
 			case 'workoutsScreen.months.1': return 'Februar';
 			case 'workoutsScreen.months.2': return 'Mars';

@@ -186,7 +186,12 @@ class _TranslationsWorkoutsScreenEn extends TranslationsWorkoutsScreenNo {
 	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Workouts';
+	@override String get appBar => 'Workouts';
+	@override TextSpan title({required InlineSpan totalWorkoutsCount}) => TextSpan(children: [
+		totalWorkoutsCount,
+		const TextSpan(text: ' workouts'),
+	]);
+	@override String get subtitle => 'You have performed a total of';
 	@override List<String> get months => [
 		'January',
 		'February',
@@ -363,7 +368,12 @@ extension on TranslationsEn {
 			case 'welcomeScreen.welcomeHeader': return 'Welcome to ';
 			case 'welcomeScreen.subtitle': return 'The strength you need';
 			case 'welcomeScreen.signInButton': return 'Sign in';
-			case 'workoutsScreen.title': return 'Workouts';
+			case 'workoutsScreen.appBar': return 'Workouts';
+			case 'workoutsScreen.title': return ({required InlineSpan totalWorkoutsCount}) => TextSpan(children: [
+				totalWorkoutsCount,
+				const TextSpan(text: ' workouts'),
+			]);
+			case 'workoutsScreen.subtitle': return 'You have performed a total of';
 			case 'workoutsScreen.months.0': return 'January';
 			case 'workoutsScreen.months.1': return 'February';
 			case 'workoutsScreen.months.2': return 'March';
