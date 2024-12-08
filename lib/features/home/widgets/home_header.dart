@@ -47,7 +47,8 @@ class HomeHeader extends ConsumerWidget {
                   maxHeight: screenHeight * 0.6,
                 ),
                 builder: (_) => _LocationPickerMenu(
-                  id: ref.read(locationControllerProvider).locationId!,
+                  currentLocationId:
+                      ref.read(locationControllerProvider).locationId!,
                 ),
               );
             },
@@ -86,11 +87,11 @@ const mapPinIcon = '''
 ''';
 
 class _LocationPickerMenu extends ConsumerStatefulWidget {
-  const _LocationPickerMenu({
-    required this.id,
-  });
+  final LocationId currentLocationId;
 
-  final LocationId id;
+  const _LocationPickerMenu({
+    required this.currentLocationId,
+  });
 
   @override
   ConsumerState<_LocationPickerMenu> createState() =>
@@ -133,7 +134,9 @@ class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
               const SizedBox(height: 16),
               for (final location in locations)
                 PlatformListTile(
-                  key: location.id == widget.id ? currentLocationKey : null,
+                  key: location.id == widget.currentLocationId
+                      ? currentLocationKey
+                      : null,
                   title: Text(location.name, maxLines: 2),
                   subtitle: primaryMembershipLocationId == location.id
                       ? Text(context.t.homeScreen.primaryMembershipLocation)
@@ -149,13 +152,19 @@ class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
                         );
                     Navigator.pop(context);
                   },
-                  selected: location.id == widget.id,
+                  selected: location.id == widget.currentLocationId,
                 ),
             ],
           ),
         ],
       ),
-      error: (e, _) => Text(context.t.errors.failedToLoadLocations),
+      error: (e, _) {
+        return Column(
+          children: [
+            Text(context.t.errors.failedToLoadLocations),
+          ],
+        );
+      },
       loading: () => const Column(
         children: [
           CircularProgressIndicator(
