@@ -4,24 +4,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'membership_workouts_statistics.freezed.dart';
 part 'membership_workouts_statistics.g.dart';
 
-/*
-{
-	"total_workouts": 12,
-	"workout_months": [
-		{
-			"total_workouts": 9,
-			"year": 2024,
-			"month": 11
-		},
-		{
-			"total_workouts": 3,
-			"year": 2024,
-			"month": 12
-		}
-	]
-}
- */
-
 @freezed
 class MembershipWorkoutsStatistics with _$MembershipWorkoutsStatistics {
   const MembershipWorkoutsStatistics._();
