@@ -7,5 +7,6 @@
     "Your keys",
     "Workouts"
   ],
-  "chooseLocation": "Choose EVO location"
+  "chooseLocation": "Choose EVO location",
+  "primaryMembershipLocation": "Your primary location"
 }
