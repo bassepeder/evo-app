@@ -21,22 +21,6 @@ class KeysMenu extends ConsumerWidget {
             return _KeyInfoListTile(keyInfo: key);
           }).toList(),
         ),
-        /*
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              context.t.homeScreen.shortcuts[0],
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 16),
-            for (final key in keys) _KeyInfoCard(keyInfo: key),
-          ],
-        ),
-           */
       ],
     );
   }
@@ -50,7 +34,6 @@ class _KeyInfoListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlatformListTile(
-      onTap: () {},
       padding: const EdgeInsets.symmetric(
         horizontal: 16,
         vertical: 16,
