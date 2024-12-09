@@ -110,7 +110,6 @@ class Chart extends StatelessWidget {
           ),
         ],
         centerSpaceRadius: 70,
-        sectionsSpace: 3,
       ),
       duration: const Duration(milliseconds: 150),
       curve: Curves.linear,
