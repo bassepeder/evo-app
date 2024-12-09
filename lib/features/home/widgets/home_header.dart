@@ -38,6 +38,7 @@ class HomeHeader extends ConsumerWidget {
             press: () {
               if (!membership.hasValue) return;
 
+              HapticFeedback.mediumImpact();
               final double screenHeight = MediaQuery.sizeOf(context).height;
 
               showAdaptiveBottomSheet<int>(
