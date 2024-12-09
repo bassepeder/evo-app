@@ -63,7 +63,7 @@ class WorkoutsScreen extends ConsumerWidget {
         loading: () {
           return const Center(
             child: CircularProgressIndicator(
-              strokeWidth: 2,
+              strokeWidth: 3,
             ),
           );
         },

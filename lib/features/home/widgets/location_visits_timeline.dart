@@ -77,7 +77,7 @@ class LocationVisitsTimeline extends ConsumerWidget {
                   child: Center(
                     child: CircularProgressIndicator(
                       color: Theme.of(context).colorScheme.onPrimary,
-                      strokeWidth: 2,
+                      strokeWidth: 3,
                     ),
                   ),
                 ),

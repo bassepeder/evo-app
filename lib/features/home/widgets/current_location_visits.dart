@@ -67,7 +67,7 @@ class CurrentLocationVisits extends ConsumerWidget {
               Center(
                 child: CircularProgressIndicator(
                   color: Theme.of(context).colorScheme.onPrimary,
-                  strokeWidth: 2,
+                  strokeWidth: 3,
                 ),
               ),
               const SizedBox(height: 20),

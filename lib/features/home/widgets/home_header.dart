@@ -162,7 +162,7 @@ class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
       loading: () => const Column(
         children: [
           CircularProgressIndicator(
-            strokeWidth: 2,
+            strokeWidth: 3,
           ),
         ],
       ),

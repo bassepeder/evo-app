@@ -43,7 +43,7 @@ class EvoElevatedButton extends StatelessWidget {
               width: 25,
               height: 25,
               child: CircularProgressIndicator(
-                strokeWidth: 2,
+                strokeWidth: 3,
               ),
             )
           : Text(text),
