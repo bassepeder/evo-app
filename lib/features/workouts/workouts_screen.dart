@@ -32,12 +32,16 @@ class WorkoutsScreen extends ConsumerWidget {
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
                         children: [
-                          const TextSpan(text: 'Du har totalt utført\n'),
                           TextSpan(
-                            text: '${statistics.totalWorkouts} treningsøkter',
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
+                            text: '${context.t.workoutsScreen.subtitle}\n',
+                          ),
+                          context.t.workoutsScreen.title(
+                            totalWorkoutsCount: TextSpan(
+                              text: statistics.totalWorkouts.toString(),
+                              style: const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ],
