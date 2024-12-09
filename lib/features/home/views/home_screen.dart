@@ -75,8 +75,10 @@ class HomeScreen extends ConsumerWidget {
                 Expanded(
                   child: ErrorScreen(
                     subtitle: context.t.errors.failedToLoadMembershipError,
-                    onRetryClicked: () =>
-                        ref.invalidate(membershipDetailsProvider),
+                    onRetryClicked: () {
+                      ref.invalidate(membershipDetailsProvider);
+                      ref.invalidate(getLocationsProvider);
+                    },
                   ),
                 ),
               ],
