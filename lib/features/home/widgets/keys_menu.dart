@@ -10,9 +10,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class KeysMenu extends ConsumerWidget {
   static const keyStatusOrder = {
-    KeyStatus.unknown: 2,
-    KeyStatus.inactive: 1,
-    KeyStatus.active: 0,
+    KeyStatus.unknown: 2, // last
+    KeyStatus.inactive: 1, // second
+    KeyStatus.active: 0, // top
   };
 
   @override
