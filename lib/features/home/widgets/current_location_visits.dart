@@ -67,7 +67,7 @@ class CurrentLocationVisits extends ConsumerWidget {
               Center(
                 child: CircularProgressIndicator(
                   color: Theme.of(context).colorScheme.onPrimary,
-                  strokeWidth: 2,
+                  strokeWidth: 3,
                 ),
               ),
               const SizedBox(height: 20),
@@ -110,7 +110,6 @@ class Chart extends StatelessWidget {
           ),
         ],
         centerSpaceRadius: 70,
-        sectionsSpace: 3,
       ),
       duration: const Duration(milliseconds: 150),
       curve: Curves.linear,

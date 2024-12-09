@@ -38,6 +38,7 @@ class HomeHeader extends ConsumerWidget {
             press: () {
               if (!membership.hasValue) return;
 
+              HapticFeedback.mediumImpact();
               final double screenHeight = MediaQuery.sizeOf(context).height;
 
               showAdaptiveBottomSheet<int>(
@@ -162,7 +163,7 @@ class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
       loading: () => const Column(
         children: [
           CircularProgressIndicator(
-            strokeWidth: 2,
+            strokeWidth: 3,
           ),
         ],
       ),

@@ -1,7 +1,10 @@
 import 'package:evo/common/widgets/adaptive_bottom_sheet.dart';
 import 'package:evo/features/home/widgets/keys_menu.dart';
+import 'package:evo/features/workouts/workouts_screen.dart';
 import 'package:evo/i18n/translations.g.dart';
+import 'package:evo/utils/navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
 class HomeShortcuts extends StatelessWidget {
@@ -35,13 +38,18 @@ class HomeShortcuts extends StatelessWidget {
             press: () {
               final id = shortcuts[index].id;
 
+              HapticFeedback.mediumImpact();
+
               if (id == 'keys') {
                 showAdaptiveBottomSheet<int>(
                   context: context,
                   builder: (_) => KeysMenu(),
                 );
               } else {
-                // TODO: implement workouts
+                pushPlatformRoute(
+                  context,
+                  builder: (_) => const WorkoutsScreen(),
+                );
               }
             },
           ),

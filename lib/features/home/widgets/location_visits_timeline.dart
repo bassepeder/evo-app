@@ -77,7 +77,7 @@ class LocationVisitsTimeline extends ConsumerWidget {
                   child: Center(
                     child: CircularProgressIndicator(
                       color: Theme.of(context).colorScheme.onPrimary,
-                      strokeWidth: 2,
+                      strokeWidth: 3,
                     ),
                   ),
                 ),
@@ -178,8 +178,22 @@ class Chart extends StatelessWidget {
             getTooltipItem: (group, groupIndex, rod, rodIndex) {
               final interval = intervals[group.x];
               return BarTooltipItem(
-                '${interval.percentageUsed.toStringAsFixed(1)}%',
-                const TextStyle(color: Colors.white),
+                '${intervals[group.x].name}\n',
+                const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                ),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: '${interval.percentageUsed.toStringAsFixed(1)}%',
+                    style: const TextStyle(
+                      color: Colors.white, //widget.touchedBarColor,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
               );
             },
           ),
