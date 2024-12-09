@@ -83,6 +83,7 @@ class _KeyStatusChip extends StatelessWidget {
         vertical: 2,
       ),
       shape: RoundedRectangleBorder(
+        side: const BorderSide(color: Colors.transparent),
         borderRadius: BorderRadius.circular(16),
       ),
       backgroundColor: status == KeyStatus.active
