@@ -132,13 +132,13 @@ class HorizontalBarChart extends StatelessWidget {
 
         return Container(
           width: barWidth,
-          height: 30.0,
+          height: 35.0,
           margin: const EdgeInsets.only(bottom: 8.0),
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           decoration: BoxDecoration(
             color: percent == highestWorkouts
-                ? Theme.of(context).colorScheme.primary.withOpacity(0.7)
-                : Theme.of(context).colorScheme.primary.withOpacity(0.4),
+                ? Theme.of(context).colorScheme.primary.withOpacity(0.8)
+                : Theme.of(context).colorScheme.primary.withOpacity(0.5),
             borderRadius: BorderRadius.circular(30.0),
           ),
           child: Row(
@@ -146,7 +146,9 @@ class HorizontalBarChart extends StatelessWidget {
             children: [
               Text(
                 monthLabel,
-                style: const TextStyle(color: Colors.white),
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
               ),
               Text(
                 '${month.totalWorkouts} økter',
