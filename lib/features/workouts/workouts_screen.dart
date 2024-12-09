@@ -113,9 +113,19 @@ class HorizontalBarChart extends StatelessWidget {
             .map((e) => e.totalWorkouts)
             .reduce((a, b) => a > b ? a : b);
 
+    final sortedByWorkoutDate = List<WorkoutMonth>.from(workoutMonths)
+      ..sort((a, b) {
+        // First compare by year, and if they are equal, compare by month.
+        if (a.year != b.year) {
+          return b.year.compareTo(a.year);
+        } else {
+          return b.month.compareTo(a.month);
+        }
+      });
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: workoutMonths.map((month) {
+      children: sortedByWorkoutDate.map((month) {
         final double percent = month.totalWorkouts.toDouble();
 
         // Get the month label text to calculate its width
