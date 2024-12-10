@@ -101,6 +101,9 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final randomEncouragement = context.t.workoutsScreen.encouragements[
+        Random().nextInt(context.t.workoutsScreen.encouragements.length)];
+
     return Text.rich(
       TextSpan(
         style: TextStyle(
@@ -119,6 +122,10 @@ class Header extends StatelessWidget {
               ),
             ),
           ),
+          if (totalWorkouts > 0)
+            TextSpan(
+              text: '... $randomEncouragement 💪',
+            ),
         ],
       ),
     );

@@ -198,6 +198,12 @@ class TranslationsWorkoutsScreenNo {
 		workoutsCount,
 		const TextSpan(text: ' økter'),
 	]);
+	List<String> get encouragements => [
+		'du er rå!',
+		'bra jobba!',
+		'råskap!',
+		'wow!',
+	];
 	List<String> get months => [
 		'Januar',
 		'Februar',
@@ -384,6 +390,10 @@ extension on Translations {
 				workoutsCount,
 				const TextSpan(text: ' økter'),
 			]);
+			case 'workoutsScreen.encouragements.0': return 'du er rå!';
+			case 'workoutsScreen.encouragements.1': return 'bra jobba!';
+			case 'workoutsScreen.encouragements.2': return 'råskap!';
+			case 'workoutsScreen.encouragements.3': return 'wow!';
 			case 'workoutsScreen.months.0': return 'Januar';
 			case 'workoutsScreen.months.1': return 'Februar';
 			case 'workoutsScreen.months.2': return 'Mars';

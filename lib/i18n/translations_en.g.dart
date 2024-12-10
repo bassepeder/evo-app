@@ -196,6 +196,12 @@ class _TranslationsWorkoutsScreenEn extends TranslationsWorkoutsScreenNo {
 		workoutsCount,
 		const TextSpan(text: ' workouts'),
 	]);
+	@override List<String> get encouragements => [
+		'you\'re awesome!',
+		'great job!',
+		'pure power!',
+		'wow!',
+	];
 	@override List<String> get months => [
 		'January',
 		'February',
@@ -382,6 +388,10 @@ extension on TranslationsEn {
 				workoutsCount,
 				const TextSpan(text: ' workouts'),
 			]);
+			case 'workoutsScreen.encouragements.0': return 'you\'re awesome!';
+			case 'workoutsScreen.encouragements.1': return 'great job!';
+			case 'workoutsScreen.encouragements.2': return 'pure power!';
+			case 'workoutsScreen.encouragements.3': return 'wow!';
 			case 'workoutsScreen.months.0': return 'January';
 			case 'workoutsScreen.months.1': return 'February';
 			case 'workoutsScreen.months.2': return 'March';

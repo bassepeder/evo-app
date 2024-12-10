@@ -3,6 +3,12 @@
   "title(rich)": "$totalWorkoutsCount treningsøkter",
   "subtitle": "Du har totalt utført",
   "monthStatisticBar(rich)": "$workoutsCount økter",
+  "encouragements": [
+    "du er rå!",
+    "bra jobba!",
+    "råskap!",
+    "wow!"
+  ],
   "months": [
     "Januar",
     "Februar",
