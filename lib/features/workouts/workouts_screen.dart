@@ -21,6 +21,11 @@ class WorkoutsScreen extends ConsumerWidget {
       ),
       body: state.workoutStatistics.when(
         data: (statistics) {
+          final groupedMonths = <int, List<WorkoutMonth>>{};
+          for (final month in statistics.months) {
+            groupedMonths.putIfAbsent(month.year, () => []).add(month);
+          }
+
           return SafeArea(
             child: SingleChildScrollView(
               child: Padding(
@@ -33,7 +38,33 @@ class WorkoutsScreen extends ConsumerWidget {
                   children: [
                     Header(totalWorkouts: statistics.totalWorkouts),
                     const SizedBox(height: 32),
-                    HorizontalBarChart(workoutMonths: statistics.months),
+                    ...groupedMonths.entries
+                        .toList()
+                        .asMap()
+                        .entries
+                        .map((entry) {
+                      final int index = entry.key;
+                      final int year = entry.value.key;
+                      final List<WorkoutMonth> months = entry.value.value;
+                      final bool isLast =
+                          index == groupedMonths.entries.length - 1;
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            year.toString(),
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          HorizontalBarChart(workoutMonths: months),
+                          if (!isLast) const SizedBox(height: 32),
+                        ],
+                      );
+                    }),
                   ],
                 ),
               ),
