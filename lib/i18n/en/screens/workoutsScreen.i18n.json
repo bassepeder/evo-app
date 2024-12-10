@@ -3,6 +3,12 @@
   "title(rich)": "$totalWorkoutsCount workouts",
   "subtitle": "You have performed a total of",
   "monthStatisticBar(rich)": "$workoutsCount workouts",
+  "encouragements": [
+    "you're awesome!",
+    "great job!",
+    "pure power!",
+    "wow!"
+  ],
   "months": [
     "January",
     "February",
