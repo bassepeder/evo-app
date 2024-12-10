@@ -191,8 +191,12 @@ class HorizontalBarChart extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
-              Text(
-                '${month.totalWorkouts} økter',
+              Text.rich(
+                context.t.workoutsScreen.monthStatisticBar(
+                  workoutsCount: TextSpan(
+                    text: month.totalWorkouts.toString(),
+                  ),
+                ),
                 style: workoutCountTextStyle,
               ),
             ],
