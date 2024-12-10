@@ -2,6 +2,7 @@
   "appBar": "Treningsøkter",
   "title(rich)": "$totalWorkoutsCount treningsøkter",
   "subtitle": "Du har totalt utført",
+  "monthStatisticBar(rich)": "$workoutsCount økter",
   "months": [
     "Januar",
     "Februar",

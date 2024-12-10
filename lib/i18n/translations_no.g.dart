@@ -194,6 +194,10 @@ class TranslationsWorkoutsScreenNo {
 		const TextSpan(text: ' treningsøkter'),
 	]);
 	String get subtitle => 'Du har totalt utført';
+	TextSpan monthStatisticBar({required InlineSpan workoutsCount}) => TextSpan(children: [
+		workoutsCount,
+		const TextSpan(text: ' økter'),
+	]);
 	List<String> get months => [
 		'Januar',
 		'Februar',
@@ -376,6 +380,10 @@ extension on Translations {
 				const TextSpan(text: ' treningsøkter'),
 			]);
 			case 'workoutsScreen.subtitle': return 'Du har totalt utført';
+			case 'workoutsScreen.monthStatisticBar': return ({required InlineSpan workoutsCount}) => TextSpan(children: [
+				workoutsCount,
+				const TextSpan(text: ' økter'),
+			]);
 			case 'workoutsScreen.months.0': return 'Januar';
 			case 'workoutsScreen.months.1': return 'Februar';
 			case 'workoutsScreen.months.2': return 'Mars';

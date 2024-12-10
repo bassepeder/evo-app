@@ -192,6 +192,10 @@ class _TranslationsWorkoutsScreenEn extends TranslationsWorkoutsScreenNo {
 		const TextSpan(text: ' workouts'),
 	]);
 	@override String get subtitle => 'You have performed a total of';
+	@override TextSpan monthStatisticBar({required InlineSpan workoutsCount}) => TextSpan(children: [
+		workoutsCount,
+		const TextSpan(text: ' workouts'),
+	]);
 	@override List<String> get months => [
 		'January',
 		'February',
@@ -374,6 +378,10 @@ extension on TranslationsEn {
 				const TextSpan(text: ' workouts'),
 			]);
 			case 'workoutsScreen.subtitle': return 'You have performed a total of';
+			case 'workoutsScreen.monthStatisticBar': return ({required InlineSpan workoutsCount}) => TextSpan(children: [
+				workoutsCount,
+				const TextSpan(text: ' workouts'),
+			]);
 			case 'workoutsScreen.months.0': return 'January';
 			case 'workoutsScreen.months.1': return 'February';
 			case 'workoutsScreen.months.2': return 'March';
