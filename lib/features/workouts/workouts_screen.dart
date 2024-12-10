@@ -108,6 +108,7 @@ class Header extends StatelessWidget {
       TextSpan(
         style: TextStyle(
           color: Theme.of(context).colorScheme.onSurface,
+          fontSize: 16,
         ),
         children: [
           TextSpan(
