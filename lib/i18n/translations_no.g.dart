@@ -120,7 +120,7 @@ class TranslationsKeyTypesNo {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get rfid => 'RFID brikke';
+	String get rfid => 'Adgangsbrikke';
 	String get pinCode => 'PIN kode';
 	String get unknown => 'Ukjent nøkkeltype';
 }
@@ -339,7 +339,7 @@ extension on Translations {
 			case 'homeScreen.primaryMembershipLocation': return 'Ditt primærsenter';
 			case 'keyStatuses.active': return 'Aktiv';
 			case 'keyStatuses.inactive': return 'Inaktiv';
-			case 'keyTypes.rfid': return 'RFID brikke';
+			case 'keyTypes.rfid': return 'Adgangsbrikke';
 			case 'keyTypes.pinCode': return 'PIN kode';
 			case 'keyTypes.unknown': return 'Ukjent nøkkeltype';
 			case 'membershipStatuses.presale': return 'Før salg';

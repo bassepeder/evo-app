@@ -118,7 +118,7 @@ class _TranslationsKeyTypesEn extends TranslationsKeyTypesNo {
 	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-	@override String get rfid => 'RFID chip';
+	@override String get rfid => 'Access-tag';
 	@override String get pinCode => 'PIN code';
 	@override String get unknown => 'Unknown key type';
 }
@@ -337,7 +337,7 @@ extension on TranslationsEn {
 			case 'homeScreen.primaryMembershipLocation': return 'Your primary location';
 			case 'keyStatuses.active': return 'Active';
 			case 'keyStatuses.inactive': return 'Inactive';
-			case 'keyTypes.rfid': return 'RFID chip';
+			case 'keyTypes.rfid': return 'Access-tag';
 			case 'keyTypes.pinCode': return 'PIN code';
 			case 'keyTypes.unknown': return 'Unknown key type';
 			case 'membershipStatuses.presale': return 'Pre-sale';

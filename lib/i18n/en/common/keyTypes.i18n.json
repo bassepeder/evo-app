@@ -1,5 +1,5 @@
 {
-  "rfid": "RFID chip",
+  "rfid": "Access-tag",
   "pinCode": "PIN code",
   "unknown": "Unknown key type"
 }
