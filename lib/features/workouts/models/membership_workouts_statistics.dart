@@ -34,7 +34,7 @@ class WorkoutMonth with _$WorkoutMonth {
 
   const factory WorkoutMonth({
     required int totalWorkouts,
-    required String year,
+    required int year,
     required int month,
   }) = _WorkoutMonth;
 
@@ -44,7 +44,7 @@ class WorkoutMonth with _$WorkoutMonth {
   factory WorkoutMonth.fromPick(RequiredPick pick) {
     return WorkoutMonth(
       totalWorkouts: pick('total_workouts').asIntOrThrow(),
-      year: pick('year').asStringOrThrow(),
+      year: pick('year').asIntOrThrow(),
       month: pick('month').asIntOrThrow(),
     );
   }
