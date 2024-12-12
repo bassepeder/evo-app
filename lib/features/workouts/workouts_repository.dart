@@ -9,7 +9,7 @@ part 'workouts_repository.g.dart';
 Future<MembershipWorkoutsStatistics> getWorkoutStatistics(Ref ref) async =>
     ref.withClientCacheFor(
       (client) => WorkoutsRepository(client).getWorkoutStatistics(),
-      const Duration(hours: 1),
+      const Duration(minutes: 30),
     );
 
 class WorkoutsRepository {
