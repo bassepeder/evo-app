@@ -83,19 +83,12 @@ class SettingsScreen extends ConsumerWidget {
                 Header(title: context.t.settingsScreen.appMenuItems.header),
                 const SizedBox(height: 8),
                 SettingsListItem(
-                  svgSrc: signOutSvg,
-                  title:
-                      context.t.settingsScreen.accountMenuItems.signOut.title,
-                  subTitle: context
-                      .t.settingsScreen.accountMenuItems.signOut.subtitle,
+                  svgSrc: brightnessSvg,
+                  title: context.t.settingsScreen.appMenuItems.appTheme.title,
+                  subTitle:
+                      context.t.settingsScreen.appMenuItems.appTheme.subtitle,
                   showNavigationIcon: false,
-                  onClick: () {
-                    ref.read(authSessionProvider.notifier).delete();
-                    pushAndRemoveUntilPlatformRoute(
-                      context,
-                      builder: (_) => const WelcomeScreen(),
-                    );
-                  },
+                  onClick: () {},
                 ),
               ],
             ),
@@ -228,3 +221,9 @@ const referralIconSvg = '''
 
 const signOutSvg =
     '''<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 256 256"><path fill="currentColor" d="M112 216a8 8 0 0 1-8 8H48a16 16 0 0 1-16-16V48a16 16 0 0 1 16-16h56a8 8 0 0 1 0 16H48v160h56a8 8 0 0 1 8 8Zm109.66-93.66l-40-40a8 8 0 0 0-11.32 11.32L196.69 120H104a8 8 0 0 0 0 16h92.69l-26.35 26.34a8 8 0 0 0 11.32 11.32l40-40a8 8 0 0 0 0-11.32Z"/></svg>''';
+
+const brightnessSvg = '''
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+</svg>
+''';
