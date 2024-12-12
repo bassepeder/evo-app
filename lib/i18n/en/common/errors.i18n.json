@@ -4,5 +4,6 @@
   "generalRetryButtonText": "Retry",
   "failedToLoadMembershipError": "Failed to retrieve information about your membership.",
   "failedToLoadLocationData": "Failed to load location data.",
-  "failedToLoadLocations": "Failed to fetch all EVO locations."
+  "failedToLoadLocations": "Failed to fetch all EVO locations.",
+  "failedToLoadWorkoutStatistics": "Failed to load your workouts."
 }

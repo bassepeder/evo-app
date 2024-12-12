@@ -1,5 +1,7 @@
 import 'package:evo/features/auth/providers/auth_session.dart';
+import 'package:evo/features/settings/views/profile_information_screen.dart';
 import 'package:evo/features/welcome_screen.dart';
+import 'package:evo/i18n/translations.g.dart';
 import 'package:evo/utils/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,50 +14,80 @@ class SettingsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Text(context.t.settingsScreen.appBar),
         centerTitle: true,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 24,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ProfileMenuCard(
+                Header(title: context.t.settingsScreen.accountMenuItems.header),
+                const SizedBox(height: 8),
+                SettingsListItem(
                   svgSrc: profileIconSvg,
-                  title: 'Profile Information',
-                  subTitle: 'Change your account information',
-                  onClick: () {},
+                  title: context.t.settingsScreen.accountMenuItems
+                      .profileInformation.title,
+                  subTitle: context.t.settingsScreen.accountMenuItems
+                      .profileInformation.subtitle,
+                  onClick: () => pushPlatformRoute(
+                    context,
+                    builder: (_) => const ProfileInformationScreen(),
+                  ),
                 ),
-                ProfileMenuCard(
-                  svgSrc: lockIconSvg,
-                  title: 'Change Password',
-                  subTitle: 'Change your password',
-                  onClick: () {},
-                ),
-                ProfileMenuCard(
+                SettingsListItem(
                   svgSrc: cardIconSvg,
-                  title: 'Payment Methods',
-                  subTitle: 'Add your credit & debit cards',
+                  title:
+                      context.t.settingsScreen.accountMenuItems.payment.title,
+                  subTitle: context
+                      .t.settingsScreen.accountMenuItems.payment.subtitle,
                   onClick: () {},
                 ),
-                ProfileMenuCard(
+                SettingsListItem(
                   svgSrc: markerIconSvg,
-                  title: 'Locations',
-                  subTitle: 'Add or remove your delivery locations',
+                  title:
+                      context.t.settingsScreen.accountMenuItems.locations.title,
+                  subTitle: context
+                      .t.settingsScreen.accountMenuItems.locations.subtitle,
                   onClick: () {},
                 ),
-                ProfileMenuCard(
-                  svgSrc: shareIconSvg,
-                  title: 'Refer to Friends',
-                  subTitle: 'Get discount for reffering friends',
+                SettingsListItem(
+                  svgSrc: referralIconSvg,
+                  title:
+                      context.t.settingsScreen.accountMenuItems.referral.title,
+                  subTitle: context
+                      .t.settingsScreen.accountMenuItems.referral.subtitle,
                   onClick: () {},
                 ),
-                ProfileMenuCard(
+                SettingsListItem(
                   svgSrc: signOutSvg,
-                  title: 'Sign out',
-                  subTitle: "We hope we'll see you soon",
+                  title:
+                      context.t.settingsScreen.accountMenuItems.signOut.title,
+                  subTitle: context
+                      .t.settingsScreen.accountMenuItems.signOut.subtitle,
+                  showNavigationIcon: false,
+                  onClick: () {
+                    ref.read(authSessionProvider.notifier).delete();
+                    pushAndRemoveUntilPlatformRoute(
+                      context,
+                      builder: (_) => const WelcomeScreen(),
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
+                Header(title: context.t.settingsScreen.appMenuItems.header),
+                const SizedBox(height: 8),
+                SettingsListItem(
+                  svgSrc: signOutSvg,
+                  title:
+                      context.t.settingsScreen.accountMenuItems.signOut.title,
+                  subTitle: context
+                      .t.settingsScreen.accountMenuItems.signOut.subtitle,
                   showNavigationIcon: false,
                   onClick: () {
                     ref.read(authSessionProvider.notifier).delete();
@@ -74,19 +106,36 @@ class SettingsScreen extends ConsumerWidget {
   }
 }
 
-class ProfileMenuCard extends StatelessWidget {
-  final String? title;
-  final String? subTitle;
-  final String? svgSrc;
-  final bool showNavigationIcon;
-  final VoidCallback? onClick;
+class Header extends StatelessWidget {
+  final String title;
 
-  const ProfileMenuCard({
+  const Header({super.key, required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title,
+      style: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+}
+
+class SettingsListItem extends StatelessWidget {
+  final String title;
+  final String subTitle;
+  final String svgSrc;
+  final bool showNavigationIcon;
+  final VoidCallback onClick;
+
+  const SettingsListItem({
     super.key,
-    this.title,
-    this.subTitle,
-    this.svgSrc,
-    this.onClick,
+    required this.title,
+    required this.subTitle,
+    required this.svgSrc,
+    required this.onClick,
     this.showNavigationIcon = true,
   });
 
@@ -171,17 +220,9 @@ const markerIconSvg = '''
 </svg>
 ''';
 
-const fbIconSvg = '''
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g opacity="0.64">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M13.1547 19V11.9992H15.2255L15.5 9.58665H13.1547L13.1582 8.37916C13.1582 7.74992 13.2223 7.41278 14.1907 7.41278H15.4853V5H13.4142C10.9264 5 10.0507 6.17033 10.0507 8.13848V9.58692H8.5V11.9994H10.0507V19H13.1547Z" fill="#010F07"/>
-</g>
-</svg>
-''';
-
-const shareIconSvg = '''
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M7.62683 13.6939C7.6272 13.7341 7.62753 13.7697 7.62753 13.8006C7.62753 13.9503 7.62676 14.1578 7.62596 14.3719C7.62512 14.5999 7.62424 14.8354 7.62424 15.0163H7.74443C7.97199 15.0163 8.17547 14.8667 8.25435 14.6414L8.25437 14.6414C8.92315 12.731 9.86818 11.5708 11.0894 11.1607C11.9413 10.8746 12.879 10.7862 14.1953 10.748V13.7028C14.1953 13.8474 14.247 13.9866 14.3401 14.0927C14.5441 14.3252 14.888 14.3392 15.1083 14.1238L19.8257 9.51233C19.8373 9.50103 19.8484 9.4892 19.859 9.47688C20.0607 9.24216 20.044 8.87926 19.8216 8.66632L15.1042 4.14884C15.0042 4.05306 14.874 4 14.7389 4C14.4387 4 14.1953 4.25691 14.1953 4.57383V7.54677C12.1221 7.64403 10.3885 7.85731 9.23015 9.08696C7.6001 10.8174 7.62014 12.9747 7.62683 13.6939ZM11.176 5.46295C11.176 5.04039 10.8515 4.69784 10.4511 4.69784H6.89939C5.2981 4.69784 4 6.06804 4 7.75827V16.9396C4 18.6298 5.2981 20 6.89939 20H15.5976C17.1989 20 18.497 18.6298 18.497 16.9396V15.4094C18.497 14.9868 18.1724 14.6442 17.7721 14.6442C17.3718 14.6442 17.0473 14.9868 17.0473 15.4094V16.9396C17.0473 17.7847 16.3982 18.4698 15.5976 18.4698H6.89939C6.09875 18.4698 5.4497 17.7847 5.4497 16.9396V7.75827C5.4497 6.91316 6.09875 6.22806 6.89939 6.22806H10.4511C10.8515 6.22806 11.176 5.88551 11.176 5.46295Z" fill="#010F07"/>
+const referralIconSvg = '''
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#010F07" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
 </svg>
 ''';
 
