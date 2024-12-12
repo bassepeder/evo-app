@@ -43,6 +43,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsKeyStatusesNo keyStatuses = TranslationsKeyStatusesNo.internal(_root);
 	late final TranslationsKeyTypesNo keyTypes = TranslationsKeyTypesNo.internal(_root);
 	late final TranslationsMembershipStatusesNo membershipStatuses = TranslationsMembershipStatusesNo.internal(_root);
+	late final TranslationsSettingsScreenNo settingsScreen = TranslationsSettingsScreenNo.internal(_root);
 	late final TranslationsSignInScreenNo signInScreen = TranslationsSignInScreenNo.internal(_root);
 	late final TranslationsValidationNo validation = TranslationsValidationNo.internal(_root);
 	late final TranslationsWelcomeScreenNo welcomeScreen = TranslationsWelcomeScreenNo.internal(_root);
@@ -62,6 +63,7 @@ class TranslationsErrorsNo {
 	String get failedToLoadMembershipError => 'Kunne ikke hente informasjon om medlemskapet ditt.';
 	String get failedToLoadLocationData => 'Klarte ikke å hente lokasjonsdata.';
 	String get failedToLoadLocations => 'Klarte ikke å hente alle EVO lokasjoner.';
+	String get failedToLoadWorkoutStatistics => 'Klarte ikke å hente treningsøktene dine.';
 }
 
 // Path: format
@@ -144,6 +146,19 @@ class TranslationsMembershipStatusesNo {
 	String get unknown => 'Ukjent';
 }
 
+// Path: settingsScreen
+class TranslationsSettingsScreenNo {
+	TranslationsSettingsScreenNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get appBar => 'Instillinger';
+	late final TranslationsSettingsScreenAccountMenuItemsNo accountMenuItems = TranslationsSettingsScreenAccountMenuItemsNo.internal(_root);
+	late final TranslationsSettingsScreenAppMenuItemsNo appMenuItems = TranslationsSettingsScreenAppMenuItemsNo.internal(_root);
+	late final TranslationsSettingsScreenScreensNo screens = TranslationsSettingsScreenScreensNo.internal(_root);
+}
+
 // Path: signInScreen
 class TranslationsSignInScreenNo {
 	TranslationsSignInScreenNo.internal(this._root);
@@ -220,6 +235,42 @@ class TranslationsWorkoutsScreenNo {
 	];
 }
 
+// Path: settingsScreen.accountMenuItems
+class TranslationsSettingsScreenAccountMenuItemsNo {
+	TranslationsSettingsScreenAccountMenuItemsNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get header => 'Kontoinstillinger';
+	late final TranslationsSettingsScreenAccountMenuItemsProfileInformationNo profileInformation = TranslationsSettingsScreenAccountMenuItemsProfileInformationNo.internal(_root);
+	late final TranslationsSettingsScreenAccountMenuItemsPaymentNo payment = TranslationsSettingsScreenAccountMenuItemsPaymentNo.internal(_root);
+	late final TranslationsSettingsScreenAccountMenuItemsLocationsNo locations = TranslationsSettingsScreenAccountMenuItemsLocationsNo.internal(_root);
+	late final TranslationsSettingsScreenAccountMenuItemsReferralNo referral = TranslationsSettingsScreenAccountMenuItemsReferralNo.internal(_root);
+	late final TranslationsSettingsScreenAccountMenuItemsSignOutNo signOut = TranslationsSettingsScreenAccountMenuItemsSignOutNo.internal(_root);
+}
+
+// Path: settingsScreen.appMenuItems
+class TranslationsSettingsScreenAppMenuItemsNo {
+	TranslationsSettingsScreenAppMenuItemsNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get header => 'App-innstillinger';
+	late final TranslationsSettingsScreenAppMenuItemsAppThemeNo appTheme = TranslationsSettingsScreenAppMenuItemsAppThemeNo.internal(_root);
+}
+
+// Path: settingsScreen.screens
+class TranslationsSettingsScreenScreensNo {
+	TranslationsSettingsScreenScreensNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	late final TranslationsSettingsScreenScreensProfileInformationNo profileInformation = TranslationsSettingsScreenScreensProfileInformationNo.internal(_root);
+}
+
 // Path: signInScreen.form
 class TranslationsSignInScreenFormNo {
 	TranslationsSignInScreenFormNo.internal(this._root);
@@ -262,6 +313,82 @@ class TranslationsValidationFormsNo {
 
 	// Translations
 	late final TranslationsValidationFormsInputFieldsNo inputFields = TranslationsValidationFormsInputFieldsNo.internal(_root);
+}
+
+// Path: settingsScreen.accountMenuItems.profileInformation
+class TranslationsSettingsScreenAccountMenuItemsProfileInformationNo {
+	TranslationsSettingsScreenAccountMenuItemsProfileInformationNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Kontoinformasjon';
+	String get subtitle => 'Endre dine kontoopplysninger';
+}
+
+// Path: settingsScreen.accountMenuItems.payment
+class TranslationsSettingsScreenAccountMenuItemsPaymentNo {
+	TranslationsSettingsScreenAccountMenuItemsPaymentNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Betaling';
+	String get subtitle => 'Kontroller ditt betalingskort';
+}
+
+// Path: settingsScreen.accountMenuItems.locations
+class TranslationsSettingsScreenAccountMenuItemsLocationsNo {
+	TranslationsSettingsScreenAccountMenuItemsLocationsNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Ditt primærsenter';
+	String get subtitle => 'Endre ditt primærsenter';
+}
+
+// Path: settingsScreen.accountMenuItems.referral
+class TranslationsSettingsScreenAccountMenuItemsReferralNo {
+	TranslationsSettingsScreenAccountMenuItemsReferralNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Vervekampanje';
+	String get subtitle => 'Få ekslusive kampanjer';
+}
+
+// Path: settingsScreen.accountMenuItems.signOut
+class TranslationsSettingsScreenAccountMenuItemsSignOutNo {
+	TranslationsSettingsScreenAccountMenuItemsSignOutNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Logg ut';
+	String get subtitle => 'Håper vi sees igjen';
+}
+
+// Path: settingsScreen.appMenuItems.appTheme
+class TranslationsSettingsScreenAppMenuItemsAppThemeNo {
+	TranslationsSettingsScreenAppMenuItemsAppThemeNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Utseende';
+	String get subtitle => 'Velg mellom mørkt og lyst tema';
+}
+
+// Path: settingsScreen.screens.profileInformation
+class TranslationsSettingsScreenScreensProfileInformationNo {
+	TranslationsSettingsScreenScreensProfileInformationNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get appbar => 'Kontoinformasjon';
 }
 
 // Path: signInScreen.form.email
@@ -329,6 +456,7 @@ extension on Translations {
 			case 'errors.failedToLoadMembershipError': return 'Kunne ikke hente informasjon om medlemskapet ditt.';
 			case 'errors.failedToLoadLocationData': return 'Klarte ikke å hente lokasjonsdata.';
 			case 'errors.failedToLoadLocations': return 'Klarte ikke å hente alle EVO lokasjoner.';
+			case 'errors.failedToLoadWorkoutStatistics': return 'Klarte ikke å hente treningsøktene dine.';
 			case 'format.yesterday': return 'i går';
 			case 'format.today': return 'i dag';
 			case 'format.tomorrow': return 'i morgen';
@@ -362,6 +490,22 @@ extension on Translations {
 			case 'membershipStatuses.cancelledInTrial': return 'Kansellert i prøveperiode';
 			case 'membershipStatuses.stopped': return 'Stoppet';
 			case 'membershipStatuses.unknown': return 'Ukjent';
+			case 'settingsScreen.appBar': return 'Instillinger';
+			case 'settingsScreen.accountMenuItems.header': return 'Kontoinstillinger';
+			case 'settingsScreen.accountMenuItems.profileInformation.title': return 'Kontoinformasjon';
+			case 'settingsScreen.accountMenuItems.profileInformation.subtitle': return 'Endre dine kontoopplysninger';
+			case 'settingsScreen.accountMenuItems.payment.title': return 'Betaling';
+			case 'settingsScreen.accountMenuItems.payment.subtitle': return 'Kontroller ditt betalingskort';
+			case 'settingsScreen.accountMenuItems.locations.title': return 'Ditt primærsenter';
+			case 'settingsScreen.accountMenuItems.locations.subtitle': return 'Endre ditt primærsenter';
+			case 'settingsScreen.accountMenuItems.referral.title': return 'Vervekampanje';
+			case 'settingsScreen.accountMenuItems.referral.subtitle': return 'Få ekslusive kampanjer';
+			case 'settingsScreen.accountMenuItems.signOut.title': return 'Logg ut';
+			case 'settingsScreen.accountMenuItems.signOut.subtitle': return 'Håper vi sees igjen';
+			case 'settingsScreen.appMenuItems.header': return 'App-innstillinger';
+			case 'settingsScreen.appMenuItems.appTheme.title': return 'Utseende';
+			case 'settingsScreen.appMenuItems.appTheme.subtitle': return 'Velg mellom mørkt og lyst tema';
+			case 'settingsScreen.screens.profileInformation.appbar': return 'Kontoinformasjon';
 			case 'signInScreen.title': return 'Logg inn';
 			case 'signInScreen.header': return 'Velkommen tilbake!';
 			case 'signInScreen.subtitle': return 'Logg inn med e-posten og passordet ditt.';

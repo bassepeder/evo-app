@@ -75,7 +75,7 @@ class WorkoutsScreen extends ConsumerWidget {
           return SafeArea(
             child: Expanded(
               child: ErrorScreen(
-                subtitle: context.t.errors.failedToLoadMembershipError,
+                subtitle: context.t.errors.failedToLoadWorkoutStatistics,
                 onRetryClicked: () =>
                     ref.invalidate(workoutsControllerProvider),
               ),

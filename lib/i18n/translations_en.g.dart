@@ -41,6 +41,7 @@ class TranslationsEn extends Translations {
 	@override late final _TranslationsKeyStatusesEn keyStatuses = _TranslationsKeyStatusesEn._(_root);
 	@override late final _TranslationsKeyTypesEn keyTypes = _TranslationsKeyTypesEn._(_root);
 	@override late final _TranslationsMembershipStatusesEn membershipStatuses = _TranslationsMembershipStatusesEn._(_root);
+	@override late final _TranslationsSettingsScreenEn settingsScreen = _TranslationsSettingsScreenEn._(_root);
 	@override late final _TranslationsSignInScreenEn signInScreen = _TranslationsSignInScreenEn._(_root);
 	@override late final _TranslationsValidationEn validation = _TranslationsValidationEn._(_root);
 	@override late final _TranslationsWelcomeScreenEn welcomeScreen = _TranslationsWelcomeScreenEn._(_root);
@@ -60,6 +61,7 @@ class _TranslationsErrorsEn extends TranslationsErrorsNo {
 	@override String get failedToLoadMembershipError => 'Failed to retrieve information about your membership.';
 	@override String get failedToLoadLocationData => 'Failed to load location data.';
 	@override String get failedToLoadLocations => 'Failed to fetch all EVO locations.';
+	@override String get failedToLoadWorkoutStatistics => 'Failed to load your workouts.';
 }
 
 // Path: format
@@ -142,6 +144,19 @@ class _TranslationsMembershipStatusesEn extends TranslationsMembershipStatusesNo
 	@override String get uknonwn => 'Unknown';
 }
 
+// Path: settingsScreen
+class _TranslationsSettingsScreenEn extends TranslationsSettingsScreenNo {
+	_TranslationsSettingsScreenEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get appBar => 'Settings';
+	@override late final _TranslationsSettingsScreenAccountMenuItemsEn accountMenuItems = _TranslationsSettingsScreenAccountMenuItemsEn._(_root);
+	@override late final _TranslationsSettingsScreenAppMenuItemsEn appMenuItems = _TranslationsSettingsScreenAppMenuItemsEn._(_root);
+	@override late final _TranslationsSettingsScreenScreensEn screens = _TranslationsSettingsScreenScreensEn._(_root);
+}
+
 // Path: signInScreen
 class _TranslationsSignInScreenEn extends TranslationsSignInScreenNo {
 	_TranslationsSignInScreenEn._(TranslationsEn root) : this._root = root, super.internal(root);
@@ -218,6 +233,42 @@ class _TranslationsWorkoutsScreenEn extends TranslationsWorkoutsScreenNo {
 	];
 }
 
+// Path: settingsScreen.accountMenuItems
+class _TranslationsSettingsScreenAccountMenuItemsEn extends TranslationsSettingsScreenAccountMenuItemsNo {
+	_TranslationsSettingsScreenAccountMenuItemsEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get header => 'Account Settings';
+	@override late final _TranslationsSettingsScreenAccountMenuItemsProfileInformationEn profileInformation = _TranslationsSettingsScreenAccountMenuItemsProfileInformationEn._(_root);
+	@override late final _TranslationsSettingsScreenAccountMenuItemsPaymentEn payment = _TranslationsSettingsScreenAccountMenuItemsPaymentEn._(_root);
+	@override late final _TranslationsSettingsScreenAccountMenuItemsLocationsEn locations = _TranslationsSettingsScreenAccountMenuItemsLocationsEn._(_root);
+	@override late final _TranslationsSettingsScreenAccountMenuItemsReferralEn referral = _TranslationsSettingsScreenAccountMenuItemsReferralEn._(_root);
+	@override late final _TranslationsSettingsScreenAccountMenuItemsSignOutEn signOut = _TranslationsSettingsScreenAccountMenuItemsSignOutEn._(_root);
+}
+
+// Path: settingsScreen.appMenuItems
+class _TranslationsSettingsScreenAppMenuItemsEn extends TranslationsSettingsScreenAppMenuItemsNo {
+	_TranslationsSettingsScreenAppMenuItemsEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get header => 'App Settings';
+	@override late final _TranslationsSettingsScreenAppMenuItemsAppThemeEn appTheme = _TranslationsSettingsScreenAppMenuItemsAppThemeEn._(_root);
+}
+
+// Path: settingsScreen.screens
+class _TranslationsSettingsScreenScreensEn extends TranslationsSettingsScreenScreensNo {
+	_TranslationsSettingsScreenScreensEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override late final _TranslationsSettingsScreenScreensProfileInformationEn profileInformation = _TranslationsSettingsScreenScreensProfileInformationEn._(_root);
+}
+
 // Path: signInScreen.form
 class _TranslationsSignInScreenFormEn extends TranslationsSignInScreenFormNo {
 	_TranslationsSignInScreenFormEn._(TranslationsEn root) : this._root = root, super.internal(root);
@@ -260,6 +311,82 @@ class _TranslationsValidationFormsEn extends TranslationsValidationFormsNo {
 
 	// Translations
 	@override late final _TranslationsValidationFormsInputFieldsEn inputFields = _TranslationsValidationFormsInputFieldsEn._(_root);
+}
+
+// Path: settingsScreen.accountMenuItems.profileInformation
+class _TranslationsSettingsScreenAccountMenuItemsProfileInformationEn extends TranslationsSettingsScreenAccountMenuItemsProfileInformationNo {
+	_TranslationsSettingsScreenAccountMenuItemsProfileInformationEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Account Information';
+	@override String get subtitle => 'Change your account information';
+}
+
+// Path: settingsScreen.accountMenuItems.payment
+class _TranslationsSettingsScreenAccountMenuItemsPaymentEn extends TranslationsSettingsScreenAccountMenuItemsPaymentNo {
+	_TranslationsSettingsScreenAccountMenuItemsPaymentEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Payment';
+	@override String get subtitle => 'Check your payment card';
+}
+
+// Path: settingsScreen.accountMenuItems.locations
+class _TranslationsSettingsScreenAccountMenuItemsLocationsEn extends TranslationsSettingsScreenAccountMenuItemsLocationsNo {
+	_TranslationsSettingsScreenAccountMenuItemsLocationsEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Your primary location';
+	@override String get subtitle => 'Change your primary location';
+}
+
+// Path: settingsScreen.accountMenuItems.referral
+class _TranslationsSettingsScreenAccountMenuItemsReferralEn extends TranslationsSettingsScreenAccountMenuItemsReferralNo {
+	_TranslationsSettingsScreenAccountMenuItemsReferralEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Referral Campaign';
+	@override String get subtitle => 'Get exclusive promotions';
+}
+
+// Path: settingsScreen.accountMenuItems.signOut
+class _TranslationsSettingsScreenAccountMenuItemsSignOutEn extends TranslationsSettingsScreenAccountMenuItemsSignOutNo {
+	_TranslationsSettingsScreenAccountMenuItemsSignOutEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Sign Out';
+	@override String get subtitle => 'Hope to see you again';
+}
+
+// Path: settingsScreen.appMenuItems.appTheme
+class _TranslationsSettingsScreenAppMenuItemsAppThemeEn extends TranslationsSettingsScreenAppMenuItemsAppThemeNo {
+	_TranslationsSettingsScreenAppMenuItemsAppThemeEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'App Theme';
+	@override String get subtitle => 'Change the look of the app';
+}
+
+// Path: settingsScreen.screens.profileInformation
+class _TranslationsSettingsScreenScreensProfileInformationEn extends TranslationsSettingsScreenScreensProfileInformationNo {
+	_TranslationsSettingsScreenScreensProfileInformationEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get appbar => 'Profile Information';
 }
 
 // Path: signInScreen.form.email
@@ -327,6 +454,7 @@ extension on TranslationsEn {
 			case 'errors.failedToLoadMembershipError': return 'Failed to retrieve information about your membership.';
 			case 'errors.failedToLoadLocationData': return 'Failed to load location data.';
 			case 'errors.failedToLoadLocations': return 'Failed to fetch all EVO locations.';
+			case 'errors.failedToLoadWorkoutStatistics': return 'Failed to load your workouts.';
 			case 'format.yesterday': return 'yesterday';
 			case 'format.today': return 'today';
 			case 'format.tomorrow': return 'tomorrow';
@@ -360,6 +488,22 @@ extension on TranslationsEn {
 			case 'membershipStatuses.cancelledInTrial': return 'Cancelled in trial';
 			case 'membershipStatuses.stopped': return 'Stopped';
 			case 'membershipStatuses.uknonwn': return 'Unknown';
+			case 'settingsScreen.appBar': return 'Settings';
+			case 'settingsScreen.accountMenuItems.header': return 'Account Settings';
+			case 'settingsScreen.accountMenuItems.profileInformation.title': return 'Account Information';
+			case 'settingsScreen.accountMenuItems.profileInformation.subtitle': return 'Change your account information';
+			case 'settingsScreen.accountMenuItems.payment.title': return 'Payment';
+			case 'settingsScreen.accountMenuItems.payment.subtitle': return 'Check your payment card';
+			case 'settingsScreen.accountMenuItems.locations.title': return 'Your primary location';
+			case 'settingsScreen.accountMenuItems.locations.subtitle': return 'Change your primary location';
+			case 'settingsScreen.accountMenuItems.referral.title': return 'Referral Campaign';
+			case 'settingsScreen.accountMenuItems.referral.subtitle': return 'Get exclusive promotions';
+			case 'settingsScreen.accountMenuItems.signOut.title': return 'Sign Out';
+			case 'settingsScreen.accountMenuItems.signOut.subtitle': return 'Hope to see you again';
+			case 'settingsScreen.appMenuItems.header': return 'App Settings';
+			case 'settingsScreen.appMenuItems.appTheme.title': return 'App Theme';
+			case 'settingsScreen.appMenuItems.appTheme.subtitle': return 'Change the look of the app';
+			case 'settingsScreen.screens.profileInformation.appbar': return 'Profile Information';
 			case 'signInScreen.title': return 'Sign in';
 			case 'signInScreen.header': return 'Welcome back!';
 			case 'signInScreen.subtitle': return 'Sign in with your e-mail and password.';

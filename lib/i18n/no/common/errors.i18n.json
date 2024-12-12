@@ -4,5 +4,6 @@
   "generalRetryButtonText": "Prøv igjen",
   "failedToLoadMembershipError": "Kunne ikke hente informasjon om medlemskapet ditt.",
   "failedToLoadLocationData": "Klarte ikke å hente lokasjonsdata.",
-  "failedToLoadLocations": "Klarte ikke å hente alle EVO lokasjoner."
+  "failedToLoadLocations": "Klarte ikke å hente alle EVO lokasjoner.",
+  "failedToLoadWorkoutStatistics": "Klarte ikke å hente treningsøktene dine."
 }
