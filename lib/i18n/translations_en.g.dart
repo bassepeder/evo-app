@@ -216,6 +216,7 @@ class _TranslationsWorkoutsScreenEn extends TranslationsWorkoutsScreenNo {
 		'great job!',
 		'pure power!',
 		'wow!',
+		'way to go!',
 	];
 	@override List<String> get months => [
 		'January',
@@ -536,6 +537,7 @@ extension on TranslationsEn {
 			case 'workoutsScreen.encouragements.1': return 'great job!';
 			case 'workoutsScreen.encouragements.2': return 'pure power!';
 			case 'workoutsScreen.encouragements.3': return 'wow!';
+			case 'workoutsScreen.encouragements.4': return 'way to go!';
 			case 'workoutsScreen.months.0': return 'January';
 			case 'workoutsScreen.months.1': return 'February';
 			case 'workoutsScreen.months.2': return 'March';
