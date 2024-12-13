@@ -1,3 +1,4 @@
+import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,6 +8,8 @@ class ProfileInformationScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final membershipDetails = ref.read(membershipDetailsProvider).requireValue!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(context.t.settingsScreen.screens.profileInformation.appbar),
@@ -23,7 +26,10 @@ class ProfileInformationScreen extends ConsumerWidget {
                 const Header(title: 'Personlig informasjon'),
                 const SizedBox(height: 8),
                 PersonalInformationForm(),
-                const Divider(),
+                const SizedBox(height: 32),
+                TermsAndConditions(
+                  terms: membershipDetails.product.postSignupPresentation,
+                ),
               ],
             ),
           ),
@@ -72,6 +78,7 @@ class PersonalInformationForm extends ConsumerWidget {
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
               initialValue: "bastian.tangedal@gmail.com",
+              style: const TextStyle(fontSize: 14),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return context.t.validation.forms.inputFields.email.empty;
@@ -107,6 +114,7 @@ class PersonalInformationForm extends ConsumerWidget {
               keyboardType: TextInputType.streetAddress,
               textInputAction: TextInputAction.next,
               initialValue: "Strømsø Torg 5E",
+              style: const TextStyle(fontSize: 14),
               decoration: InputDecoration(
                 suffixIcon: const Icon(Icons.home),
                 filled: true,
@@ -131,6 +139,7 @@ class PersonalInformationForm extends ConsumerWidget {
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.done,
               initialValue: "Drammen",
+              style: const TextStyle(fontSize: 14),
               decoration: InputDecoration(
                 suffixIcon: const Icon(Icons.pin_drop),
                 filled: true,
@@ -154,6 +163,7 @@ class PersonalInformationForm extends ConsumerWidget {
             child: TextFormField(
               keyboardType: TextInputType.number,
               initialValue: "3044",
+              style: const TextStyle(fontSize: 14),
               decoration: InputDecoration(
                 suffixIcon: const Icon(Icons.numbers),
                 filled: true,
@@ -178,15 +188,36 @@ class PersonalInformationForm extends ConsumerWidget {
   }
 }
 
+class TermsAndConditions extends StatelessWidget {
+  final String terms;
+
+  const TermsAndConditions({
+    super.key,
+    required this.terms,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Header(title: 'Vilkår'),
+        const SizedBox(height: 8),
+        Text(terms),
+      ],
+    );
+  }
+}
+
 class UserInfoEditField extends StatelessWidget {
+  final String text;
+  final Widget child;
+
   const UserInfoEditField({
     super.key,
     required this.text,
     required this.child,
   });
-
-  final String text;
-  final Widget child;
 
   @override
   Widget build(BuildContext context) {
