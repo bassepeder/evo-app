@@ -4,8 +4,10 @@
       "label": "E-post",
       "hint": "Skriv inn e-postaddressen din",
       "validation": {
-        "empty": "Vennligst skriv inn e-postadressen din",
-        "invalid": "Vennligst skriv inn en gyldig e-post"
+        "emptyFull": "Vennligst skriv inn e-postadressen din",
+        "invalidFull": "Vennligst skriv inn en gyldig e-post",
+        "emptyShort": "E-post er påkrevd",
+        "invalidShort": "Ugyldig e-post"
       }
     },
     "password": {
@@ -16,13 +18,22 @@
       }
     },
     "streetAddress": {
-      "label": "Addresse"
+      "label": "Addresse",
+      "validation": {
+        "empty": "Addresse er påkrevd"
+      }
     },
     "addressCity": {
-      "label": "Sted"
+      "label": "Sted",
+      "validation": {
+        "empty": "Sted er påkrevd"
+      }
     },
     "postalCode": {
-      "label": "Postnummer  "
+      "label": "Postnummer",
+      "validation": {
+        "empty": "Postnummer er påkrevd"
+      }
     }
   }
 }

@@ -4,8 +4,10 @@
       "label": "Email",
       "hint": "Type your e-mail",
       "validation": {
-        "empty": "Please enter your e-mail",
-        "invalid": "Please enter a valid e-mail"
+        "emptyFull": "Please enter your e-mail",
+        "invalidFull": "Please enter a valid e-mail",
+        "emptyShort": "E-mail is required",
+        "invalidShort": "Invalid e-mail"
       }
     },
     "password": {
@@ -16,13 +18,22 @@
       }
     },
     "streetAddress": {
-      "label": "Address"
+      "label": "Address",
+      "validation": {
+        "empty": "This is required"
+      }
     },
     "addressCity": {
-      "label": "Place"
+      "label": "Place",
+      "validation": {
+        "empty": "This is required"
+      }
     },
     "postalCode": {
-      "label": "Postal code"
+      "label": "Postal code",
+      "validation": {
+        "empty": "This is required"
+      }
     }
   }
 }
