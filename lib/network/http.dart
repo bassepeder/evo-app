@@ -67,10 +67,7 @@ class HttpClientFactory {
 @Riverpod(keepAlive: true)
 HttpClientFactory httpClientFactory(Ref _) => HttpClientFactory();
 
-/// The default http client.
-///
-/// This client is used for all requests that don't go to the lichess server, for
-/// example, requests to lichess CDN, or other APIs.
+/// The default HTTP client.
 /// Only one instance of this client is created and kept alive for the whole app.
 @Riverpod(keepAlive: true)
 Client defaultClient(Ref ref) {

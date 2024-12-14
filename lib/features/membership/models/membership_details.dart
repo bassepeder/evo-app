@@ -17,7 +17,7 @@ class MembershipDetails with _$MembershipDetails {
     required Profile profile,
     required List<KeyInfo> keys,
     required Product product,
-    required Location location,
+    required MembershipLocation location,
     required String referralCode,
     required String locale,
     required bool gdprConsentGiven,
@@ -51,7 +51,7 @@ class MembershipDetails with _$MembershipDetails {
         ),
       ),
       product: Product.fromPick(pick('product').required()),
-      location: Location.fromPick(pick('location').required()),
+      location: MembershipLocation.fromPick(pick('location').required()),
       referralCode: pick('referral_code').asStringOrThrow(),
       locale: pick('locale').asStringOrThrow(),
       gdprConsentGiven: pick('gdpr_consent_given').asBoolOrThrow(),
@@ -245,17 +245,17 @@ class Product with _$Product {
 }
 
 @freezed
-class Location with _$Location {
-  const factory Location({
+class MembershipLocation with _$MembershipLocation {
+  const factory MembershipLocation({
     required LocationId id,
     required String name,
-  }) = _Location;
+  }) = _MembershipLocation;
 
-  factory Location.fromJson(Map<String, dynamic> json) =>
-      _$LocationFromJson(json);
+  factory MembershipLocation.fromJson(Map<String, dynamic> json) =>
+      _$MembershipLocationFromJson(json);
 
-  factory Location.fromPick(RequiredPick pick) {
-    return Location(
+  factory MembershipLocation.fromPick(RequiredPick pick) {
+    return MembershipLocation(
       id: pick('id').asLocationIdOrThrow(),
       name: pick('name').asStringOrThrow(),
     );
