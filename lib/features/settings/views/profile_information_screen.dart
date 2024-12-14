@@ -20,6 +20,8 @@ class _ProfileInformationScreenState
   late final TextEditingController cityController;
   late final TextEditingController postalCodeController;
 
+  final formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     super.initState();
@@ -64,7 +66,18 @@ class _ProfileInformationScreenState
                 opacity: hasChanged ? 1.0 : 0.0,
                 duration: const Duration(milliseconds: 250),
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          const SnackBar(
+                            content: Text('Saving...'),
+                            behavior: SnackBarBehavior.floating,
+                          ),
+                        );
+                    }
+                  },
                   icon: const Icon(Icons.save_as_outlined),
                 ),
               );
@@ -90,6 +103,7 @@ class _ProfileInformationScreenState
                   cityController: cityController,
                   postalCodeController: postalCodeController,
                   isLoading: isLoading,
+                  formKey: formKey,
                 ),
                 const SizedBox(height: 32),
                 TermsAndConditions(
@@ -127,21 +141,21 @@ class PersonalInformationForm extends ConsumerWidget {
   final TextEditingController cityController;
   final TextEditingController postalCodeController;
   final bool isLoading;
-
-  final formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey;
 
   static const outlineInputBorder = OutlineInputBorder(
     borderSide: BorderSide(color: Color(0xFF757575)),
     borderRadius: BorderRadius.all(Radius.circular(100)),
   );
 
-  PersonalInformationForm({
+  const PersonalInformationForm({
     super.key,
     required this.emailController,
     required this.streetAddressController,
     required this.cityController,
     required this.postalCodeController,
     required this.isLoading,
+    required this.formKey,
   });
 
   @override
@@ -164,9 +178,9 @@ class PersonalInformationForm extends ConsumerWidget {
               style: const TextStyle(fontSize: 14),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return context.t.forms.fields.email.validation.empty;
+                  return context.t.forms.fields.email.validation.emptyShort;
                 } else if (!value.isValidEmail()) {
-                  return context.t.forms.fields.email.validation.invalid;
+                  return context.t.forms.fields.email.validation.invalidShort;
                 }
 
                 return null;
@@ -200,6 +214,13 @@ class PersonalInformationForm extends ConsumerWidget {
               readOnly: isLoading,
               textInputAction: TextInputAction.done,
               style: const TextStyle(fontSize: 14),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return context.t.forms.fields.streetAddress.validation.empty;
+                }
+
+                return null;
+              },
               decoration: InputDecoration(
                 suffixIcon: const Icon(Icons.home),
                 filled: true,
@@ -229,6 +250,13 @@ class PersonalInformationForm extends ConsumerWidget {
               textInputAction: TextInputAction.done,
               readOnly: isLoading,
               style: const TextStyle(fontSize: 14),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return context.t.forms.fields.addressCity.validation.empty;
+                }
+
+                return null;
+              },
               decoration: InputDecoration(
                 suffixIcon: const Icon(Icons.pin_drop),
                 filled: true,
@@ -257,6 +285,13 @@ class PersonalInformationForm extends ConsumerWidget {
               keyboardType: TextInputType.number,
               readOnly: isLoading,
               style: const TextStyle(fontSize: 14),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return context.t.forms.fields.postalCode.validation.empty;
+                }
+
+                return null;
+              },
               decoration: InputDecoration(
                 suffixIcon: const Icon(Icons.numbers),
                 filled: true,
