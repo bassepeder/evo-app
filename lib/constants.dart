@@ -4,3 +4,4 @@ const kEvoHost = String.fromEnvironment(
 );
 
 const String kBaseApiUrl = 'evo-api-234p.onrender.com';
+const String kBuyMembershipUrl = 'https://evofitness.no/velg-medlemskap/';
