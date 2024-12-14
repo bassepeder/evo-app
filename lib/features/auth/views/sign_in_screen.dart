@@ -6,6 +6,7 @@ import 'package:evo/features/auth/viewmodels/auth_view_model.dart';
 import 'package:evo/features/home/views/home_screen.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:evo/utils/navigation.dart';
+import 'package:evo/utils/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -188,9 +189,7 @@ class SignInForm extends StatelessWidget {
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return context.t.forms.fields.email.validation.empty;
-              } else if (!RegExp(
-                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-              ).hasMatch(value)) {
+              } else if (!value.isValidEmail()) {
                 return context.t.forms.fields.email.validation.invalid;
               }
 

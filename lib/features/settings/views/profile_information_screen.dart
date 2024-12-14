@@ -1,6 +1,7 @@
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/features/settings/profile_controller.dart';
 import 'package:evo/i18n/translations.g.dart';
+import 'package:evo/utils/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -141,9 +142,7 @@ class PersonalInformationForm extends ConsumerWidget {
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return context.t.forms.fields.email.validation.empty;
-                } else if (!RegExp(
-                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-                ).hasMatch(value)) {
+                } else if (!value.isValidEmail()) {
                   return context.t.forms.fields.email.validation.invalid;
                 }
 
