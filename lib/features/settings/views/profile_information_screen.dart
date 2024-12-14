@@ -25,11 +25,13 @@ class _ProfileInformationScreenState
     super.initState();
 
     final state = ref.read(profileControllerProvider);
+
     emailController = TextEditingController(text: state.email);
     streetAddressController = TextEditingController(text: state.address.street);
     cityController = TextEditingController(text: state.address.postalLocation);
-    postalCodeController =
-        TextEditingController(text: state.address.postalCode);
+    postalCodeController = TextEditingController(
+      text: state.address.postalCode,
+    );
   }
 
   @override
@@ -51,6 +53,24 @@ class _ProfileInformationScreenState
       appBar: AppBar(
         title: Text(context.t.profileScreen.appbar),
         centerTitle: true,
+        actions: [
+          Consumer(
+            builder: (context, ref, child) {
+              final hasChanged = ref.watch(
+                profileControllerProvider.select((state) => state.hasChanged),
+              );
+
+              return AnimatedOpacity(
+                opacity: hasChanged ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 250),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.save_as_outlined),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -134,6 +154,9 @@ class PersonalInformationForm extends ConsumerWidget {
             label: context.t.forms.fields.email.label,
             child: TextFormField(
               controller: emailController,
+              onChanged: (value) => ref
+                  .read(profileControllerProvider.notifier)
+                  .updateEmail(value),
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.done,
               autocorrect: false,
@@ -170,6 +193,9 @@ class PersonalInformationForm extends ConsumerWidget {
             label: context.t.forms.fields.streetAddress.label,
             child: TextFormField(
               controller: streetAddressController,
+              onChanged: (value) => ref
+                  .read(profileControllerProvider.notifier)
+                  .updateStreetAddress(value),
               keyboardType: TextInputType.streetAddress,
               readOnly: isLoading,
               textInputAction: TextInputAction.done,
@@ -196,6 +222,9 @@ class PersonalInformationForm extends ConsumerWidget {
             label: context.t.forms.fields.addressCity.label,
             child: TextFormField(
               controller: cityController,
+              onChanged: (value) => ref
+                  .read(profileControllerProvider.notifier)
+                  .updateCity(value),
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.done,
               readOnly: isLoading,
@@ -222,6 +251,9 @@ class PersonalInformationForm extends ConsumerWidget {
             label: context.t.forms.fields.postalCode.label,
             child: TextFormField(
               controller: postalCodeController,
+              onChanged: (value) => ref
+                  .read(profileControllerProvider.notifier)
+                  .updatePostalCode(value),
               keyboardType: TextInputType.number,
               readOnly: isLoading,
               style: const TextStyle(fontSize: 14),
