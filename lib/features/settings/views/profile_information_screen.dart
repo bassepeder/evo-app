@@ -4,12 +4,47 @@ import 'package:evo/i18n/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ProfileInformationScreen extends ConsumerWidget {
+class ProfileInformationScreen extends ConsumerStatefulWidget {
   const ProfileInformationScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ProfileInformationScreen> createState() =>
+      _ProfileInformationScreenState();
+}
+
+class _ProfileInformationScreenState
+    extends ConsumerState<ProfileInformationScreen> {
+  late final TextEditingController emailController;
+  late final TextEditingController streetAddressController;
+  late final TextEditingController cityController;
+  late final TextEditingController postalCodeController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    final state = ref.read(profileControllerProvider);
+    emailController = TextEditingController(text: state.email);
+    streetAddressController = TextEditingController(text: state.address.street);
+    cityController = TextEditingController(text: state.address.postalLocation);
+    postalCodeController =
+        TextEditingController(text: state.address.postalCode);
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    streetAddressController.dispose();
+    cityController.dispose();
+    postalCodeController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final membershipDetails = ref.read(membershipDetailsProvider).requireValue!;
+    final isLoading =
+        ref.watch(profileControllerProvider.select((state) => state.isLoading));
 
     return Scaffold(
       appBar: AppBar(
@@ -28,7 +63,13 @@ class ProfileInformationScreen extends ConsumerWidget {
                   title: context.t.profileScreen.personalInformationHeader,
                 ),
                 const SizedBox(height: 8),
-                PersonalInformationForm(),
+                PersonalInformationForm(
+                  emailController: emailController,
+                  streetAddressController: streetAddressController,
+                  cityController: cityController,
+                  postalCodeController: postalCodeController,
+                  isLoading: isLoading,
+                ),
                 const SizedBox(height: 32),
                 TermsAndConditions(
                   terms: membershipDetails.product.postSignupPresentation,
@@ -60,6 +101,12 @@ class Header extends StatelessWidget {
 }
 
 class PersonalInformationForm extends ConsumerWidget {
+  final TextEditingController emailController;
+  final TextEditingController streetAddressController;
+  final TextEditingController cityController;
+  final TextEditingController postalCodeController;
+  final bool isLoading;
+
   final formKey = GlobalKey<FormState>();
 
   static const outlineInputBorder = OutlineInputBorder(
@@ -67,12 +114,17 @@ class PersonalInformationForm extends ConsumerWidget {
     borderRadius: BorderRadius.all(Radius.circular(100)),
   );
 
-  PersonalInformationForm({super.key});
+  PersonalInformationForm({
+    super.key,
+    required this.emailController,
+    required this.streetAddressController,
+    required this.cityController,
+    required this.postalCodeController,
+    required this.isLoading,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.read(profileControllerProvider);
-
     return Form(
       key: formKey,
       child: Column(
@@ -80,9 +132,11 @@ class PersonalInformationForm extends ConsumerWidget {
           UserInfoEditField(
             label: context.t.forms.fields.email.label,
             child: TextFormField(
+              controller: emailController,
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
-              initialValue: state.email,
+              autocorrect: false,
+              readOnly: isLoading,
               style: const TextStyle(fontSize: 14),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -116,9 +170,10 @@ class PersonalInformationForm extends ConsumerWidget {
           UserInfoEditField(
             label: context.t.forms.fields.streetAddress.label,
             child: TextFormField(
+              controller: streetAddressController,
               keyboardType: TextInputType.streetAddress,
+              readOnly: isLoading,
               textInputAction: TextInputAction.next,
-              initialValue: state.address.street,
               style: const TextStyle(fontSize: 14),
               decoration: InputDecoration(
                 suffixIcon: const Icon(Icons.home),
@@ -141,9 +196,10 @@ class PersonalInformationForm extends ConsumerWidget {
           UserInfoEditField(
             label: context.t.forms.fields.addressCity.label,
             child: TextFormField(
+              controller: cityController,
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.done,
-              initialValue: state.address.postalLocation,
+              readOnly: isLoading,
               style: const TextStyle(fontSize: 14),
               decoration: InputDecoration(
                 suffixIcon: const Icon(Icons.pin_drop),
@@ -166,8 +222,9 @@ class PersonalInformationForm extends ConsumerWidget {
           UserInfoEditField(
             label: context.t.forms.fields.postalCode.label,
             child: TextFormField(
+              controller: postalCodeController,
               keyboardType: TextInputType.number,
-              initialValue: state.address.postalCode,
+              readOnly: isLoading,
               style: const TextStyle(fontSize: 14),
               decoration: InputDecoration(
                 suffixIcon: const Icon(Icons.numbers),
@@ -206,7 +263,7 @@ class TermsAndConditions extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Header(title: 'Vilkår'),
+        Header(title: context.t.profileScreen.termsHeader),
         const SizedBox(height: 8),
         Text(terms),
       ],

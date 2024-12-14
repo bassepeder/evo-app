@@ -15,6 +15,7 @@ class ProfileController extends _$ProfileController {
     return ProfileState(
       email: membership.profile.email,
       address: membership.profile.address,
+      isLoading: false,
     );
   }
 }
@@ -24,5 +25,6 @@ class ProfileState with _$ProfileState {
   const factory ProfileState({
     required String email,
     required Address address,
+    required bool isLoading,
   }) = _ProfileState;
 }
