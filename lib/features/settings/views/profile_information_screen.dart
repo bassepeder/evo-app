@@ -1,4 +1,5 @@
 import 'package:evo/features/membership/membership_repository.dart';
+import 'package:evo/features/settings/profile_controller.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -70,17 +71,18 @@ class PersonalInformationForm extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.read(profileControllerProvider);
+
     return Form(
       key: formKey,
       child: Column(
         children: <Widget>[
           UserInfoEditField(
-            text: "E-post",
             label: context.t.forms.fields.email.label,
             child: TextFormField(
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
-              initialValue: "bastian.tangedal@gmail.com",
+              initialValue: state.email,
               style: const TextStyle(fontSize: 14),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -116,7 +118,6 @@ class PersonalInformationForm extends ConsumerWidget {
             child: TextFormField(
               keyboardType: TextInputType.streetAddress,
               textInputAction: TextInputAction.next,
-              initialValue: "Strømsø Torg 5E",
               initialValue: state.address.street,
               style: const TextStyle(fontSize: 14),
               decoration: InputDecoration(
@@ -142,7 +143,7 @@ class PersonalInformationForm extends ConsumerWidget {
             child: TextFormField(
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.done,
-              initialValue: "Drammen",
+              initialValue: state.address.postalLocation,
               style: const TextStyle(fontSize: 14),
               decoration: InputDecoration(
                 suffixIcon: const Icon(Icons.pin_drop),
@@ -166,7 +167,7 @@ class PersonalInformationForm extends ConsumerWidget {
             label: context.t.forms.fields.postalCode.label,
             child: TextFormField(
               keyboardType: TextInputType.number,
-              initialValue: "3044",
+              initialValue: state.address.postalCode,
               style: const TextStyle(fontSize: 14),
               decoration: InputDecoration(
                 suffixIcon: const Icon(Icons.numbers),
@@ -214,12 +215,12 @@ class TermsAndConditions extends StatelessWidget {
 }
 
 class UserInfoEditField extends StatelessWidget {
-  final String text;
+  final String label;
   final Widget child;
 
   const UserInfoEditField({
     super.key,
-    required this.text,
+    required this.label,
     required this.child,
   });
 
@@ -232,7 +233,7 @@ class UserInfoEditField extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Text(
-              text,
+              label,
               style: const TextStyle(fontSize: 16),
             ),
           ),
