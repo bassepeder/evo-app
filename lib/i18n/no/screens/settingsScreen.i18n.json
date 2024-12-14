@@ -29,10 +29,5 @@
       "title": "Utseende",
       "subtitle": "Velg mellom mørkt og lyst tema"
     }
-  },
-  "screens": {
-    "profileInformation": {
-      "appbar": "Kontoinformasjon"
-    }
   }
 }

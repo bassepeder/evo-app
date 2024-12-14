@@ -1,0 +1,28 @@
+{
+  "fields": {
+    "email": {
+      "label": "E-post",
+      "hint": "Skriv inn e-postaddressen din",
+      "validation": {
+        "empty": "Vennligst skriv inn e-postadressen din",
+        "invalid": "Vennligst skriv inn en gyldig e-post"
+      }
+    },
+    "password": {
+      "label": "Passord",
+      "hint": "Skriv inn passordet ditt",
+      "validation": {
+        "empty": "Vennligst skriv inn passordet ditt"
+      }
+    },
+    "streetAddress": {
+      "label": "Addresse"
+    },
+    "addressCity": {
+      "label": "Sted"
+    },
+    "postalCode": {
+      "label": "Postnummer  "
+    }
+  }
+}

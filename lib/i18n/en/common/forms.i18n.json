@@ -1,0 +1,28 @@
+{
+  "fields": {
+    "email": {
+      "label": "Email",
+      "hint": "Type your e-mail",
+      "validation": {
+        "empty": "Please enter your e-mail",
+        "invalid": "Please enter a valid e-mail"
+      }
+    },
+    "password": {
+      "label": "Password",
+      "hint": "Type your password",
+      "validation": {
+        "empty": "Please enter password"
+      }
+    },
+    "streetAddress": {
+      "label": "Address"
+    },
+    "addressCity": {
+      "label": "Place"
+    },
+    "postalCode": {
+      "label": "Postal code"
+    }
+  }
+}

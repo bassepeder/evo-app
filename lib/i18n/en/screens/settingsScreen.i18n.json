@@ -29,10 +29,5 @@
       "title": "App Theme",
       "subtitle": "Change the look of the app"
     }
-  },
-  "screens": {
-    "profileInformation": {
-      "appbar": "Profile Information"
-    }
   }
 }
