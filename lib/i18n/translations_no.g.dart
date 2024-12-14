@@ -166,7 +166,7 @@ class TranslationsProfileScreenNo {
 	// Translations
 	String get appbar => 'Kontoinformasjon';
 	String get personalInformationHeader => 'Personlig informasjon ';
-	String get termsHeader => 'Vilkår';
+	String get termsHeader => 'Medlemsvilkår';
 }
 
 // Path: settingsScreen
@@ -507,7 +507,7 @@ extension on Translations {
 			case 'membershipStatuses.unknown': return 'Ukjent';
 			case 'profileScreen.appbar': return 'Kontoinformasjon';
 			case 'profileScreen.personalInformationHeader': return 'Personlig informasjon ';
-			case 'profileScreen.termsHeader': return 'Vilkår';
+			case 'profileScreen.termsHeader': return 'Medlemsvilkår';
 			case 'settingsScreen.appBar': return 'Instillinger';
 			case 'settingsScreen.accountMenuItems.header': return 'Kontoinstillinger';
 			case 'settingsScreen.accountMenuItems.profileInformation.title': return 'Kontoinformasjon';
