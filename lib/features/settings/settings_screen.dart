@@ -144,7 +144,7 @@ class SettingsListItem extends StatelessWidget {
           child: Row(
             children: [
               SvgPicture.string(
-                svgSrc!,
+                svgSrc,
                 height: 24,
                 width: 24,
                 colorFilter: ColorFilter.mode(
@@ -158,13 +158,13 @@ class SettingsListItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      title!,
+                      title,
                       maxLines: 1,
                       style: Theme.of(context).textTheme.labelLarge,
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      subTitle!,
+                      subTitle,
                       maxLines: 1,
                       style: TextStyle(
                         fontSize: 14,
