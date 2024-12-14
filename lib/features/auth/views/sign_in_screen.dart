@@ -284,7 +284,7 @@ class ForgotPasswordTextButton extends StatelessWidget {
                   .textTheme
                   .bodyLarge!
                   .color!
-                  .withOpacity(0.64),
+                  .withValues(alpha: 0.64),
             ),
       ),
     );
@@ -308,7 +308,8 @@ class BecomeMemberTextButton extends StatelessWidget {
       child: Text(
         label,
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-              color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+              color:
+                  Theme.of(context).colorScheme.primary.withValues(alpha: 0.8),
             ),
       ),
     );
