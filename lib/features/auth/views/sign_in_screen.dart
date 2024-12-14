@@ -1,5 +1,6 @@
 import 'package:evo/common/exceptions/http_exceptions.dart';
 import 'package:evo/common/widgets/evo_elevated_button.dart';
+import 'package:evo/constants.dart';
 import 'package:evo/features/auth/models/auth_state.dart';
 import 'package:evo/features/auth/viewmodels/auth_view_model.dart';
 import 'package:evo/features/home/views/home_screen.dart';
@@ -121,9 +122,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                               ScaffoldMessenger.of(context)
                                   .hideCurrentSnackBar();
                               launchUrl(
-                                Uri.parse(
-                                  'https://evofitness.no/velg-medlemskap/',
-                                ),
+                                Uri.parse(kBuyMembershipUrl),
                               );
                             },
                             label: context.t.signInScreen.buttons.becomeMember,
