@@ -341,6 +341,7 @@ class TranslationsFormsFieldsStreetAddressNo {
 
 	// Translations
 	String get label => 'Addresse';
+	late final TranslationsFormsFieldsStreetAddressValidationNo validation = TranslationsFormsFieldsStreetAddressValidationNo.internal(_root);
 }
 
 // Path: forms.fields.addressCity
@@ -351,6 +352,7 @@ class TranslationsFormsFieldsAddressCityNo {
 
 	// Translations
 	String get label => 'Sted';
+	late final TranslationsFormsFieldsAddressCityValidationNo validation = TranslationsFormsFieldsAddressCityValidationNo.internal(_root);
 }
 
 // Path: forms.fields.postalCode
@@ -360,7 +362,8 @@ class TranslationsFormsFieldsPostalCodeNo {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get label => 'Postnummer  ';
+	String get label => 'Postnummer';
+	late final TranslationsFormsFieldsPostalCodeValidationNo validation = TranslationsFormsFieldsPostalCodeValidationNo.internal(_root);
 }
 
 // Path: settingsScreen.accountMenuItems.profileInformation
@@ -436,8 +439,10 @@ class TranslationsFormsFieldsEmailValidationNo {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get empty => 'Vennligst skriv inn e-postadressen din';
-	String get invalid => 'Vennligst skriv inn en gyldig e-post';
+	String get emptyFull => 'Vennligst skriv inn e-postadressen din';
+	String get invalidFull => 'Vennligst skriv inn en gyldig e-post';
+	String get emptyShort => 'E-post er påkrevd';
+	String get invalidShort => 'Ugyldig e-post';
 }
 
 // Path: forms.fields.password.validation
@@ -448,6 +453,36 @@ class TranslationsFormsFieldsPasswordValidationNo {
 
 	// Translations
 	String get empty => 'Vennligst skriv inn passordet ditt';
+}
+
+// Path: forms.fields.streetAddress.validation
+class TranslationsFormsFieldsStreetAddressValidationNo {
+	TranslationsFormsFieldsStreetAddressValidationNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get empty => 'Addresse er påkrevd';
+}
+
+// Path: forms.fields.addressCity.validation
+class TranslationsFormsFieldsAddressCityValidationNo {
+	TranslationsFormsFieldsAddressCityValidationNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get empty => 'Sted er påkrevd';
+}
+
+// Path: forms.fields.postalCode.validation
+class TranslationsFormsFieldsPostalCodeValidationNo {
+	TranslationsFormsFieldsPostalCodeValidationNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get empty => 'Postnummer er påkrevd';
 }
 
 /// Flat map(s) containing all translations.
@@ -467,14 +502,19 @@ extension on Translations {
 			case 'format.tomorrow': return 'i morgen';
 			case 'forms.fields.email.label': return 'E-post';
 			case 'forms.fields.email.hint': return 'Skriv inn e-postaddressen din';
-			case 'forms.fields.email.validation.empty': return 'Vennligst skriv inn e-postadressen din';
-			case 'forms.fields.email.validation.invalid': return 'Vennligst skriv inn en gyldig e-post';
+			case 'forms.fields.email.validation.emptyFull': return 'Vennligst skriv inn e-postadressen din';
+			case 'forms.fields.email.validation.invalidFull': return 'Vennligst skriv inn en gyldig e-post';
+			case 'forms.fields.email.validation.emptyShort': return 'E-post er påkrevd';
+			case 'forms.fields.email.validation.invalidShort': return 'Ugyldig e-post';
 			case 'forms.fields.password.label': return 'Passord';
 			case 'forms.fields.password.hint': return 'Skriv inn passordet ditt';
 			case 'forms.fields.password.validation.empty': return 'Vennligst skriv inn passordet ditt';
 			case 'forms.fields.streetAddress.label': return 'Addresse';
+			case 'forms.fields.streetAddress.validation.empty': return 'Addresse er påkrevd';
 			case 'forms.fields.addressCity.label': return 'Sted';
-			case 'forms.fields.postalCode.label': return 'Postnummer  ';
+			case 'forms.fields.addressCity.validation.empty': return 'Sted er påkrevd';
+			case 'forms.fields.postalCode.label': return 'Postnummer';
+			case 'forms.fields.postalCode.validation.empty': return 'Postnummer er påkrevd';
 			case 'homeScreen.membershipStatus': return 'Ditt medlemsskap er';
 			case 'homeScreen.explore': return 'Utforsk medlemsskap';
 			case 'homeScreen.currentLocationStatisticsTitle': return 'Antall personer nå inne på';

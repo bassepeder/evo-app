@@ -340,6 +340,7 @@ class _TranslationsFormsFieldsStreetAddressEn extends TranslationsFormsFieldsStr
 
 	// Translations
 	@override String get label => 'Address';
+	@override late final _TranslationsFormsFieldsStreetAddressValidationEn validation = _TranslationsFormsFieldsStreetAddressValidationEn._(_root);
 }
 
 // Path: forms.fields.addressCity
@@ -350,6 +351,7 @@ class _TranslationsFormsFieldsAddressCityEn extends TranslationsFormsFieldsAddre
 
 	// Translations
 	@override String get label => 'Place';
+	@override late final _TranslationsFormsFieldsAddressCityValidationEn validation = _TranslationsFormsFieldsAddressCityValidationEn._(_root);
 }
 
 // Path: forms.fields.postalCode
@@ -360,6 +362,7 @@ class _TranslationsFormsFieldsPostalCodeEn extends TranslationsFormsFieldsPostal
 
 	// Translations
 	@override String get label => 'Postal code';
+	@override late final _TranslationsFormsFieldsPostalCodeValidationEn validation = _TranslationsFormsFieldsPostalCodeValidationEn._(_root);
 }
 
 // Path: settingsScreen.accountMenuItems.profileInformation
@@ -435,8 +438,10 @@ class _TranslationsFormsFieldsEmailValidationEn extends TranslationsFormsFieldsE
 	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-	@override String get empty => 'Please enter your e-mail';
-	@override String get invalid => 'Please enter a valid e-mail';
+	@override String get emptyFull => 'Please enter your e-mail';
+	@override String get invalidFull => 'Please enter a valid e-mail';
+	@override String get emptyShort => 'E-mail is required';
+	@override String get invalidShort => 'Invalid e-mail';
 }
 
 // Path: forms.fields.password.validation
@@ -447,6 +452,36 @@ class _TranslationsFormsFieldsPasswordValidationEn extends TranslationsFormsFiel
 
 	// Translations
 	@override String get empty => 'Please enter password';
+}
+
+// Path: forms.fields.streetAddress.validation
+class _TranslationsFormsFieldsStreetAddressValidationEn extends TranslationsFormsFieldsStreetAddressValidationNo {
+	_TranslationsFormsFieldsStreetAddressValidationEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get empty => 'This is required';
+}
+
+// Path: forms.fields.addressCity.validation
+class _TranslationsFormsFieldsAddressCityValidationEn extends TranslationsFormsFieldsAddressCityValidationNo {
+	_TranslationsFormsFieldsAddressCityValidationEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get empty => 'This is required';
+}
+
+// Path: forms.fields.postalCode.validation
+class _TranslationsFormsFieldsPostalCodeValidationEn extends TranslationsFormsFieldsPostalCodeValidationNo {
+	_TranslationsFormsFieldsPostalCodeValidationEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get empty => 'This is required';
 }
 
 /// Flat map(s) containing all translations.
@@ -466,14 +501,19 @@ extension on TranslationsEn {
 			case 'format.tomorrow': return 'tomorrow';
 			case 'forms.fields.email.label': return 'Email';
 			case 'forms.fields.email.hint': return 'Type your e-mail';
-			case 'forms.fields.email.validation.empty': return 'Please enter your e-mail';
-			case 'forms.fields.email.validation.invalid': return 'Please enter a valid e-mail';
+			case 'forms.fields.email.validation.emptyFull': return 'Please enter your e-mail';
+			case 'forms.fields.email.validation.invalidFull': return 'Please enter a valid e-mail';
+			case 'forms.fields.email.validation.emptyShort': return 'E-mail is required';
+			case 'forms.fields.email.validation.invalidShort': return 'Invalid e-mail';
 			case 'forms.fields.password.label': return 'Password';
 			case 'forms.fields.password.hint': return 'Type your password';
 			case 'forms.fields.password.validation.empty': return 'Please enter password';
 			case 'forms.fields.streetAddress.label': return 'Address';
+			case 'forms.fields.streetAddress.validation.empty': return 'This is required';
 			case 'forms.fields.addressCity.label': return 'Place';
+			case 'forms.fields.addressCity.validation.empty': return 'This is required';
 			case 'forms.fields.postalCode.label': return 'Postal code';
+			case 'forms.fields.postalCode.validation.empty': return 'This is required';
 			case 'homeScreen.membershipStatus': return 'Your membership is';
 			case 'homeScreen.explore': return 'Explore membership';
 			case 'homeScreen.currentLocationStatisticsTitle': return 'Number of people now at';

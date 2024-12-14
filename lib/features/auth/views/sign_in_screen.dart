@@ -188,9 +188,9 @@ class SignInForm extends StatelessWidget {
             textInputAction: TextInputAction.next,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return context.t.forms.fields.email.validation.empty;
+                return context.t.forms.fields.email.validation.emptyFull;
               } else if (!value.isValidEmail()) {
-                return context.t.forms.fields.email.validation.invalid;
+                return context.t.forms.fields.email.validation.invalidFull;
               }
 
               return null;
