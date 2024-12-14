@@ -135,7 +135,7 @@ class PersonalInformationForm extends ConsumerWidget {
             child: TextFormField(
               controller: emailController,
               keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.next,
+              textInputAction: TextInputAction.done,
               autocorrect: false,
               readOnly: isLoading,
               style: const TextStyle(fontSize: 14),
@@ -172,7 +172,7 @@ class PersonalInformationForm extends ConsumerWidget {
               controller: streetAddressController,
               keyboardType: TextInputType.streetAddress,
               readOnly: isLoading,
-              textInputAction: TextInputAction.next,
+              textInputAction: TextInputAction.done,
               style: const TextStyle(fontSize: 14),
               decoration: InputDecoration(
                 suffixIcon: const Icon(Icons.home),
