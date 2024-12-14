@@ -164,6 +164,7 @@ class _TranslationsProfileScreenEn extends TranslationsProfileScreenNo {
 	// Translations
 	@override String get appbar => 'Profile Information';
 	@override String get personalInformationHeader => 'Personal information';
+	@override String get termsHeader => 'Terms';
 }
 
 // Path: settingsScreen
@@ -505,6 +506,7 @@ extension on TranslationsEn {
 			case 'membershipStatuses.uknonwn': return 'Unknown';
 			case 'profileScreen.appbar': return 'Profile Information';
 			case 'profileScreen.personalInformationHeader': return 'Personal information';
+			case 'profileScreen.termsHeader': return 'Terms';
 			case 'settingsScreen.appBar': return 'Settings';
 			case 'settingsScreen.accountMenuItems.header': return 'Account Settings';
 			case 'settingsScreen.accountMenuItems.profileInformation.title': return 'Account Information';

@@ -166,6 +166,7 @@ class TranslationsProfileScreenNo {
 	// Translations
 	String get appbar => 'Kontoinformasjon';
 	String get personalInformationHeader => 'Personlig informasjon ';
+	String get termsHeader => 'Vilkår';
 }
 
 // Path: settingsScreen
@@ -359,7 +360,7 @@ class TranslationsFormsFieldsPostalCodeNo {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get label => 'Postnummer';
+	String get label => 'Postnummer  ';
 }
 
 // Path: settingsScreen.accountMenuItems.profileInformation
@@ -473,7 +474,7 @@ extension on Translations {
 			case 'forms.fields.password.validation.empty': return 'Vennligst skriv inn passordet ditt';
 			case 'forms.fields.streetAddress.label': return 'Addresse';
 			case 'forms.fields.addressCity.label': return 'Sted';
-			case 'forms.fields.postalCode.label': return 'Postnummer';
+			case 'forms.fields.postalCode.label': return 'Postnummer  ';
 			case 'homeScreen.membershipStatus': return 'Ditt medlemsskap er';
 			case 'homeScreen.explore': return 'Utforsk medlemsskap';
 			case 'homeScreen.currentLocationStatisticsTitle': return 'Antall personer nå inne på';
@@ -506,6 +507,7 @@ extension on Translations {
 			case 'membershipStatuses.unknown': return 'Ukjent';
 			case 'profileScreen.appbar': return 'Kontoinformasjon';
 			case 'profileScreen.personalInformationHeader': return 'Personlig informasjon ';
+			case 'profileScreen.termsHeader': return 'Vilkår';
 			case 'settingsScreen.appBar': return 'Instillinger';
 			case 'settingsScreen.accountMenuItems.header': return 'Kontoinstillinger';
 			case 'settingsScreen.accountMenuItems.profileInformation.title': return 'Kontoinformasjon';
