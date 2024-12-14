@@ -188,18 +188,18 @@ class SignInForm extends StatelessWidget {
             textInputAction: TextInputAction.next,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return context.t.validation.forms.inputFields.email.empty;
+                return context.t.forms.fields.email.validation.empty;
               } else if (!RegExp(
                 r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
               ).hasMatch(value)) {
-                return context.t.validation.forms.inputFields.email.invalid;
+                return context.t.forms.fields.email.validation.invalid;
               }
 
               return null;
             },
             decoration: InputDecoration(
-              hintText: context.t.signInScreen.form.email.hint,
-              labelText: context.t.signInScreen.form.email.label,
+              hintText: context.t.forms.fields.email.hint,
+              labelText: context.t.forms.fields.email.label,
               floatingLabelBehavior: FloatingLabelBehavior.always,
               hintStyle: const TextStyle(color: Color(0xFF757575)),
               contentPadding: const EdgeInsets.symmetric(
@@ -223,14 +223,14 @@ class SignInForm extends StatelessWidget {
               readOnly: isLoading,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return context.t.validation.forms.inputFields.password.empty;
+                  return context.t.forms.fields.password.validation.empty;
                 }
 
                 return null;
               },
               decoration: InputDecoration(
-                hintText: context.t.signInScreen.form.password.hint,
-                labelText: context.t.signInScreen.form.password.label,
+                hintText: context.t.forms.fields.password.hint,
+                labelText: context.t.forms.fields.password.label,
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 hintStyle: const TextStyle(color: Color(0xFF757575)),
                 contentPadding: const EdgeInsets.symmetric(

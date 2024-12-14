@@ -12,7 +12,7 @@ class ProfileInformationScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.t.settingsScreen.screens.profileInformation.appbar),
+        title: Text(context.t.profileScreen.appbar),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -23,7 +23,9 @@ class ProfileInformationScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 16),
-                const Header(title: 'Personlig informasjon'),
+                Header(
+                  title: context.t.profileScreen.personalInformationHeader,
+                ),
                 const SizedBox(height: 8),
                 PersonalInformationForm(),
                 const SizedBox(height: 32),
@@ -74,6 +76,7 @@ class PersonalInformationForm extends ConsumerWidget {
         children: <Widget>[
           UserInfoEditField(
             text: "E-post",
+            label: context.t.forms.fields.email.label,
             child: TextFormField(
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
@@ -81,11 +84,11 @@ class PersonalInformationForm extends ConsumerWidget {
               style: const TextStyle(fontSize: 14),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return context.t.validation.forms.inputFields.email.empty;
+                  return context.t.forms.fields.email.validation.empty;
                 } else if (!RegExp(
                   r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
                 ).hasMatch(value)) {
-                  return context.t.validation.forms.inputFields.email.invalid;
+                  return context.t.forms.fields.email.validation.invalid;
                 }
 
                 return null;
@@ -109,11 +112,12 @@ class PersonalInformationForm extends ConsumerWidget {
             ),
           ),
           UserInfoEditField(
-            text: "Addresse",
+            label: context.t.forms.fields.streetAddress.label,
             child: TextFormField(
               keyboardType: TextInputType.streetAddress,
               textInputAction: TextInputAction.next,
               initialValue: "Strømsø Torg 5E",
+              initialValue: state.address.street,
               style: const TextStyle(fontSize: 14),
               decoration: InputDecoration(
                 suffixIcon: const Icon(Icons.home),
@@ -134,7 +138,7 @@ class PersonalInformationForm extends ConsumerWidget {
             ),
           ),
           UserInfoEditField(
-            text: "Sted",
+            label: context.t.forms.fields.addressCity.label,
             child: TextFormField(
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.done,
@@ -159,7 +163,7 @@ class PersonalInformationForm extends ConsumerWidget {
             ),
           ),
           UserInfoEditField(
-            text: "Postnummer",
+            label: context.t.forms.fields.postalCode.label,
             child: TextFormField(
               keyboardType: TextInputType.number,
               initialValue: "3044",

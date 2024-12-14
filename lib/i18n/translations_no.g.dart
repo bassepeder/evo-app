@@ -39,13 +39,14 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	// Translations
 	late final TranslationsErrorsNo errors = TranslationsErrorsNo.internal(_root);
 	late final TranslationsFormatNo format = TranslationsFormatNo.internal(_root);
+	late final TranslationsFormsNo forms = TranslationsFormsNo.internal(_root);
 	late final TranslationsHomeScreenNo homeScreen = TranslationsHomeScreenNo.internal(_root);
 	late final TranslationsKeyStatusesNo keyStatuses = TranslationsKeyStatusesNo.internal(_root);
 	late final TranslationsKeyTypesNo keyTypes = TranslationsKeyTypesNo.internal(_root);
 	late final TranslationsMembershipStatusesNo membershipStatuses = TranslationsMembershipStatusesNo.internal(_root);
+	late final TranslationsProfileScreenNo profileScreen = TranslationsProfileScreenNo.internal(_root);
 	late final TranslationsSettingsScreenNo settingsScreen = TranslationsSettingsScreenNo.internal(_root);
 	late final TranslationsSignInScreenNo signInScreen = TranslationsSignInScreenNo.internal(_root);
-	late final TranslationsValidationNo validation = TranslationsValidationNo.internal(_root);
 	late final TranslationsWelcomeScreenNo welcomeScreen = TranslationsWelcomeScreenNo.internal(_root);
 	late final TranslationsWorkoutsScreenNo workoutsScreen = TranslationsWorkoutsScreenNo.internal(_root);
 }
@@ -76,6 +77,16 @@ class TranslationsFormatNo {
 	String get yesterday => 'i går';
 	String get today => 'i dag';
 	String get tomorrow => 'i morgen';
+}
+
+// Path: forms
+class TranslationsFormsNo {
+	TranslationsFormsNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	late final TranslationsFormsFieldsNo fields = TranslationsFormsFieldsNo.internal(_root);
 }
 
 // Path: homeScreen
@@ -146,6 +157,17 @@ class TranslationsMembershipStatusesNo {
 	String get unknown => 'Ukjent';
 }
 
+// Path: profileScreen
+class TranslationsProfileScreenNo {
+	TranslationsProfileScreenNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get appbar => 'Kontoinformasjon';
+	String get personalInformationHeader => 'Personlig informasjon ';
+}
+
 // Path: settingsScreen
 class TranslationsSettingsScreenNo {
 	TranslationsSettingsScreenNo.internal(this._root);
@@ -156,7 +178,6 @@ class TranslationsSettingsScreenNo {
 	String get appBar => 'Instillinger';
 	late final TranslationsSettingsScreenAccountMenuItemsNo accountMenuItems = TranslationsSettingsScreenAccountMenuItemsNo.internal(_root);
 	late final TranslationsSettingsScreenAppMenuItemsNo appMenuItems = TranslationsSettingsScreenAppMenuItemsNo.internal(_root);
-	late final TranslationsSettingsScreenScreensNo screens = TranslationsSettingsScreenScreensNo.internal(_root);
 }
 
 // Path: signInScreen
@@ -169,19 +190,8 @@ class TranslationsSignInScreenNo {
 	String get title => 'Logg inn';
 	String get header => 'Velkommen tilbake!';
 	String get subtitle => 'Logg inn med e-posten og passordet ditt.';
-	late final TranslationsSignInScreenFormNo form = TranslationsSignInScreenFormNo.internal(_root);
 	late final TranslationsSignInScreenButtonsNo buttons = TranslationsSignInScreenButtonsNo.internal(_root);
 	late final TranslationsSignInScreenErrorMessagesNo errorMessages = TranslationsSignInScreenErrorMessagesNo.internal(_root);
-}
-
-// Path: validation
-class TranslationsValidationNo {
-	TranslationsValidationNo.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-	late final TranslationsValidationFormsNo forms = TranslationsValidationFormsNo.internal(_root);
 }
 
 // Path: welcomeScreen
@@ -235,6 +245,20 @@ class TranslationsWorkoutsScreenNo {
 	];
 }
 
+// Path: forms.fields
+class TranslationsFormsFieldsNo {
+	TranslationsFormsFieldsNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	late final TranslationsFormsFieldsEmailNo email = TranslationsFormsFieldsEmailNo.internal(_root);
+	late final TranslationsFormsFieldsPasswordNo password = TranslationsFormsFieldsPasswordNo.internal(_root);
+	late final TranslationsFormsFieldsStreetAddressNo streetAddress = TranslationsFormsFieldsStreetAddressNo.internal(_root);
+	late final TranslationsFormsFieldsAddressCityNo addressCity = TranslationsFormsFieldsAddressCityNo.internal(_root);
+	late final TranslationsFormsFieldsPostalCodeNo postalCode = TranslationsFormsFieldsPostalCodeNo.internal(_root);
+}
+
 // Path: settingsScreen.accountMenuItems
 class TranslationsSettingsScreenAccountMenuItemsNo {
 	TranslationsSettingsScreenAccountMenuItemsNo.internal(this._root);
@@ -261,27 +285,6 @@ class TranslationsSettingsScreenAppMenuItemsNo {
 	late final TranslationsSettingsScreenAppMenuItemsAppThemeNo appTheme = TranslationsSettingsScreenAppMenuItemsAppThemeNo.internal(_root);
 }
 
-// Path: settingsScreen.screens
-class TranslationsSettingsScreenScreensNo {
-	TranslationsSettingsScreenScreensNo.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-	late final TranslationsSettingsScreenScreensProfileInformationNo profileInformation = TranslationsSettingsScreenScreensProfileInformationNo.internal(_root);
-}
-
-// Path: signInScreen.form
-class TranslationsSignInScreenFormNo {
-	TranslationsSignInScreenFormNo.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-	late final TranslationsSignInScreenFormEmailNo email = TranslationsSignInScreenFormEmailNo.internal(_root);
-	late final TranslationsSignInScreenFormPasswordNo password = TranslationsSignInScreenFormPasswordNo.internal(_root);
-}
-
 // Path: signInScreen.buttons
 class TranslationsSignInScreenButtonsNo {
 	TranslationsSignInScreenButtonsNo.internal(this._root);
@@ -305,14 +308,58 @@ class TranslationsSignInScreenErrorMessagesNo {
 	String get genericError => 'En feil oppstod. Prøv igjen senere.';
 }
 
-// Path: validation.forms
-class TranslationsValidationFormsNo {
-	TranslationsValidationFormsNo.internal(this._root);
+// Path: forms.fields.email
+class TranslationsFormsFieldsEmailNo {
+	TranslationsFormsFieldsEmailNo.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsValidationFormsInputFieldsNo inputFields = TranslationsValidationFormsInputFieldsNo.internal(_root);
+	String get label => 'E-post';
+	String get hint => 'Skriv inn e-postaddressen din';
+	late final TranslationsFormsFieldsEmailValidationNo validation = TranslationsFormsFieldsEmailValidationNo.internal(_root);
+}
+
+// Path: forms.fields.password
+class TranslationsFormsFieldsPasswordNo {
+	TranslationsFormsFieldsPasswordNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'Passord';
+	String get hint => 'Skriv inn passordet ditt';
+	late final TranslationsFormsFieldsPasswordValidationNo validation = TranslationsFormsFieldsPasswordValidationNo.internal(_root);
+}
+
+// Path: forms.fields.streetAddress
+class TranslationsFormsFieldsStreetAddressNo {
+	TranslationsFormsFieldsStreetAddressNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'Addresse';
+}
+
+// Path: forms.fields.addressCity
+class TranslationsFormsFieldsAddressCityNo {
+	TranslationsFormsFieldsAddressCityNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'Sted';
+}
+
+// Path: forms.fields.postalCode
+class TranslationsFormsFieldsPostalCodeNo {
+	TranslationsFormsFieldsPostalCodeNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'Postnummer';
 }
 
 // Path: settingsScreen.accountMenuItems.profileInformation
@@ -381,52 +428,9 @@ class TranslationsSettingsScreenAppMenuItemsAppThemeNo {
 	String get subtitle => 'Velg mellom mørkt og lyst tema';
 }
 
-// Path: settingsScreen.screens.profileInformation
-class TranslationsSettingsScreenScreensProfileInformationNo {
-	TranslationsSettingsScreenScreensProfileInformationNo.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-	String get appbar => 'Kontoinformasjon';
-}
-
-// Path: signInScreen.form.email
-class TranslationsSignInScreenFormEmailNo {
-	TranslationsSignInScreenFormEmailNo.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-	String get label => 'E-post';
-	String get hint => 'Skriv inn e-postaddressen din';
-}
-
-// Path: signInScreen.form.password
-class TranslationsSignInScreenFormPasswordNo {
-	TranslationsSignInScreenFormPasswordNo.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-	String get label => 'Passord';
-	String get hint => 'Skriv inn passordet ditt';
-}
-
-// Path: validation.forms.inputFields
-class TranslationsValidationFormsInputFieldsNo {
-	TranslationsValidationFormsInputFieldsNo.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-	late final TranslationsValidationFormsInputFieldsEmailNo email = TranslationsValidationFormsInputFieldsEmailNo.internal(_root);
-	late final TranslationsValidationFormsInputFieldsPasswordNo password = TranslationsValidationFormsInputFieldsPasswordNo.internal(_root);
-}
-
-// Path: validation.forms.inputFields.email
-class TranslationsValidationFormsInputFieldsEmailNo {
-	TranslationsValidationFormsInputFieldsEmailNo.internal(this._root);
+// Path: forms.fields.email.validation
+class TranslationsFormsFieldsEmailValidationNo {
+	TranslationsFormsFieldsEmailValidationNo.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -435,9 +439,9 @@ class TranslationsValidationFormsInputFieldsEmailNo {
 	String get invalid => 'Vennligst skriv inn en gyldig e-post';
 }
 
-// Path: validation.forms.inputFields.password
-class TranslationsValidationFormsInputFieldsPasswordNo {
-	TranslationsValidationFormsInputFieldsPasswordNo.internal(this._root);
+// Path: forms.fields.password.validation
+class TranslationsFormsFieldsPasswordValidationNo {
+	TranslationsFormsFieldsPasswordValidationNo.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -460,6 +464,16 @@ extension on Translations {
 			case 'format.yesterday': return 'i går';
 			case 'format.today': return 'i dag';
 			case 'format.tomorrow': return 'i morgen';
+			case 'forms.fields.email.label': return 'E-post';
+			case 'forms.fields.email.hint': return 'Skriv inn e-postaddressen din';
+			case 'forms.fields.email.validation.empty': return 'Vennligst skriv inn e-postadressen din';
+			case 'forms.fields.email.validation.invalid': return 'Vennligst skriv inn en gyldig e-post';
+			case 'forms.fields.password.label': return 'Passord';
+			case 'forms.fields.password.hint': return 'Skriv inn passordet ditt';
+			case 'forms.fields.password.validation.empty': return 'Vennligst skriv inn passordet ditt';
+			case 'forms.fields.streetAddress.label': return 'Addresse';
+			case 'forms.fields.addressCity.label': return 'Sted';
+			case 'forms.fields.postalCode.label': return 'Postnummer';
 			case 'homeScreen.membershipStatus': return 'Ditt medlemsskap er';
 			case 'homeScreen.explore': return 'Utforsk medlemsskap';
 			case 'homeScreen.currentLocationStatisticsTitle': return 'Antall personer nå inne på';
@@ -490,6 +504,8 @@ extension on Translations {
 			case 'membershipStatuses.cancelledInTrial': return 'Kansellert i prøveperiode';
 			case 'membershipStatuses.stopped': return 'Stoppet';
 			case 'membershipStatuses.unknown': return 'Ukjent';
+			case 'profileScreen.appbar': return 'Kontoinformasjon';
+			case 'profileScreen.personalInformationHeader': return 'Personlig informasjon ';
 			case 'settingsScreen.appBar': return 'Instillinger';
 			case 'settingsScreen.accountMenuItems.header': return 'Kontoinstillinger';
 			case 'settingsScreen.accountMenuItems.profileInformation.title': return 'Kontoinformasjon';
@@ -505,22 +521,14 @@ extension on Translations {
 			case 'settingsScreen.appMenuItems.header': return 'App-innstillinger';
 			case 'settingsScreen.appMenuItems.appTheme.title': return 'Utseende';
 			case 'settingsScreen.appMenuItems.appTheme.subtitle': return 'Velg mellom mørkt og lyst tema';
-			case 'settingsScreen.screens.profileInformation.appbar': return 'Kontoinformasjon';
 			case 'signInScreen.title': return 'Logg inn';
 			case 'signInScreen.header': return 'Velkommen tilbake!';
 			case 'signInScreen.subtitle': return 'Logg inn med e-posten og passordet ditt.';
-			case 'signInScreen.form.email.label': return 'E-post';
-			case 'signInScreen.form.email.hint': return 'Skriv inn e-postaddressen din';
-			case 'signInScreen.form.password.label': return 'Passord';
-			case 'signInScreen.form.password.hint': return 'Skriv inn passordet ditt';
 			case 'signInScreen.buttons.signIn': return 'Logg inn';
 			case 'signInScreen.buttons.forgotPassword': return 'Glemt passord?';
 			case 'signInScreen.buttons.becomeMember': return 'Bli medlem';
 			case 'signInScreen.errorMessages.invalidCredentials': return 'Brukernavn eller passord samsvarer ikke.';
 			case 'signInScreen.errorMessages.genericError': return 'En feil oppstod. Prøv igjen senere.';
-			case 'validation.forms.inputFields.email.empty': return 'Vennligst skriv inn e-postadressen din';
-			case 'validation.forms.inputFields.email.invalid': return 'Vennligst skriv inn en gyldig e-post';
-			case 'validation.forms.inputFields.password.empty': return 'Vennligst skriv inn passordet ditt';
 			case 'welcomeScreen.welcomeHeader': return 'Velkommen til ';
 			case 'welcomeScreen.subtitle': return 'Styrken du trenger';
 			case 'welcomeScreen.signInButton': return 'Logg inn';

@@ -37,13 +37,14 @@ class TranslationsEn extends Translations {
 	// Translations
 	@override late final _TranslationsErrorsEn errors = _TranslationsErrorsEn._(_root);
 	@override late final _TranslationsFormatEn format = _TranslationsFormatEn._(_root);
+	@override late final _TranslationsFormsEn forms = _TranslationsFormsEn._(_root);
 	@override late final _TranslationsHomeScreenEn homeScreen = _TranslationsHomeScreenEn._(_root);
 	@override late final _TranslationsKeyStatusesEn keyStatuses = _TranslationsKeyStatusesEn._(_root);
 	@override late final _TranslationsKeyTypesEn keyTypes = _TranslationsKeyTypesEn._(_root);
 	@override late final _TranslationsMembershipStatusesEn membershipStatuses = _TranslationsMembershipStatusesEn._(_root);
+	@override late final _TranslationsProfileScreenEn profileScreen = _TranslationsProfileScreenEn._(_root);
 	@override late final _TranslationsSettingsScreenEn settingsScreen = _TranslationsSettingsScreenEn._(_root);
 	@override late final _TranslationsSignInScreenEn signInScreen = _TranslationsSignInScreenEn._(_root);
-	@override late final _TranslationsValidationEn validation = _TranslationsValidationEn._(_root);
 	@override late final _TranslationsWelcomeScreenEn welcomeScreen = _TranslationsWelcomeScreenEn._(_root);
 	@override late final _TranslationsWorkoutsScreenEn workoutsScreen = _TranslationsWorkoutsScreenEn._(_root);
 }
@@ -74,6 +75,16 @@ class _TranslationsFormatEn extends TranslationsFormatNo {
 	@override String get yesterday => 'yesterday';
 	@override String get today => 'today';
 	@override String get tomorrow => 'tomorrow';
+}
+
+// Path: forms
+class _TranslationsFormsEn extends TranslationsFormsNo {
+	_TranslationsFormsEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override late final _TranslationsFormsFieldsEn fields = _TranslationsFormsFieldsEn._(_root);
 }
 
 // Path: homeScreen
@@ -144,6 +155,17 @@ class _TranslationsMembershipStatusesEn extends TranslationsMembershipStatusesNo
 	@override String get uknonwn => 'Unknown';
 }
 
+// Path: profileScreen
+class _TranslationsProfileScreenEn extends TranslationsProfileScreenNo {
+	_TranslationsProfileScreenEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get appbar => 'Profile Information';
+	@override String get personalInformationHeader => 'Personal information';
+}
+
 // Path: settingsScreen
 class _TranslationsSettingsScreenEn extends TranslationsSettingsScreenNo {
 	_TranslationsSettingsScreenEn._(TranslationsEn root) : this._root = root, super.internal(root);
@@ -154,7 +176,6 @@ class _TranslationsSettingsScreenEn extends TranslationsSettingsScreenNo {
 	@override String get appBar => 'Settings';
 	@override late final _TranslationsSettingsScreenAccountMenuItemsEn accountMenuItems = _TranslationsSettingsScreenAccountMenuItemsEn._(_root);
 	@override late final _TranslationsSettingsScreenAppMenuItemsEn appMenuItems = _TranslationsSettingsScreenAppMenuItemsEn._(_root);
-	@override late final _TranslationsSettingsScreenScreensEn screens = _TranslationsSettingsScreenScreensEn._(_root);
 }
 
 // Path: signInScreen
@@ -167,19 +188,8 @@ class _TranslationsSignInScreenEn extends TranslationsSignInScreenNo {
 	@override String get title => 'Sign in';
 	@override String get header => 'Welcome back!';
 	@override String get subtitle => 'Sign in with your e-mail and password.';
-	@override late final _TranslationsSignInScreenFormEn form = _TranslationsSignInScreenFormEn._(_root);
 	@override late final _TranslationsSignInScreenButtonsEn buttons = _TranslationsSignInScreenButtonsEn._(_root);
 	@override late final _TranslationsSignInScreenErrorMessagesEn errorMessages = _TranslationsSignInScreenErrorMessagesEn._(_root);
-}
-
-// Path: validation
-class _TranslationsValidationEn extends TranslationsValidationNo {
-	_TranslationsValidationEn._(TranslationsEn root) : this._root = root, super.internal(root);
-
-	final TranslationsEn _root; // ignore: unused_field
-
-	// Translations
-	@override late final _TranslationsValidationFormsEn forms = _TranslationsValidationFormsEn._(_root);
 }
 
 // Path: welcomeScreen
@@ -234,6 +244,20 @@ class _TranslationsWorkoutsScreenEn extends TranslationsWorkoutsScreenNo {
 	];
 }
 
+// Path: forms.fields
+class _TranslationsFormsFieldsEn extends TranslationsFormsFieldsNo {
+	_TranslationsFormsFieldsEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override late final _TranslationsFormsFieldsEmailEn email = _TranslationsFormsFieldsEmailEn._(_root);
+	@override late final _TranslationsFormsFieldsPasswordEn password = _TranslationsFormsFieldsPasswordEn._(_root);
+	@override late final _TranslationsFormsFieldsStreetAddressEn streetAddress = _TranslationsFormsFieldsStreetAddressEn._(_root);
+	@override late final _TranslationsFormsFieldsAddressCityEn addressCity = _TranslationsFormsFieldsAddressCityEn._(_root);
+	@override late final _TranslationsFormsFieldsPostalCodeEn postalCode = _TranslationsFormsFieldsPostalCodeEn._(_root);
+}
+
 // Path: settingsScreen.accountMenuItems
 class _TranslationsSettingsScreenAccountMenuItemsEn extends TranslationsSettingsScreenAccountMenuItemsNo {
 	_TranslationsSettingsScreenAccountMenuItemsEn._(TranslationsEn root) : this._root = root, super.internal(root);
@@ -260,27 +284,6 @@ class _TranslationsSettingsScreenAppMenuItemsEn extends TranslationsSettingsScre
 	@override late final _TranslationsSettingsScreenAppMenuItemsAppThemeEn appTheme = _TranslationsSettingsScreenAppMenuItemsAppThemeEn._(_root);
 }
 
-// Path: settingsScreen.screens
-class _TranslationsSettingsScreenScreensEn extends TranslationsSettingsScreenScreensNo {
-	_TranslationsSettingsScreenScreensEn._(TranslationsEn root) : this._root = root, super.internal(root);
-
-	final TranslationsEn _root; // ignore: unused_field
-
-	// Translations
-	@override late final _TranslationsSettingsScreenScreensProfileInformationEn profileInformation = _TranslationsSettingsScreenScreensProfileInformationEn._(_root);
-}
-
-// Path: signInScreen.form
-class _TranslationsSignInScreenFormEn extends TranslationsSignInScreenFormNo {
-	_TranslationsSignInScreenFormEn._(TranslationsEn root) : this._root = root, super.internal(root);
-
-	final TranslationsEn _root; // ignore: unused_field
-
-	// Translations
-	@override late final _TranslationsSignInScreenFormEmailEn email = _TranslationsSignInScreenFormEmailEn._(_root);
-	@override late final _TranslationsSignInScreenFormPasswordEn password = _TranslationsSignInScreenFormPasswordEn._(_root);
-}
-
 // Path: signInScreen.buttons
 class _TranslationsSignInScreenButtonsEn extends TranslationsSignInScreenButtonsNo {
 	_TranslationsSignInScreenButtonsEn._(TranslationsEn root) : this._root = root, super.internal(root);
@@ -304,14 +307,58 @@ class _TranslationsSignInScreenErrorMessagesEn extends TranslationsSignInScreenE
 	@override String get genericError => 'An error occured. Please try again.';
 }
 
-// Path: validation.forms
-class _TranslationsValidationFormsEn extends TranslationsValidationFormsNo {
-	_TranslationsValidationFormsEn._(TranslationsEn root) : this._root = root, super.internal(root);
+// Path: forms.fields.email
+class _TranslationsFormsFieldsEmailEn extends TranslationsFormsFieldsEmailNo {
+	_TranslationsFormsFieldsEmailEn._(TranslationsEn root) : this._root = root, super.internal(root);
 
 	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-	@override late final _TranslationsValidationFormsInputFieldsEn inputFields = _TranslationsValidationFormsInputFieldsEn._(_root);
+	@override String get label => 'Email';
+	@override String get hint => 'Type your e-mail';
+	@override late final _TranslationsFormsFieldsEmailValidationEn validation = _TranslationsFormsFieldsEmailValidationEn._(_root);
+}
+
+// Path: forms.fields.password
+class _TranslationsFormsFieldsPasswordEn extends TranslationsFormsFieldsPasswordNo {
+	_TranslationsFormsFieldsPasswordEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get label => 'Password';
+	@override String get hint => 'Type your password';
+	@override late final _TranslationsFormsFieldsPasswordValidationEn validation = _TranslationsFormsFieldsPasswordValidationEn._(_root);
+}
+
+// Path: forms.fields.streetAddress
+class _TranslationsFormsFieldsStreetAddressEn extends TranslationsFormsFieldsStreetAddressNo {
+	_TranslationsFormsFieldsStreetAddressEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get label => 'Address';
+}
+
+// Path: forms.fields.addressCity
+class _TranslationsFormsFieldsAddressCityEn extends TranslationsFormsFieldsAddressCityNo {
+	_TranslationsFormsFieldsAddressCityEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get label => 'Place';
+}
+
+// Path: forms.fields.postalCode
+class _TranslationsFormsFieldsPostalCodeEn extends TranslationsFormsFieldsPostalCodeNo {
+	_TranslationsFormsFieldsPostalCodeEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get label => 'Postal code';
 }
 
 // Path: settingsScreen.accountMenuItems.profileInformation
@@ -380,52 +427,9 @@ class _TranslationsSettingsScreenAppMenuItemsAppThemeEn extends TranslationsSett
 	@override String get subtitle => 'Change the look of the app';
 }
 
-// Path: settingsScreen.screens.profileInformation
-class _TranslationsSettingsScreenScreensProfileInformationEn extends TranslationsSettingsScreenScreensProfileInformationNo {
-	_TranslationsSettingsScreenScreensProfileInformationEn._(TranslationsEn root) : this._root = root, super.internal(root);
-
-	final TranslationsEn _root; // ignore: unused_field
-
-	// Translations
-	@override String get appbar => 'Profile Information';
-}
-
-// Path: signInScreen.form.email
-class _TranslationsSignInScreenFormEmailEn extends TranslationsSignInScreenFormEmailNo {
-	_TranslationsSignInScreenFormEmailEn._(TranslationsEn root) : this._root = root, super.internal(root);
-
-	final TranslationsEn _root; // ignore: unused_field
-
-	// Translations
-	@override String get label => 'Email';
-	@override String get hint => 'Type your e-mail';
-}
-
-// Path: signInScreen.form.password
-class _TranslationsSignInScreenFormPasswordEn extends TranslationsSignInScreenFormPasswordNo {
-	_TranslationsSignInScreenFormPasswordEn._(TranslationsEn root) : this._root = root, super.internal(root);
-
-	final TranslationsEn _root; // ignore: unused_field
-
-	// Translations
-	@override String get label => 'Password';
-	@override String get hint => 'Type your password';
-}
-
-// Path: validation.forms.inputFields
-class _TranslationsValidationFormsInputFieldsEn extends TranslationsValidationFormsInputFieldsNo {
-	_TranslationsValidationFormsInputFieldsEn._(TranslationsEn root) : this._root = root, super.internal(root);
-
-	final TranslationsEn _root; // ignore: unused_field
-
-	// Translations
-	@override late final _TranslationsValidationFormsInputFieldsEmailEn email = _TranslationsValidationFormsInputFieldsEmailEn._(_root);
-	@override late final _TranslationsValidationFormsInputFieldsPasswordEn password = _TranslationsValidationFormsInputFieldsPasswordEn._(_root);
-}
-
-// Path: validation.forms.inputFields.email
-class _TranslationsValidationFormsInputFieldsEmailEn extends TranslationsValidationFormsInputFieldsEmailNo {
-	_TranslationsValidationFormsInputFieldsEmailEn._(TranslationsEn root) : this._root = root, super.internal(root);
+// Path: forms.fields.email.validation
+class _TranslationsFormsFieldsEmailValidationEn extends TranslationsFormsFieldsEmailValidationNo {
+	_TranslationsFormsFieldsEmailValidationEn._(TranslationsEn root) : this._root = root, super.internal(root);
 
 	final TranslationsEn _root; // ignore: unused_field
 
@@ -434,9 +438,9 @@ class _TranslationsValidationFormsInputFieldsEmailEn extends TranslationsValidat
 	@override String get invalid => 'Please enter a valid e-mail';
 }
 
-// Path: validation.forms.inputFields.password
-class _TranslationsValidationFormsInputFieldsPasswordEn extends TranslationsValidationFormsInputFieldsPasswordNo {
-	_TranslationsValidationFormsInputFieldsPasswordEn._(TranslationsEn root) : this._root = root, super.internal(root);
+// Path: forms.fields.password.validation
+class _TranslationsFormsFieldsPasswordValidationEn extends TranslationsFormsFieldsPasswordValidationNo {
+	_TranslationsFormsFieldsPasswordValidationEn._(TranslationsEn root) : this._root = root, super.internal(root);
 
 	final TranslationsEn _root; // ignore: unused_field
 
@@ -459,6 +463,16 @@ extension on TranslationsEn {
 			case 'format.yesterday': return 'yesterday';
 			case 'format.today': return 'today';
 			case 'format.tomorrow': return 'tomorrow';
+			case 'forms.fields.email.label': return 'Email';
+			case 'forms.fields.email.hint': return 'Type your e-mail';
+			case 'forms.fields.email.validation.empty': return 'Please enter your e-mail';
+			case 'forms.fields.email.validation.invalid': return 'Please enter a valid e-mail';
+			case 'forms.fields.password.label': return 'Password';
+			case 'forms.fields.password.hint': return 'Type your password';
+			case 'forms.fields.password.validation.empty': return 'Please enter password';
+			case 'forms.fields.streetAddress.label': return 'Address';
+			case 'forms.fields.addressCity.label': return 'Place';
+			case 'forms.fields.postalCode.label': return 'Postal code';
 			case 'homeScreen.membershipStatus': return 'Your membership is';
 			case 'homeScreen.explore': return 'Explore membership';
 			case 'homeScreen.currentLocationStatisticsTitle': return 'Number of people now at';
@@ -489,6 +503,8 @@ extension on TranslationsEn {
 			case 'membershipStatuses.cancelledInTrial': return 'Cancelled in trial';
 			case 'membershipStatuses.stopped': return 'Stopped';
 			case 'membershipStatuses.uknonwn': return 'Unknown';
+			case 'profileScreen.appbar': return 'Profile Information';
+			case 'profileScreen.personalInformationHeader': return 'Personal information';
 			case 'settingsScreen.appBar': return 'Settings';
 			case 'settingsScreen.accountMenuItems.header': return 'Account Settings';
 			case 'settingsScreen.accountMenuItems.profileInformation.title': return 'Account Information';
@@ -504,22 +520,14 @@ extension on TranslationsEn {
 			case 'settingsScreen.appMenuItems.header': return 'App Settings';
 			case 'settingsScreen.appMenuItems.appTheme.title': return 'App Theme';
 			case 'settingsScreen.appMenuItems.appTheme.subtitle': return 'Change the look of the app';
-			case 'settingsScreen.screens.profileInformation.appbar': return 'Profile Information';
 			case 'signInScreen.title': return 'Sign in';
 			case 'signInScreen.header': return 'Welcome back!';
 			case 'signInScreen.subtitle': return 'Sign in with your e-mail and password.';
-			case 'signInScreen.form.email.label': return 'Email';
-			case 'signInScreen.form.email.hint': return 'Type your e-mail';
-			case 'signInScreen.form.password.label': return 'Password';
-			case 'signInScreen.form.password.hint': return 'Type your password';
 			case 'signInScreen.buttons.signIn': return 'Sign in';
 			case 'signInScreen.buttons.forgotPassword': return 'Forgot password?';
 			case 'signInScreen.buttons.becomeMember': return 'Become member';
 			case 'signInScreen.errorMessages.invalidCredentials': return 'Username or password is incorrect.';
 			case 'signInScreen.errorMessages.genericError': return 'An error occured. Please try again.';
-			case 'validation.forms.inputFields.email.empty': return 'Please enter your e-mail';
-			case 'validation.forms.inputFields.email.invalid': return 'Please enter a valid e-mail';
-			case 'validation.forms.inputFields.password.empty': return 'Please enter password';
 			case 'welcomeScreen.welcomeHeader': return 'Welcome to ';
 			case 'welcomeScreen.subtitle': return 'The strength you need';
 			case 'welcomeScreen.signInButton': return 'Sign in';
