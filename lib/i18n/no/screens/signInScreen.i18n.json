@@ -2,16 +2,6 @@
   "title": "Logg inn",
   "header": "Velkommen tilbake!",
   "subtitle": "Logg inn med e-posten og passordet ditt.",
-  "form": {
-    "email": {
-      "label": "E-post",
-      "hint": "Skriv inn e-postaddressen din"
-    },
-    "password": {
-      "label": "Passord",
-      "hint": "Skriv inn passordet ditt"
-    }
-  },
   "buttons": {
     "signIn": "Logg inn",
     "forgotPassword": "Glemt passord?",

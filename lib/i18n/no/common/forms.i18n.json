@@ -1,0 +1,61 @@
+{
+  "fields": {
+    "firstname": {
+      "label": "Fornavn",
+      "hint": "Skriv inn fornavnet ditt",
+      "validation": {
+        "empty": "Vennligst skriv inn fornavnet ditt"
+      }
+    },
+    "lastName": {
+      "label": "Etternavn",
+      "hint": "Skriv inn etternavnet idtt",
+      "validation": {
+        "empty": "Vennligst skriv inn etternavnet ditt"
+      }
+    },
+    "mobile": {
+      "label": "Mobil",
+      "hint": "Skriv inn mobilnummeret ditt",
+      "validation": {
+        "empty": "Nummer er påkrevd",
+        "invalid": "Ugyldig mobilnummer"
+      }
+    },
+    "email": {
+      "label": "E-post",
+      "hint": "Skriv inn e-postaddressen din",
+      "validation": {
+        "emptyFull": "Vennligst skriv inn e-postadressen din",
+        "invalidFull": "Vennligst skriv inn en gyldig e-post",
+        "emptyShort": "E-post er påkrevd",
+        "invalidShort": "Ugyldig e-post"
+      }
+    },
+    "password": {
+      "label": "Passord",
+      "hint": "Skriv inn passordet ditt",
+      "validation": {
+        "empty": "Vennligst skriv inn passordet ditt"
+      }
+    },
+    "streetAddress": {
+      "label": "Addresse",
+      "validation": {
+        "empty": "Addresse er påkrevd"
+      }
+    },
+    "addressCity": {
+      "label": "Sted",
+      "validation": {
+        "empty": "Sted er påkrevd"
+      }
+    },
+    "postalCode": {
+      "label": "Postnummer",
+      "validation": {
+        "empty": "Postnummer er påkrevd"
+      }
+    }
+  }
+}

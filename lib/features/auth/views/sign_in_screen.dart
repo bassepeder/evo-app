@@ -1,10 +1,12 @@
 import 'package:evo/common/exceptions/http_exceptions.dart';
 import 'package:evo/common/widgets/evo_elevated_button.dart';
+import 'package:evo/constants.dart';
 import 'package:evo/features/auth/models/auth_state.dart';
 import 'package:evo/features/auth/viewmodels/auth_view_model.dart';
 import 'package:evo/features/home/views/home_screen.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:evo/utils/navigation.dart';
+import 'package:evo/utils/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -121,9 +123,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                               ScaffoldMessenger.of(context)
                                   .hideCurrentSnackBar();
                               launchUrl(
-                                Uri.parse(
-                                  'https://evofitness.no/velg-medlemskap/',
-                                ),
+                                Uri.parse(kBuyMembershipUrl),
                               );
                             },
                             label: context.t.signInScreen.buttons.becomeMember,
@@ -188,18 +188,16 @@ class SignInForm extends StatelessWidget {
             textInputAction: TextInputAction.next,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return context.t.validation.forms.inputFields.email.empty;
-              } else if (!RegExp(
-                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-              ).hasMatch(value)) {
-                return context.t.validation.forms.inputFields.email.invalid;
+                return context.t.forms.fields.email.validation.emptyFull;
+              } else if (!value.isValidEmail()) {
+                return context.t.forms.fields.email.validation.invalidFull;
               }
 
               return null;
             },
             decoration: InputDecoration(
-              hintText: context.t.signInScreen.form.email.hint,
-              labelText: context.t.signInScreen.form.email.label,
+              hintText: context.t.forms.fields.email.hint,
+              labelText: context.t.forms.fields.email.label,
               floatingLabelBehavior: FloatingLabelBehavior.always,
               hintStyle: const TextStyle(color: Color(0xFF757575)),
               contentPadding: const EdgeInsets.symmetric(
@@ -223,14 +221,14 @@ class SignInForm extends StatelessWidget {
               readOnly: isLoading,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return context.t.validation.forms.inputFields.password.empty;
+                  return context.t.forms.fields.password.validation.empty;
                 }
 
                 return null;
               },
               decoration: InputDecoration(
-                hintText: context.t.signInScreen.form.password.hint,
-                labelText: context.t.signInScreen.form.password.label,
+                hintText: context.t.forms.fields.password.hint,
+                labelText: context.t.forms.fields.password.label,
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 hintStyle: const TextStyle(color: Color(0xFF757575)),
                 contentPadding: const EdgeInsets.symmetric(
@@ -285,7 +283,7 @@ class ForgotPasswordTextButton extends StatelessWidget {
                   .textTheme
                   .bodyLarge!
                   .color!
-                  .withOpacity(0.64),
+                  .withValues(alpha: 0.64),
             ),
       ),
     );
@@ -309,7 +307,8 @@ class BecomeMemberTextButton extends StatelessWidget {
       child: Text(
         label,
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-              color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+              color:
+                  Theme.of(context).colorScheme.primary.withValues(alpha: 0.8),
             ),
       ),
     );

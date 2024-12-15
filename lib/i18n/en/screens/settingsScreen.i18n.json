@@ -1,0 +1,33 @@
+{
+  "appBar": "Settings",
+  "accountMenuItems": {
+    "header": "Account Settings",
+    "profileInformation": {
+      "title": "Account Information",
+      "subtitle": "Change your account information"
+    },
+    "payment": {
+      "title": "Payment",
+      "subtitle": "Check your payment card"
+    },
+    "locations": {
+      "title": "Your primary location",
+      "subtitle": "Change your primary location"
+    },
+    "referral": {
+      "title": "Referral Campaign",
+      "subtitle": "Get exclusive promotions"
+    },
+    "signOut": {
+      "title": "Sign Out",
+      "subtitle": "Hope to see you again"
+    }
+  },
+  "appMenuItems": {
+    "header": "App Settings",
+    "appTheme": {
+      "title": "App Theme",
+      "subtitle": "Change the look of the app"
+    }
+  }
+}

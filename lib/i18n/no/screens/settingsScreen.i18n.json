@@ -1,0 +1,33 @@
+{
+  "appBar": "Instillinger",
+  "accountMenuItems": {
+    "header": "Kontoinstillinger",
+    "profileInformation": {
+      "title": "Kontoinformasjon",
+      "subtitle": "Endre dine kontoopplysninger"
+    },
+    "payment": {
+      "title": "Betaling",
+      "subtitle": "Kontroller ditt betalingskort"
+    },
+    "locations": {
+      "title": "Ditt primærsenter",
+      "subtitle": "Endre ditt primærsenter"
+    },
+    "referral": {
+      "title": "Vervekampanje",
+      "subtitle": "Få ekslusive kampanjer"
+    },
+    "signOut": {
+      "title": "Logg ut",
+      "subtitle": "Håper vi sees igjen"
+    }
+  },
+  "appMenuItems": {
+    "header": "App-innstillinger",
+    "appTheme": {
+      "title": "Utseende",
+      "subtitle": "Velg mellom mørkt og lyst tema"
+    }
+  }
+}

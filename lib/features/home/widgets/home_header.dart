@@ -5,7 +5,7 @@ import 'package:evo/common/widgets/list.dart';
 import 'package:evo/features/home/location_repository.dart';
 import 'package:evo/features/home/viewmodels/location_controller.dart';
 import 'package:evo/features/membership/membership_repository.dart';
-import 'package:evo/features/settings/views/settings_screen.dart';
+import 'package:evo/features/settings/settings_screen.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:evo/utils/navigation.dart';
 import 'package:flutter/material.dart';
