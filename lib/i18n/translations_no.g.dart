@@ -166,6 +166,8 @@ class TranslationsPaymentScreenNo {
 
 	// Translations
 	String get appbar => 'Betaling';
+	String get paymentCardHeader => 'Betalingskort';
+	String get previousPaymentsHeader => 'Tidligere betalinger';
 }
 
 // Path: profileScreen
@@ -637,6 +639,8 @@ extension on Translations {
 			case 'membershipStatuses.stopped': return 'Stoppet';
 			case 'membershipStatuses.unknown': return 'Ukjent';
 			case 'paymentScreen.appbar': return 'Betaling';
+			case 'paymentScreen.paymentCardHeader': return 'Betalingskort';
+			case 'paymentScreen.previousPaymentsHeader': return 'Tidligere betalinger';
 			case 'profileScreen.appbar': return 'Kontoinformasjon';
 			case 'profileScreen.personalInformationHeader': return 'Personlig informasjon ';
 			case 'profileScreen.termsHeader': return 'Medlemsvilkår';
