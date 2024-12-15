@@ -5,5 +5,7 @@
   "failedToLoadMembershipError": "Kunne ikke hente informasjon om medlemskapet ditt.",
   "failedToLoadLocationData": "Klarte ikke å hente lokasjonsdata.",
   "failedToLoadLocations": "Klarte ikke å hente alle EVO lokasjoner.",
-  "failedToLoadWorkoutStatistics": "Klarte ikke å hente treningsøktene dine."
+  "failedToLoadWorkoutStatistics": "Klarte ikke å hente treningsøktene dine.",
+  "failedToLoadInvoices": "Klarte ikke å hente fakturaene dine.",
+  "failedToOpenUrl": "Klarte ikke å åpne URL."
 }

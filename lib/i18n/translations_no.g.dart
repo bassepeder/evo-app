@@ -66,6 +66,8 @@ class TranslationsErrorsNo {
 	String get failedToLoadLocationData => 'Klarte ikke å hente lokasjonsdata.';
 	String get failedToLoadLocations => 'Klarte ikke å hente alle EVO lokasjoner.';
 	String get failedToLoadWorkoutStatistics => 'Klarte ikke å hente treningsøktene dine.';
+	String get failedToLoadInvoices => 'Klarte ikke å hente fakturaene dine.';
+	String get failedToOpenUrl => 'Klarte ikke å åpne URL.';
 }
 
 // Path: format
@@ -635,6 +637,8 @@ extension on Translations {
 			case 'errors.failedToLoadLocationData': return 'Klarte ikke å hente lokasjonsdata.';
 			case 'errors.failedToLoadLocations': return 'Klarte ikke å hente alle EVO lokasjoner.';
 			case 'errors.failedToLoadWorkoutStatistics': return 'Klarte ikke å hente treningsøktene dine.';
+			case 'errors.failedToLoadInvoices': return 'Klarte ikke å hente fakturaene dine.';
+			case 'errors.failedToOpenUrl': return 'Klarte ikke å åpne URL.';
 			case 'format.yesterday': return 'i går';
 			case 'format.today': return 'i dag';
 			case 'format.tomorrow': return 'i morgen';

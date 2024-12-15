@@ -5,5 +5,7 @@
   "failedToLoadMembershipError": "Failed to retrieve information about your membership.",
   "failedToLoadLocationData": "Failed to load location data.",
   "failedToLoadLocations": "Failed to fetch all EVO locations.",
-  "failedToLoadWorkoutStatistics": "Failed to load your workouts."
+  "failedToLoadWorkoutStatistics": "Failed to load your workouts.",
+  "failedToLoadInvoices": "Failed to fetch your invoices.",
+  "failedToOpenUrl": "Failed to open URL."
 }
