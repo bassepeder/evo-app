@@ -42,6 +42,7 @@ class TranslationsEn extends Translations {
 	@override late final _TranslationsKeyStatusesEn keyStatuses = _TranslationsKeyStatusesEn._(_root);
 	@override late final _TranslationsKeyTypesEn keyTypes = _TranslationsKeyTypesEn._(_root);
 	@override late final _TranslationsMembershipStatusesEn membershipStatuses = _TranslationsMembershipStatusesEn._(_root);
+	@override late final _TranslationsPaymentScreenEn paymentScreen = _TranslationsPaymentScreenEn._(_root);
 	@override late final _TranslationsProfileScreenEn profileScreen = _TranslationsProfileScreenEn._(_root);
 	@override late final _TranslationsSettingsScreenEn settingsScreen = _TranslationsSettingsScreenEn._(_root);
 	@override late final _TranslationsSignInScreenEn signInScreen = _TranslationsSignInScreenEn._(_root);
@@ -153,6 +154,16 @@ class _TranslationsMembershipStatusesEn extends TranslationsMembershipStatusesNo
 	@override String get cancelledInTrial => 'Cancelled in trial';
 	@override String get stopped => 'Stopped';
 	@override String get uknonwn => 'Unknown';
+}
+
+// Path: paymentScreen
+class _TranslationsPaymentScreenEn extends TranslationsPaymentScreenNo {
+	_TranslationsPaymentScreenEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get appbar => 'Payment';
 }
 
 // Path: profileScreen
@@ -624,6 +635,7 @@ extension on TranslationsEn {
 			case 'membershipStatuses.cancelledInTrial': return 'Cancelled in trial';
 			case 'membershipStatuses.stopped': return 'Stopped';
 			case 'membershipStatuses.uknonwn': return 'Unknown';
+			case 'paymentScreen.appbar': return 'Payment';
 			case 'profileScreen.appbar': return 'Profile Information';
 			case 'profileScreen.personalInformationHeader': return 'Personal information';
 			case 'profileScreen.termsHeader': return 'Membership terms';

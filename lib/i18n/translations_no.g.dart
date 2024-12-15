@@ -44,6 +44,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsKeyStatusesNo keyStatuses = TranslationsKeyStatusesNo.internal(_root);
 	late final TranslationsKeyTypesNo keyTypes = TranslationsKeyTypesNo.internal(_root);
 	late final TranslationsMembershipStatusesNo membershipStatuses = TranslationsMembershipStatusesNo.internal(_root);
+	late final TranslationsPaymentScreenNo paymentScreen = TranslationsPaymentScreenNo.internal(_root);
 	late final TranslationsProfileScreenNo profileScreen = TranslationsProfileScreenNo.internal(_root);
 	late final TranslationsSettingsScreenNo settingsScreen = TranslationsSettingsScreenNo.internal(_root);
 	late final TranslationsSignInScreenNo signInScreen = TranslationsSignInScreenNo.internal(_root);
@@ -155,6 +156,16 @@ class TranslationsMembershipStatusesNo {
 	String get cancelledInTrial => 'Kansellert i prøveperiode';
 	String get stopped => 'Stoppet';
 	String get unknown => 'Ukjent';
+}
+
+// Path: paymentScreen
+class TranslationsPaymentScreenNo {
+	TranslationsPaymentScreenNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get appbar => 'Betaling';
 }
 
 // Path: profileScreen
@@ -625,6 +636,7 @@ extension on Translations {
 			case 'membershipStatuses.cancelledInTrial': return 'Kansellert i prøveperiode';
 			case 'membershipStatuses.stopped': return 'Stoppet';
 			case 'membershipStatuses.unknown': return 'Ukjent';
+			case 'paymentScreen.appbar': return 'Betaling';
 			case 'profileScreen.appbar': return 'Kontoinformasjon';
 			case 'profileScreen.personalInformationHeader': return 'Personlig informasjon ';
 			case 'profileScreen.termsHeader': return 'Medlemsvilkår';
