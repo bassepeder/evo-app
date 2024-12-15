@@ -1,5 +1,27 @@
 {
   "fields": {
+    "firstname": {
+      "label": "First name",
+      "hint": "Type your first name",
+      "validation": {
+        "empty": "Please enter a name"
+      }
+    },
+    "lastName": {
+      "label": "Last name",
+      "hint": "Type your last name",
+      "validation": {
+        "empty": "Please enter a last name"
+      }
+    },
+    "mobile": {
+      "label": "Mobile",
+      "hint": "Input your mobile",
+      "validation": {
+        "empty": "Mobile is required",
+        "invalid": "Mobile is not valid"
+      }
+    },
     "email": {
       "label": "Email",
       "hint": "Type your e-mail",

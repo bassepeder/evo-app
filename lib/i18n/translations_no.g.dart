@@ -253,6 +253,9 @@ class TranslationsFormsFieldsNo {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+	late final TranslationsFormsFieldsFirstnameNo firstname = TranslationsFormsFieldsFirstnameNo.internal(_root);
+	late final TranslationsFormsFieldsLastNameNo lastName = TranslationsFormsFieldsLastNameNo.internal(_root);
+	late final TranslationsFormsFieldsMobileNo mobile = TranslationsFormsFieldsMobileNo.internal(_root);
 	late final TranslationsFormsFieldsEmailNo email = TranslationsFormsFieldsEmailNo.internal(_root);
 	late final TranslationsFormsFieldsPasswordNo password = TranslationsFormsFieldsPasswordNo.internal(_root);
 	late final TranslationsFormsFieldsStreetAddressNo streetAddress = TranslationsFormsFieldsStreetAddressNo.internal(_root);
@@ -307,6 +310,42 @@ class TranslationsSignInScreenErrorMessagesNo {
 	// Translations
 	String get invalidCredentials => 'Brukernavn eller passord samsvarer ikke.';
 	String get genericError => 'En feil oppstod. Prøv igjen senere.';
+}
+
+// Path: forms.fields.firstname
+class TranslationsFormsFieldsFirstnameNo {
+	TranslationsFormsFieldsFirstnameNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'Fornavn';
+	String get hint => 'Skriv inn fornavnet ditt';
+	late final TranslationsFormsFieldsFirstnameValidationNo validation = TranslationsFormsFieldsFirstnameValidationNo.internal(_root);
+}
+
+// Path: forms.fields.lastName
+class TranslationsFormsFieldsLastNameNo {
+	TranslationsFormsFieldsLastNameNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'Etternavn';
+	String get hint => 'Skriv inn etternavnet idtt';
+	late final TranslationsFormsFieldsLastNameValidationNo validation = TranslationsFormsFieldsLastNameValidationNo.internal(_root);
+}
+
+// Path: forms.fields.mobile
+class TranslationsFormsFieldsMobileNo {
+	TranslationsFormsFieldsMobileNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'Mobil';
+	String get hint => 'Skriv inn mobilnummeret ditt';
+	late final TranslationsFormsFieldsMobileValidationNo validation = TranslationsFormsFieldsMobileValidationNo.internal(_root);
 }
 
 // Path: forms.fields.email
@@ -432,6 +471,37 @@ class TranslationsSettingsScreenAppMenuItemsAppThemeNo {
 	String get subtitle => 'Velg mellom mørkt og lyst tema';
 }
 
+// Path: forms.fields.firstname.validation
+class TranslationsFormsFieldsFirstnameValidationNo {
+	TranslationsFormsFieldsFirstnameValidationNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get empty => 'Vennligst skriv inn fornavnet ditt';
+}
+
+// Path: forms.fields.lastName.validation
+class TranslationsFormsFieldsLastNameValidationNo {
+	TranslationsFormsFieldsLastNameValidationNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get empty => 'Vennligst skriv inn etternavnet ditt';
+}
+
+// Path: forms.fields.mobile.validation
+class TranslationsFormsFieldsMobileValidationNo {
+	TranslationsFormsFieldsMobileValidationNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get empty => 'Nummer er påkrevd';
+	String get invalid => 'Ugyldig mobilnummer';
+}
+
 // Path: forms.fields.email.validation
 class TranslationsFormsFieldsEmailValidationNo {
 	TranslationsFormsFieldsEmailValidationNo.internal(this._root);
@@ -500,6 +570,16 @@ extension on Translations {
 			case 'format.yesterday': return 'i går';
 			case 'format.today': return 'i dag';
 			case 'format.tomorrow': return 'i morgen';
+			case 'forms.fields.firstname.label': return 'Fornavn';
+			case 'forms.fields.firstname.hint': return 'Skriv inn fornavnet ditt';
+			case 'forms.fields.firstname.validation.empty': return 'Vennligst skriv inn fornavnet ditt';
+			case 'forms.fields.lastName.label': return 'Etternavn';
+			case 'forms.fields.lastName.hint': return 'Skriv inn etternavnet idtt';
+			case 'forms.fields.lastName.validation.empty': return 'Vennligst skriv inn etternavnet ditt';
+			case 'forms.fields.mobile.label': return 'Mobil';
+			case 'forms.fields.mobile.hint': return 'Skriv inn mobilnummeret ditt';
+			case 'forms.fields.mobile.validation.empty': return 'Nummer er påkrevd';
+			case 'forms.fields.mobile.validation.invalid': return 'Ugyldig mobilnummer';
 			case 'forms.fields.email.label': return 'E-post';
 			case 'forms.fields.email.hint': return 'Skriv inn e-postaddressen din';
 			case 'forms.fields.email.validation.emptyFull': return 'Vennligst skriv inn e-postadressen din';

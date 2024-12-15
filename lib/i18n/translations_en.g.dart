@@ -252,6 +252,9 @@ class _TranslationsFormsFieldsEn extends TranslationsFormsFieldsNo {
 	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
+	@override late final _TranslationsFormsFieldsFirstnameEn firstname = _TranslationsFormsFieldsFirstnameEn._(_root);
+	@override late final _TranslationsFormsFieldsLastNameEn lastName = _TranslationsFormsFieldsLastNameEn._(_root);
+	@override late final _TranslationsFormsFieldsMobileEn mobile = _TranslationsFormsFieldsMobileEn._(_root);
 	@override late final _TranslationsFormsFieldsEmailEn email = _TranslationsFormsFieldsEmailEn._(_root);
 	@override late final _TranslationsFormsFieldsPasswordEn password = _TranslationsFormsFieldsPasswordEn._(_root);
 	@override late final _TranslationsFormsFieldsStreetAddressEn streetAddress = _TranslationsFormsFieldsStreetAddressEn._(_root);
@@ -306,6 +309,42 @@ class _TranslationsSignInScreenErrorMessagesEn extends TranslationsSignInScreenE
 	// Translations
 	@override String get invalidCredentials => 'Username or password is incorrect.';
 	@override String get genericError => 'An error occured. Please try again.';
+}
+
+// Path: forms.fields.firstname
+class _TranslationsFormsFieldsFirstnameEn extends TranslationsFormsFieldsFirstnameNo {
+	_TranslationsFormsFieldsFirstnameEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get label => 'First name';
+	@override String get hint => 'Type your first name';
+	@override late final _TranslationsFormsFieldsFirstnameValidationEn validation = _TranslationsFormsFieldsFirstnameValidationEn._(_root);
+}
+
+// Path: forms.fields.lastName
+class _TranslationsFormsFieldsLastNameEn extends TranslationsFormsFieldsLastNameNo {
+	_TranslationsFormsFieldsLastNameEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get label => 'Last name';
+	@override String get hint => 'Type your last name';
+	@override late final _TranslationsFormsFieldsLastNameValidationEn validation = _TranslationsFormsFieldsLastNameValidationEn._(_root);
+}
+
+// Path: forms.fields.mobile
+class _TranslationsFormsFieldsMobileEn extends TranslationsFormsFieldsMobileNo {
+	_TranslationsFormsFieldsMobileEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get label => 'Mobile';
+	@override String get hint => 'Input your mobile';
+	@override late final _TranslationsFormsFieldsMobileValidationEn validation = _TranslationsFormsFieldsMobileValidationEn._(_root);
 }
 
 // Path: forms.fields.email
@@ -431,6 +470,37 @@ class _TranslationsSettingsScreenAppMenuItemsAppThemeEn extends TranslationsSett
 	@override String get subtitle => 'Change the look of the app';
 }
 
+// Path: forms.fields.firstname.validation
+class _TranslationsFormsFieldsFirstnameValidationEn extends TranslationsFormsFieldsFirstnameValidationNo {
+	_TranslationsFormsFieldsFirstnameValidationEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get empty => 'Please enter a name';
+}
+
+// Path: forms.fields.lastName.validation
+class _TranslationsFormsFieldsLastNameValidationEn extends TranslationsFormsFieldsLastNameValidationNo {
+	_TranslationsFormsFieldsLastNameValidationEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get empty => 'Please enter a last name';
+}
+
+// Path: forms.fields.mobile.validation
+class _TranslationsFormsFieldsMobileValidationEn extends TranslationsFormsFieldsMobileValidationNo {
+	_TranslationsFormsFieldsMobileValidationEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get empty => 'Mobile is required';
+	@override String get invalid => 'Mobile is not valid';
+}
+
 // Path: forms.fields.email.validation
 class _TranslationsFormsFieldsEmailValidationEn extends TranslationsFormsFieldsEmailValidationNo {
 	_TranslationsFormsFieldsEmailValidationEn._(TranslationsEn root) : this._root = root, super.internal(root);
@@ -499,6 +569,16 @@ extension on TranslationsEn {
 			case 'format.yesterday': return 'yesterday';
 			case 'format.today': return 'today';
 			case 'format.tomorrow': return 'tomorrow';
+			case 'forms.fields.firstname.label': return 'First name';
+			case 'forms.fields.firstname.hint': return 'Type your first name';
+			case 'forms.fields.firstname.validation.empty': return 'Please enter a name';
+			case 'forms.fields.lastName.label': return 'Last name';
+			case 'forms.fields.lastName.hint': return 'Type your last name';
+			case 'forms.fields.lastName.validation.empty': return 'Please enter a last name';
+			case 'forms.fields.mobile.label': return 'Mobile';
+			case 'forms.fields.mobile.hint': return 'Input your mobile';
+			case 'forms.fields.mobile.validation.empty': return 'Mobile is required';
+			case 'forms.fields.mobile.validation.invalid': return 'Mobile is not valid';
 			case 'forms.fields.email.label': return 'Email';
 			case 'forms.fields.email.hint': return 'Type your e-mail';
 			case 'forms.fields.email.validation.emptyFull': return 'Please enter your e-mail';

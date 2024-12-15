@@ -4,6 +4,7 @@ import 'package:evo/i18n/translations.g.dart';
 import 'package:evo/utils/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:phone_form_field/phone_form_field.dart';
 
 class ProfileInformationScreen extends ConsumerStatefulWidget {
   const ProfileInformationScreen({super.key});
@@ -15,6 +16,8 @@ class ProfileInformationScreen extends ConsumerStatefulWidget {
 
 class _ProfileInformationScreenState
     extends ConsumerState<ProfileInformationScreen> {
+  late final TextEditingController firstNameController;
+  late final TextEditingController lastNameController;
   late final TextEditingController emailController;
   late final TextEditingController streetAddressController;
   late final TextEditingController cityController;
@@ -28,6 +31,8 @@ class _ProfileInformationScreenState
 
     final state = ref.read(profileControllerProvider);
 
+    firstNameController = TextEditingController(text: state.firstName);
+    lastNameController = TextEditingController(text: state.lastName);
     emailController = TextEditingController(text: state.email);
     streetAddressController = TextEditingController(text: state.address.street);
     cityController = TextEditingController(text: state.address.postalLocation);
@@ -38,6 +43,8 @@ class _ProfileInformationScreenState
 
   @override
   void dispose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
     emailController.dispose();
     streetAddressController.dispose();
     cityController.dispose();
@@ -82,12 +89,14 @@ class _ProfileInformationScreenState
         actions: [
           Consumer(
             builder: (context, ref, child) {
-              final hasChanged = ref.watch(
-                profileControllerProvider.select((state) => state.hasChanged),
+              final canSaveDetails = ref.watch(
+                profileControllerProvider.select(
+                  (state) => state.hasChanged && state.isValidMobile,
+                ),
               );
 
               return AnimatedOpacity(
-                opacity: hasChanged ? 1.0 : 0.0,
+                opacity: canSaveDetails ? 1.0 : 0.0,
                 duration: const Duration(milliseconds: 250),
                 child: isLoading
                     ? const Padding(
@@ -95,7 +104,9 @@ class _ProfileInformationScreenState
                         child: SizedBox(
                           width: 24,
                           height: 24,
-                          child: CircularProgressIndicator(strokeWidth: 3),
+                          child: Center(
+                            child: CircularProgressIndicator(strokeWidth: 3),
+                          ),
                         ),
                       )
                     : IconButton(
@@ -126,6 +137,8 @@ class _ProfileInformationScreenState
                 ),
                 const SizedBox(height: 8),
                 PersonalInformationForm(
+                  firstNameController: firstNameController,
+                  lastNameController: lastNameController,
                   emailController: emailController,
                   streetAddressController: streetAddressController,
                   cityController: cityController,
@@ -164,6 +177,8 @@ class Header extends StatelessWidget {
 }
 
 class PersonalInformationForm extends ConsumerWidget {
+  final TextEditingController firstNameController;
+  final TextEditingController lastNameController;
   final TextEditingController emailController;
   final TextEditingController streetAddressController;
   final TextEditingController cityController;
@@ -178,6 +193,8 @@ class PersonalInformationForm extends ConsumerWidget {
 
   const PersonalInformationForm({
     super.key,
+    required this.firstNameController,
+    required this.lastNameController,
     required this.emailController,
     required this.streetAddressController,
     required this.cityController,
@@ -192,6 +209,80 @@ class PersonalInformationForm extends ConsumerWidget {
       key: formKey,
       child: Column(
         children: <Widget>[
+          UserInfoEditField(
+            label: context.t.forms.fields.firstname.label,
+            child: TextFormField(
+              controller: firstNameController,
+              onChanged: (value) => ref
+                  .read(profileControllerProvider.notifier)
+                  .updateFirstName(value),
+              keyboardType: TextInputType.name,
+              textInputAction: TextInputAction.done,
+              autocorrect: false,
+              readOnly: isLoading,
+              style: const TextStyle(fontSize: 14),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return context.t.forms.fields.firstname.validation.empty;
+                }
+
+                return null;
+              },
+              decoration: InputDecoration(
+                suffixIcon: const Icon(Icons.account_box),
+                filled: true,
+                fillColor: Theme.of(context)
+                    .colorScheme
+                    .primary
+                    .withValues(alpha: 0.05),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 16.0 * 1.5,
+                  vertical: 16.0,
+                ),
+                border: const OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.all(Radius.circular(50)),
+                ),
+              ),
+            ),
+          ),
+          UserInfoEditField(
+            label: context.t.forms.fields.lastName.label,
+            child: TextFormField(
+              controller: lastNameController,
+              onChanged: (value) => ref
+                  .read(profileControllerProvider.notifier)
+                  .updateLastName(value),
+              keyboardType: TextInputType.name,
+              textInputAction: TextInputAction.done,
+              autocorrect: false,
+              readOnly: isLoading,
+              style: const TextStyle(fontSize: 14),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return context.t.forms.fields.lastName.validation.empty;
+                }
+
+                return null;
+              },
+              decoration: InputDecoration(
+                suffixIcon: const Icon(Icons.account_box),
+                filled: true,
+                fillColor: Theme.of(context)
+                    .colorScheme
+                    .primary
+                    .withValues(alpha: 0.05),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 16.0 * 1.5,
+                  vertical: 16.0,
+                ),
+                border: const OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.all(Radius.circular(50)),
+                ),
+              ),
+            ),
+          ),
           UserInfoEditField(
             label: context.t.forms.fields.email.label,
             child: TextFormField(
@@ -229,6 +320,16 @@ class PersonalInformationForm extends ConsumerWidget {
                   borderRadius: BorderRadius.all(Radius.circular(50)),
                 ),
               ),
+            ),
+          ),
+          UserInfoEditField(
+            label: context.t.forms.fields.mobile.label,
+            child: PhoneInputField(
+              initialValue: ref.read(profileControllerProvider).mobile.prefix +
+                  ref.read(profileControllerProvider).mobile.number,
+              onPhoneNumberChanged: (number, isValid) => ref
+                  .read(profileControllerProvider.notifier)
+                  .updateMobile(number, isValid),
             ),
           ),
           UserInfoEditField(
@@ -393,6 +494,83 @@ class UserInfoEditField extends StatelessWidget {
             child: child,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class PhoneInputField extends StatefulWidget {
+  final void Function(String, bool) onPhoneNumberChanged;
+  final String? initialValue;
+
+  const PhoneInputField({
+    super.key,
+    required this.onPhoneNumberChanged,
+    this.initialValue,
+  });
+
+  @override
+  _PhoneInputState createState() => _PhoneInputState();
+}
+
+class _PhoneInputState extends State<PhoneInputField> {
+  late PhoneController controller;
+  late PhoneNumber initialValue;
+
+  @override
+  void initState() {
+    super.initState();
+    initialValue = PhoneNumber.parse(
+      (widget.initialValue?.isNotEmpty ?? false) && widget.initialValue != ''
+          ? widget.initialValue!
+          : '+47',
+    );
+    controller = PhoneController(initialValue: initialValue);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return PhoneFormField(
+      onChanged: (value) => widget.onPhoneNumberChanged(
+        value.international,
+        value.isValid(type: PhoneNumberType.mobile),
+      ),
+      controller: controller,
+      validator: PhoneValidator.compose([
+        PhoneValidator.required(
+          context,
+          errorText: context.t.forms.fields.mobile.validation.empty,
+        ),
+        PhoneValidator.validMobile(
+          context,
+          errorText: context.t.forms.fields.mobile.validation.invalid,
+        )
+      ]),
+      decoration: InputDecoration(
+        filled: true,
+        fillColor:
+            Theme.of(context).colorScheme.primary.withValues(alpha: 0.05),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16.0 * 1.5,
+          vertical: 16.0,
+        ),
+        border: const OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.all(Radius.circular(50)),
+        ),
+      ),
+      enabled: true,
+      /*
+      countrySelectorNavigator: const CountrySelectorNavigator.page(
+        favorites: [IsoCode.NO],
+      ),
+       */
+      isCountryButtonPersistent: true,
+      isCountrySelectionEnabled: false,
+      countryButtonStyle: const CountryButtonStyle(
+        showDropdownIcon: false,
+        showFlag: true,
+        flagSize: 16,
       ),
     );
   }
