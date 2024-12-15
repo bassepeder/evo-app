@@ -99,11 +99,20 @@ class PreviousPaymentCard extends ConsumerWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  '${formatDate(context, invoice.date)} - ${formatDate(context, invoice.to)}',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
+                Text.rich(
+                  style: const TextStyle(fontSize: 16),
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                        text: formatDate(context, invoice.date),
+                        style: const TextStyle(fontWeight: FontWeight.w500),
+                      ),
+                      const TextSpan(text: ' - '),
+                      TextSpan(
+                        text: formatDate(context, invoice.to),
+                        style: const TextStyle(fontWeight: FontWeight.w500),
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 8),
