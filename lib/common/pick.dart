@@ -1,3 +1,4 @@
+import 'package:decimal/decimal.dart';
 import 'package:deep_pick/deep_pick.dart';
 
 extension PickDateParsing on Pick {
@@ -23,6 +24,21 @@ extension PickDateParsing on Pick {
       return DateTime.parse(dateString);
     } catch (e) {
       return null;
+    }
+  }
+}
+
+extension PickDecimalParsing on Pick {
+  /// Converts a string in "0.0" format to a `Decimal` object.
+  /// Throws an exception if the string is null or invalid.
+  Decimal asDecimalOrThrow() {
+    final value = asStringOrThrow();
+    try {
+      return Decimal.parse(value);
+    } catch (e) {
+      throw PickException(
+        'Expected a valid decimal in "0.0" format, but got: $value',
+      );
     }
   }
 }
