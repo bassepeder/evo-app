@@ -1,5 +1,19 @@
 {
   "appbar": "Betaling",
   "paymentCardHeader": "Betalingskort",
-  "previousPaymentsHeader": "Tidligere betalinger"
+  "previousPaymentsHeader": "Tidligere betalinger",
+  "tableHeaders": {
+    "date": {
+      "label": "Dato"
+    },
+    "amount": {
+      "label": "Beløp"
+    },
+    "period": {
+      "label": "Periode"
+    },
+    "pdf": {
+      "label": "PDF"
+    }
+  }
 }
