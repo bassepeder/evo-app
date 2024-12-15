@@ -62,6 +62,7 @@ dependencies:
   http: any
   intl: ^0.19.0
   dynamic_color: ^1.7.0
+  phone_form_field: ^10.0.2
 dev_dependencies:
   freezed: ^2.5.7
   lint: ^2.0.1

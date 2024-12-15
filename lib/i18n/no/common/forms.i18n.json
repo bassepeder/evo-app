@@ -1,5 +1,27 @@
 {
   "fields": {
+    "firstname": {
+      "label": "Fornavn",
+      "hint": "Skriv inn fornavnet ditt",
+      "validation": {
+        "empty": "Vennligst skriv inn fornavnet ditt"
+      }
+    },
+    "lastName": {
+      "label": "Etternavn",
+      "hint": "Skriv inn etternavnet idtt",
+      "validation": {
+        "empty": "Vennligst skriv inn etternavnet ditt"
+      }
+    },
+    "mobile": {
+      "label": "Mobil",
+      "hint": "Skriv inn mobilnummeret ditt",
+      "validation": {
+        "empty": "Nummer er påkrevd",
+        "invalid": "Ugyldig mobilnummer"
+      }
+    },
     "email": {
       "label": "E-post",
       "hint": "Skriv inn e-postaddressen din",
