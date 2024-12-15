@@ -1,5 +1,6 @@
 {
   "appbar": "Kontoinformasjon",
   "personalInformationHeader": "Personlig informasjon ",
-  "termsHeader": "Medlemsvilkår"
+  "termsHeader": "Medlemsvilkår",
+  "updateSuccessful": "Personlig informasjon oppdatert."
 }
