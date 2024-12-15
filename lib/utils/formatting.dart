@@ -52,3 +52,11 @@ String formatDate(BuildContext context, DateTime dateTime) {
     return DateFormat('dd.MM.yyyy', locale.languageCode).format(dateTime);
   }
 }
+
+String formatCurrencyToProfileLocale(double amount, String locale) {
+  final formatter = NumberFormat.currency(
+    locale: locale,
+  );
+
+  return formatter.format(amount);
+}
