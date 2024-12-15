@@ -1,4 +1,5 @@
 import 'package:evo/features/auth/providers/auth_session.dart';
+import 'package:evo/features/settings/views/payment_information_screen.dart';
 import 'package:evo/features/settings/views/profile_information_screen.dart';
 import 'package:evo/features/welcome_screen.dart';
 import 'package:evo/i18n/translations.g.dart';
@@ -46,7 +47,10 @@ class SettingsScreen extends ConsumerWidget {
                       context.t.settingsScreen.accountMenuItems.payment.title,
                   subTitle: context
                       .t.settingsScreen.accountMenuItems.payment.subtitle,
-                  onClick: () {},
+                  onClick: () => pushPlatformRoute(
+                    context,
+                    builder: (_) => const PaymentInformationScreen(),
+                  ),
                 ),
                 SettingsListItem(
                   svgSrc: markerIconSvg,
