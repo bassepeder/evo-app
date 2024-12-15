@@ -64,6 +64,8 @@ class _TranslationsErrorsEn extends TranslationsErrorsNo {
 	@override String get failedToLoadLocationData => 'Failed to load location data.';
 	@override String get failedToLoadLocations => 'Failed to fetch all EVO locations.';
 	@override String get failedToLoadWorkoutStatistics => 'Failed to load your workouts.';
+	@override String get failedToLoadInvoices => 'Failed to fetch your invoices.';
+	@override String get failedToOpenUrl => 'Failed to open URL.';
 }
 
 // Path: format
@@ -634,6 +636,8 @@ extension on TranslationsEn {
 			case 'errors.failedToLoadLocationData': return 'Failed to load location data.';
 			case 'errors.failedToLoadLocations': return 'Failed to fetch all EVO locations.';
 			case 'errors.failedToLoadWorkoutStatistics': return 'Failed to load your workouts.';
+			case 'errors.failedToLoadInvoices': return 'Failed to fetch your invoices.';
+			case 'errors.failedToOpenUrl': return 'Failed to open URL.';
 			case 'format.yesterday': return 'yesterday';
 			case 'format.today': return 'today';
 			case 'format.tomorrow': return 'tomorrow';
