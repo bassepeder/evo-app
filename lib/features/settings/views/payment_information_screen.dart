@@ -48,11 +48,11 @@ class PaymentInformationScreen extends ConsumerWidget {
                 },
                 loading: () {
                   return const Padding(
-                    padding: EdgeInsets.only(left: 4),
+                    padding: EdgeInsets.only(left: 4, top: 8),
                     child: SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(strokeWidth: 3),
+                      width: 24,
+                      height: 24,
+                      child: CircularProgressIndicator(strokeWidth: 2),
                     ),
                   );
                 },
