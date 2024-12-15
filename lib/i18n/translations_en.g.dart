@@ -164,6 +164,8 @@ class _TranslationsPaymentScreenEn extends TranslationsPaymentScreenNo {
 
 	// Translations
 	@override String get appbar => 'Payment';
+	@override String get paymentCardHeader => 'Payment card';
+	@override String get previousPaymentsHeader => 'Previous payments';
 }
 
 // Path: profileScreen
@@ -636,6 +638,8 @@ extension on TranslationsEn {
 			case 'membershipStatuses.stopped': return 'Stopped';
 			case 'membershipStatuses.uknonwn': return 'Unknown';
 			case 'paymentScreen.appbar': return 'Payment';
+			case 'paymentScreen.paymentCardHeader': return 'Payment card';
+			case 'paymentScreen.previousPaymentsHeader': return 'Previous payments';
 			case 'profileScreen.appbar': return 'Profile Information';
 			case 'profileScreen.personalInformationHeader': return 'Personal information';
 			case 'profileScreen.termsHeader': return 'Membership terms';

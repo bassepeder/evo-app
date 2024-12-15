@@ -1,3 +1,5 @@
 {
-  "appbar": "Betaling"
+  "appbar": "Betaling",
+  "paymentCardHeader": "Betalingskort",
+  "previousPaymentsHeader": "Tidligere betalinger"
 }
