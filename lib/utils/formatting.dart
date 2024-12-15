@@ -1,4 +1,5 @@
 import 'package:evo/i18n/translations.g.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 /// Formats a [DateTime] object into a localized string.
@@ -40,4 +41,14 @@ String formatDateTime(DateTime dateTime, {String? locale}) {
   );
 
   return dateFormat.format(dateTime);
+}
+
+String formatDate(BuildContext context, DateTime dateTime) {
+  final locale = TranslationProvider.of(context).flutterLocale;
+
+  if (locale.languageCode == 'en') {
+    return DateFormat('yyyy-MM-dd').format(dateTime);
+  } else {
+    return DateFormat('dd.MM.yyyy', locale.languageCode).format(dateTime);
+  }
 }
