@@ -124,9 +124,7 @@ class PreviousPaymentCard extends ConsumerWidget {
                         invoice.amount.toDouble(),
                         membershipLocale,
                       ),
-                      style: const TextStyle(
-                        fontSize: 16,
-                      ),
+                      style: const TextStyle(fontSize: 16),
                     ),
                   ],
                 ),
