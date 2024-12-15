@@ -43,6 +43,17 @@ String formatDateTime(DateTime dateTime, {String? locale}) {
   return dateFormat.format(dateTime);
 }
 
+/// Formats a [DateTime] object to a string based on the user's locale.
+///
+/// - Parameters:
+///   - [context]: The [BuildContext] used to access the locale.
+///   - [dateTime]: The [DateTime] to format.
+///
+/// - Returns: A [String] representing the formatted date.
+///
+/// The format is:
+/// - `yyyy-MM-dd` for English (`en`) locales.
+/// - `dd.MM.yyyy` for other locales.
 String formatDate(BuildContext context, DateTime dateTime) {
   final locale = TranslationProvider.of(context).flutterLocale;
 
@@ -53,6 +64,15 @@ String formatDate(BuildContext context, DateTime dateTime) {
   }
 }
 
+/// Formats a monetary value to a string representation based on a given locale.
+///
+/// - Parameters:
+///   - [amount]: The monetary value to format.
+///   - [locale]: A [String] representing the locale (e.g., `en_US`, `nb_NO`).
+///
+/// - Returns: A [String] with the formatted currency, including the currency symbol.
+///
+/// Uses the [NumberFormat.currency] formatter to include locale-specific formatting.
 String formatCurrencyToProfileLocale(double amount, String locale) {
   final formatter = NumberFormat.currency(
     locale: locale,
