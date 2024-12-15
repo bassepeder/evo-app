@@ -18,6 +18,10 @@ extension type const LocationId(String value) implements StringId {
   LocationId.fromJson(dynamic json) : this(json as String);
 }
 
+extension type const InvoiceId(String value) implements StringId {
+  InvoiceId.fromJson(dynamic json) : this(json as String);
+}
+
 extension IDPick on Pick {
   MembershipId asMembershipIdOrThrow() {
     final value = required().value;
@@ -36,6 +40,16 @@ extension IDPick on Pick {
     }
     throw PickException(
       "Value $value at $debugParsingExit can't be casted to LocationId",
+    );
+  }
+
+  InvoiceId asInvoiceIdOrThrow() {
+    final value = required().value;
+    if (value is String) {
+      return InvoiceId(value);
+    }
+    throw PickException(
+      "Value $value at $debugParsingExit can't be casted to InvoiceId",
     );
   }
 }
