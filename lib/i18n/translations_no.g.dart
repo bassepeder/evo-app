@@ -44,6 +44,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsKeyStatusesNo keyStatuses = TranslationsKeyStatusesNo.internal(_root);
 	late final TranslationsKeyTypesNo keyTypes = TranslationsKeyTypesNo.internal(_root);
 	late final TranslationsMembershipStatusesNo membershipStatuses = TranslationsMembershipStatusesNo.internal(_root);
+	late final TranslationsPaymentScreenNo paymentScreen = TranslationsPaymentScreenNo.internal(_root);
 	late final TranslationsProfileScreenNo profileScreen = TranslationsProfileScreenNo.internal(_root);
 	late final TranslationsSettingsScreenNo settingsScreen = TranslationsSettingsScreenNo.internal(_root);
 	late final TranslationsSignInScreenNo signInScreen = TranslationsSignInScreenNo.internal(_root);
@@ -65,6 +66,8 @@ class TranslationsErrorsNo {
 	String get failedToLoadLocationData => 'Klarte ikke å hente lokasjonsdata.';
 	String get failedToLoadLocations => 'Klarte ikke å hente alle EVO lokasjoner.';
 	String get failedToLoadWorkoutStatistics => 'Klarte ikke å hente treningsøktene dine.';
+	String get failedToLoadInvoices => 'Klarte ikke å hente fakturaene dine.';
+	String get failedToOpenUrl => 'Klarte ikke å åpne URL.';
 }
 
 // Path: format
@@ -157,6 +160,19 @@ class TranslationsMembershipStatusesNo {
 	String get unknown => 'Ukjent';
 }
 
+// Path: paymentScreen
+class TranslationsPaymentScreenNo {
+	TranslationsPaymentScreenNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get appbar => 'Betaling';
+	String get paymentCardHeader => 'Betalingskort';
+	String get previousPaymentsHeader => 'Tidligere betalinger';
+	late final TranslationsPaymentScreenTableHeadersNo tableHeaders = TranslationsPaymentScreenTableHeadersNo.internal(_root);
+}
+
 // Path: profileScreen
 class TranslationsProfileScreenNo {
 	TranslationsProfileScreenNo.internal(this._root);
@@ -167,6 +183,7 @@ class TranslationsProfileScreenNo {
 	String get appbar => 'Kontoinformasjon';
 	String get personalInformationHeader => 'Personlig informasjon ';
 	String get termsHeader => 'Medlemsvilkår';
+	String get updateSuccessful => 'Personlig informasjon oppdatert.';
 }
 
 // Path: settingsScreen
@@ -261,6 +278,19 @@ class TranslationsFormsFieldsNo {
 	late final TranslationsFormsFieldsStreetAddressNo streetAddress = TranslationsFormsFieldsStreetAddressNo.internal(_root);
 	late final TranslationsFormsFieldsAddressCityNo addressCity = TranslationsFormsFieldsAddressCityNo.internal(_root);
 	late final TranslationsFormsFieldsPostalCodeNo postalCode = TranslationsFormsFieldsPostalCodeNo.internal(_root);
+}
+
+// Path: paymentScreen.tableHeaders
+class TranslationsPaymentScreenTableHeadersNo {
+	TranslationsPaymentScreenTableHeadersNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	late final TranslationsPaymentScreenTableHeadersDateNo date = TranslationsPaymentScreenTableHeadersDateNo.internal(_root);
+	late final TranslationsPaymentScreenTableHeadersAmountNo amount = TranslationsPaymentScreenTableHeadersAmountNo.internal(_root);
+	late final TranslationsPaymentScreenTableHeadersPeriodNo period = TranslationsPaymentScreenTableHeadersPeriodNo.internal(_root);
+	late final TranslationsPaymentScreenTableHeadersPdfNo pdf = TranslationsPaymentScreenTableHeadersPdfNo.internal(_root);
 }
 
 // Path: settingsScreen.accountMenuItems
@@ -403,6 +433,46 @@ class TranslationsFormsFieldsPostalCodeNo {
 	// Translations
 	String get label => 'Postnummer';
 	late final TranslationsFormsFieldsPostalCodeValidationNo validation = TranslationsFormsFieldsPostalCodeValidationNo.internal(_root);
+}
+
+// Path: paymentScreen.tableHeaders.date
+class TranslationsPaymentScreenTableHeadersDateNo {
+	TranslationsPaymentScreenTableHeadersDateNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'Dato';
+}
+
+// Path: paymentScreen.tableHeaders.amount
+class TranslationsPaymentScreenTableHeadersAmountNo {
+	TranslationsPaymentScreenTableHeadersAmountNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'Beløp';
+}
+
+// Path: paymentScreen.tableHeaders.period
+class TranslationsPaymentScreenTableHeadersPeriodNo {
+	TranslationsPaymentScreenTableHeadersPeriodNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'Periode';
+}
+
+// Path: paymentScreen.tableHeaders.pdf
+class TranslationsPaymentScreenTableHeadersPdfNo {
+	TranslationsPaymentScreenTableHeadersPdfNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'PDF';
 }
 
 // Path: settingsScreen.accountMenuItems.profileInformation
@@ -567,6 +637,8 @@ extension on Translations {
 			case 'errors.failedToLoadLocationData': return 'Klarte ikke å hente lokasjonsdata.';
 			case 'errors.failedToLoadLocations': return 'Klarte ikke å hente alle EVO lokasjoner.';
 			case 'errors.failedToLoadWorkoutStatistics': return 'Klarte ikke å hente treningsøktene dine.';
+			case 'errors.failedToLoadInvoices': return 'Klarte ikke å hente fakturaene dine.';
+			case 'errors.failedToOpenUrl': return 'Klarte ikke å åpne URL.';
 			case 'format.yesterday': return 'i går';
 			case 'format.today': return 'i dag';
 			case 'format.tomorrow': return 'i morgen';
@@ -625,9 +697,17 @@ extension on Translations {
 			case 'membershipStatuses.cancelledInTrial': return 'Kansellert i prøveperiode';
 			case 'membershipStatuses.stopped': return 'Stoppet';
 			case 'membershipStatuses.unknown': return 'Ukjent';
+			case 'paymentScreen.appbar': return 'Betaling';
+			case 'paymentScreen.paymentCardHeader': return 'Betalingskort';
+			case 'paymentScreen.previousPaymentsHeader': return 'Tidligere betalinger';
+			case 'paymentScreen.tableHeaders.date.label': return 'Dato';
+			case 'paymentScreen.tableHeaders.amount.label': return 'Beløp';
+			case 'paymentScreen.tableHeaders.period.label': return 'Periode';
+			case 'paymentScreen.tableHeaders.pdf.label': return 'PDF';
 			case 'profileScreen.appbar': return 'Kontoinformasjon';
 			case 'profileScreen.personalInformationHeader': return 'Personlig informasjon ';
 			case 'profileScreen.termsHeader': return 'Medlemsvilkår';
+			case 'profileScreen.updateSuccessful': return 'Personlig informasjon oppdatert.';
 			case 'settingsScreen.appBar': return 'Instillinger';
 			case 'settingsScreen.accountMenuItems.header': return 'Kontoinstillinger';
 			case 'settingsScreen.accountMenuItems.profileInformation.title': return 'Kontoinformasjon';

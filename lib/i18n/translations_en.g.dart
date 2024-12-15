@@ -42,6 +42,7 @@ class TranslationsEn extends Translations {
 	@override late final _TranslationsKeyStatusesEn keyStatuses = _TranslationsKeyStatusesEn._(_root);
 	@override late final _TranslationsKeyTypesEn keyTypes = _TranslationsKeyTypesEn._(_root);
 	@override late final _TranslationsMembershipStatusesEn membershipStatuses = _TranslationsMembershipStatusesEn._(_root);
+	@override late final _TranslationsPaymentScreenEn paymentScreen = _TranslationsPaymentScreenEn._(_root);
 	@override late final _TranslationsProfileScreenEn profileScreen = _TranslationsProfileScreenEn._(_root);
 	@override late final _TranslationsSettingsScreenEn settingsScreen = _TranslationsSettingsScreenEn._(_root);
 	@override late final _TranslationsSignInScreenEn signInScreen = _TranslationsSignInScreenEn._(_root);
@@ -63,6 +64,8 @@ class _TranslationsErrorsEn extends TranslationsErrorsNo {
 	@override String get failedToLoadLocationData => 'Failed to load location data.';
 	@override String get failedToLoadLocations => 'Failed to fetch all EVO locations.';
 	@override String get failedToLoadWorkoutStatistics => 'Failed to load your workouts.';
+	@override String get failedToLoadInvoices => 'Failed to fetch your invoices.';
+	@override String get failedToOpenUrl => 'Failed to open URL.';
 }
 
 // Path: format
@@ -155,6 +158,19 @@ class _TranslationsMembershipStatusesEn extends TranslationsMembershipStatusesNo
 	@override String get uknonwn => 'Unknown';
 }
 
+// Path: paymentScreen
+class _TranslationsPaymentScreenEn extends TranslationsPaymentScreenNo {
+	_TranslationsPaymentScreenEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get appbar => 'Payment';
+	@override String get paymentCardHeader => 'Payment card';
+	@override String get previousPaymentsHeader => 'Previous payments';
+	@override late final _TranslationsPaymentScreenTableHeadersEn tableHeaders = _TranslationsPaymentScreenTableHeadersEn._(_root);
+}
+
 // Path: profileScreen
 class _TranslationsProfileScreenEn extends TranslationsProfileScreenNo {
 	_TranslationsProfileScreenEn._(TranslationsEn root) : this._root = root, super.internal(root);
@@ -165,6 +181,7 @@ class _TranslationsProfileScreenEn extends TranslationsProfileScreenNo {
 	@override String get appbar => 'Profile Information';
 	@override String get personalInformationHeader => 'Personal information';
 	@override String get termsHeader => 'Membership terms';
+	@override String get updateSuccessful => 'Personal information updated.';
 }
 
 // Path: settingsScreen
@@ -260,6 +277,19 @@ class _TranslationsFormsFieldsEn extends TranslationsFormsFieldsNo {
 	@override late final _TranslationsFormsFieldsStreetAddressEn streetAddress = _TranslationsFormsFieldsStreetAddressEn._(_root);
 	@override late final _TranslationsFormsFieldsAddressCityEn addressCity = _TranslationsFormsFieldsAddressCityEn._(_root);
 	@override late final _TranslationsFormsFieldsPostalCodeEn postalCode = _TranslationsFormsFieldsPostalCodeEn._(_root);
+}
+
+// Path: paymentScreen.tableHeaders
+class _TranslationsPaymentScreenTableHeadersEn extends TranslationsPaymentScreenTableHeadersNo {
+	_TranslationsPaymentScreenTableHeadersEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override late final _TranslationsPaymentScreenTableHeadersDateEn date = _TranslationsPaymentScreenTableHeadersDateEn._(_root);
+	@override late final _TranslationsPaymentScreenTableHeadersAmountEn amount = _TranslationsPaymentScreenTableHeadersAmountEn._(_root);
+	@override late final _TranslationsPaymentScreenTableHeadersPeriodEn period = _TranslationsPaymentScreenTableHeadersPeriodEn._(_root);
+	@override late final _TranslationsPaymentScreenTableHeadersPdfEn pdf = _TranslationsPaymentScreenTableHeadersPdfEn._(_root);
 }
 
 // Path: settingsScreen.accountMenuItems
@@ -402,6 +432,46 @@ class _TranslationsFormsFieldsPostalCodeEn extends TranslationsFormsFieldsPostal
 	// Translations
 	@override String get label => 'Postal code';
 	@override late final _TranslationsFormsFieldsPostalCodeValidationEn validation = _TranslationsFormsFieldsPostalCodeValidationEn._(_root);
+}
+
+// Path: paymentScreen.tableHeaders.date
+class _TranslationsPaymentScreenTableHeadersDateEn extends TranslationsPaymentScreenTableHeadersDateNo {
+	_TranslationsPaymentScreenTableHeadersDateEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get label => 'Date';
+}
+
+// Path: paymentScreen.tableHeaders.amount
+class _TranslationsPaymentScreenTableHeadersAmountEn extends TranslationsPaymentScreenTableHeadersAmountNo {
+	_TranslationsPaymentScreenTableHeadersAmountEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get label => 'Amount';
+}
+
+// Path: paymentScreen.tableHeaders.period
+class _TranslationsPaymentScreenTableHeadersPeriodEn extends TranslationsPaymentScreenTableHeadersPeriodNo {
+	_TranslationsPaymentScreenTableHeadersPeriodEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get label => 'Period';
+}
+
+// Path: paymentScreen.tableHeaders.pdf
+class _TranslationsPaymentScreenTableHeadersPdfEn extends TranslationsPaymentScreenTableHeadersPdfNo {
+	_TranslationsPaymentScreenTableHeadersPdfEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get label => 'PDF';
 }
 
 // Path: settingsScreen.accountMenuItems.profileInformation
@@ -566,6 +636,8 @@ extension on TranslationsEn {
 			case 'errors.failedToLoadLocationData': return 'Failed to load location data.';
 			case 'errors.failedToLoadLocations': return 'Failed to fetch all EVO locations.';
 			case 'errors.failedToLoadWorkoutStatistics': return 'Failed to load your workouts.';
+			case 'errors.failedToLoadInvoices': return 'Failed to fetch your invoices.';
+			case 'errors.failedToOpenUrl': return 'Failed to open URL.';
 			case 'format.yesterday': return 'yesterday';
 			case 'format.today': return 'today';
 			case 'format.tomorrow': return 'tomorrow';
@@ -624,9 +696,17 @@ extension on TranslationsEn {
 			case 'membershipStatuses.cancelledInTrial': return 'Cancelled in trial';
 			case 'membershipStatuses.stopped': return 'Stopped';
 			case 'membershipStatuses.uknonwn': return 'Unknown';
+			case 'paymentScreen.appbar': return 'Payment';
+			case 'paymentScreen.paymentCardHeader': return 'Payment card';
+			case 'paymentScreen.previousPaymentsHeader': return 'Previous payments';
+			case 'paymentScreen.tableHeaders.date.label': return 'Date';
+			case 'paymentScreen.tableHeaders.amount.label': return 'Amount';
+			case 'paymentScreen.tableHeaders.period.label': return 'Period';
+			case 'paymentScreen.tableHeaders.pdf.label': return 'PDF';
 			case 'profileScreen.appbar': return 'Profile Information';
 			case 'profileScreen.personalInformationHeader': return 'Personal information';
 			case 'profileScreen.termsHeader': return 'Membership terms';
+			case 'profileScreen.updateSuccessful': return 'Personal information updated.';
 			case 'settingsScreen.appBar': return 'Settings';
 			case 'settingsScreen.accountMenuItems.header': return 'Account Settings';
 			case 'settingsScreen.accountMenuItems.profileInformation.title': return 'Account Information';

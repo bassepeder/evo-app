@@ -63,8 +63,8 @@ class _ProfileInformationScreenState
         ScaffoldMessenger.of(context)
           ..hideCurrentSnackBar()
           ..showSnackBar(
-            const SnackBar(
-              content: Text('Update successful'),
+            SnackBar(
+              content: Text(context.t.profileScreen.updateSuccessful),
               behavior: SnackBarBehavior.floating,
             ),
           );

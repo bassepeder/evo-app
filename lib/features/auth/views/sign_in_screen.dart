@@ -6,10 +6,10 @@ import 'package:evo/features/auth/viewmodels/auth_view_model.dart';
 import 'package:evo/features/home/views/home_screen.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:evo/utils/navigation.dart';
+import 'package:evo/utils/util.dart';
 import 'package:evo/utils/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
   const SignInScreen({super.key});
@@ -119,11 +119,12 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
                           BecomeMemberTextButton(
-                            onClick: () {
+                            onClick: () async {
                               ScaffoldMessenger.of(context)
                                   .hideCurrentSnackBar();
-                              launchUrl(
-                                Uri.parse(kBuyMembershipUrl),
+                              await tryOpenUrlWithFeedback(
+                                kBuyMembershipUrl,
+                                context,
                               );
                             },
                             label: context.t.signInScreen.buttons.becomeMember,
