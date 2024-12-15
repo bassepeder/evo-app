@@ -42,7 +42,14 @@ class PaymentInformationScreen extends ConsumerWidget {
                 data: (invoices) {
                   return Column(
                     children: invoices
-                        .map((invoice) => PreviousPaymentCard(invoice: invoice))
+                        .asMap()
+                        .map((index, invoice) {
+                          return MapEntry(
+                            index,
+                            FadeInPaymentCard(invoice: invoice, index: index),
+                          );
+                        })
+                        .values
                         .toList(),
                   );
                 },
@@ -70,6 +77,65 @@ class PaymentInformationScreen extends ConsumerWidget {
         ),
       ),
     );
+  }
+}
+
+class FadeInPaymentCard extends StatefulWidget {
+  final InvoiceDetails invoice;
+  final int index;
+
+  const FadeInPaymentCard({
+    super.key,
+    required this.invoice,
+    required this.index,
+  });
+
+  @override
+  _FadeInPaymentCardState createState() => _FadeInPaymentCardState();
+}
+
+class _FadeInPaymentCardState extends State<FadeInPaymentCard>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _opacityAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
+
+    _opacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
+    );
+
+    // Delay each card's animation slightly for a staggered effect
+    Future.delayed(Duration(milliseconds: widget.index * 100), () {
+      if (mounted) {
+        _controller.forward();
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        return Opacity(
+          opacity: _opacityAnimation.value,
+          child: PreviousPaymentCard(invoice: widget.invoice),
+        );
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }
 
