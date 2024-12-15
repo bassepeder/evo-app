@@ -65,21 +65,25 @@ class _ProfileInformationScreenState
               return AnimatedOpacity(
                 opacity: hasChanged ? 1.0 : 0.0,
                 duration: const Duration(milliseconds: 250),
-                child: IconButton(
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      ScaffoldMessenger.of(context)
-                        ..hideCurrentSnackBar()
-                        ..showSnackBar(
-                          const SnackBar(
-                            content: Text('Saving...'),
-                            behavior: SnackBarBehavior.floating,
-                          ),
-                        );
-                    }
-                  },
-                  icon: const Icon(Icons.save_as_outlined),
-                ),
+                child: isLoading
+                    ? const Padding(
+                        padding: EdgeInsets.only(right: 16),
+                        child: SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CircularProgressIndicator(strokeWidth: 3),
+                        ),
+                      )
+                    : IconButton(
+                        onPressed: () async {
+                          if (formKey.currentState!.validate()) {
+                            await ref
+                                .read(profileControllerProvider.notifier)
+                                .updateInformation();
+                          }
+                        },
+                        icon: const Icon(Icons.save_as_outlined),
+                      ),
               );
             },
           ),

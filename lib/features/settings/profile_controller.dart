@@ -20,6 +20,12 @@ class ProfileController extends _$ProfileController {
     );
   }
 
+  Future<void> updateInformation() {
+    state = state.copyWith(isLoading: true);
+
+    return Future.value();
+  }
+
   void updateEmail(String email) {
     state = state.copyWith(
       email: email.trim(),
