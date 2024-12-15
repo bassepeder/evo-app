@@ -28,8 +28,8 @@ class InvoiceDetails with _$InvoiceDetails {
     return InvoiceDetails(
       id: pick('id').asInvoiceIdOrThrow(),
       date: pick('date').asDateOrThrow(),
-      number: pick('number').asIntOrThrow(),
-      amount: pick('id').asDecimalOrThrow(),
+      number: pick('invoice_number').asIntOrThrow(),
+      amount: pick('amount').asDecimalOrThrow(),
       currency: pick('currency').asStringOrThrow(),
       status: pick('id').asStringOrThrow(),
       from: pick('from').asDateOrThrow(),
