@@ -325,8 +325,7 @@ class PersonalInformationForm extends ConsumerWidget {
           UserInfoEditField(
             label: context.t.forms.fields.mobile.label,
             child: PhoneInputField(
-              initialValue: ref.read(profileControllerProvider).mobile.prefix +
-                  ref.read(profileControllerProvider).mobile.number,
+              initialValue: ref.read(profileControllerProvider).mobile.number,
               onPhoneNumberChanged: (number, isValid) => ref
                   .read(profileControllerProvider.notifier)
                   .updateMobile(number, isValid),
@@ -568,8 +567,9 @@ class _PhoneInputState extends State<PhoneInputField> {
       isCountryButtonPersistent: true,
       isCountrySelectionEnabled: false,
       countryButtonStyle: const CountryButtonStyle(
-        showDropdownIcon: false,
+        showDialCode: true,
         showFlag: true,
+        showDropdownIcon: false,
         flagSize: 16,
       ),
     );
