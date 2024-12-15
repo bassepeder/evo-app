@@ -51,6 +51,30 @@ class _ProfileInformationScreenState
     final isLoading =
         ref.watch(profileControllerProvider.select((state) => state.isLoading));
 
+    ref.listen<ProfileState>(profileControllerProvider, (previous, next) {
+      if (next.success == true) {
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            const SnackBar(
+              content: Text('Update successful'),
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+      } else if (next.error != null && next.error != previous?.error) {
+        final message = context.t.signInScreen.errorMessages.genericError;
+
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(
+              content: Text(message),
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+      }
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: Text(context.t.profileScreen.appbar),
@@ -67,7 +91,7 @@ class _ProfileInformationScreenState
                 duration: const Duration(milliseconds: 250),
                 child: isLoading
                     ? const Padding(
-                        padding: EdgeInsets.only(right: 16),
+                        padding: EdgeInsets.only(right: 20),
                         child: SizedBox(
                           width: 24,
                           height: 24,
@@ -79,7 +103,7 @@ class _ProfileInformationScreenState
                           if (formKey.currentState!.validate()) {
                             await ref
                                 .read(profileControllerProvider.notifier)
-                                .updateInformation();
+                                .updateProfileDetails();
                           }
                         },
                         icon: const Icon(Icons.save_as_outlined),
