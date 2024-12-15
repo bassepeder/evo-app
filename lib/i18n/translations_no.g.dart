@@ -180,6 +180,7 @@ class TranslationsProfileScreenNo {
 	String get appbar => 'Kontoinformasjon';
 	String get personalInformationHeader => 'Personlig informasjon ';
 	String get termsHeader => 'Medlemsvilkår';
+	String get updateSuccessful => 'Personlig informasjon oppdatert.';
 }
 
 // Path: settingsScreen
@@ -644,6 +645,7 @@ extension on Translations {
 			case 'profileScreen.appbar': return 'Kontoinformasjon';
 			case 'profileScreen.personalInformationHeader': return 'Personlig informasjon ';
 			case 'profileScreen.termsHeader': return 'Medlemsvilkår';
+			case 'profileScreen.updateSuccessful': return 'Personlig informasjon oppdatert.';
 			case 'settingsScreen.appBar': return 'Instillinger';
 			case 'settingsScreen.accountMenuItems.header': return 'Kontoinstillinger';
 			case 'settingsScreen.accountMenuItems.profileInformation.title': return 'Kontoinformasjon';

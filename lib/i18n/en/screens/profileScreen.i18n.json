@@ -1,5 +1,6 @@
 {
   "appbar": "Profile Information",
   "personalInformationHeader": "Personal information",
-  "termsHeader": "Membership terms"
+  "termsHeader": "Membership terms",
+  "updateSuccessful": "Personal information updated."
 }
