@@ -127,6 +127,7 @@ class Profile with _$Profile {
 
 @freezed
 class Address with _$Address {
+  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory Address({
     required String street,
     required String postalCode,

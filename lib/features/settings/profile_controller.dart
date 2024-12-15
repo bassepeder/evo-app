@@ -1,5 +1,8 @@
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/features/membership/models/membership_details.dart';
+import 'package:evo/features/settings/models/update_profile_details_request.dart';
+import 'package:evo/features/settings/profile_repository.dart';
+import 'package:evo/network/http.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -17,13 +20,45 @@ class ProfileController extends _$ProfileController {
       address: membership.profile.address,
       isLoading: false,
       hasChanged: false,
+      success: false,
+      error: null,
     );
   }
 
-  Future<void> updateInformation() {
-    state = state.copyWith(isLoading: true);
+  Future<void> updateProfileDetails() async {
+    state = state.copyWith(
+      isLoading: true,
+      success: false,
+      error: null,
+    );
 
-    return Future.value();
+    try {
+      final request = UpdateProfileDetailsRequest(
+        firstName: 'Bastian',
+        lastName: 'Tangedal Pedersen',
+        email: state.email,
+        address: state.address,
+        mobile: const Mobile(number: '45472336', prefix: '+47'),
+      );
+
+      await ref.withClient(
+        (client) => ProfileRepository(client).updateProfileDetails(request),
+      );
+
+      state = state.copyWith(
+        isLoading: false,
+        hasChanged: false,
+        success: true,
+      );
+
+      ref.invalidate(membershipDetailsProvider);
+
+      state = state.copyWith(
+        success: false,
+      );
+    } on Exception catch (e) {
+      state = state.copyWith(error: e);
+    }
   }
 
   void updateEmail(String email) {
@@ -80,5 +115,7 @@ class ProfileState with _$ProfileState {
     required Address address,
     required bool isLoading,
     required bool hasChanged,
+    required bool success,
+    required Exception? error,
   }) = _ProfileState;
 }
