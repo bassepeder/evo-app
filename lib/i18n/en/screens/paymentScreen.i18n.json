@@ -1,5 +1,19 @@
 {
   "appbar": "Payment",
   "paymentCardHeader": "Payment card",
-  "previousPaymentsHeader": "Previous payments"
+  "previousPaymentsHeader": "Previous payments",
+  "tableHeaders": {
+    "date": {
+      "label": "Date"
+    },
+    "amount": {
+      "label": "Amount"
+    },
+    "period": {
+      "label": "Period"
+    },
+    "pdf": {
+      "label": "PDF"
+    }
+  }
 }

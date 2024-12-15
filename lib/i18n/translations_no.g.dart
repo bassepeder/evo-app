@@ -168,6 +168,7 @@ class TranslationsPaymentScreenNo {
 	String get appbar => 'Betaling';
 	String get paymentCardHeader => 'Betalingskort';
 	String get previousPaymentsHeader => 'Tidligere betalinger';
+	late final TranslationsPaymentScreenTableHeadersNo tableHeaders = TranslationsPaymentScreenTableHeadersNo.internal(_root);
 }
 
 // Path: profileScreen
@@ -275,6 +276,19 @@ class TranslationsFormsFieldsNo {
 	late final TranslationsFormsFieldsStreetAddressNo streetAddress = TranslationsFormsFieldsStreetAddressNo.internal(_root);
 	late final TranslationsFormsFieldsAddressCityNo addressCity = TranslationsFormsFieldsAddressCityNo.internal(_root);
 	late final TranslationsFormsFieldsPostalCodeNo postalCode = TranslationsFormsFieldsPostalCodeNo.internal(_root);
+}
+
+// Path: paymentScreen.tableHeaders
+class TranslationsPaymentScreenTableHeadersNo {
+	TranslationsPaymentScreenTableHeadersNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	late final TranslationsPaymentScreenTableHeadersDateNo date = TranslationsPaymentScreenTableHeadersDateNo.internal(_root);
+	late final TranslationsPaymentScreenTableHeadersAmountNo amount = TranslationsPaymentScreenTableHeadersAmountNo.internal(_root);
+	late final TranslationsPaymentScreenTableHeadersPeriodNo period = TranslationsPaymentScreenTableHeadersPeriodNo.internal(_root);
+	late final TranslationsPaymentScreenTableHeadersPdfNo pdf = TranslationsPaymentScreenTableHeadersPdfNo.internal(_root);
 }
 
 // Path: settingsScreen.accountMenuItems
@@ -417,6 +431,46 @@ class TranslationsFormsFieldsPostalCodeNo {
 	// Translations
 	String get label => 'Postnummer';
 	late final TranslationsFormsFieldsPostalCodeValidationNo validation = TranslationsFormsFieldsPostalCodeValidationNo.internal(_root);
+}
+
+// Path: paymentScreen.tableHeaders.date
+class TranslationsPaymentScreenTableHeadersDateNo {
+	TranslationsPaymentScreenTableHeadersDateNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'Dato';
+}
+
+// Path: paymentScreen.tableHeaders.amount
+class TranslationsPaymentScreenTableHeadersAmountNo {
+	TranslationsPaymentScreenTableHeadersAmountNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'Beløp';
+}
+
+// Path: paymentScreen.tableHeaders.period
+class TranslationsPaymentScreenTableHeadersPeriodNo {
+	TranslationsPaymentScreenTableHeadersPeriodNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'Periode';
+}
+
+// Path: paymentScreen.tableHeaders.pdf
+class TranslationsPaymentScreenTableHeadersPdfNo {
+	TranslationsPaymentScreenTableHeadersPdfNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'PDF';
 }
 
 // Path: settingsScreen.accountMenuItems.profileInformation
@@ -642,6 +696,10 @@ extension on Translations {
 			case 'paymentScreen.appbar': return 'Betaling';
 			case 'paymentScreen.paymentCardHeader': return 'Betalingskort';
 			case 'paymentScreen.previousPaymentsHeader': return 'Tidligere betalinger';
+			case 'paymentScreen.tableHeaders.date.label': return 'Dato';
+			case 'paymentScreen.tableHeaders.amount.label': return 'Beløp';
+			case 'paymentScreen.tableHeaders.period.label': return 'Periode';
+			case 'paymentScreen.tableHeaders.pdf.label': return 'PDF';
 			case 'profileScreen.appbar': return 'Kontoinformasjon';
 			case 'profileScreen.personalInformationHeader': return 'Personlig informasjon ';
 			case 'profileScreen.termsHeader': return 'Medlemsvilkår';
