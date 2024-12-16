@@ -1,4 +1,5 @@
 {
   "appbar": "Primærsenter",
-  "header": "Ditt primærsenter"
+  "header": "Ditt primærsenter",
+  "updateSuccessful": "$name satt som ditt primærsenter."
 }
