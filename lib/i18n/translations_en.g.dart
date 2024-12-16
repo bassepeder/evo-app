@@ -43,6 +43,7 @@ class TranslationsEn extends Translations {
 	@override late final _TranslationsKeyTypesEn keyTypes = _TranslationsKeyTypesEn._(_root);
 	@override late final _TranslationsMembershipStatusesEn membershipStatuses = _TranslationsMembershipStatusesEn._(_root);
 	@override late final _TranslationsPaymentScreenEn paymentScreen = _TranslationsPaymentScreenEn._(_root);
+	@override late final _TranslationsPrimaryLocationScreenEn primaryLocationScreen = _TranslationsPrimaryLocationScreenEn._(_root);
 	@override late final _TranslationsProfileScreenEn profileScreen = _TranslationsProfileScreenEn._(_root);
 	@override late final _TranslationsSettingsScreenEn settingsScreen = _TranslationsSettingsScreenEn._(_root);
 	@override late final _TranslationsSignInScreenEn signInScreen = _TranslationsSignInScreenEn._(_root);
@@ -169,6 +170,16 @@ class _TranslationsPaymentScreenEn extends TranslationsPaymentScreenNo {
 	@override String get paymentCardHeader => 'Payment card';
 	@override String get previousPaymentsHeader => 'Previous payments';
 	@override late final _TranslationsPaymentScreenTableHeadersEn tableHeaders = _TranslationsPaymentScreenTableHeadersEn._(_root);
+}
+
+// Path: primaryLocationScreen
+class _TranslationsPrimaryLocationScreenEn extends TranslationsPrimaryLocationScreenNo {
+	_TranslationsPrimaryLocationScreenEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get appbar => 'Primary location';
 }
 
 // Path: profileScreen
@@ -703,6 +714,7 @@ extension on TranslationsEn {
 			case 'paymentScreen.tableHeaders.amount.label': return 'Amount';
 			case 'paymentScreen.tableHeaders.period.label': return 'Period';
 			case 'paymentScreen.tableHeaders.pdf.label': return 'PDF';
+			case 'primaryLocationScreen.appbar': return 'Primary location';
 			case 'profileScreen.appbar': return 'Profile Information';
 			case 'profileScreen.personalInformationHeader': return 'Personal information';
 			case 'profileScreen.termsHeader': return 'Membership terms';
