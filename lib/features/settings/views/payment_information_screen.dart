@@ -1,4 +1,4 @@
-import 'package:evo/common/widgets/error_screen.dart';
+import 'package:evo/common/widgets/evo_elevated_button.dart';
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/features/settings/invoice_repository.dart';
 import 'package:evo/features/settings/models/invoice_details.dart';
@@ -39,6 +39,7 @@ class PaymentInformationScreen extends ConsumerWidget {
               Header(title: context.t.paymentScreen.previousPaymentsHeader),
               const SizedBox(height: 8),
               invoicesAsync.when(
+                skipLoadingOnRefresh: false,
                 data: (invoices) {
                   return Column(
                     children: invoices
@@ -64,11 +65,17 @@ class PaymentInformationScreen extends ConsumerWidget {
                   );
                 },
                 error: (error, stack) {
-                  return Expanded(
-                    child: ErrorScreen(
-                      subtitle: context.t.errors.failedToLoadInvoices,
-                      onRetryClicked: () => ref.invalidate(invoicesProvider),
-                    ),
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 8),
+                      Text(context.t.errors.failedToLoadInvoices),
+                      const SizedBox(height: 32),
+                      EvoElevatedButton(
+                        onPressed: () => ref.invalidate(invoicesProvider),
+                        text: context.t.errors.generalRetryButtonText,
+                      ),
+                    ],
                   );
                 },
               ),
