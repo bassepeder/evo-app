@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:evo/common/exceptions/http_exceptions.dart';
 import 'package:evo/common/widgets/evo_elevated_button.dart';
 import 'package:evo/constants.dart';
@@ -7,7 +8,6 @@ import 'package:evo/features/home/views/home_screen.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:evo/utils/navigation.dart';
 import 'package:evo/utils/util.dart';
-import 'package:evo/utils/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -190,7 +190,7 @@ class SignInForm extends StatelessWidget {
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return context.t.forms.fields.email.validation.emptyFull;
-              } else if (!value.isValidEmail()) {
+              } else if (!EmailValidator.validate(value)) {
                 return context.t.forms.fields.email.validation.invalidFull;
               }
 

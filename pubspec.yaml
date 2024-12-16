@@ -64,6 +64,7 @@ dependencies:
   dynamic_color: ^1.7.0
   phone_form_field: ^10.0.2
   decimal: ^3.0.2
+  email_validator: ^3.0.0
 dev_dependencies:
   freezed: ^2.5.7
   lint: ^2.0.1

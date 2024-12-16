@@ -1,7 +1,7 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/features/settings/profile_controller.dart';
 import 'package:evo/i18n/translations.g.dart';
-import 'package:evo/utils/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:phone_form_field/phone_form_field.dart';
@@ -298,7 +298,7 @@ class PersonalInformationForm extends ConsumerWidget {
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return context.t.forms.fields.email.validation.emptyShort;
-                } else if (!value.isValidEmail()) {
+                } else if (!EmailValidator.validate(value)) {
                   return context.t.forms.fields.email.validation.invalidShort;
                 }
 
