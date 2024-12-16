@@ -152,7 +152,7 @@ class SettingsListItem extends StatelessWidget {
                 height: 24,
                 width: 24,
                 colorFilter: ColorFilter.mode(
-                  const Color(0xFF010F07).withOpacity(0.64),
+                  const Color(0xFF010F07).withValues(alpha: 0.64),
                   BlendMode.srcIn,
                 ),
               ),
@@ -172,7 +172,7 @@ class SettingsListItem extends StatelessWidget {
                       maxLines: 1,
                       style: TextStyle(
                         fontSize: 14,
-                        color: const Color(0xFF010F07).withOpacity(0.54),
+                        color: const Color(0xFF010F07).withValues(alpha: 0.54),
                       ),
                     ),
                   ],
