@@ -103,7 +103,7 @@ class _FadeInPaymentCardState extends State<FadeInPaymentCard>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 600),
       vsync: this,
     );
 
