@@ -182,6 +182,7 @@ class TranslationsPrimaryLocationScreenNo {
 
 	// Translations
 	String get appbar => 'Primærsenter';
+	String get header => 'Ditt primærsenter';
 }
 
 // Path: profileScreen
@@ -716,6 +717,7 @@ extension on Translations {
 			case 'paymentScreen.tableHeaders.period.label': return 'Periode';
 			case 'paymentScreen.tableHeaders.pdf.label': return 'PDF';
 			case 'primaryLocationScreen.appbar': return 'Primærsenter';
+			case 'primaryLocationScreen.header': return 'Ditt primærsenter';
 			case 'profileScreen.appbar': return 'Kontoinformasjon';
 			case 'profileScreen.personalInformationHeader': return 'Personlig informasjon ';
 			case 'profileScreen.termsHeader': return 'Medlemsvilkår';

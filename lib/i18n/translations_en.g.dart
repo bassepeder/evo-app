@@ -180,6 +180,7 @@ class _TranslationsPrimaryLocationScreenEn extends TranslationsPrimaryLocationSc
 
 	// Translations
 	@override String get appbar => 'Primary location';
+	@override String get header => 'Your primary location';
 }
 
 // Path: profileScreen
@@ -715,6 +716,7 @@ extension on TranslationsEn {
 			case 'paymentScreen.tableHeaders.period.label': return 'Period';
 			case 'paymentScreen.tableHeaders.pdf.label': return 'PDF';
 			case 'primaryLocationScreen.appbar': return 'Primary location';
+			case 'primaryLocationScreen.header': return 'Your primary location';
 			case 'profileScreen.appbar': return 'Profile Information';
 			case 'profileScreen.personalInformationHeader': return 'Personal information';
 			case 'profileScreen.termsHeader': return 'Membership terms';
