@@ -543,7 +543,7 @@ class _PhoneInputState extends State<PhoneInputField> {
         PhoneValidator.validMobile(
           context,
           errorText: context.t.forms.fields.mobile.validation.invalid,
-        )
+        ),
       ]),
       decoration: InputDecoration(
         filled: true,
