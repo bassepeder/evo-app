@@ -133,7 +133,9 @@ class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
                 ),
               ),
               const SizedBox(height: 16),
-              for (final location in locations)
+              for (final location in locations.sort(
+                (a, b) => a.name.compareTo(b.name),
+              ))
                 PlatformListTile(
                   key: location.id == widget.currentLocationId
                       ? currentLocationKey
