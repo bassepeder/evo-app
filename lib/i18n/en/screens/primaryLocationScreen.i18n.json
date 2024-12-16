@@ -1,4 +1,5 @@
 {
   "appbar": "Primary location",
-  "header": "Your primary location"
+  "header": "Your primary location",
+  "updateSuccessful": "$name now set as your primary location."
 }

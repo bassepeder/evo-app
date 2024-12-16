@@ -156,7 +156,7 @@ class _TranslationsMembershipStatusesEn extends TranslationsMembershipStatusesNo
 	@override String get cancelledInPresale => 'Cancelled in pre-sale';
 	@override String get cancelledInTrial => 'Cancelled in trial';
 	@override String get stopped => 'Stopped';
-	@override String get uknonwn => 'Unknown';
+	@override String get unknown => 'Unknown';
 }
 
 // Path: paymentScreen
@@ -181,6 +181,7 @@ class _TranslationsPrimaryLocationScreenEn extends TranslationsPrimaryLocationSc
 	// Translations
 	@override String get appbar => 'Primary location';
 	@override String get header => 'Your primary location';
+	@override String updateSuccessful({required Object name}) => '${name} now set as your primary location.';
 }
 
 // Path: profileScreen
@@ -707,7 +708,7 @@ extension on TranslationsEn {
 			case 'membershipStatuses.cancelledInPresale': return 'Cancelled in pre-sale';
 			case 'membershipStatuses.cancelledInTrial': return 'Cancelled in trial';
 			case 'membershipStatuses.stopped': return 'Stopped';
-			case 'membershipStatuses.uknonwn': return 'Unknown';
+			case 'membershipStatuses.unknown': return 'Unknown';
 			case 'paymentScreen.appbar': return 'Payment';
 			case 'paymentScreen.paymentCardHeader': return 'Payment card';
 			case 'paymentScreen.previousPaymentsHeader': return 'Previous payments';
@@ -717,6 +718,7 @@ extension on TranslationsEn {
 			case 'paymentScreen.tableHeaders.pdf.label': return 'PDF';
 			case 'primaryLocationScreen.appbar': return 'Primary location';
 			case 'primaryLocationScreen.header': return 'Your primary location';
+			case 'primaryLocationScreen.updateSuccessful': return ({required Object name}) => '${name} now set as your primary location.';
 			case 'profileScreen.appbar': return 'Profile Information';
 			case 'profileScreen.personalInformationHeader': return 'Personal information';
 			case 'profileScreen.termsHeader': return 'Membership terms';
