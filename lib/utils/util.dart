@@ -16,7 +16,7 @@ Future<void> tryOpenUrlWithFeedback(String url, BuildContext context) async {
     return;
   }
 
-  if (!await launchUrl(Uri.parse(url))) {
+  if (!await canLaunchUrl(Uri.parse(url))) {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
@@ -25,5 +25,16 @@ Future<void> tryOpenUrlWithFeedback(String url, BuildContext context) async {
           behavior: SnackBarBehavior.floating,
         ),
       );
+  } else {
+    if (!await launchUrl(Uri.parse(url))) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(
+            content: Text(context.t.errors.failedToOpenUrl),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+    }
   }
 }
