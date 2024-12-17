@@ -35,6 +35,7 @@ class TranslationsEn extends Translations {
 	late final TranslationsEn _root = this; // ignore: unused_field
 
 	// Translations
+	@override late final _TranslationsCurrentReferralScreenEn currentReferralScreen = _TranslationsCurrentReferralScreenEn._(_root);
 	@override late final _TranslationsErrorsEn errors = _TranslationsErrorsEn._(_root);
 	@override late final _TranslationsFormatEn format = _TranslationsFormatEn._(_root);
 	@override late final _TranslationsFormsEn forms = _TranslationsFormsEn._(_root);
@@ -49,6 +50,17 @@ class TranslationsEn extends Translations {
 	@override late final _TranslationsSignInScreenEn signInScreen = _TranslationsSignInScreenEn._(_root);
 	@override late final _TranslationsWelcomeScreenEn welcomeScreen = _TranslationsWelcomeScreenEn._(_root);
 	@override late final _TranslationsWorkoutsScreenEn workoutsScreen = _TranslationsWorkoutsScreenEn._(_root);
+}
+
+// Path: currentReferralScreen
+class _TranslationsCurrentReferralScreenEn extends TranslationsCurrentReferralScreenNo {
+	_TranslationsCurrentReferralScreenEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get appbar => 'Referral Campaign';
+	@override String get header => 'Your referral code';
 }
 
 // Path: errors
@@ -67,6 +79,7 @@ class _TranslationsErrorsEn extends TranslationsErrorsNo {
 	@override String get failedToLoadWorkoutStatistics => 'Failed to load your workouts.';
 	@override String get failedToLoadInvoices => 'Failed to fetch your invoices.';
 	@override String get failedToOpenUrl => 'Failed to open URL.';
+	@override String get failedToLoadCurrentMembershipReferral => 'Failed to load membership referral info.';
 }
 
 // Path: format
@@ -642,6 +655,8 @@ class _TranslationsFormsFieldsPostalCodeValidationEn extends TranslationsFormsFi
 extension on TranslationsEn {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
+			case 'currentReferralScreen.appbar': return 'Referral Campaign';
+			case 'currentReferralScreen.header': return 'Your referral code';
 			case 'errors.generalTitle': return 'Oops! Something went wrong';
 			case 'errors.generalDescription': return 'Something broke, but we\'re fixing it. Try again in a moment.';
 			case 'errors.generalRetryButtonText': return 'Retry';
@@ -651,6 +666,7 @@ extension on TranslationsEn {
 			case 'errors.failedToLoadWorkoutStatistics': return 'Failed to load your workouts.';
 			case 'errors.failedToLoadInvoices': return 'Failed to fetch your invoices.';
 			case 'errors.failedToOpenUrl': return 'Failed to open URL.';
+			case 'errors.failedToLoadCurrentMembershipReferral': return 'Failed to load membership referral info.';
 			case 'format.yesterday': return 'yesterday';
 			case 'format.today': return 'today';
 			case 'format.tomorrow': return 'tomorrow';

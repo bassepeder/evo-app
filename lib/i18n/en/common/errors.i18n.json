@@ -7,5 +7,6 @@
   "failedToLoadLocations": "Failed to fetch all EVO locations.",
   "failedToLoadWorkoutStatistics": "Failed to load your workouts.",
   "failedToLoadInvoices": "Failed to fetch your invoices.",
-  "failedToOpenUrl": "Failed to open URL."
+  "failedToOpenUrl": "Failed to open URL.",
+  "failedToLoadCurrentMembershipReferral": "Failed to load membership referral info."
 }
