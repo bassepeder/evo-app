@@ -101,6 +101,8 @@ class _TranslationsFormsEn extends TranslationsFormsNo {
 	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
+	@override String get cancel => 'Cancel';
+	@override String get ok => 'OK';
 	@override late final _TranslationsFormsFieldsEn fields = _TranslationsFormsFieldsEn._(_root);
 }
 
@@ -564,6 +566,7 @@ class _TranslationsSettingsScreenAppMenuItemsAppThemeEn extends TranslationsSett
 	// Translations
 	@override String get title => 'App Theme';
 	@override String get subtitle => 'Change the look of the app';
+	@override late final _TranslationsSettingsScreenAppMenuItemsAppThemeOptionsEn options = _TranslationsSettingsScreenAppMenuItemsAppThemeOptionsEn._(_root);
 }
 
 // Path: forms.fields.firstname.validation
@@ -650,6 +653,18 @@ class _TranslationsFormsFieldsPostalCodeValidationEn extends TranslationsFormsFi
 	@override String get empty => 'This is required';
 }
 
+// Path: settingsScreen.appMenuItems.appTheme.options
+class _TranslationsSettingsScreenAppMenuItemsAppThemeOptionsEn extends TranslationsSettingsScreenAppMenuItemsAppThemeOptionsNo {
+	_TranslationsSettingsScreenAppMenuItemsAppThemeOptionsEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get deviceTheme => 'Device theme';
+	@override String get dark => 'Dark';
+	@override String get light => 'Light';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 extension on TranslationsEn {
@@ -670,6 +685,8 @@ extension on TranslationsEn {
 			case 'format.yesterday': return 'yesterday';
 			case 'format.today': return 'today';
 			case 'format.tomorrow': return 'tomorrow';
+			case 'forms.cancel': return 'Cancel';
+			case 'forms.ok': return 'OK';
 			case 'forms.fields.firstname.label': return 'First name';
 			case 'forms.fields.firstname.hint': return 'Type your first name';
 			case 'forms.fields.firstname.validation.empty': return 'Please enter a name';
@@ -754,6 +771,9 @@ extension on TranslationsEn {
 			case 'settingsScreen.appMenuItems.header': return 'App Settings';
 			case 'settingsScreen.appMenuItems.appTheme.title': return 'App Theme';
 			case 'settingsScreen.appMenuItems.appTheme.subtitle': return 'Change the look of the app';
+			case 'settingsScreen.appMenuItems.appTheme.options.deviceTheme': return 'Device theme';
+			case 'settingsScreen.appMenuItems.appTheme.options.dark': return 'Dark';
+			case 'settingsScreen.appMenuItems.appTheme.options.light': return 'Light';
 			case 'signInScreen.title': return 'Sign in';
 			case 'signInScreen.header': return 'Welcome back!';
 			case 'signInScreen.subtitle': return 'Sign in with your e-mail and password.';

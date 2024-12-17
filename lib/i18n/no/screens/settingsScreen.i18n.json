@@ -27,7 +27,12 @@
     "header": "App-innstillinger",
     "appTheme": {
       "title": "Utseende",
-      "subtitle": "Velg mellom mørkt og lyst tema"
+      "subtitle": "Velg mellom mørkt og lyst tema",
+      "options": {
+        "deviceTheme": "Følg system",
+        "dark": "Mørk",
+        "light": "Lys"
+      }
     }
   }
 }

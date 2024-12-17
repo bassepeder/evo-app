@@ -1,4 +1,7 @@
+import 'package:evo/common/widgets/adaptive_choice_picker.dart';
 import 'package:evo/features/auth/providers/auth_session.dart';
+import 'package:evo/features/settings/app_background_mode_screen.dart';
+import 'package:evo/features/settings/general_preferences.dart';
 import 'package:evo/features/settings/views/current_referral_screen.dart';
 import 'package:evo/features/settings/views/payment_information_screen.dart';
 import 'package:evo/features/settings/views/primary_location_screen.dart';
@@ -15,6 +18,8 @@ class SettingsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final generalPrefs = ref.watch(generalPreferencesProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(context.t.settingsScreen.appBar),
@@ -100,7 +105,30 @@ class SettingsScreen extends ConsumerWidget {
                   subTitle:
                       context.t.settingsScreen.appMenuItems.appTheme.subtitle,
                   showNavigationIcon: false,
-                  onClick: () {},
+                  onClick: () {
+                    if (Theme.of(context).platform == TargetPlatform.android) {
+                      showChoicePicker(
+                        context,
+                        choices: BackgroundThemeMode.values,
+                        selectedItem: generalPrefs.themeMode,
+                        labelBuilder: (t) => Text(
+                          AppBackgroundModeScreen.themeTitle(context, t),
+                        ),
+                        onSelectedItemChanged: (BackgroundThemeMode? value) =>
+                            ref
+                                .read(generalPreferencesProvider.notifier)
+                                .setThemeMode(
+                                    value ?? BackgroundThemeMode.system),
+                      );
+                    } else {
+                      pushPlatformRoute(
+                        context,
+                        title: context
+                            .t.settingsScreen.appMenuItems.appTheme.title,
+                        builder: (context) => const AppBackgroundModeScreen(),
+                      );
+                    }
+                  },
                 ),
               ],
             ),
