@@ -64,7 +64,7 @@ class PaymentInformationScreen extends ConsumerWidget {
                     ),
                   );
                 },
-                error: (error, stack) {
+                error: (_, stack) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

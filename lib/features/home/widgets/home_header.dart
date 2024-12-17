@@ -106,7 +106,7 @@ class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
   Widget build(BuildContext context) {
     final primaryMembershipLocationId =
         ref.read(membershipDetailsProvider).requireValue!.location.id;
-    final locationsProvider = ref.read(getLocationsProvider);
+    final locationsAsync = ref.read(getLocationsProvider);
 
     // Scroll to the current location.
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -118,7 +118,7 @@ class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
       }
     });
 
-    return locationsProvider.when(
+    return locationsAsync.when(
       data: (locations) => BottomSheetScrollableContainer(
         padding: const EdgeInsets.all(16.0),
         children: [
@@ -133,7 +133,9 @@ class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
                 ),
               ),
               const SizedBox(height: 16),
-              for (final location in locations)
+              for (final location in locations.sort(
+                (a, b) => a.name.compareTo(b.name),
+              ))
                 PlatformListTile(
                   key: location.id == widget.currentLocationId
                       ? currentLocationKey

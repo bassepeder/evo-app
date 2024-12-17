@@ -45,6 +45,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsKeyTypesNo keyTypes = TranslationsKeyTypesNo.internal(_root);
 	late final TranslationsMembershipStatusesNo membershipStatuses = TranslationsMembershipStatusesNo.internal(_root);
 	late final TranslationsPaymentScreenNo paymentScreen = TranslationsPaymentScreenNo.internal(_root);
+	late final TranslationsPrimaryLocationScreenNo primaryLocationScreen = TranslationsPrimaryLocationScreenNo.internal(_root);
 	late final TranslationsProfileScreenNo profileScreen = TranslationsProfileScreenNo.internal(_root);
 	late final TranslationsSettingsScreenNo settingsScreen = TranslationsSettingsScreenNo.internal(_root);
 	late final TranslationsSignInScreenNo signInScreen = TranslationsSignInScreenNo.internal(_root);
@@ -171,6 +172,18 @@ class TranslationsPaymentScreenNo {
 	String get paymentCardHeader => 'Betalingskort';
 	String get previousPaymentsHeader => 'Tidligere betalinger';
 	late final TranslationsPaymentScreenTableHeadersNo tableHeaders = TranslationsPaymentScreenTableHeadersNo.internal(_root);
+}
+
+// Path: primaryLocationScreen
+class TranslationsPrimaryLocationScreenNo {
+	TranslationsPrimaryLocationScreenNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get appbar => 'Primærsenter';
+	String get header => 'Ditt primærsenter';
+	String updateSuccessful({required Object name}) => '${name} satt som ditt primærsenter.';
 }
 
 // Path: profileScreen
@@ -704,6 +717,9 @@ extension on Translations {
 			case 'paymentScreen.tableHeaders.amount.label': return 'Beløp';
 			case 'paymentScreen.tableHeaders.period.label': return 'Periode';
 			case 'paymentScreen.tableHeaders.pdf.label': return 'PDF';
+			case 'primaryLocationScreen.appbar': return 'Primærsenter';
+			case 'primaryLocationScreen.header': return 'Ditt primærsenter';
+			case 'primaryLocationScreen.updateSuccessful': return ({required Object name}) => '${name} satt som ditt primærsenter.';
 			case 'profileScreen.appbar': return 'Kontoinformasjon';
 			case 'profileScreen.personalInformationHeader': return 'Personlig informasjon ';
 			case 'profileScreen.termsHeader': return 'Medlemsvilkår';
