@@ -10,8 +10,6 @@ class MembershipStatusBanner extends StatelessWidget {
     required this.details,
   });
 
-  static const defaultColor = Color(0xFF4A3298);
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,8 +20,9 @@ class MembershipStatusBanner extends StatelessWidget {
         vertical: 16,
       ),
       decoration: BoxDecoration(
-        color:
-            MembershipStatusExtensions.color(details.membershipDetails.status),
+        color: MembershipStatusExtensions.color(
+          details.membershipDetails.status,
+        ),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text.rich(
