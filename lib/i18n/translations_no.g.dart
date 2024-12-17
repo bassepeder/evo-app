@@ -103,6 +103,8 @@ class TranslationsFormsNo {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+	String get cancel => 'Avbryt';
+	String get ok => 'OK';
 	late final TranslationsFormsFieldsNo fields = TranslationsFormsFieldsNo.internal(_root);
 }
 
@@ -565,6 +567,7 @@ class TranslationsSettingsScreenAppMenuItemsAppThemeNo {
 	// Translations
 	String get title => 'Utseende';
 	String get subtitle => 'Velg mellom mørkt og lyst tema';
+	late final TranslationsSettingsScreenAppMenuItemsAppThemeOptionsNo options = TranslationsSettingsScreenAppMenuItemsAppThemeOptionsNo.internal(_root);
 }
 
 // Path: forms.fields.firstname.validation
@@ -651,6 +654,18 @@ class TranslationsFormsFieldsPostalCodeValidationNo {
 	String get empty => 'Postnummer er påkrevd';
 }
 
+// Path: settingsScreen.appMenuItems.appTheme.options
+class TranslationsSettingsScreenAppMenuItemsAppThemeOptionsNo {
+	TranslationsSettingsScreenAppMenuItemsAppThemeOptionsNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get deviceTheme => 'Følg system';
+	String get dark => 'Mørk';
+	String get light => 'Lys';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 extension on Translations {
@@ -671,6 +686,8 @@ extension on Translations {
 			case 'format.yesterday': return 'i går';
 			case 'format.today': return 'i dag';
 			case 'format.tomorrow': return 'i morgen';
+			case 'forms.cancel': return 'Avbryt';
+			case 'forms.ok': return 'OK';
 			case 'forms.fields.firstname.label': return 'Fornavn';
 			case 'forms.fields.firstname.hint': return 'Skriv inn fornavnet ditt';
 			case 'forms.fields.firstname.validation.empty': return 'Vennligst skriv inn fornavnet ditt';
@@ -755,6 +772,9 @@ extension on Translations {
 			case 'settingsScreen.appMenuItems.header': return 'App-innstillinger';
 			case 'settingsScreen.appMenuItems.appTheme.title': return 'Utseende';
 			case 'settingsScreen.appMenuItems.appTheme.subtitle': return 'Velg mellom mørkt og lyst tema';
+			case 'settingsScreen.appMenuItems.appTheme.options.deviceTheme': return 'Følg system';
+			case 'settingsScreen.appMenuItems.appTheme.options.dark': return 'Mørk';
+			case 'settingsScreen.appMenuItems.appTheme.options.light': return 'Lys';
 			case 'signInScreen.title': return 'Logg inn';
 			case 'signInScreen.header': return 'Velkommen tilbake!';
 			case 'signInScreen.subtitle': return 'Logg inn med e-posten og passordet ditt.';

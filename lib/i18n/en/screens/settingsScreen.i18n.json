@@ -27,7 +27,12 @@
     "header": "App Settings",
     "appTheme": {
       "title": "App Theme",
-      "subtitle": "Change the look of the app"
+      "subtitle": "Change the look of the app",
+      "options": {
+        "deviceTheme": "Device theme",
+        "dark": "Dark",
+        "light": "Light"
+      }
     }
   }
 }

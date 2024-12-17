@@ -1,4 +1,6 @@
 {
+  "cancel": "Avbryt",
+  "ok": "OK",
   "fields": {
     "firstname": {
       "label": "Fornavn",

@@ -1,4 +1,6 @@
 {
+  "cancel": "Cancel",
+  "ok": "OK",
   "fields": {
     "firstname": {
       "label": "First name",
