@@ -15,9 +15,14 @@ class PrimaryLocationScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final membershipDetails =
-        ref.watch(membershipDetailsProvider).requireValue!;
-    final primaryMembershipLocationId = membershipDetails.location.id;
+    final membershipLocationName = ref.watch(
+      membershipDetailsProvider
+          .select((membership) => membership.requireValue!.location.name),
+    );
+    final primaryMembershipLocationId = ref.watch(
+      membershipDetailsProvider
+          .select((membership) => membership.requireValue!.location.id),
+    );
     final locationsAsync = ref.read(getLocationsProvider);
 
     return Scaffold(
@@ -33,13 +38,14 @@ class PrimaryLocationScreen extends ConsumerWidget {
                 SliverPersistentHeader(
                   pinned: true,
                   delegate: _StickyHeaderDelegate(
+                    dependency: membershipLocationName,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Header(title: context.t.primaryLocationScreen.header),
                         const SizedBox(height: 8),
                         Text(
-                          membershipDetails.location.name,
+                          membershipLocationName,
                           style: const TextStyle(fontSize: 16),
                         ),
                         const SizedBox(height: 32),
@@ -56,11 +62,12 @@ class PrimaryLocationScreen extends ConsumerWidget {
                   sliver: SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
+                        final sortedLocations =
+                            locations.sort((a, b) => a.name.compareTo(b.name));
+
                         return _LocationPickerList(
                           primaryLocationId: primaryMembershipLocationId,
-                          locations: locations.sort(
-                            (a, b) => a.name.compareTo(b.name),
-                          ),
+                          locations: sortedLocations,
                         );
                       },
                       childCount: 1,
@@ -102,8 +109,12 @@ class PrimaryLocationScreen extends ConsumerWidget {
 
 class _StickyHeaderDelegate extends SliverPersistentHeaderDelegate {
   final Widget child;
+  final Object? dependency;
 
-  _StickyHeaderDelegate({required this.child});
+  _StickyHeaderDelegate({
+    required this.child,
+    required this.dependency,
+  });
 
   @override
   Widget build(
@@ -119,12 +130,14 @@ class _StickyHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 150; // Adjust to match your header size
+  double get maxExtent => 150;
+
   @override
-  double get minExtent => 150; // Keep the height consistent
+  double get minExtent => 150;
+
   @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
-      false;
+  bool shouldRebuild(covariant _StickyHeaderDelegate oldDelegate) =>
+      oldDelegate.dependency != dependency;
 }
 
 class _LocationPickerList extends ConsumerStatefulWidget {
@@ -144,51 +157,38 @@ class _LocationPickerList extends ConsumerStatefulWidget {
 class _LocationPickerListState extends ConsumerState<_LocationPickerList> {
   final currentLocationKey = GlobalKey();
   LocationId? loadingLocationId;
-  LocationId? previousPrimaryLocationId;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollToCurrentLocation();
+    });
+  }
 
   @override
   void didUpdateWidget(covariant _LocationPickerList oldWidget) {
     super.didUpdateWidget(oldWidget);
-
-    // Check if the primary location has changed
-    if (previousPrimaryLocationId != widget.primaryLocationId) {
-      previousPrimaryLocationId = widget.primaryLocationId;
-
-      // Scroll to the new location with animation
+    if (oldWidget.primaryLocationId != widget.primaryLocationId) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (currentLocationKey.currentContext != null) {
-          final scrollableState =
-              Scrollable.of(currentLocationKey.currentContext!);
-          final scrollPosition = scrollableState.position;
-
-          final targetOffset = scrollPosition.pixels +
-              (currentLocationKey.currentContext!.findRenderObject()!
-                      as RenderBox)
-                  .localToGlobal(Offset.zero)
-                  .dy -
-              (MediaQuery.of(context).size.height / 2);
-
-          scrollPosition.animateTo(
-            targetOffset,
-            duration: const Duration(seconds: 1),
-            curve: Curves.easeInOut,
-          );
-        }
+        _scrollToCurrentLocation(const Duration(milliseconds: 500));
       });
+    }
+  }
+
+  void _scrollToCurrentLocation([Duration duration = Duration.zero]) {
+    if (currentLocationKey.currentContext != null) {
+      Scrollable.ensureVisible(
+        currentLocationKey.currentContext!,
+        alignment: 0.5,
+        duration: duration,
+        curve: Curves.easeInOut,
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (currentLocationKey.currentContext != null) {
-        Scrollable.ensureVisible(
-          currentLocationKey.currentContext!,
-          alignment: 0.5,
-        );
-      }
-    });
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -217,9 +217,10 @@ class _LocationPickerListState extends ConsumerState<_LocationPickerList> {
                     });
 
                     try {
-                      await ref.withClient((client) =>
-                          MembershipRepository(client)
-                              .updatePrimaryLocation(location.id));
+                      await ref.withClient(
+                        (client) => MembershipRepository(client)
+                            .updatePrimaryLocation(location.id),
+                      );
                       ref.invalidate(membershipDetailsProvider);
 
                       if (!context.mounted) return;
