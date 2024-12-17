@@ -69,25 +69,30 @@ class CurrentReferralScreen extends ConsumerWidget {
                     return Column(
                       children: [
                         const SizedBox(height: 64),
-                        Text(
-                          textAlign: TextAlign.center,
-                          referral.description,
-                          style: Theme.of(context).textTheme.bodyLarge,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Text(
+                            textAlign: TextAlign.center,
+                            referral.description,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
                         ),
                       ],
                     );
                   },
                   loading: () {
-                    return const Column(children: [
-                      SizedBox(height: 48),
-                      Center(
-                        child: SizedBox(
-                          width: 32,
-                          height: 32,
-                          child: CircularProgressIndicator(strokeWidth: 2),
+                    return const Column(
+                      children: [
+                        SizedBox(height: 48),
+                        Center(
+                          child: SizedBox(
+                            width: 32,
+                            height: 32,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          ),
                         ),
-                      ),
-                    ],);
+                      ],
+                    );
                   },
                   error: (_, stack) {
                     return SizedBox(
