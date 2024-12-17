@@ -37,6 +37,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final Translations _root = this; // ignore: unused_field
 
 	// Translations
+	late final TranslationsCurrentReferralScreenNo currentReferralScreen = TranslationsCurrentReferralScreenNo.internal(_root);
 	late final TranslationsErrorsNo errors = TranslationsErrorsNo.internal(_root);
 	late final TranslationsFormatNo format = TranslationsFormatNo.internal(_root);
 	late final TranslationsFormsNo forms = TranslationsFormsNo.internal(_root);
@@ -51,6 +52,17 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsSignInScreenNo signInScreen = TranslationsSignInScreenNo.internal(_root);
 	late final TranslationsWelcomeScreenNo welcomeScreen = TranslationsWelcomeScreenNo.internal(_root);
 	late final TranslationsWorkoutsScreenNo workoutsScreen = TranslationsWorkoutsScreenNo.internal(_root);
+}
+
+// Path: currentReferralScreen
+class TranslationsCurrentReferralScreenNo {
+	TranslationsCurrentReferralScreenNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get appbar => 'Vervekampanje';
+	String get header => 'Din vervekode';
 }
 
 // Path: errors
@@ -69,6 +81,7 @@ class TranslationsErrorsNo {
 	String get failedToLoadWorkoutStatistics => 'Klarte ikke å hente treningsøktene dine.';
 	String get failedToLoadInvoices => 'Klarte ikke å hente fakturaene dine.';
 	String get failedToOpenUrl => 'Klarte ikke å åpne URL.';
+	String get failedToLoadCurrentMembershipReferral => 'Klarte ikke å hente info om din vervekampanje.';
 }
 
 // Path: format
@@ -643,6 +656,8 @@ class TranslationsFormsFieldsPostalCodeValidationNo {
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
+			case 'currentReferralScreen.appbar': return 'Vervekampanje';
+			case 'currentReferralScreen.header': return 'Din vervekode';
 			case 'errors.generalTitle': return 'Oi! Noe gikk galt';
 			case 'errors.generalDescription': return 'Noe gikk i stykker, men vi jobber med det. Prøv igjen om litt.';
 			case 'errors.generalRetryButtonText': return 'Prøv igjen';
@@ -652,6 +667,7 @@ extension on Translations {
 			case 'errors.failedToLoadWorkoutStatistics': return 'Klarte ikke å hente treningsøktene dine.';
 			case 'errors.failedToLoadInvoices': return 'Klarte ikke å hente fakturaene dine.';
 			case 'errors.failedToOpenUrl': return 'Klarte ikke å åpne URL.';
+			case 'errors.failedToLoadCurrentMembershipReferral': return 'Klarte ikke å hente info om din vervekampanje.';
 			case 'format.yesterday': return 'i går';
 			case 'format.today': return 'i dag';
 			case 'format.tomorrow': return 'i morgen';
