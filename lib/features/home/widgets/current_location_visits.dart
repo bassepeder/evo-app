@@ -22,7 +22,7 @@ class CurrentLocationVisits extends ConsumerWidget {
         vertical: 16,
       ),
       decoration: BoxDecoration(
-        color: colorScheme.primary.withOpacity(0.5),
+        color: colorScheme.primary.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(20),
       ),
       child: locationState.currentLocationData.when(
