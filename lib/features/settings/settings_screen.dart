@@ -1,4 +1,5 @@
 import 'package:evo/features/auth/providers/auth_session.dart';
+import 'package:evo/features/settings/views/current_referral_screen.dart';
 import 'package:evo/features/settings/views/payment_information_screen.dart';
 import 'package:evo/features/settings/views/primary_location_screen.dart';
 import 'package:evo/features/settings/views/profile_information_screen.dart';
@@ -70,7 +71,10 @@ class SettingsScreen extends ConsumerWidget {
                       context.t.settingsScreen.accountMenuItems.referral.title,
                   subTitle: context
                       .t.settingsScreen.accountMenuItems.referral.subtitle,
-                  onClick: () {},
+                  onClick: () => pushPlatformRoute(
+                    context,
+                    builder: (_) => const CurrentReferralScreen(),
+                  ),
                 ),
                 SettingsListItem(
                   svgSrc: signOutSvg,
