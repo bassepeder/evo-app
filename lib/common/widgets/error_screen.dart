@@ -95,8 +95,7 @@ class ErrorInfo extends StatelessWidget {
   }
 }
 
-const svgImage =
-    '''
+const svgImage = '''
 <svg width="1080" height="1080" viewBox="0 0 1080 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M495.37 347.17C529.49 305.3 601.8 305.22 636.11 346.94" stroke="#0E0E0E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M572.22 752.17C632.85 752.17 682 707.533 682 652.47C682 597.407 632.85 552.77 572.22 552.77C511.59 552.77 462.44 597.407 462.44 652.47C462.44 707.533 511.59 752.17 572.22 752.17Z" fill="#D3D3D3"/>

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:evo/common/id.dart';
 import 'package:evo/features/auth/providers/auth_session.dart';
+import 'package:evo/features/membership/models/current_membership_referral.dart';
 import 'package:evo/features/membership/models/membership_details.dart';
 import 'package:evo/features/settings/models/update_primary_location_request.dart';
 import 'package:evo/network/http.dart';
@@ -20,6 +21,14 @@ Future<MembershipDetails?> membershipDetails(Ref ref) async {
   );
 }
 
+@riverpod
+Future<CurrentMembershipReferral> currentMembershipReferral(Ref ref) async {
+  return ref.withClientCacheFor(
+    (client) => MembershipRepository(client).getCurrentMembershipReferral(),
+    const Duration(days: 1),
+  );
+}
+
 class MembershipRepository {
   MembershipRepository(this.client);
 
@@ -29,6 +38,13 @@ class MembershipRepository {
     return client.readJson(
       evoUri('api/v1/membership'),
       mapper: MembershipDetails.fromServerJson,
+    );
+  }
+
+  Future<CurrentMembershipReferral> getCurrentMembershipReferral() {
+    return client.readJson(
+      evoUri('api/v1/membership/current-referral'),
+      mapper: CurrentMembershipReferral.fromServerJson,
     );
   }
 
