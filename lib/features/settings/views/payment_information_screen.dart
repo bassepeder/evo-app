@@ -1,5 +1,6 @@
 import 'package:evo/common/widgets/evo_elevated_button.dart';
 import 'package:evo/features/membership/membership_repository.dart';
+import 'package:evo/features/settings/brightness.dart';
 import 'package:evo/features/settings/invoice_repository.dart';
 import 'package:evo/features/settings/models/invoice_details.dart';
 import 'package:evo/i18n/translations.g.dart';
@@ -158,13 +159,23 @@ class PreviousPaymentCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final membershipLocale =
         ref.read(membershipDetailsProvider).requireValue!.locale;
+    final isDarkMode = ref.read(currentBrightnessProvider
+        .select((brightness) => brightness == Brightness.dark));
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.onPrimary,
+          color: isDarkMode
+              ? Theme.of(context)
+                  .colorScheme
+                  .surfaceContainerHigh
+                  .withValues(alpha: 0.5)
+              : Theme.of(context)
+                  .colorScheme
+                  .surfaceContainer
+                  .withValues(alpha: 0.5),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
