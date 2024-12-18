@@ -1,6 +1,8 @@
 import 'package:evo/common/widgets/adaptive_choice_picker.dart';
+import 'package:evo/common/widgets/themed_icon.dart';
 import 'package:evo/features/auth/providers/auth_session.dart';
 import 'package:evo/features/settings/app_background_mode_screen.dart';
+import 'package:evo/features/settings/brightness.dart';
 import 'package:evo/features/settings/general_preferences.dart';
 import 'package:evo/features/settings/views/current_referral_screen.dart';
 import 'package:evo/features/settings/views/payment_information_screen.dart';
@@ -19,6 +21,7 @@ class SettingsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final generalPrefs = ref.watch(generalPreferencesProvider);
+    final brightness = ref.watch(currentBrightnessProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -43,6 +46,7 @@ class SettingsScreen extends ConsumerWidget {
                       .profileInformation.title,
                   subTitle: context.t.settingsScreen.accountMenuItems
                       .profileInformation.subtitle,
+                  currentBrightness: brightness,
                   onClick: () => pushPlatformRoute(
                     context,
                     builder: (_) => const ProfileInformationScreen(),
@@ -54,6 +58,7 @@ class SettingsScreen extends ConsumerWidget {
                       context.t.settingsScreen.accountMenuItems.payment.title,
                   subTitle: context
                       .t.settingsScreen.accountMenuItems.payment.subtitle,
+                  currentBrightness: brightness,
                   onClick: () => pushPlatformRoute(
                     context,
                     builder: (_) => const PaymentInformationScreen(),
@@ -65,6 +70,7 @@ class SettingsScreen extends ConsumerWidget {
                       context.t.settingsScreen.accountMenuItems.locations.title,
                   subTitle: context
                       .t.settingsScreen.accountMenuItems.locations.subtitle,
+                  currentBrightness: brightness,
                   onClick: () => pushPlatformRoute(
                     context,
                     builder: (_) => const PrimaryLocationScreen(),
@@ -76,6 +82,7 @@ class SettingsScreen extends ConsumerWidget {
                       context.t.settingsScreen.accountMenuItems.referral.title,
                   subTitle: context
                       .t.settingsScreen.accountMenuItems.referral.subtitle,
+                  currentBrightness: brightness,
                   onClick: () => pushPlatformRoute(
                     context,
                     builder: (_) => const CurrentReferralScreen(),
@@ -88,6 +95,7 @@ class SettingsScreen extends ConsumerWidget {
                   subTitle: context
                       .t.settingsScreen.accountMenuItems.signOut.subtitle,
                   showNavigationIcon: false,
+                  currentBrightness: brightness,
                   onClick: () {
                     ref.read(authSessionProvider.notifier).delete();
                     pushAndRemoveUntilPlatformRoute(
@@ -105,6 +113,7 @@ class SettingsScreen extends ConsumerWidget {
                   subTitle:
                       context.t.settingsScreen.appMenuItems.appTheme.subtitle,
                   showNavigationIcon: false,
+                  currentBrightness: brightness,
                   onClick: () {
                     if (Theme.of(context).platform == TargetPlatform.android) {
                       showChoicePicker(
@@ -118,7 +127,8 @@ class SettingsScreen extends ConsumerWidget {
                             ref
                                 .read(generalPreferencesProvider.notifier)
                                 .setThemeMode(
-                                    value ?? BackgroundThemeMode.system),
+                                  value ?? BackgroundThemeMode.system,
+                                ),
                       );
                     } else {
                       pushPlatformRoute(
@@ -148,9 +158,10 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.bold,
+        color: Theme.of(context).colorScheme.onSurface,
       ),
     );
   }
@@ -162,6 +173,7 @@ class SettingsListItem extends StatelessWidget {
   final String svgSrc;
   final bool showNavigationIcon;
   final VoidCallback onClick;
+  final Brightness currentBrightness;
 
   const SettingsListItem({
     super.key,
@@ -169,6 +181,7 @@ class SettingsListItem extends StatelessWidget {
     required this.subTitle,
     required this.svgSrc,
     required this.onClick,
+    required this.currentBrightness,
     this.showNavigationIcon = true,
   });
 
@@ -183,15 +196,18 @@ class SettingsListItem extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: Row(
             children: [
-              SvgPicture.string(
-                svgSrc,
-                height: 24,
-                width: 24,
-                colorFilter: ColorFilter.mode(
-                  const Color(0xFF010F07).withValues(alpha: 0.64),
-                  BlendMode.srcIn,
+              if (currentBrightness == Brightness.dark)
+                ThemedIcon(svgData: svgSrc)
+              else
+                SvgPicture.string(
+                  svgSrc,
+                  height: 24,
+                  width: 24,
+                  colorFilter: ColorFilter.mode(
+                    const Color(0xFF010F07).withValues(alpha: 0.64),
+                    BlendMode.srcIn,
+                  ),
                 ),
-              ),
               const SizedBox(width: 8),
               Expanded(
                 child: Column(
@@ -208,7 +224,10 @@ class SettingsListItem extends StatelessWidget {
                       maxLines: 1,
                       style: TextStyle(
                         fontSize: 14,
-                        color: const Color(0xFF010F07).withValues(alpha: 0.54),
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onSurface
+                            .withValues(alpha: 0.54),
                       ),
                     ),
                   ],

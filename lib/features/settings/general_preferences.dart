@@ -60,7 +60,7 @@ class GeneralPrefs with _$GeneralPrefs implements Serializable {
   const factory GeneralPrefs({
     @JsonKey(
         unknownEnumValue: BackgroundThemeMode.system,
-        defaultValue: BackgroundThemeMode.system)
+        defaultValue: BackgroundThemeMode.system,)
     required BackgroundThemeMode themeMode,
 
     /// Locale to use in the app, use system locale if null

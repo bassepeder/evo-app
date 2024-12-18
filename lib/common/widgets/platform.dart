@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 /// A simple widget that builds different things on different platforms.
 class PlatformWidget extends StatelessWidget {
   const PlatformWidget(
-      {super.key, required this.androidBuilder, required this.iosBuilder});
+      {super.key, required this.androidBuilder, required this.iosBuilder,});
 
   final WidgetBuilder androidBuilder;
   final WidgetBuilder iosBuilder;
@@ -26,7 +26,7 @@ class PlatformWidget extends StatelessWidget {
 }
 
 typedef ConsumerWidgetBuilder = Widget Function(
-    BuildContext context, WidgetRef ref);
+    BuildContext context, WidgetRef ref,);
 
 /// A widget that builds different things on different platforms with riverpod.
 class ConsumerPlatformWidget extends StatelessWidget {

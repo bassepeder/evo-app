@@ -1,12 +1,12 @@
 import 'package:evo/common/styles.dart';
 import 'package:evo/common/widgets/adaptive_bottom_sheet.dart';
 import 'package:evo/common/widgets/list.dart';
+import 'package:evo/common/widgets/themed_icon.dart';
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/features/membership/models/membership_details.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class KeysMenu extends ConsumerWidget {
   static const keyStatusOrder = {
@@ -133,7 +133,7 @@ class _KeyIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.string(getIconForKeyType(type));
+    return ThemedIcon(svgData: getIconForKeyType(type));
   }
 
   String getIconForKeyType(KeyType type) {

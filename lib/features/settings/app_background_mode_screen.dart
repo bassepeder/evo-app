@@ -12,7 +12,7 @@ class AppBackgroundModeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlatformWidget(
-        androidBuilder: _androidBuilder, iosBuilder: _iosBuilder);
+        androidBuilder: _androidBuilder, iosBuilder: _iosBuilder,);
   }
 
   Widget _androidBuilder(BuildContext context) {

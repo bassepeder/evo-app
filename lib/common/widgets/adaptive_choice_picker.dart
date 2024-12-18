@@ -47,7 +47,7 @@ Future<void> showChoicePicker<T>(
                       )
                     : Column(
                         mainAxisSize: MainAxisSize.min,
-                        children: choiceWidgets);
+                        children: choiceWidgets,);
               },
             ),
             actions: [

@@ -1,5 +1,5 @@
+import 'package:evo/common/widgets/themed_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class IconButtonWithCounter extends StatelessWidget {
   final String svgSrc;
@@ -26,10 +26,10 @@ class IconButtonWithCounter extends StatelessWidget {
             height: 46,
             width: 46,
             decoration: BoxDecoration(
-              color: const Color(0xFF979797).withOpacity(0.1),
+              color: const Color(0xFF979797).withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
-            child: SvgPicture.string(svgSrc),
+            child: ThemedIcon(svgData: svgSrc),
           ),
           if (counter != 0)
             Positioned(
