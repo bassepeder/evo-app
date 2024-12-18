@@ -1,5 +1,6 @@
 import 'package:evo/features/home/models/location_statistics_timeline.dart';
 import 'package:evo/features/home/viewmodels/location_controller.dart';
+import 'package:evo/features/settings/brightness.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:evo/utils/formatting.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -14,6 +15,7 @@ class LocationVisitsTimeline extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
 
+    final brightness = ref.watch(currentBrightnessProvider);
     final locationState = ref.watch(locationControllerProvider);
     final dateToDisplay = ref.watch(
       locationControllerProvider.select((state) => state.timelineDateFilter),
@@ -61,7 +63,10 @@ class LocationVisitsTimeline extends ConsumerWidget {
               SizedBox(
                 width: double.infinity,
                 height: 225,
-                child: Chart(intervals: timeline.intervals),
+                child: Chart(
+                  intervals: timeline.intervals,
+                  isDarkMode: brightness == Brightness.dark,
+                ),
               ),
             ],
           );
@@ -105,8 +110,13 @@ class LocationVisitsTimeline extends ConsumerWidget {
 
 class Chart extends StatelessWidget {
   final List<LocationStatisticsTimelineEntry> intervals;
+  final bool isDarkMode;
 
-  const Chart({super.key, required this.intervals});
+  const Chart({
+    super.key,
+    required this.intervals,
+    required this.isDarkMode,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -121,11 +131,11 @@ class Chart extends StatelessWidget {
           final isCurrent = item.status == 'current';
           final isHistoric = item.status == 'historic';
           final barColor = isCurrent
-              ? colorScheme.primary // Keep primary for the bar
+              ? colorScheme.primary // Keep primary for the current bar
               : isHistoric
                   ? colorScheme.surfaceContainerHighest
                       .withValues(alpha: 0.7) // Subdued color for historic bars
-                  : colorScheme.primary.withValues(alpha: 0.6); // Default bars
+                  : colorScheme.primary.withValues(alpha: 0.6); // Future bars
 
           return BarChartGroupData(
             x: index,
