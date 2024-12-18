@@ -12,6 +12,7 @@ import 'package:evo/features/settings/views/profile_information_screen.dart';
 import 'package:evo/features/welcome_screen.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:evo/utils/navigation.dart';
+import 'package:evo/utils/system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -23,6 +24,7 @@ class SettingsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final generalPrefs = ref.watch(generalPreferencesProvider);
     final brightness = ref.watch(currentBrightnessProvider);
+    final androidVersionAsync = ref.watch(androidVersionProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -141,6 +143,27 @@ class SettingsScreen extends ConsumerWidget {
                     }
                   },
                 ),
+                /*
+                if (Theme.of(context).platform == TargetPlatform.android)
+                  androidVersionAsync.maybeWhen(
+                    data: (version) => version != null && version.sdkInt >= 31
+                        ? SwitchSettingTile(
+                            leading: const Icon(Icons.colorize_outlined),
+                            title: Text(context.t.settingsScreen.appMenuItems
+                                .systemColors.title,),
+                            subtitle: Text(context.t.settingsScreen.appMenuItems
+                                .systemColors.subtitle,),
+                            value: generalPrefs.systemColors,
+                            onChanged: (value) {
+                              ref
+                                  .read(generalPreferencesProvider.notifier)
+                                  .toggleSystemColors();
+                            },
+                          )
+                        : const SizedBox.shrink(),
+                    orElse: () => const SizedBox.shrink(),
+                  ),
+                 */
                 SettingsListItem(
                   svgSrc: languageSvg,
                   title: context.t.settingsScreen.appMenuItems.locale.title,

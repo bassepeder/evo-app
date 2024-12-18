@@ -1,5 +1,6 @@
 import 'package:evo/features/home/models/location_statistics_timeline.dart';
 import 'package:evo/features/home/viewmodels/location_controller.dart';
+import 'package:evo/features/settings/brightness.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:evo/utils/formatting.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -14,6 +15,7 @@ class LocationVisitsTimeline extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
 
+    final brightness = ref.watch(currentBrightnessProvider);
     final locationState = ref.watch(locationControllerProvider);
     final dateToDisplay = ref.watch(
       locationControllerProvider.select((state) => state.timelineDateFilter),
@@ -27,7 +29,7 @@ class LocationVisitsTimeline extends ConsumerWidget {
         vertical: 16,
       ),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.8),
+        color: colorScheme.surface.withValues(alpha: 0.8),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
@@ -61,7 +63,10 @@ class LocationVisitsTimeline extends ConsumerWidget {
               SizedBox(
                 width: double.infinity,
                 height: 225,
-                child: Chart(intervals: timeline.intervals),
+                child: Chart(
+                  intervals: timeline.intervals,
+                  isDarkMode: brightness == Brightness.dark,
+                ),
               ),
             ],
           );
@@ -83,7 +88,7 @@ class LocationVisitsTimeline extends ConsumerWidget {
                 Expanded(
                   child: Center(
                     child: CircularProgressIndicator(
-                      color: Theme.of(context).colorScheme.primary,
+                      color: colorScheme.primary,
                       strokeWidth: 3,
                     ),
                   ),
@@ -105,8 +110,13 @@ class LocationVisitsTimeline extends ConsumerWidget {
 
 class Chart extends StatelessWidget {
   final List<LocationStatisticsTimelineEntry> intervals;
+  final bool isDarkMode;
 
-  const Chart({super.key, required this.intervals});
+  const Chart({
+    super.key,
+    required this.intervals,
+    required this.isDarkMode,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -120,12 +130,12 @@ class Chart extends StatelessWidget {
           final item = entry.value;
           final isCurrent = item.status == 'current';
           final isHistoric = item.status == 'historic';
-          final barColor = isCurrent
-              ? colorScheme.primary // Keep primary for the bar
-              : isHistoric
-                  ? colorScheme.surfaceContainerHighest
-                      .withValues(alpha: 0.7) // Subdued color for historic bars
-                  : colorScheme.primary.withValues(alpha: 0.6); // Default bars
+          final barColor = _getBarColor(
+            colorScheme,
+            isCurrent,
+            isHistoric,
+            isDarkMode,
+          );
 
           return BarChartGroupData(
             x: index,
@@ -211,6 +221,26 @@ class Chart extends StatelessWidget {
       ),
     );
   }
+}
+
+Color _getBarColor(
+  ColorScheme colorScheme,
+  bool isCurrent,
+  bool isHistoric,
+  bool isDarkMode,
+) {
+  if (isCurrent) {
+    return colorScheme.primary;
+  }
+
+  if (isHistoric) {
+    return isDarkMode
+        ? colorScheme.surfaceContainerHigh.withValues(alpha: 0.7)
+        : colorScheme.onSurface.withValues(alpha: 0.4);
+  }
+
+  // Future bars
+  return colorScheme.primary.withValues(alpha: 0.6);
 }
 
 class Header extends StatelessWidget {

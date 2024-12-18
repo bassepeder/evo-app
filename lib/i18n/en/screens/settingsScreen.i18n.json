@@ -34,10 +34,14 @@
         "light": "Light"
       }
     },
+    "systemColors": {
+      "title": "Use system colors",
+      "subtitle": "Make use of the system color palette"
+    },
     "locale": {
       "title": "Language",
       "subtitle": "Select preferred language",
-      "optionsMap": {
+      "optionsMap(map)": {
         "en": "English",
         "no": "Norwegian"
       }

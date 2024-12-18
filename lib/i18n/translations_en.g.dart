@@ -344,6 +344,7 @@ class _TranslationsSettingsScreenAppMenuItemsEn extends TranslationsSettingsScre
 	// Translations
 	@override String get header => 'App Settings';
 	@override late final _TranslationsSettingsScreenAppMenuItemsAppThemeEn appTheme = _TranslationsSettingsScreenAppMenuItemsAppThemeEn._(_root);
+	@override late final _TranslationsSettingsScreenAppMenuItemsSystemColorsEn systemColors = _TranslationsSettingsScreenAppMenuItemsSystemColorsEn._(_root);
 	@override late final _TranslationsSettingsScreenAppMenuItemsLocaleEn locale = _TranslationsSettingsScreenAppMenuItemsLocaleEn._(_root);
 }
 
@@ -570,6 +571,17 @@ class _TranslationsSettingsScreenAppMenuItemsAppThemeEn extends TranslationsSett
 	@override late final _TranslationsSettingsScreenAppMenuItemsAppThemeOptionsEn options = _TranslationsSettingsScreenAppMenuItemsAppThemeOptionsEn._(_root);
 }
 
+// Path: settingsScreen.appMenuItems.systemColors
+class _TranslationsSettingsScreenAppMenuItemsSystemColorsEn extends TranslationsSettingsScreenAppMenuItemsSystemColorsNo {
+	_TranslationsSettingsScreenAppMenuItemsSystemColorsEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Use system colors';
+	@override String get subtitle => 'Make use of the system color palette';
+}
+
 // Path: settingsScreen.appMenuItems.locale
 class _TranslationsSettingsScreenAppMenuItemsLocaleEn extends TranslationsSettingsScreenAppMenuItemsLocaleNo {
 	_TranslationsSettingsScreenAppMenuItemsLocaleEn._(TranslationsEn root) : this._root = root, super.internal(root);
@@ -579,7 +591,10 @@ class _TranslationsSettingsScreenAppMenuItemsLocaleEn extends TranslationsSettin
 	// Translations
 	@override String get title => 'Language';
 	@override String get subtitle => 'Select preferred language';
-	@override late final _TranslationsSettingsScreenAppMenuItemsLocaleOptionsMapEn optionsMap = _TranslationsSettingsScreenAppMenuItemsLocaleOptionsMapEn._(_root);
+	@override Map<String, String> get optionsMap => {
+		'en': 'English',
+		'no': 'Norwegian',
+	};
 }
 
 // Path: forms.fields.firstname.validation
@@ -676,17 +691,6 @@ class _TranslationsSettingsScreenAppMenuItemsAppThemeOptionsEn extends Translati
 	@override String get deviceTheme => 'Device theme';
 	@override String get dark => 'Dark';
 	@override String get light => 'Light';
-}
-
-// Path: settingsScreen.appMenuItems.locale.optionsMap
-class _TranslationsSettingsScreenAppMenuItemsLocaleOptionsMapEn extends TranslationsSettingsScreenAppMenuItemsLocaleOptionsMapNo {
-	_TranslationsSettingsScreenAppMenuItemsLocaleOptionsMapEn._(TranslationsEn root) : this._root = root, super.internal(root);
-
-	final TranslationsEn _root; // ignore: unused_field
-
-	// Translations
-	@override String get en => 'English';
-	@override String get no => 'Norwegian';
 }
 
 /// Flat map(s) containing all translations.
@@ -798,6 +802,8 @@ extension on TranslationsEn {
 			case 'settingsScreen.appMenuItems.appTheme.options.deviceTheme': return 'Device theme';
 			case 'settingsScreen.appMenuItems.appTheme.options.dark': return 'Dark';
 			case 'settingsScreen.appMenuItems.appTheme.options.light': return 'Light';
+			case 'settingsScreen.appMenuItems.systemColors.title': return 'Use system colors';
+			case 'settingsScreen.appMenuItems.systemColors.subtitle': return 'Make use of the system color palette';
 			case 'settingsScreen.appMenuItems.locale.title': return 'Language';
 			case 'settingsScreen.appMenuItems.locale.subtitle': return 'Select preferred language';
 			case 'settingsScreen.appMenuItems.locale.optionsMap.en': return 'English';

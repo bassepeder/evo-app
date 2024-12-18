@@ -345,6 +345,7 @@ class TranslationsSettingsScreenAppMenuItemsNo {
 	// Translations
 	String get header => 'App-innstillinger';
 	late final TranslationsSettingsScreenAppMenuItemsAppThemeNo appTheme = TranslationsSettingsScreenAppMenuItemsAppThemeNo.internal(_root);
+	late final TranslationsSettingsScreenAppMenuItemsSystemColorsNo systemColors = TranslationsSettingsScreenAppMenuItemsSystemColorsNo.internal(_root);
 	late final TranslationsSettingsScreenAppMenuItemsLocaleNo locale = TranslationsSettingsScreenAppMenuItemsLocaleNo.internal(_root);
 }
 
@@ -571,6 +572,17 @@ class TranslationsSettingsScreenAppMenuItemsAppThemeNo {
 	late final TranslationsSettingsScreenAppMenuItemsAppThemeOptionsNo options = TranslationsSettingsScreenAppMenuItemsAppThemeOptionsNo.internal(_root);
 }
 
+// Path: settingsScreen.appMenuItems.systemColors
+class TranslationsSettingsScreenAppMenuItemsSystemColorsNo {
+	TranslationsSettingsScreenAppMenuItemsSystemColorsNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Bruk systemfarger';
+	String get subtitle => 'Ta i bruk system fargepalett';
+}
+
 // Path: settingsScreen.appMenuItems.locale
 class TranslationsSettingsScreenAppMenuItemsLocaleNo {
 	TranslationsSettingsScreenAppMenuItemsLocaleNo.internal(this._root);
@@ -791,6 +803,8 @@ extension on Translations {
 			case 'settingsScreen.appMenuItems.appTheme.options.deviceTheme': return 'Følg system';
 			case 'settingsScreen.appMenuItems.appTheme.options.dark': return 'Mørk';
 			case 'settingsScreen.appMenuItems.appTheme.options.light': return 'Lys';
+			case 'settingsScreen.appMenuItems.systemColors.title': return 'Bruk systemfarger';
+			case 'settingsScreen.appMenuItems.systemColors.subtitle': return 'Ta i bruk system fargepalett';
 			case 'settingsScreen.appMenuItems.locale.title': return 'Språk';
 			case 'settingsScreen.appMenuItems.locale.subtitle': return 'Velg ønsket språk';
 			case 'settingsScreen.appMenuItems.locale.optionsMap.en': return 'Engelsk';

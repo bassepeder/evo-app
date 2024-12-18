@@ -34,6 +34,10 @@
         "light": "Lys"
       }
     },
+    "systemColors": {
+      "title": "Bruk systemfarger",
+      "subtitle": "Ta i bruk system fargepalett"
+    },
     "locale": {
       "title": "Språk",
       "subtitle": "Velg ønsket språk",

@@ -97,10 +97,16 @@ class _AppState extends ConsumerState<Application> {
             ? _generateDynamicColourSchemes(lightColorScheme, darkColorScheme)
             : (null, null);
 
-        final colorScheme = ColorScheme.fromSeed(
-          seedColor: evoCustomColors.primary,
-          brightness: brightness,
-        );
+        final dynamicColorScheme =
+            brightness == Brightness.light ? fixedLightScheme : fixedDarkScheme;
+
+        final colorScheme =
+            generalPrefs.systemColors && dynamicColorScheme != null
+                ? dynamicColorScheme
+                : ColorScheme.fromSeed(
+                    seedColor: evoCustomColors.primary,
+                    brightness: brightness,
+                  );
 
         final cupertinoThemeData = CupertinoThemeData(
           primaryColor: colorScheme.primary,
