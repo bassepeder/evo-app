@@ -144,6 +144,22 @@ class SettingsScreen extends ConsumerWidget {
                     }
                   },
                 ),
+                if (Theme.of(context).platform == TargetPlatform.android)
+                  androidVersionAsync.maybeWhen(
+                    data: (version) => version != null && version.sdkInt >= 31
+                        ? SwitchSettingTile(
+                            leading: const Icon(Icons.colorize_outlined),
+                            title: Text('System colors'),
+                            value: generalPrefs.systemColors,
+                            onChanged: (value) {
+                              ref
+                                  .read(generalPreferencesProvider.notifier)
+                                  .toggleSystemColors();
+                            },
+                          )
+                        : const SizedBox.shrink(),
+                    orElse: () => const SizedBox.shrink(),
+                  ),
                 SettingsListItem(
                   svgSrc: languageSvg,
                   title: context.t.settingsScreen.appMenuItems.locale.title,
@@ -171,22 +187,6 @@ class SettingsScreen extends ConsumerWidget {
                     }
                   },
                 ),
-                if (Theme.of(context).platform == TargetPlatform.android)
-                  androidVersionAsync.maybeWhen(
-                    data: (version) => version != null && version.sdkInt >= 31
-                        ? SwitchSettingTile(
-                            leading: const Icon(Icons.colorize_outlined),
-                            title: Text('System colors'),
-                            value: generalPrefs.systemColors,
-                            onChanged: (value) {
-                              ref
-                                  .read(generalPreferencesProvider.notifier)
-                                  .toggleSystemColors();
-                            },
-                          )
-                        : const SizedBox.shrink(),
-                    orElse: () => const SizedBox.shrink(),
-                  ),
               ],
             ),
           ),
