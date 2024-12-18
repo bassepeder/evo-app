@@ -186,8 +186,8 @@ class HorizontalBarChart extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           decoration: BoxDecoration(
             color: percent == highestWorkouts
-                ? Theme.of(context).colorScheme.primary.withOpacity(0.8)
-                : Theme.of(context).colorScheme.primary.withOpacity(0.5),
+                ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.8)
+                : Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
             borderRadius: BorderRadius.circular(30.0),
           ),
           child: Row(

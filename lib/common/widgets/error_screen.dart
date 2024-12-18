@@ -1,7 +1,7 @@
 import 'package:evo/common/widgets/evo_elevated_button.dart';
+import 'package:evo/common/widgets/themed_icon.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class ErrorScreen extends StatelessWidget {
   final String? title;
@@ -28,10 +28,10 @@ class ErrorScreen extends StatelessWidget {
           const Spacer(flex: 1),
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.8,
-            child: AspectRatio(
+            child: const AspectRatio(
               aspectRatio: 1,
-              child: SvgPicture.string(
-                svgImage,
+              child: ThemedIcon(
+                svgData: svgImage,
                 fit: BoxFit.scaleDown,
               ),
             ),
