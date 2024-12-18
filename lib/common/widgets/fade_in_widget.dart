@@ -33,6 +33,7 @@ class _FadeInWidgetState extends State<FadeInWidget>
     _controller.forward(); // Start the animation
   }
 
+  /*
   @override
   void didUpdateWidget(covariant FadeInWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -41,6 +42,7 @@ class _FadeInWidgetState extends State<FadeInWidget>
       _controller.forward();
     }
   }
+   */
 
   @override
   void dispose() {
