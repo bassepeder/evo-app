@@ -234,7 +234,9 @@ Color _getBarColor(
   }
 
   if (isHistoric) {
-    return colorScheme.surfaceContainerHighest.withValues(alpha: 0.7);
+    return isDarkMode
+        ? colorScheme.surfaceContainerHigh.withValues(alpha: 0.7)
+        : colorScheme.onSurface.withValues(alpha: 0.4);
   }
 
   // Future bars
