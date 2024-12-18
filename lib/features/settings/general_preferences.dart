@@ -69,7 +69,7 @@ class GeneralPrefs with _$GeneralPrefs implements Serializable {
     required BackgroundThemeMode themeMode,
 
     /// Should enable system color palette (Android 12+ only)
-    @JsonKey(defaultValue: true) required bool systemColors,
+    @JsonKey(defaultValue: false) required bool systemColors,
 
     /// Locale to use in the app, use system locale if null
     @JsonKey(toJson: _localeToJson, fromJson: _localeFromJson) Locale? locale,
