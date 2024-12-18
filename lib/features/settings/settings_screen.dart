@@ -149,7 +149,10 @@ class SettingsScreen extends ConsumerWidget {
                     data: (version) => version != null && version.sdkInt >= 31
                         ? SwitchSettingTile(
                             leading: const Icon(Icons.colorize_outlined),
-                            title: Text('System colors'),
+                            title: Text(context.t.settingsScreen.appMenuItems
+                                .systemColors.title,),
+                            subtitle: Text(context.t.settingsScreen.appMenuItems
+                                .systemColors.subtitle,),
                             value: generalPrefs.systemColors,
                             onChanged: (value) {
                               ref
