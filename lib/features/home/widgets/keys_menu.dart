@@ -47,7 +47,7 @@ class _KeyInfoListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return PlatformListTile(
       padding: const EdgeInsets.symmetric(
-        horizontal: 16,
+        //horizontal: 16,
         vertical: 16,
       ),
       leading: Padding(
