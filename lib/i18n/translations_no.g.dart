@@ -247,7 +247,7 @@ class TranslationsWelcomeScreenNo {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get welcomeHeader => 'Velkommen til ';
+	String get welcomeHeader => 'Velkommen til';
 	String get subtitle => 'Styrken du trenger';
 	String get signInButton => 'Logg inn';
 }
@@ -783,7 +783,7 @@ extension on Translations {
 			case 'signInScreen.buttons.becomeMember': return 'Bli medlem';
 			case 'signInScreen.errorMessages.invalidCredentials': return 'Brukernavn eller passord samsvarer ikke.';
 			case 'signInScreen.errorMessages.genericError': return 'En feil oppstod. Prøv igjen senere.';
-			case 'welcomeScreen.welcomeHeader': return 'Velkommen til ';
+			case 'welcomeScreen.welcomeHeader': return 'Velkommen til';
 			case 'welcomeScreen.subtitle': return 'Styrken du trenger';
 			case 'welcomeScreen.signInButton': return 'Logg inn';
 			case 'workoutsScreen.appBar': return 'Treningsøkter';

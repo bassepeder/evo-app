@@ -194,7 +194,7 @@ class _TranslationsPrimaryLocationScreenEn extends TranslationsPrimaryLocationSc
 	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-	@override String get appbar => 'Primary location';
+	@override String get appbar => 'Primary Location';
 	@override String get header => 'Your primary location';
 	@override String updateSuccessful({required Object name}) => '${name} now set as your primary location.';
 }
@@ -245,7 +245,7 @@ class _TranslationsWelcomeScreenEn extends TranslationsWelcomeScreenNo {
 	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-	@override String get welcomeHeader => 'Welcome to ';
+	@override String get welcomeHeader => 'Welcome to';
 	@override String get subtitle => 'The strength you need';
 	@override String get signInButton => 'Sign in';
 }
@@ -749,7 +749,7 @@ extension on TranslationsEn {
 			case 'paymentScreen.tableHeaders.amount.label': return 'Amount';
 			case 'paymentScreen.tableHeaders.period.label': return 'Period';
 			case 'paymentScreen.tableHeaders.pdf.label': return 'PDF';
-			case 'primaryLocationScreen.appbar': return 'Primary location';
+			case 'primaryLocationScreen.appbar': return 'Primary Location';
 			case 'primaryLocationScreen.header': return 'Your primary location';
 			case 'primaryLocationScreen.updateSuccessful': return ({required Object name}) => '${name} now set as your primary location.';
 			case 'profileScreen.appbar': return 'Profile Information';
@@ -782,7 +782,7 @@ extension on TranslationsEn {
 			case 'signInScreen.buttons.becomeMember': return 'Become member';
 			case 'signInScreen.errorMessages.invalidCredentials': return 'Username or password is incorrect.';
 			case 'signInScreen.errorMessages.genericError': return 'An error occured. Please try again.';
-			case 'welcomeScreen.welcomeHeader': return 'Welcome to ';
+			case 'welcomeScreen.welcomeHeader': return 'Welcome to';
 			case 'welcomeScreen.subtitle': return 'The strength you need';
 			case 'welcomeScreen.signInButton': return 'Sign in';
 			case 'workoutsScreen.appBar': return 'Workouts';
