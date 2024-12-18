@@ -363,7 +363,10 @@ class SwitchSettingTile extends StatelessWidget {
       title: _SettingsTitle(title: title),
       subtitle: subtitle,
       trailing: Switch.adaptive(
-          value: value, onChanged: onChanged, applyCupertinoTheme: true),
+        value: value,
+        onChanged: onChanged,
+        applyCupertinoTheme: true,
+      ),
     );
   }
 }
@@ -386,7 +389,8 @@ class _SettingsTitle extends StatelessWidget {
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       child: Text.rich(
-          TextSpan(children: [title.textSpan ?? TextSpan(text: title.data)])),
+        TextSpan(children: [title.textSpan ?? TextSpan(text: title.data)]),
+      ),
     );
   }
 }
