@@ -14,25 +14,44 @@ class FadeInWidget extends StatefulWidget {
   _FadeInWidgetState createState() => _FadeInWidgetState();
 }
 
-class _FadeInWidgetState extends State<FadeInWidget> {
-  double _opacity = 0.0;
+class _FadeInWidgetState extends State<FadeInWidget>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _fadeAnimation;
 
   @override
   void initState() {
     super.initState();
-    // Start fading in when the widget is inserted into the widget tree
-    Future.delayed(Duration.zero, () {
-      setState(() {
-        _opacity = 1.0;
-      });
-    });
+    _controller = AnimationController(
+      vsync: this,
+      duration: widget.duration,
+    );
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeIn),
+    );
+
+    _controller.forward(); // Start the animation
+  }
+
+  @override
+  void didUpdateWidget(covariant FadeInWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.child != oldWidget.child) {
+      _controller.reset();
+      _controller.forward();
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedOpacity(
-      opacity: _opacity,
-      duration: widget.duration,
+    return FadeTransition(
+      opacity: _fadeAnimation,
       child: widget.child,
     );
   }
