@@ -46,16 +46,17 @@ class HomeScreen extends ConsumerWidget {
           );
         },
         loading: () {
-          return const SafeArea(
+          return SafeArea(
             child: Column(
               children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.symmetric(vertical: 16),
                   child: HomeHeader(),
                 ),
                 Expanded(
                   child: Center(
                     child: CircularProgressIndicator(
+                      color: Theme.of(context).colorScheme.primary,
                       strokeWidth: 3,
                     ),
                   ),
