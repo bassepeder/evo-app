@@ -36,7 +36,7 @@
     },
     "locale": {
       "title": "Språk",
-      "subtitle": "Endre språk",
+      "subtitle": "Velg ønsket språk",
       "optionsMap(map)": {
         "en": "Engelsk",
         "no": "Norsk"
