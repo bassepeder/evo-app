@@ -83,7 +83,7 @@ class LocationVisitsTimeline extends ConsumerWidget {
                 Expanded(
                   child: Center(
                     child: CircularProgressIndicator(
-                      color: Theme.of(context).colorScheme.onPrimary,
+                      color: Theme.of(context).colorScheme.onSurface,
                       strokeWidth: 3,
                     ),
                   ),
@@ -95,7 +95,7 @@ class LocationVisitsTimeline extends ConsumerWidget {
         error: (error, stack) => Center(
           child: Text(
             context.t.errors.failedToLoadLocationData,
-            style: TextStyle(color: colorScheme.onPrimary),
+            style: TextStyle(color: colorScheme.onSurface),
           ),
         ),
       ),
