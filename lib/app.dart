@@ -76,6 +76,12 @@ class _AppState extends ConsumerState<Application> {
     final generalPrefs = ref.watch(generalPreferencesProvider);
     final brightness = ref.watch(currentBrightnessProvider);
 
+    if (generalPrefs.locale != null) {
+      LocaleSettings.setLocaleRaw(generalPrefs.locale!.languageCode);
+    } else {
+      LocaleSettings.useDeviceLocale();
+    }
+
     final hasSession = ref.read(
       authSessionProvider.select((it) => it?.token.isNotEmpty ?? false),
     );
@@ -130,7 +136,7 @@ class _AppState extends ConsumerState<Application> {
           supportedLocales: AppLocaleUtils.supportedLocales,
           debugShowCheckedModeBanner: false,
           onGenerateTitle: (BuildContext context) => 'EVO',
-          locale: generalPrefs.locale,
+          locale: TranslationProvider.of(context).flutterLocale,
           theme: ThemeData.from(
             colorScheme: colorScheme,
             textTheme: Theme.of(context).platform == TargetPlatform.iOS
