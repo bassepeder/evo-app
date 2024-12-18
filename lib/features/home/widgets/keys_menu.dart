@@ -52,9 +52,7 @@ class _KeyInfoListTile extends StatelessWidget {
           ? const EdgeInsets.symmetric(vertical: 16, horizontal: 16)
           : const EdgeInsets.symmetric(vertical: 16),
       leading: Padding(
-        padding: Theme.of(context).platform == TargetPlatform.android
-            ? const EdgeInsets.all(5.0)
-            : EdgeInsets.zero,
+        padding: isAndroid ? const EdgeInsets.all(5.0) : EdgeInsets.zero,
         child: _KeyIcon(type: keyInfo.type),
       ),
       trailing: _KeyStatusChip(status: keyInfo.status),
