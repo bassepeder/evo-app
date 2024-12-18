@@ -203,7 +203,9 @@ List<Color> _extractAdditionalColours(ColorScheme scheme) => [
     ];
 
 ColorScheme _insertAdditionalColours(
-        ColorScheme scheme, List<Color> additionalColours) =>
+  ColorScheme scheme,
+  List<Color> additionalColours,
+) =>
     scheme.copyWith(
       surface: additionalColours[0],
       surfaceDim: additionalColours[1],
