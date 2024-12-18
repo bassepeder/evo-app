@@ -33,6 +33,14 @@
         "dark": "Mørk",
         "light": "Lys"
       }
+    },
+    "locale": {
+      "title": "Språk",
+      "subtitle": "Endre språk",
+      "optionsMap(map)": {
+        "en": "Engelsk",
+        "no": "Norsk"
+      }
     }
   }
 }

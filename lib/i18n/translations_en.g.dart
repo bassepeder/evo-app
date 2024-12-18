@@ -344,6 +344,7 @@ class _TranslationsSettingsScreenAppMenuItemsEn extends TranslationsSettingsScre
 	// Translations
 	@override String get header => 'App Settings';
 	@override late final _TranslationsSettingsScreenAppMenuItemsAppThemeEn appTheme = _TranslationsSettingsScreenAppMenuItemsAppThemeEn._(_root);
+	@override late final _TranslationsSettingsScreenAppMenuItemsLocaleEn locale = _TranslationsSettingsScreenAppMenuItemsLocaleEn._(_root);
 }
 
 // Path: signInScreen.buttons
@@ -564,9 +565,24 @@ class _TranslationsSettingsScreenAppMenuItemsAppThemeEn extends TranslationsSett
 	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'App Theme';
+	@override String get title => 'Theme';
 	@override String get subtitle => 'Change the look of the app';
 	@override late final _TranslationsSettingsScreenAppMenuItemsAppThemeOptionsEn options = _TranslationsSettingsScreenAppMenuItemsAppThemeOptionsEn._(_root);
+}
+
+// Path: settingsScreen.appMenuItems.locale
+class _TranslationsSettingsScreenAppMenuItemsLocaleEn extends TranslationsSettingsScreenAppMenuItemsLocaleNo {
+	_TranslationsSettingsScreenAppMenuItemsLocaleEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Language';
+	@override String get subtitle => 'Change the language';
+	@override Map<String, String> get optionsMap => {
+		'en': 'English',
+		'no': 'Norwegian',
+	};
 }
 
 // Path: forms.fields.firstname.validation
@@ -769,11 +785,15 @@ extension on TranslationsEn {
 			case 'settingsScreen.accountMenuItems.signOut.title': return 'Sign Out';
 			case 'settingsScreen.accountMenuItems.signOut.subtitle': return 'Hope to see you again';
 			case 'settingsScreen.appMenuItems.header': return 'App Settings';
-			case 'settingsScreen.appMenuItems.appTheme.title': return 'App Theme';
+			case 'settingsScreen.appMenuItems.appTheme.title': return 'Theme';
 			case 'settingsScreen.appMenuItems.appTheme.subtitle': return 'Change the look of the app';
 			case 'settingsScreen.appMenuItems.appTheme.options.deviceTheme': return 'Device theme';
 			case 'settingsScreen.appMenuItems.appTheme.options.dark': return 'Dark';
 			case 'settingsScreen.appMenuItems.appTheme.options.light': return 'Light';
+			case 'settingsScreen.appMenuItems.locale.title': return 'Language';
+			case 'settingsScreen.appMenuItems.locale.subtitle': return 'Change the language';
+			case 'settingsScreen.appMenuItems.locale.optionsMap.en': return 'English';
+			case 'settingsScreen.appMenuItems.locale.optionsMap.no': return 'Norwegian';
 			case 'signInScreen.title': return 'Sign in';
 			case 'signInScreen.header': return 'Welcome back!';
 			case 'signInScreen.subtitle': return 'Sign in with your e-mail and password.';

@@ -345,6 +345,7 @@ class TranslationsSettingsScreenAppMenuItemsNo {
 	// Translations
 	String get header => 'App-innstillinger';
 	late final TranslationsSettingsScreenAppMenuItemsAppThemeNo appTheme = TranslationsSettingsScreenAppMenuItemsAppThemeNo.internal(_root);
+	late final TranslationsSettingsScreenAppMenuItemsLocaleNo locale = TranslationsSettingsScreenAppMenuItemsLocaleNo.internal(_root);
 }
 
 // Path: signInScreen.buttons
@@ -570,6 +571,21 @@ class TranslationsSettingsScreenAppMenuItemsAppThemeNo {
 	late final TranslationsSettingsScreenAppMenuItemsAppThemeOptionsNo options = TranslationsSettingsScreenAppMenuItemsAppThemeOptionsNo.internal(_root);
 }
 
+// Path: settingsScreen.appMenuItems.locale
+class TranslationsSettingsScreenAppMenuItemsLocaleNo {
+	TranslationsSettingsScreenAppMenuItemsLocaleNo.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Språk';
+	String get subtitle => 'Endre språk';
+	Map<String, String> get optionsMap => {
+		'en': 'Engelsk',
+		'no': 'Norsk',
+	};
+}
+
 // Path: forms.fields.firstname.validation
 class TranslationsFormsFieldsFirstnameValidationNo {
 	TranslationsFormsFieldsFirstnameValidationNo.internal(this._root);
@@ -775,6 +791,10 @@ extension on Translations {
 			case 'settingsScreen.appMenuItems.appTheme.options.deviceTheme': return 'Følg system';
 			case 'settingsScreen.appMenuItems.appTheme.options.dark': return 'Mørk';
 			case 'settingsScreen.appMenuItems.appTheme.options.light': return 'Lys';
+			case 'settingsScreen.appMenuItems.locale.title': return 'Språk';
+			case 'settingsScreen.appMenuItems.locale.subtitle': return 'Endre språk';
+			case 'settingsScreen.appMenuItems.locale.optionsMap.en': return 'Engelsk';
+			case 'settingsScreen.appMenuItems.locale.optionsMap.no': return 'Norsk';
 			case 'signInScreen.title': return 'Logg inn';
 			case 'signInScreen.header': return 'Velkommen tilbake!';
 			case 'signInScreen.subtitle': return 'Logg inn med e-posten og passordet ditt.';

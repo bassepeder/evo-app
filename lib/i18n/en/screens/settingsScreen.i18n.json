@@ -26,12 +26,20 @@
   "appMenuItems": {
     "header": "App Settings",
     "appTheme": {
-      "title": "App Theme",
+      "title": "Theme",
       "subtitle": "Change the look of the app",
       "options": {
         "deviceTheme": "Device theme",
         "dark": "Dark",
         "light": "Light"
+      }
+    },
+    "locale": {
+      "title": "Language",
+      "subtitle": "Change the language",
+      "optionsMap(map)": {
+        "en": "English",
+        "no": "Norwegian"
       }
     }
   }
