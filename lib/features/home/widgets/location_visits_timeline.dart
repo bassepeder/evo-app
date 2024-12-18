@@ -27,7 +27,7 @@ class LocationVisitsTimeline extends ConsumerWidget {
         vertical: 16,
       ),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.8),
+        color: colorScheme.surface.withValues(alpha: 0.8),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
@@ -83,7 +83,7 @@ class LocationVisitsTimeline extends ConsumerWidget {
                 Expanded(
                   child: Center(
                     child: CircularProgressIndicator(
-                      color: Theme.of(context).colorScheme.primary,
+                      color: colorScheme.primary,
                       strokeWidth: 3,
                     ),
                   ),
