@@ -579,7 +579,7 @@ class TranslationsSettingsScreenAppMenuItemsLocaleNo {
 
 	// Translations
 	String get title => 'Språk';
-	String get subtitle => 'Endre språk';
+	String get subtitle => 'Velg ønsket språk';
 	Map<String, String> get optionsMap => {
 		'en': 'Engelsk',
 		'no': 'Norsk',
@@ -792,7 +792,7 @@ extension on Translations {
 			case 'settingsScreen.appMenuItems.appTheme.options.dark': return 'Mørk';
 			case 'settingsScreen.appMenuItems.appTheme.options.light': return 'Lys';
 			case 'settingsScreen.appMenuItems.locale.title': return 'Språk';
-			case 'settingsScreen.appMenuItems.locale.subtitle': return 'Endre språk';
+			case 'settingsScreen.appMenuItems.locale.subtitle': return 'Velg ønsket språk';
 			case 'settingsScreen.appMenuItems.locale.optionsMap.en': return 'Engelsk';
 			case 'settingsScreen.appMenuItems.locale.optionsMap.no': return 'Norsk';
 			case 'signInScreen.title': return 'Logg inn';
