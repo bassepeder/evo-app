@@ -32,6 +32,10 @@ class GeneralPreferences extends _$GeneralPreferences
   Future<void> setLocale(Locale? locale) {
     return save(state.copyWith(locale: locale));
   }
+
+  Future<void> toggleSystemColors() async {
+    await save(state.copyWith(systemColors: !state.systemColors));
+  }
 }
 
 Map<String, dynamic>? _localeToJson(Locale? locale) {
@@ -59,9 +63,13 @@ Locale? _localeFromJson(Map<String, dynamic>? json) {
 class GeneralPrefs with _$GeneralPrefs implements Serializable {
   const factory GeneralPrefs({
     @JsonKey(
-        unknownEnumValue: BackgroundThemeMode.system,
-        defaultValue: BackgroundThemeMode.system,)
+      unknownEnumValue: BackgroundThemeMode.system,
+      defaultValue: BackgroundThemeMode.system,
+    )
     required BackgroundThemeMode themeMode,
+
+    /// Should enable system color palette (Android 12+ only)
+    @JsonKey(defaultValue: true) required bool systemColors,
 
     /// Locale to use in the app, use system locale if null
     @JsonKey(toJson: _localeToJson, fromJson: _localeFromJson) Locale? locale,
@@ -69,6 +77,7 @@ class GeneralPrefs with _$GeneralPrefs implements Serializable {
 
   static const defaults = GeneralPrefs(
     themeMode: BackgroundThemeMode.system,
+    systemColors: true,
   );
 
   factory GeneralPrefs.fromJson(Map<String, dynamic> json) {

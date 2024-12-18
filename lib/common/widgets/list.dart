@@ -339,3 +339,54 @@ class PlatformListTile extends StatelessWidget {
     }
   }
 }
+
+class SwitchSettingTile extends StatelessWidget {
+  const SwitchSettingTile({
+    required this.title,
+    this.subtitle,
+    required this.value,
+    this.onChanged,
+    this.leading,
+    super.key,
+  });
+
+  final Text title;
+  final Widget? subtitle;
+  final bool value;
+  final void Function(bool value)? onChanged;
+  final Widget? leading;
+
+  @override
+  Widget build(BuildContext context) {
+    return PlatformListTile(
+      leading: leading,
+      title: _SettingsTitle(title: title),
+      subtitle: subtitle,
+      trailing: Switch.adaptive(
+          value: value, onChanged: onChanged, applyCupertinoTheme: true),
+    );
+  }
+}
+
+class _SettingsTitle extends StatelessWidget {
+  const _SettingsTitle({required this.title});
+
+  final Text title;
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTextStyle.merge(
+      // forces iOS default font size
+      style: Theme.of(context).platform == TargetPlatform.iOS
+          ? CupertinoTheme.of(context)
+              .textTheme
+              .textStyle
+              .copyWith(fontSize: 17.0)
+          : null,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      child: Text.rich(
+          TextSpan(children: [title.textSpan ?? TextSpan(text: title.data)])),
+    );
+  }
+}
