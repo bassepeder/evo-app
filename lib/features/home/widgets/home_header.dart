@@ -12,12 +12,52 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeHeader extends ConsumerWidget {
+class HomeHeader extends ConsumerStatefulWidget {
   const HomeHeader({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final membership = ref.read(membershipDetailsProvider);
+  ConsumerState<HomeHeader> createState() => _HomeHeaderState();
+}
+
+class _HomeHeaderState extends ConsumerState<HomeHeader>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeIn),
+    );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final membership = ref.watch(membershipDetailsProvider);
+
+    // Trigger fade-in if membership is available
+    if (membership.hasValue) {
+      _controller.forward();
+    } else {
+      _controller.reverse();
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final membership = ref.watch(membershipDetailsProvider);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -33,39 +73,48 @@ class HomeHeader extends ConsumerWidget {
             ),
           ),
           const Spacer(),
-          IconButtonWithCounter(
-            svgSrc: mapPinIcon,
-            press: () {
-              if (!membership.hasValue) return;
+          // Fade-in effect for the buttons
+          FadeTransition(
+            opacity: _fadeAnimation,
+            child: Row(
+              children: [
+                IconButtonWithCounter(
+                  svgSrc: mapPinIcon,
+                  press: () {
+                    if (!membership.hasValue) return;
 
-              HapticFeedback.mediumImpact();
-              final double screenHeight = MediaQuery.sizeOf(context).height;
+                    HapticFeedback.mediumImpact();
+                    final double screenHeight =
+                        MediaQuery.sizeOf(context).height;
 
-              showAdaptiveBottomSheet<int>(
-                context: context,
-                isScrollControlled: true,
-                constraints: BoxConstraints(
-                  maxHeight: screenHeight * 0.6,
+                    showAdaptiveBottomSheet<int>(
+                      context: context,
+                      isScrollControlled: true,
+                      constraints: BoxConstraints(
+                        maxHeight: screenHeight * 0.6,
+                      ),
+                      builder: (_) => _LocationPickerMenu(
+                        currentLocationId:
+                            ref.read(locationControllerProvider).locationId!,
+                      ),
+                    );
+                  },
                 ),
-                builder: (_) => _LocationPickerMenu(
-                  currentLocationId:
-                      ref.read(locationControllerProvider).locationId!,
-                ),
-              );
-            },
-          ),
-          const SizedBox(width: 8),
-          IconButtonWithCounter(
-            svgSrc: settingsIcon,
-            press: () {
-              if (!membership.hasValue) return;
+                const SizedBox(width: 8),
+                IconButtonWithCounter(
+                  svgSrc: settingsIcon,
+                  press: () {
+                    if (!membership.hasValue) return;
 
-              HapticFeedback.mediumImpact();
-              pushPlatformRoute(
-                context,
-                builder: (_) => const SettingsScreen(),
-              );
-            },
+                    HapticFeedback.mediumImpact();
+                    pushPlatformRoute(
+                      context,
+                      builder: (_) => const SettingsScreen(),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ],
       ),
