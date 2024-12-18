@@ -27,8 +27,15 @@ class LocationVisitsTimeline extends ConsumerWidget {
         vertical: 16,
       ),
       decoration: BoxDecoration(
-        color: colorScheme.primary.withValues(alpha: 0.5),
+        color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.8),
         borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context).shadowColor.withValues(alpha: 0.2),
+            blurRadius: 10,
+            offset: const Offset(0, 5),
+          ),
+        ],
       ),
       child: locationState.locationTimelineData.when(
         skipLoadingOnRefresh: false,
@@ -114,10 +121,11 @@ class Chart extends StatelessWidget {
           final isCurrent = item.status == 'current';
           final isHistoric = item.status == 'historic';
           final barColor = isCurrent
-              ? colorScheme.primary.withGreen(1).withOpacity(0.9)
+              ? colorScheme.primary // Keep primary for the bar
               : isHistoric
-                  ? Colors.grey.shade600
-                  : colorScheme.primary;
+                  ? colorScheme.surfaceContainerHighest
+                      .withValues(alpha: 0.7) // Subdued color for historic bars
+                  : colorScheme.primary.withValues(alpha: 0.6); // Default bars
 
           return BarChartGroupData(
             x: index,
@@ -238,18 +246,26 @@ class Header extends StatelessWidget {
                     ? context.t.homeScreen.oldLocationTimelineTitle(
                         formattedDate: TextSpan(
                           text: formatDateTime(date),
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: colorScheme.onSurface.withValues(alpha: 0.7),
+                          ),
                         ),
                       )
                     : context.t.homeScreen.presentOrFutureLocationTimelineTitle(
                         formattedDate: TextSpan(
                           text: formatDateTime(date),
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: colorScheme.onSurface.withValues(alpha: 0.7),
+                          ),
                         ),
                       ),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1, // Truncate the text
-                style: TextStyle(color: colorScheme.onPrimary),
+                style: TextStyle(
+                  color: colorScheme.onSurface.withValues(alpha: 0.7),
+                ),
               ),
               Text(
                 name,
@@ -257,7 +273,7 @@ class Header extends StatelessWidget {
                 maxLines: 1,
                 style: TextStyle(
                   fontSize: 24,
-                  color: colorScheme.onPrimary,
+                  color: colorScheme.onSurface,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -267,12 +283,12 @@ class Header extends StatelessWidget {
         IconButton(
           onPressed: onBackClicked,
           icon: const Icon(Icons.arrow_back_ios),
-          color: colorScheme.onPrimary,
+          color: Theme.of(context).iconTheme.color,
         ),
         IconButton(
           onPressed: onForwardClicked,
           icon: const Icon(Icons.arrow_forward_ios),
-          color: colorScheme.onPrimary,
+          color: Theme.of(context).iconTheme.color,
         ),
       ],
     );
