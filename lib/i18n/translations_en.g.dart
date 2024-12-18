@@ -579,7 +579,10 @@ class _TranslationsSettingsScreenAppMenuItemsLocaleEn extends TranslationsSettin
 	// Translations
 	@override String get title => 'Language';
 	@override String get subtitle => 'Select preferred language';
-	@override late final _TranslationsSettingsScreenAppMenuItemsLocaleOptionsMapEn optionsMap = _TranslationsSettingsScreenAppMenuItemsLocaleOptionsMapEn._(_root);
+	@override Map<String, String> get optionsMap => {
+		'en': 'English',
+		'no': 'Norwegian',
+	};
 }
 
 // Path: forms.fields.firstname.validation
@@ -676,17 +679,6 @@ class _TranslationsSettingsScreenAppMenuItemsAppThemeOptionsEn extends Translati
 	@override String get deviceTheme => 'Device theme';
 	@override String get dark => 'Dark';
 	@override String get light => 'Light';
-}
-
-// Path: settingsScreen.appMenuItems.locale.optionsMap
-class _TranslationsSettingsScreenAppMenuItemsLocaleOptionsMapEn extends TranslationsSettingsScreenAppMenuItemsLocaleOptionsMapNo {
-	_TranslationsSettingsScreenAppMenuItemsLocaleOptionsMapEn._(TranslationsEn root) : this._root = root, super.internal(root);
-
-	final TranslationsEn _root; // ignore: unused_field
-
-	// Translations
-	@override String get en => 'English';
-	@override String get no => 'Norwegian';
 }
 
 /// Flat map(s) containing all translations.
