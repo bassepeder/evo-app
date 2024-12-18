@@ -27,7 +27,7 @@ class WelcomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                context.t.welcomeScreen.welcomeHeader,
+                '${context.t.welcomeScreen.welcomeHeader} ',
                 textAlign: TextAlign.center,
                 style: textTheme.headlineLarge!
                     .copyWith(fontWeight: FontWeight.w500),
@@ -44,7 +44,7 @@ class WelcomeScreen extends StatelessWidget {
             context.t.welcomeScreen.subtitle,
             textAlign: TextAlign.center,
             style: textTheme.bodyLarge!.copyWith(
-              color: textTheme.bodyLarge!.color!.withOpacity(0.64),
+              color: textTheme.bodyLarge!.color!.withValues(alpha: 0.64),
             ),
           ),
           const SizedBox(height: 48),
