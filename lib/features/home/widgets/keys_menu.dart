@@ -25,10 +25,11 @@ class KeysMenu extends ConsumerWidget {
       });
 
     return BottomSheetScrollableContainer(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(8.0),
       children: [
         ListSection(
           header: Text(context.t.homeScreen.shortcuts[0]),
+          cupertinoBorderRadius: BorderRadius.circular(20),
           children: sortedKeys.map((key) {
             return _KeyInfoListTile(keyInfo: key);
           }).toList(),
@@ -45,14 +46,12 @@ class _KeyInfoListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isAndroid = Theme.of(context).platform == TargetPlatform.android;
-
     return PlatformListTile(
-      padding: isAndroid
-          ? const EdgeInsets.symmetric(vertical: 16, horizontal: 16)
-          : const EdgeInsets.symmetric(vertical: 16),
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
       leading: Padding(
-        padding: isAndroid ? const EdgeInsets.all(5.0) : EdgeInsets.zero,
+        padding: Theme.of(context).platform == TargetPlatform.android
+            ? const EdgeInsets.all(5.0)
+            : EdgeInsets.zero,
         child: _KeyIcon(type: keyInfo.type),
       ),
       trailing: _KeyStatusChip(status: keyInfo.status),
