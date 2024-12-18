@@ -130,12 +130,12 @@ class Chart extends StatelessWidget {
           final item = entry.value;
           final isCurrent = item.status == 'current';
           final isHistoric = item.status == 'historic';
-          final barColor = isCurrent
-              ? colorScheme.primary // Keep primary for the current bar
-              : isHistoric
-                  ? colorScheme.surfaceContainerHighest
-                      .withValues(alpha: 0.7) // Subdued color for historic bars
-                  : colorScheme.primary.withValues(alpha: 0.6); // Future bars
+          final barColor = _getBarColor(
+            colorScheme,
+            isCurrent,
+            isHistoric,
+            isDarkMode,
+          );
 
           return BarChartGroupData(
             x: index,
@@ -221,6 +221,24 @@ class Chart extends StatelessWidget {
       ),
     );
   }
+}
+
+Color _getBarColor(
+  ColorScheme colorScheme,
+  bool isCurrent,
+  bool isHistoric,
+  bool isDarkMode,
+) {
+  if (isCurrent) {
+    return colorScheme.primary;
+  }
+
+  if (isHistoric) {
+    return colorScheme.surfaceContainerHighest.withValues(alpha: 0.7);
+  }
+
+  // Future bars
+  return colorScheme.primary.withValues(alpha: 0.6);
 }
 
 class Header extends StatelessWidget {
