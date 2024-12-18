@@ -45,11 +45,12 @@ class _KeyInfoListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isAndroid = Theme.of(context).platform == TargetPlatform.android;
+
     return PlatformListTile(
-      padding: const EdgeInsets.symmetric(
-        //horizontal: 16,
-        vertical: 16,
-      ),
+      padding: isAndroid
+          ? const EdgeInsets.symmetric(vertical: 16, horizontal: 16)
+          : const EdgeInsets.symmetric(vertical: 16),
       leading: Padding(
         padding: Theme.of(context).platform == TargetPlatform.android
             ? const EdgeInsets.all(5.0)
