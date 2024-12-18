@@ -52,8 +52,9 @@ class LocationController extends _$LocationController {
 
       state = state.copyWith(currentLocationData: AsyncValue.data(data));
     } catch (e, stackTrace) {
-      state =
-          state.copyWith(currentLocationData: AsyncValue.error(e, stackTrace));
+      state = state.copyWith(
+        currentLocationData: AsyncValue.error(e, stackTrace),
+      );
     }
   }
 
@@ -70,8 +71,9 @@ class LocationController extends _$LocationController {
 
       state = state.copyWith(locationTimelineData: AsyncValue.data(data));
     } catch (e, stackTrace) {
-      state =
-          state.copyWith(locationTimelineData: AsyncValue.error(e, stackTrace));
+      state = state.copyWith(
+        locationTimelineData: AsyncValue.error(e, stackTrace),
+      );
     }
   }
 

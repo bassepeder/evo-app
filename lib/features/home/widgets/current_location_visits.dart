@@ -22,8 +22,15 @@ class CurrentLocationVisits extends ConsumerWidget {
         vertical: 16,
       ),
       decoration: BoxDecoration(
-        color: colorScheme.primary.withValues(alpha: 0.5),
+        color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.8),
         borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context).shadowColor.withValues(alpha: 0.2),
+            blurRadius: 10,
+            offset: const Offset(0, 5),
+          ),
+        ],
       ),
       child: locationState.currentLocationData.when(
         skipLoadingOnRefresh: false,
@@ -47,7 +54,7 @@ class CurrentLocationVisits extends ConsumerWidget {
                     currentValue.toStringAsFixed(0),
                     style: TextStyle(
                       fontSize: 32,
-                      color: colorScheme.onPrimary,
+                      color: colorScheme.onSurface,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -66,7 +73,7 @@ class CurrentLocationVisits extends ConsumerWidget {
               const SizedBox(height: 20),
               Center(
                 child: CircularProgressIndicator(
-                  color: Theme.of(context).colorScheme.onPrimary,
+                  color: Theme.of(context).colorScheme.primary,
                   strokeWidth: 3,
                 ),
               ),
@@ -77,7 +84,7 @@ class CurrentLocationVisits extends ConsumerWidget {
         error: (error, stack) => Center(
           child: Text(
             context.t.errors.failedToLoadLocationData,
-            style: TextStyle(color: colorScheme.onPrimary),
+            style: TextStyle(color: colorScheme.onSurface),
           ),
         ),
       ),
@@ -92,19 +99,21 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return PieChart(
       PieChartData(
         startDegreeOffset: 270,
         sections: [
           PieChartSectionData(
             value: stats.percentageUsed,
-            color: Theme.of(context).colorScheme.primary,
+            color: colorScheme.primary,
             radius: 50,
             showTitle: false,
           ),
           PieChartSectionData(
             value: 100 - stats.percentageUsed,
-            color: Colors.grey.shade300,
+            color: colorScheme.surfaceContainerHighest,
             radius: 50,
             showTitle: false,
           ),
@@ -134,13 +143,17 @@ class Header extends StatelessWidget {
       children: [
         Text(
           context.t.homeScreen.currentLocationStatisticsTitle,
-          style: TextStyle(color: colorScheme.onPrimary),
+          style: TextStyle(
+            fontSize: 14,
+            color: colorScheme.onSurface.withValues(alpha: 0.7),
+          ),
         ),
+        const SizedBox(height: 4),
         Text(
           name,
           style: TextStyle(
             fontSize: 24,
-            color: colorScheme.onPrimary,
+            color: colorScheme.onSurface,
             fontWeight: FontWeight.bold,
           ),
         ),

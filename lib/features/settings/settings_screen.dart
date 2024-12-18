@@ -1,4 +1,10 @@
+import 'package:app_settings/app_settings.dart';
+import 'package:evo/common/widgets/adaptive_choice_picker.dart';
+import 'package:evo/common/widgets/themed_icon.dart';
 import 'package:evo/features/auth/providers/auth_session.dart';
+import 'package:evo/features/settings/app_background_mode_screen.dart';
+import 'package:evo/features/settings/brightness.dart';
+import 'package:evo/features/settings/general_preferences.dart';
 import 'package:evo/features/settings/views/current_referral_screen.dart';
 import 'package:evo/features/settings/views/payment_information_screen.dart';
 import 'package:evo/features/settings/views/primary_location_screen.dart';
@@ -15,6 +21,9 @@ class SettingsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final generalPrefs = ref.watch(generalPreferencesProvider);
+    final brightness = ref.watch(currentBrightnessProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(context.t.settingsScreen.appBar),
@@ -38,6 +47,7 @@ class SettingsScreen extends ConsumerWidget {
                       .profileInformation.title,
                   subTitle: context.t.settingsScreen.accountMenuItems
                       .profileInformation.subtitle,
+                  currentBrightness: brightness,
                   onClick: () => pushPlatformRoute(
                     context,
                     builder: (_) => const ProfileInformationScreen(),
@@ -49,6 +59,7 @@ class SettingsScreen extends ConsumerWidget {
                       context.t.settingsScreen.accountMenuItems.payment.title,
                   subTitle: context
                       .t.settingsScreen.accountMenuItems.payment.subtitle,
+                  currentBrightness: brightness,
                   onClick: () => pushPlatformRoute(
                     context,
                     builder: (_) => const PaymentInformationScreen(),
@@ -60,6 +71,7 @@ class SettingsScreen extends ConsumerWidget {
                       context.t.settingsScreen.accountMenuItems.locations.title,
                   subTitle: context
                       .t.settingsScreen.accountMenuItems.locations.subtitle,
+                  currentBrightness: brightness,
                   onClick: () => pushPlatformRoute(
                     context,
                     builder: (_) => const PrimaryLocationScreen(),
@@ -71,6 +83,7 @@ class SettingsScreen extends ConsumerWidget {
                       context.t.settingsScreen.accountMenuItems.referral.title,
                   subTitle: context
                       .t.settingsScreen.accountMenuItems.referral.subtitle,
+                  currentBrightness: brightness,
                   onClick: () => pushPlatformRoute(
                     context,
                     builder: (_) => const CurrentReferralScreen(),
@@ -83,6 +96,7 @@ class SettingsScreen extends ConsumerWidget {
                   subTitle: context
                       .t.settingsScreen.accountMenuItems.signOut.subtitle,
                   showNavigationIcon: false,
+                  currentBrightness: brightness,
                   onClick: () {
                     ref.read(authSessionProvider.notifier).delete();
                     pushAndRemoveUntilPlatformRoute(
@@ -100,7 +114,59 @@ class SettingsScreen extends ConsumerWidget {
                   subTitle:
                       context.t.settingsScreen.appMenuItems.appTheme.subtitle,
                   showNavigationIcon: false,
-                  onClick: () {},
+                  currentBrightness: brightness,
+                  onClick: () {
+                    if (Theme.of(context).platform == TargetPlatform.android) {
+                      showChoicePicker(
+                        context,
+                        choices: BackgroundThemeMode.values,
+                        selectedItem: generalPrefs.themeMode,
+                        labelBuilder: (t) => Text(
+                          AppBackgroundModeScreen.themeTitle(context, t),
+                        ),
+                        onSelectedItemChanged: (BackgroundThemeMode? value) =>
+                            ref
+                                .read(generalPreferencesProvider.notifier)
+                                .setThemeMode(
+                                  value ?? BackgroundThemeMode.system,
+                                ),
+                      );
+                    } else {
+                      pushPlatformRoute(
+                        context,
+                        title: context
+                            .t.settingsScreen.appMenuItems.appTheme.title,
+                        builder: (context) => const AppBackgroundModeScreen(),
+                      );
+                    }
+                  },
+                ),
+                SettingsListItem(
+                  svgSrc: languageSvg,
+                  title: context.t.settingsScreen.appMenuItems.locale.title,
+                  subTitle:
+                      context.t.settingsScreen.appMenuItems.locale.subtitle,
+                  showNavigationIcon: false,
+                  currentBrightness: brightness,
+                  onClick: () {
+                    if (Theme.of(context).platform == TargetPlatform.android) {
+                      showChoicePicker<Locale>(
+                        context,
+                        choices: AppLocaleUtils.supportedLocales,
+                        selectedItem: generalPrefs.locale ??
+                            Localizations.localeOf(context),
+                        labelBuilder: (t) => Text(
+                          context.t.settingsScreen.appMenuItems.locale
+                              .optionsMap[t.languageCode]!,
+                        ),
+                        onSelectedItemChanged: (Locale? locale) => ref
+                            .read(generalPreferencesProvider.notifier)
+                            .setLocale(locale),
+                      );
+                    } else {
+                      AppSettings.openAppSettings();
+                    }
+                  },
                 ),
               ],
             ),
@@ -120,9 +186,10 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.bold,
+        color: Theme.of(context).colorScheme.onSurface,
       ),
     );
   }
@@ -134,6 +201,7 @@ class SettingsListItem extends StatelessWidget {
   final String svgSrc;
   final bool showNavigationIcon;
   final VoidCallback onClick;
+  final Brightness currentBrightness;
 
   const SettingsListItem({
     super.key,
@@ -141,6 +209,7 @@ class SettingsListItem extends StatelessWidget {
     required this.subTitle,
     required this.svgSrc,
     required this.onClick,
+    required this.currentBrightness,
     this.showNavigationIcon = true,
   });
 
@@ -155,15 +224,18 @@ class SettingsListItem extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: Row(
             children: [
-              SvgPicture.string(
-                svgSrc,
-                height: 24,
-                width: 24,
-                colorFilter: ColorFilter.mode(
-                  const Color(0xFF010F07).withValues(alpha: 0.64),
-                  BlendMode.srcIn,
+              if (currentBrightness == Brightness.dark)
+                ThemedIcon(svgData: svgSrc)
+              else
+                SvgPicture.string(
+                  svgSrc,
+                  height: 24,
+                  width: 24,
+                  colorFilter: ColorFilter.mode(
+                    const Color(0xFF010F07).withValues(alpha: 0.64),
+                    BlendMode.srcIn,
+                  ),
                 ),
-              ),
               const SizedBox(width: 8),
               Expanded(
                 child: Column(
@@ -180,7 +252,10 @@ class SettingsListItem extends StatelessWidget {
                       maxLines: 1,
                       style: TextStyle(
                         fontSize: 14,
-                        color: const Color(0xFF010F07).withValues(alpha: 0.54),
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onSurface
+                            .withValues(alpha: 0.54),
                       ),
                     ),
                   ],
@@ -237,5 +312,11 @@ const signOutSvg =
 const brightnessSvg = '''
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
   <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+</svg>
+''';
+
+const languageSvg = '''
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m10.5 21 5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 0 1 6-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 0 1-3.827-5.802" />
 </svg>
 ''';

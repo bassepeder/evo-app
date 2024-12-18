@@ -1,12 +1,12 @@
 import 'package:evo/common/styles.dart';
 import 'package:evo/common/widgets/adaptive_bottom_sheet.dart';
 import 'package:evo/common/widgets/list.dart';
+import 'package:evo/common/widgets/themed_icon.dart';
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/features/membership/models/membership_details.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class KeysMenu extends ConsumerWidget {
   static const keyStatusOrder = {
@@ -25,10 +25,11 @@ class KeysMenu extends ConsumerWidget {
       });
 
     return BottomSheetScrollableContainer(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(8.0),
       children: [
         ListSection(
           header: Text(context.t.homeScreen.shortcuts[0]),
+          cupertinoBorderRadius: BorderRadius.circular(20),
           children: sortedKeys.map((key) {
             return _KeyInfoListTile(keyInfo: key);
           }).toList(),
@@ -46,10 +47,7 @@ class _KeyInfoListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlatformListTile(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 16,
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
       leading: Padding(
         padding: Theme.of(context).platform == TargetPlatform.android
             ? const EdgeInsets.all(5.0)
@@ -133,7 +131,7 @@ class _KeyIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.string(getIconForKeyType(type));
+    return ThemedIcon(svgData: getIconForKeyType(type));
   }
 
   String getIconForKeyType(KeyType type) {

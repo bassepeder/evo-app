@@ -101,6 +101,8 @@ class _TranslationsFormsEn extends TranslationsFormsNo {
 	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
+	@override String get cancel => 'Cancel';
+	@override String get ok => 'OK';
 	@override late final _TranslationsFormsFieldsEn fields = _TranslationsFormsFieldsEn._(_root);
 }
 
@@ -192,7 +194,7 @@ class _TranslationsPrimaryLocationScreenEn extends TranslationsPrimaryLocationSc
 	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-	@override String get appbar => 'Primary location';
+	@override String get appbar => 'Primary Location';
 	@override String get header => 'Your primary location';
 	@override String updateSuccessful({required Object name}) => '${name} now set as your primary location.';
 }
@@ -243,7 +245,7 @@ class _TranslationsWelcomeScreenEn extends TranslationsWelcomeScreenNo {
 	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-	@override String get welcomeHeader => 'Welcome to ';
+	@override String get welcomeHeader => 'Welcome to';
 	@override String get subtitle => 'The strength you need';
 	@override String get signInButton => 'Sign in';
 }
@@ -342,6 +344,7 @@ class _TranslationsSettingsScreenAppMenuItemsEn extends TranslationsSettingsScre
 	// Translations
 	@override String get header => 'App Settings';
 	@override late final _TranslationsSettingsScreenAppMenuItemsAppThemeEn appTheme = _TranslationsSettingsScreenAppMenuItemsAppThemeEn._(_root);
+	@override late final _TranslationsSettingsScreenAppMenuItemsLocaleEn locale = _TranslationsSettingsScreenAppMenuItemsLocaleEn._(_root);
 }
 
 // Path: signInScreen.buttons
@@ -562,8 +565,21 @@ class _TranslationsSettingsScreenAppMenuItemsAppThemeEn extends TranslationsSett
 	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'App Theme';
+	@override String get title => 'Theme';
 	@override String get subtitle => 'Change the look of the app';
+	@override late final _TranslationsSettingsScreenAppMenuItemsAppThemeOptionsEn options = _TranslationsSettingsScreenAppMenuItemsAppThemeOptionsEn._(_root);
+}
+
+// Path: settingsScreen.appMenuItems.locale
+class _TranslationsSettingsScreenAppMenuItemsLocaleEn extends TranslationsSettingsScreenAppMenuItemsLocaleNo {
+	_TranslationsSettingsScreenAppMenuItemsLocaleEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Language';
+	@override String get subtitle => 'Select preferred language';
+	@override late final _TranslationsSettingsScreenAppMenuItemsLocaleOptionsMapEn optionsMap = _TranslationsSettingsScreenAppMenuItemsLocaleOptionsMapEn._(_root);
 }
 
 // Path: forms.fields.firstname.validation
@@ -650,6 +666,29 @@ class _TranslationsFormsFieldsPostalCodeValidationEn extends TranslationsFormsFi
 	@override String get empty => 'This is required';
 }
 
+// Path: settingsScreen.appMenuItems.appTheme.options
+class _TranslationsSettingsScreenAppMenuItemsAppThemeOptionsEn extends TranslationsSettingsScreenAppMenuItemsAppThemeOptionsNo {
+	_TranslationsSettingsScreenAppMenuItemsAppThemeOptionsEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get deviceTheme => 'Device theme';
+	@override String get dark => 'Dark';
+	@override String get light => 'Light';
+}
+
+// Path: settingsScreen.appMenuItems.locale.optionsMap
+class _TranslationsSettingsScreenAppMenuItemsLocaleOptionsMapEn extends TranslationsSettingsScreenAppMenuItemsLocaleOptionsMapNo {
+	_TranslationsSettingsScreenAppMenuItemsLocaleOptionsMapEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get en => 'English';
+	@override String get no => 'Norwegian';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 extension on TranslationsEn {
@@ -670,6 +709,8 @@ extension on TranslationsEn {
 			case 'format.yesterday': return 'yesterday';
 			case 'format.today': return 'today';
 			case 'format.tomorrow': return 'tomorrow';
+			case 'forms.cancel': return 'Cancel';
+			case 'forms.ok': return 'OK';
 			case 'forms.fields.firstname.label': return 'First name';
 			case 'forms.fields.firstname.hint': return 'Type your first name';
 			case 'forms.fields.firstname.validation.empty': return 'Please enter a name';
@@ -732,7 +773,7 @@ extension on TranslationsEn {
 			case 'paymentScreen.tableHeaders.amount.label': return 'Amount';
 			case 'paymentScreen.tableHeaders.period.label': return 'Period';
 			case 'paymentScreen.tableHeaders.pdf.label': return 'PDF';
-			case 'primaryLocationScreen.appbar': return 'Primary location';
+			case 'primaryLocationScreen.appbar': return 'Primary Location';
 			case 'primaryLocationScreen.header': return 'Your primary location';
 			case 'primaryLocationScreen.updateSuccessful': return ({required Object name}) => '${name} now set as your primary location.';
 			case 'profileScreen.appbar': return 'Profile Information';
@@ -752,8 +793,15 @@ extension on TranslationsEn {
 			case 'settingsScreen.accountMenuItems.signOut.title': return 'Sign Out';
 			case 'settingsScreen.accountMenuItems.signOut.subtitle': return 'Hope to see you again';
 			case 'settingsScreen.appMenuItems.header': return 'App Settings';
-			case 'settingsScreen.appMenuItems.appTheme.title': return 'App Theme';
+			case 'settingsScreen.appMenuItems.appTheme.title': return 'Theme';
 			case 'settingsScreen.appMenuItems.appTheme.subtitle': return 'Change the look of the app';
+			case 'settingsScreen.appMenuItems.appTheme.options.deviceTheme': return 'Device theme';
+			case 'settingsScreen.appMenuItems.appTheme.options.dark': return 'Dark';
+			case 'settingsScreen.appMenuItems.appTheme.options.light': return 'Light';
+			case 'settingsScreen.appMenuItems.locale.title': return 'Language';
+			case 'settingsScreen.appMenuItems.locale.subtitle': return 'Select preferred language';
+			case 'settingsScreen.appMenuItems.locale.optionsMap.en': return 'English';
+			case 'settingsScreen.appMenuItems.locale.optionsMap.no': return 'Norwegian';
 			case 'signInScreen.title': return 'Sign in';
 			case 'signInScreen.header': return 'Welcome back!';
 			case 'signInScreen.subtitle': return 'Sign in with your e-mail and password.';
@@ -762,7 +810,7 @@ extension on TranslationsEn {
 			case 'signInScreen.buttons.becomeMember': return 'Become member';
 			case 'signInScreen.errorMessages.invalidCredentials': return 'Username or password is incorrect.';
 			case 'signInScreen.errorMessages.genericError': return 'An error occured. Please try again.';
-			case 'welcomeScreen.welcomeHeader': return 'Welcome to ';
+			case 'welcomeScreen.welcomeHeader': return 'Welcome to';
 			case 'welcomeScreen.subtitle': return 'The strength you need';
 			case 'welcomeScreen.signInButton': return 'Sign in';
 			case 'workoutsScreen.appBar': return 'Workouts';

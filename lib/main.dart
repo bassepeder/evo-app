@@ -18,8 +18,6 @@ void main() async {
   // See src/app.dart for splash screen removal
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  LocaleSettings.useDeviceLocale();
-
   await evoBinding.preloadSharedPreferences();
 
   await setupFirstLaunch();
