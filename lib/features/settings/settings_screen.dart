@@ -1,6 +1,5 @@
 import 'package:app_settings/app_settings.dart';
 import 'package:evo/common/widgets/adaptive_choice_picker.dart';
-import 'package:evo/common/widgets/list.dart';
 import 'package:evo/common/widgets/themed_icon.dart';
 import 'package:evo/features/auth/providers/auth_session.dart';
 import 'package:evo/features/settings/app_background_mode_screen.dart';
@@ -144,6 +143,7 @@ class SettingsScreen extends ConsumerWidget {
                     }
                   },
                 ),
+                /*
                 if (Theme.of(context).platform == TargetPlatform.android)
                   androidVersionAsync.maybeWhen(
                     data: (version) => version != null && version.sdkInt >= 31
@@ -163,6 +163,7 @@ class SettingsScreen extends ConsumerWidget {
                         : const SizedBox.shrink(),
                     orElse: () => const SizedBox.shrink(),
                   ),
+                 */
                 SettingsListItem(
                   svgSrc: languageSvg,
                   title: context.t.settingsScreen.appMenuItems.locale.title,
