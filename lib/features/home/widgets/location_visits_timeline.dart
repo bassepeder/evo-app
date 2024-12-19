@@ -230,7 +230,9 @@ Color _getBarColor(
   bool isDarkMode,
 ) {
   if (isCurrent) {
-    return colorScheme.primary;
+    return isDarkMode
+        ? colorScheme.primary.withValues(green: 0.5)
+        : colorScheme.primary;
   }
 
   if (isHistoric) {
@@ -240,7 +242,9 @@ Color _getBarColor(
   }
 
   // Future bars
-  return colorScheme.primary.withValues(alpha: 0.6);
+  return isDarkMode
+      ? colorScheme.primary.withValues(alpha: 0.8)
+      : colorScheme.primary.withValues(alpha: 0.6);
 }
 
 class Header extends StatelessWidget {
