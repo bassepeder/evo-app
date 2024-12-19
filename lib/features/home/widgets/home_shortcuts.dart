@@ -35,7 +35,7 @@ class HomeShortcuts extends StatelessWidget {
           (index) => ShortcutCard(
             icon: shortcuts[index].svgIcon,
             text: shortcuts[index].title,
-            press: () {
+            onTap: () {
               final id = shortcuts[index].id;
 
               HapticFeedback.mediumImpact();
@@ -62,13 +62,13 @@ class HomeShortcuts extends StatelessWidget {
 class ShortcutCard extends StatelessWidget {
   final String icon;
   final String text;
-  final GestureTapCallback press;
+  final GestureTapCallback onTap;
 
   const ShortcutCard({
     super.key,
     required this.icon,
     required this.text,
-    required this.press,
+    required this.onTap,
   });
 
   @override
@@ -77,7 +77,7 @@ class ShortcutCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4),
         child: GestureDetector(
-          onTap: press,
+          onTap: onTap,
           child: Container(
             padding: const EdgeInsets.all(16),
             height: 56,
@@ -90,7 +90,12 @@ class ShortcutCard extends StatelessWidget {
               children: [
                 ThemedIcon(svgData: icon),
                 const SizedBox(width: 8),
-                Text(text, textAlign: TextAlign.center),
+                Text(
+                  text,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                ),
               ],
             ),
           ),
