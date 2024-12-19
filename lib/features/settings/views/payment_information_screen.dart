@@ -159,8 +159,10 @@ class PreviousPaymentCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final membershipLocale =
         ref.read(membershipDetailsProvider).requireValue!.locale;
-    final isDarkMode = ref.read(currentBrightnessProvider
-        .select((brightness) => brightness == Brightness.dark));
+    final isDarkMode = ref.read(
+      currentBrightnessProvider
+          .select((brightness) => brightness == Brightness.dark),
+    );
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),

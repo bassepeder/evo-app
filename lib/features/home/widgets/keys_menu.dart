@@ -4,7 +4,9 @@ import 'package:evo/common/widgets/list.dart';
 import 'package:evo/common/widgets/themed_icon.dart';
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/features/membership/models/membership_details.dart';
+import 'package:evo/features/settings/brightness.dart';
 import 'package:evo/i18n/translations.g.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,6 +20,10 @@ class KeysMenu extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final keys = ref.read(membershipDetailsProvider).requireValue!.keys;
+    final isDarkMode = ref.watch(
+      currentBrightnessProvider
+          .select((brightness) => brightness == Brightness.dark),
+    );
 
     final sortedKeys = List<KeyInfo>.from(keys)
       ..sort((a, b) {
@@ -28,6 +34,10 @@ class KeysMenu extends ConsumerWidget {
       padding: const EdgeInsets.all(8.0),
       children: [
         ListSection(
+          cupertinoBackgroundColor: isDarkMode
+              ? CupertinoColors.tertiarySystemGroupedBackground
+                  .resolveFrom(context)
+              : null,
           header: Text(context.t.homeScreen.shortcuts[0]),
           cupertinoBorderRadius: BorderRadius.circular(20),
           children: sortedKeys.map((key) {
