@@ -225,7 +225,7 @@ class PreviousPaymentCard extends ConsumerWidget {
                 );
               },
               icon: Icon(
-                Icons.picture_as_pdf_outlined,
+                Icons.open_in_new,
                 color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
