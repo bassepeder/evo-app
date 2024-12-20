@@ -3,9 +3,7 @@ import 'package:evo/features/auth/views/sign_in_screen.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:evo/utils/navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:webview_flutter_android/webview_flutter_android.dart';
-import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -15,7 +13,20 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  late WebViewController webController;
+  InAppWebViewController? webViewController;
+  InAppWebViewSettings settings = InAppWebViewSettings(
+    mediaPlaybackRequiresUserGesture: false,
+    preferredContentMode: UserPreferredContentMode.MOBILE,
+    ignoresViewportScaleLimits: true,
+    initialScale: 2,
+    disableContextMenu: true,
+    disableHorizontalScroll: true,
+    disableVerticalScroll: true,
+    disableLongPressContextMenuOnLinks: true,
+    allowsInlineMediaPlayback: true,
+    iframeAllow: 'autoplay;',
+    iframeAllowFullscreen: true,
+  );
 
   @override
   void initState() {
@@ -24,33 +35,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   void _initializeWebView() {
-    late PlatformWebViewControllerCreationParams params;
+    const String videoId = 'yvBQVE_FoaY';
     const String videoUrl =
-        'https://www.youtube.com/embed/yvBQVE_FoaY?controls=0&rel=0&playsinline=1&enablejsapi=1';
+        'https://www.youtube.com/embed/$videoId?controls=0&rel=0&playsinline=1&autoplay=1&disablekb=0&fs=0&iv_load_policy=0&loop=1&playlist=$videoId&enablejsapi=1';
 
-    // Check if the platform is Android or iOS and apply specific settings
-    if (WebViewPlatform.instance is WebKitWebViewPlatform) {
-      // iOS/macOS-specific parameters
-      params = WebKitWebViewControllerCreationParams(
-        allowsInlineMediaPlayback: true, // Autoplay and inline video
-        mediaTypesRequiringUserAction: const <PlaybackMediaTypes>{}, // Disable user interaction for media playback
-      );
-    } else {
-      // Android-specific parameters
-      params = const PlatformWebViewControllerCreationParams();
-    }
-
-    // Create WebView controller
-    webController = WebViewController.fromPlatformCreationParams(params)
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(
-        Uri.parse(videoUrl),
-      );
-
-    if (webController.platform is AndroidWebViewController) {
-      (webController.platform as AndroidWebViewController)
-          .setMediaPlaybackRequiresUserGesture(false);
-    }
+    webViewController?.loadUrl(
+      urlRequest: URLRequest(url: WebUri(videoUrl)),
+    );
   }
 
   @override
@@ -63,9 +54,68 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         children: [
           SizedBox(
             height: size.height * 0.7,
-            child: WebViewWidget(
+            child: InAppWebView(
+              initialData: InAppWebViewInitialData(
+                data: """
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <style>
+              body {
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: #000;
+                position: relative;
+              }
+              iframe {
+                width: 1422.22px;
+                height: 800px;
+                border: none;
+              }
+              .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: transparent;
+                z-index: 10;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="video-container">
+              <iframe 
+                class="elementor-background-video-embed"
+                frameborder="0"
+                allowfullscreen
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                title="EVO - WEB bannervideo"
+                id="widget2"
+                src="https://www.youtube.com/embed/yvBQVE_FoaY?controls=0&rel=0&playsinline=1&autoplay=1&disablekb=0&fs=0&iv_load_policy=0&loop=1&playlist=yvBQVE_FoaY&enablejsapi=1"
+              ></iframe>
+              <div class="overlay"></div>
+            </div>
+          </body>
+          </html>
+          """,
+              ),
+              initialSettings: settings,
               gestureRecognizers: const {},
-              controller: webController,
+              onWebViewCreated: (controller) {
+                webViewController = controller;
+              },
+              onPermissionRequest: (controller, request) async {
+                return PermissionResponse(
+                  resources: request.resources,
+                  action: PermissionResponseAction.GRANT,
+                );
+              },
             ),
           ),
           const SizedBox(height: 16),
@@ -118,6 +168,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   void dispose() {
     super.dispose();
-    webController.clearCache(); // Clear WebView cache on dispose
+    InAppWebViewController.clearAllCache();
   }
 }
