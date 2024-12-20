@@ -27,7 +27,7 @@ class ErrorScreen extends StatelessWidget {
         children: [
           const Spacer(flex: 1),
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.8,
+            width: MediaQuery.sizeOf(context).width * 0.8,
             child: const AspectRatio(
               aspectRatio: 1,
               child: ThemedIcon(

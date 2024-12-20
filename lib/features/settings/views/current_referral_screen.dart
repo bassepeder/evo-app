@@ -97,7 +97,7 @@ class CurrentReferralScreen extends ConsumerWidget {
                   error: (_, stack) {
                     return SizedBox(
                       width: double.infinity,
-                      height: MediaQuery.of(context).size.height * 0.65,
+                      height: MediaQuery.sizeOf(context).height * 0.65,
                       child: ErrorScreen(
                         subtitle: context
                             .t.errors.failedToLoadCurrentMembershipReferral,

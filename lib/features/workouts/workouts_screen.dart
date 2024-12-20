@@ -176,7 +176,7 @@ class HorizontalBarChart extends StatelessWidget {
           60.0 + monthLabelWidth + 20.0,
           highestWorkouts == 0
               ? 0
-              : (percent / highestWorkouts) * MediaQuery.of(context).size.width,
+              : (percent / highestWorkouts) * MediaQuery.sizeOf(context).width,
         );
 
         return Container(
