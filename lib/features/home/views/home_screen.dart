@@ -6,8 +6,8 @@ import 'package:evo/features/home/widgets/current_location_visits.dart';
 import 'package:evo/features/home/widgets/home_header.dart';
 import 'package:evo/features/home/widgets/home_shortcuts.dart';
 import 'package:evo/features/home/widgets/location_visits_timeline.dart';
-import 'package:evo/features/home/widgets/membership_status_banner.dart';
 import 'package:evo/features/membership/membership_repository.dart';
+import 'package:evo/features/membership/models/membership_details.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,7 +39,8 @@ class HomeScreen extends ConsumerWidget {
                     FadeInWidget(
                       child: Column(
                         children: [
-                          MembershipStatusBanner(details: details!),
+                          //MembershipStatusBanner(details: details!),
+                          Greeting(details: details!),
                           const HomeShortcuts(),
                           const CurrentLocationVisits(),
                           const LocationVisitsTimeline(),
@@ -95,5 +96,86 @@ class HomeScreen extends ConsumerWidget {
         },
       ),
     );
+  }
+}
+
+class Greeting extends StatelessWidget {
+  final MembershipDetails details;
+
+  const Greeting({
+    super.key,
+    required this.details,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final showAdditionalDetails =
+        details.membershipDetails.status != MembershipStatus.active;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 12,
+      ),
+      child: Row(
+        children: [
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${getGreeting(context)}, ${details.profile.firstName}!',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                  overflow: TextOverflow
+                      .ellipsis, // Ensures the greeting and name are truncated if too long
+                ),
+                if (showAdditionalDetails)
+                  Text.rich(
+                    TextSpan(
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: context.t.homeScreen.membershipStatus,
+                        ),
+                        TextSpan(
+                          text: ' ${MembershipStatusExtensions.translated(
+                            details.membershipDetails.status,
+                            context,
+                          ).toLowerCase()}.',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow
+                        .ellipsis, // Ensures only additional details truncate
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String getGreeting(BuildContext context) {
+    final DateTime now = DateTime.now();
+    final hour = now.hour;
+
+    if (hour >= 5 && hour < 12) {
+      return '☀️ ${context.t.homeScreen.greetings.morning}';
+    } else if (hour >= 12 && hour < 17) {
+      return '🌤️ ${context.t.homeScreen.greetings.afternoon}';
+    } else {
+      return '🌙 ${context.t.homeScreen.greetings.evening}';
+    }
   }
 }
