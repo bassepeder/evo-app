@@ -99,18 +99,65 @@ class HomeScreen extends ConsumerWidget {
   }
 }
 
-class Greeting extends StatelessWidget {
+class Greeting extends StatefulWidget {
   final MembershipDetails details;
 
-  const Greeting({
-    super.key,
-    required this.details,
-  });
+  const Greeting({super.key, required this.details});
+
+  @override
+  _GreetingState createState() => _GreetingState();
+}
+
+class _GreetingState extends State<Greeting> with WidgetsBindingObserver {
+  late String greeting;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  void updateGreeting() {
+    setState(() {
+      greeting = getGreeting(context);
+    });
+  }
+
+  String getGreeting(BuildContext context) {
+    final hour = DateTime.now().hour;
+
+    if (hour >= 5 && hour < 12) {
+      return '☀️ ${context.t.homeScreen.greetings.morning}';
+    } else if (hour >= 12 && hour < 17) {
+      return '🌤️ ${context.t.homeScreen.greetings.afternoon}';
+    } else {
+      return '🌙 ${context.t.homeScreen.greetings.evening}';
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    updateGreeting();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      updateGreeting();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final showAdditionalDetails =
-        details.membershipDetails.status != MembershipStatus.active;
+        widget.details.membershipDetails.status != MembershipStatus.active;
 
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -124,7 +171,7 @@ class Greeting extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${getGreeting(context)}, ${details.profile.firstName}!',
+                  '$greeting, ${widget.details.profile.firstName}!',
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -145,7 +192,7 @@ class Greeting extends StatelessWidget {
                         ),
                         TextSpan(
                           text: ' ${MembershipStatusExtensions.translated(
-                            details.membershipDetails.status,
+                            widget.details.membershipDetails.status,
                             context,
                           ).toLowerCase()}.',
                           style: TextStyle(
@@ -165,18 +212,5 @@ class Greeting extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  String getGreeting(BuildContext context) {
-    final DateTime now = DateTime.now();
-    final hour = now.hour;
-
-    if (hour >= 5 && hour < 12) {
-      return '☀️ ${context.t.homeScreen.greetings.morning}';
-    } else if (hour >= 12 && hour < 17) {
-      return '🌤️ ${context.t.homeScreen.greetings.afternoon}';
-    } else {
-      return '🌙 ${context.t.homeScreen.greetings.evening}';
-    }
   }
 }
