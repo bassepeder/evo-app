@@ -9,5 +9,10 @@
     "Workouts"
   ],
   "chooseLocation": "Choose EVO location",
-  "primaryMembershipLocation": "Your primary location"
+  "primaryMembershipLocation": "Your primary location",
+  "greetings": {
+    "morning": "Good morning",
+    "afternoon": "Good afternoon",
+    "evening": "Good evening"
+  }
 }
