@@ -3,9 +3,55 @@ import 'package:evo/features/auth/views/sign_in_screen.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:evo/utils/navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_flutter_android/webview_flutter_android.dart';
+import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
+
+  @override
+  _WelcomeScreenState createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  late WebViewController webController;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeWebView();
+  }
+
+  void _initializeWebView() {
+    late PlatformWebViewControllerCreationParams params;
+    const String videoUrl =
+        'https://www.youtube.com/embed/yvBQVE_FoaY?controls=0&rel=0&playsinline=1&enablejsapi=1';
+
+    // Check if the platform is Android or iOS and apply specific settings
+    if (WebViewPlatform.instance is WebKitWebViewPlatform) {
+      // iOS/macOS-specific parameters
+      params = WebKitWebViewControllerCreationParams(
+        allowsInlineMediaPlayback: true, // Autoplay and inline video
+        mediaTypesRequiringUserAction: const <PlaybackMediaTypes>{}, // Disable user interaction for media playback
+      );
+    } else {
+      // Android-specific parameters
+      params = const PlatformWebViewControllerCreationParams();
+    }
+
+    // Create WebView controller
+    webController = WebViewController.fromPlatformCreationParams(params)
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadRequest(
+        Uri.parse(videoUrl),
+      );
+
+    if (webController.platform is AndroidWebViewController) {
+      (webController.platform as AndroidWebViewController)
+          .setMediaPlaybackRequiresUserGesture(false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +61,12 @@ class WelcomeScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          Image.asset(
-            'assets/images/showcase.jpg',
-            width: size.width,
+          SizedBox(
             height: size.height * 0.7,
-            fit: BoxFit.cover,
+            child: WebViewWidget(
+              gestureRecognizers: const {},
+              controller: webController,
+            ),
           ),
           const SizedBox(height: 16),
           Row(
@@ -66,5 +113,11 @@ class WelcomeScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    webController.clearCache(); // Clear WebView cache on dispose
   }
 }
