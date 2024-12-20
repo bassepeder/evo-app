@@ -35,7 +35,9 @@ class EvoElevatedButton extends StatelessWidget {
         minimumSize: Size(width, height),
         shape: shape ??
             const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(16)),
+              borderRadius: BorderRadius.all(
+                Radius.circular(16),
+              ),
             ),
       ),
       child: isLoading
@@ -46,7 +48,10 @@ class EvoElevatedButton extends StatelessWidget {
                 strokeWidth: 3,
               ),
             )
-          : Text(text),
+          : Text(
+              text,
+              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+            ),
     );
   }
 }

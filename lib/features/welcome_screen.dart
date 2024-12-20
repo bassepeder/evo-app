@@ -13,7 +13,6 @@ class WelcomeScreen extends StatelessWidget {
     final size = MediaQuery.sizeOf(context);
 
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Column(
         children: [
           Image.asset(
@@ -30,14 +29,16 @@ class WelcomeScreen extends StatelessWidget {
               Text(
                 '${context.t.welcomeScreen.welcomeHeader} ',
                 textAlign: TextAlign.center,
-                style: textTheme.headlineLarge!
-                    .copyWith(fontWeight: FontWeight.w500),
+                style: textTheme.headlineLarge!.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
               const SizedBox(width: 4),
               Image.asset(
                 'assets/images/logo.png',
-                width: 60,
-                height: 60,
+                width: 70,
+                height: 70,
               ),
             ],
           ),
@@ -45,7 +46,10 @@ class WelcomeScreen extends StatelessWidget {
             context.t.welcomeScreen.subtitle,
             textAlign: TextAlign.center,
             style: textTheme.bodyLarge!.copyWith(
-              color: textTheme.bodyLarge!.color!.withValues(alpha: 0.64),
+              color: Theme.of(context)
+                  .colorScheme
+                  .onSurface
+                  .withValues(alpha: 0.64),
             ),
           ),
           const SizedBox(height: 48),
