@@ -9,5 +9,10 @@
     "Treningsøkter"
   ],
   "chooseLocation": "Velg EVO senter",
-  "primaryMembershipLocation": "Ditt primærsenter"
+  "primaryMembershipLocation": "Ditt primærsenter",
+  "greetings": {
+    "morning": "God morgen",
+    "afternoon": "God ettermiddag",
+    "evening": "God kveld"
+  }
 }

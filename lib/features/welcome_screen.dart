@@ -10,6 +10,7 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final size = MediaQuery.sizeOf(context);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -17,8 +18,8 @@ class WelcomeScreen extends StatelessWidget {
         children: [
           Image.asset(
             'assets/images/showcase.jpg',
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.7,
+            width: size.width,
+            height: size.height * 0.7,
             fit: BoxFit.cover,
           ),
           const SizedBox(height: 16),
