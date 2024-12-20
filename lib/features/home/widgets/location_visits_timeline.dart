@@ -243,7 +243,7 @@ Color _getBarColor(
 
   // Future bars
   return isDarkMode
-      ? colorScheme.primary.withValues(alpha: 0.8)
+      ? colorScheme.primary
       : colorScheme.primary.withValues(alpha: 0.6);
 }
 
