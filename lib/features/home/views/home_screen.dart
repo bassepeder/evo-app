@@ -114,7 +114,7 @@ class Greeting extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: 20,
+        horizontal: 24,
         vertical: 12,
       ),
       child: Row(
