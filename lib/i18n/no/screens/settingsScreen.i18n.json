@@ -1,7 +1,7 @@
 {
   "appBar": "Instillinger",
   "accountMenuItems": {
-    "header": "Kontoinstillinger",
+    "header": "Kontoinnstillinger",
     "profileInformation": {
       "title": "Kontoinformasjon",
       "subtitle": "Endre dine kontoopplysninger"
