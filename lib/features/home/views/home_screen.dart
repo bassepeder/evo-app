@@ -150,6 +150,7 @@ class Greeting extends StatelessWidget {
                           ).toLowerCase()}.',
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ],
