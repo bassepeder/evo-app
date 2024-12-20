@@ -83,7 +83,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
               Text(
                 context.t.signInScreen.header,
                 style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                      color: Colors.black,
+                      color: Theme.of(context).colorScheme.onSurface,
                       fontWeight: FontWeight.bold,
                     ),
               ),
@@ -92,7 +92,10 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 context.t.signInScreen.subtitle,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: const Color(0xFF757575),
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withValues(alpha: 0.9),
                     ),
               ),
               Expanded(
