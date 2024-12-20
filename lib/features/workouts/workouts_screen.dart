@@ -138,13 +138,10 @@ class HorizontalBarChart extends StatelessWidget {
 
   const HorizontalBarChart({required this.workoutMonths});
 
-  static const workoutCountTextStyle = TextStyle(
-    color: Colors.white,
-    fontWeight: FontWeight.w500,
-  );
-
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     // Get the maximum workouts count
     final int highestWorkouts = workoutMonths.isEmpty
         ? 0
@@ -186,8 +183,8 @@ class HorizontalBarChart extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           decoration: BoxDecoration(
             color: percent == highestWorkouts
-                ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.8)
-                : Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
+                ? colorScheme.primary.withValues(alpha: 0.8)
+                : colorScheme.primary.withValues(alpha: 0.5),
             borderRadius: BorderRadius.circular(30.0),
           ),
           child: Row(
@@ -196,7 +193,7 @@ class HorizontalBarChart extends StatelessWidget {
               Text(
                 monthLabel,
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary,
+                  color: colorScheme.onPrimary,
                 ),
               ),
               Text.rich(
@@ -205,7 +202,10 @@ class HorizontalBarChart extends StatelessWidget {
                     text: month.totalWorkouts.toString(),
                   ),
                 ),
-                style: workoutCountTextStyle,
+                style: TextStyle(
+                  color: colorScheme.onPrimary,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ],
           ),
@@ -234,7 +234,10 @@ class HorizontalBarChart extends StatelessWidget {
   }
 
   double _getTextWidth(BuildContext context, String text) {
-    final textSpan = TextSpan(text: text, style: workoutCountTextStyle);
+    final textSpan = TextSpan(
+      text: text,
+      style: const TextStyle(fontWeight: FontWeight.w500),
+    );
     final textPainter = TextPainter(
       text: textSpan,
       textDirection: TextDirection.ltr,
