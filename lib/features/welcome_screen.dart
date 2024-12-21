@@ -107,7 +107,7 @@ class _WebViewWidgetState extends State<WebViewWidget> {
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
 
-    final double scale = size.height / size.width < 1.5 ? 1.8 : 2.3;
+    final double scale = size.height / size.width < 1.5 ? 1.8 : 2.35;
     final String htmlData = '''
 <!DOCTYPE html>
 <html>
