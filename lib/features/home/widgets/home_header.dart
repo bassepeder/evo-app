@@ -189,6 +189,9 @@ class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
                   key: location.id == widget.currentLocationId
                       ? currentLocationKey
                       : null,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   title: Text(location.name, maxLines: 2),
                   subtitle: primaryMembershipLocationId == location.id
                       ? Text(context.t.homeScreen.primaryMembershipLocation)

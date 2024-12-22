@@ -223,7 +223,7 @@ class ListSection extends StatelessWidget {
 
 /// Platform agnostic list tile widget.
 ///
-/// Will use [ListTile] on android and [CupertinoListTile] on iOS.
+/// Will use [ListTile] on Android and [CupertinoListTile] on iOS.
 class PlatformListTile extends StatelessWidget {
   const PlatformListTile({
     this.leading,
@@ -238,6 +238,7 @@ class PlatformListTile extends StatelessWidget {
     this.isThreeLine = false,
     this.padding,
     this.cupertinoBackgroundColor,
+    this.shape,
     this.visualDensity,
     this.harmonizeCupertinoTitleStyle = false,
     super.key,
@@ -250,9 +251,12 @@ class PlatformListTile extends StatelessWidget {
 
   final EdgeInsetsGeometry? padding;
 
+  // only on Android
+  final ShapeBorder? shape;
+
   final Color? cupertinoBackgroundColor;
 
-  /// only on iOS
+  /// Only on iOS.
   final Widget? additionalInfo;
 
   /// Useful on some screens where ListTiles with and without subtitle are mixed.
@@ -260,13 +264,13 @@ class PlatformListTile extends StatelessWidget {
 
   final bool selected;
 
-  // only on android
+  // Only on Android.
   final bool? dense;
 
-  // only on android
+  // Only on Android.
   final bool isThreeLine;
 
-  /// Only on android.
+  /// Only on Android.
   final VisualDensity? visualDensity;
 
   final GestureTapCallback? onTap;
@@ -296,6 +300,7 @@ class PlatformListTile extends StatelessWidget {
           onTap: onTap,
           onLongPress: onLongPress,
           selected: selected,
+          shape: shape,
           isThreeLine: isThreeLine,
           contentPadding: padding,
         );
