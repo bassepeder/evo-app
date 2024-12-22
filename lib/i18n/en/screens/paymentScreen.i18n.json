@@ -1,6 +1,7 @@
 {
   "appbar": "Payment",
   "paymentCardHeader": "Payment card",
+  "cardExpiry": "Expires",
   "previousPaymentsHeader": "Previous payments",
   "tableHeaders": {
     "date": {
