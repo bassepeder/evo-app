@@ -3,24 +3,34 @@ import 'dart:async';
 import 'package:evo/common/widgets/evo_elevated_button.dart';
 import 'package:evo/features/auth/views/sign_in_screen.dart';
 import 'package:evo/i18n/translations.g.dart';
+import 'package:evo/network/connectivity.dart';
 import 'package:evo/utils/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends ConsumerWidget {
   const WelcomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = Theme.of(context).textTheme;
     final size = MediaQuery.sizeOf(context);
+
+    final connectivityStatus = ref.watch(connectivityChangesProvider);
 
     return Scaffold(
       body: Column(
         children: [
           SizedBox(
             height: size.height * 0.6,
-            child: const WebViewWidget(),
+            child: connectivityStatus.whenIs(
+              online: () => const WebViewWidget(),
+              offline: () => Image.asset(
+                'assets/images/showcase.jpg',
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           const SizedBox(height: 16),
           Row(
@@ -47,10 +57,7 @@ class WelcomeScreen extends StatelessWidget {
             context.t.welcomeScreen.subtitle,
             textAlign: TextAlign.center,
             style: textTheme.bodyLarge!.copyWith(
-              color: Theme.of(context)
-                  .colorScheme
-                  .onSurface
-                  .withValues(alpha: 0.64),
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.64),
             ),
           ),
           const SizedBox(height: 48),
