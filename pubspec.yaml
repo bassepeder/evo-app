@@ -69,6 +69,7 @@ dependencies:
   webview_flutter: ^4.10.0
   webview_flutter_android: ^4.2.0
   flutter_inappwebview: ^6.1.5
+  connectivity_plus: ^6.1.1
 dev_dependencies:
   freezed: ^2.5.7
   lint: ^2.0.1
