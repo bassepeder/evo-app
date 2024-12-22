@@ -31,7 +31,7 @@ class InvoiceDetails with _$InvoiceDetails {
       number: pick('invoice_number').asIntOrThrow(),
       amount: pick('amount').asDecimalOrThrow(),
       currency: pick('currency').asStringOrThrow(),
-      status: pick('id').asStringOrThrow(),
+      status: pick('status').asStringOrThrow(),
       from: pick('from').asDateOrThrow(),
       to: pick('to').asDateOrThrow(),
     );
