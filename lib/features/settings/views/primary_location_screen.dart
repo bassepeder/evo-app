@@ -203,6 +203,9 @@ class _LocationPickerListState extends ConsumerState<_LocationPickerList> {
                 : null,
             padding: const EdgeInsets.symmetric(horizontal: 5),
             leading: const Icon(Icons.pin_drop),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
             trailing: loadingLocationId == location.id
                 ? const SizedBox(
                     width: 20,
