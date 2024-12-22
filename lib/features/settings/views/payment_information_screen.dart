@@ -35,6 +35,8 @@ class PaymentInformationScreen extends ConsumerWidget {
               PaymentCardDetails(
                 cardNumber: membership.currentPaymentMethod.details,
                 brand: membership.currentPaymentMethod.brand,
+                expiryYear: membership.currentPaymentMethod.expiryYear,
+                expiryMonth: membership.currentPaymentMethod.expiryMonth,
               ),
               const SizedBox(height: 48),
               Header(title: context.t.paymentScreen.previousPaymentsHeader),
@@ -239,29 +241,43 @@ class PreviousPaymentCard extends ConsumerWidget {
 class PaymentCardDetails extends StatelessWidget {
   final String cardNumber;
   final String brand;
+  final int expiryYear;
+  final int expiryMonth;
 
   const PaymentCardDetails({
     super.key,
     required this.cardNumber,
     required this.brand,
+    required this.expiryYear,
+    required this.expiryMonth,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Row(
+          children: [
+            Text(
+              cardNumber,
+              style: const TextStyle(fontSize: 16),
+            ),
+            const SizedBox(width: 8),
+            if (brand == 'VISA') ...[
+              SvgPicture.string(
+                visaCardSvg,
+                width: 24,
+                height: 24,
+              ),
+            ],
+          ],
+        ),
+        const SizedBox(height: 12),
         Text(
-          cardNumber,
+          '${context.t.paymentScreen.cardExpiry} ${expiryMonth < 10 ? '0$expiryMonth' : expiryMonth}/$expiryYear',
           style: const TextStyle(fontSize: 16),
         ),
-        const SizedBox(width: 8),
-        if (brand == 'VISA') ...[
-          SvgPicture.string(
-            visaCardSvg,
-            width: 24,
-            height: 24,
-          ),
-        ],
       ],
     );
   }

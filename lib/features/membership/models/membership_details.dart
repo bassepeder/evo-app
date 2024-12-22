@@ -269,6 +269,8 @@ class PaymentMethod with _$PaymentMethod {
     required String id,
     required String brand,
     required String details,
+    required int expiryYear,
+    required int expiryMonth,
   }) = _PaymentMethod;
 
   factory PaymentMethod.fromJson(Map<String, dynamic> json) =>
@@ -279,6 +281,8 @@ class PaymentMethod with _$PaymentMethod {
       id: pick('id').asStringOrThrow(),
       brand: pick('brand').asStringOrThrow(),
       details: pick('details').asStringOrThrow(),
+      expiryYear: pick('expiry_year').asIntOrThrow(),
+      expiryMonth: pick('expiry_month').asIntOrThrow(),
     );
   }
 }
