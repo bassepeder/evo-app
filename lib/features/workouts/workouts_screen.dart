@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:evo/common/widgets/error_screen.dart';
+import 'package:evo/features/settings/brightness.dart';
 import 'package:evo/features/workouts/models/membership_workouts_statistics.dart';
 import 'package:evo/features/workouts/workouts_controller.dart';
 import 'package:evo/i18n/translations.g.dart';
@@ -13,6 +14,10 @@ class WorkoutsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(workoutsControllerProvider);
+    final isDarkMode = ref.watch(
+      currentBrightnessProvider
+          .select((brightness) => brightness == Brightness.dark),
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -60,7 +65,10 @@ class WorkoutsScreen extends ConsumerWidget {
                             ),
                           ),
                           const SizedBox(height: 16),
-                          HorizontalBarChart(workoutMonths: months),
+                          HorizontalBarChart(
+                            workoutMonths: months,
+                            isDarkMode: isDarkMode,
+                          ),
                           if (!isLast) const SizedBox(height: 32),
                         ],
                       );
@@ -135,8 +143,12 @@ class Header extends StatelessWidget {
 
 class HorizontalBarChart extends StatelessWidget {
   final List<WorkoutMonth> workoutMonths;
+  final bool isDarkMode;
 
-  const HorizontalBarChart({required this.workoutMonths});
+  const HorizontalBarChart({
+    required this.workoutMonths,
+    required this.isDarkMode,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -184,7 +196,8 @@ class HorizontalBarChart extends StatelessWidget {
           decoration: BoxDecoration(
             color: percent == highestWorkouts
                 ? colorScheme.primary.withValues(alpha: 0.8)
-                : colorScheme.primary.withValues(alpha: 0.5),
+                : colorScheme.primary
+                    .withValues(alpha: isDarkMode ? 0.65 : 0.5),
             borderRadius: BorderRadius.circular(30.0),
           ),
           child: Row(
