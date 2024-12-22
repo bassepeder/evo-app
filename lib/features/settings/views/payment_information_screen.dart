@@ -1,3 +1,4 @@
+import 'package:evo/common/styles.dart';
 import 'package:evo/common/widgets/evo_elevated_button.dart';
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/features/settings/brightness.dart';
@@ -182,55 +183,71 @@ class PreviousPaymentCard extends ConsumerWidget {
                   .withValues(alpha: 0.5),
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Row(
               children: [
-                Text.rich(
-                  style: const TextStyle(fontSize: 16),
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: formatDate(context, invoice.date),
-                        style: const TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                      const TextSpan(text: ' - '),
-                      TextSpan(
-                        text: formatDate(context, invoice.to),
-                        style: const TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Row(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      formatCurrencyToProfileLocale(
-                        invoice.amount.toDouble(),
-                        membershipLocale,
-                      ),
+                    Text.rich(
                       style: const TextStyle(fontSize: 16),
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: formatDate(context, invoice.date),
+                            style: const TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                          const TextSpan(text: ' - '),
+                          TextSpan(
+                            text: formatDate(context, invoice.to),
+                            style: const TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          formatCurrencyToProfileLocale(
+                            invoice.amount.toDouble(),
+                            membershipLocale,
+                          ),
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ],
                     ),
                   ],
                 ),
+                const Spacer(),
+                IconButton(
+                  onPressed: () async {
+                    await tryOpenUrlWithFeedback(
+                      'https://me.evofitness.no/invoice/${invoice.id}',
+                      context,
+                    );
+                  },
+                  icon: Icon(
+                    Icons.open_in_new,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                ),
               ],
             ),
-            const Spacer(),
-            IconButton(
-              onPressed: () async {
-                await tryOpenUrlWithFeedback(
-                  'https://me.evofitness.no/invoice/${invoice.id}',
-                  context,
-                );
-              },
-              icon: Icon(
-                Icons.open_in_new,
-                color: Theme.of(context).colorScheme.onSurface,
+            const SizedBox(height: 16),
+            Chip(
+              label: Text(
+                'Charged',
+                style: const TextStyle(color: Colors.white),
               ),
-            ),
+              visualDensity: const VisualDensity(vertical: -4),
+              backgroundColor: invoice.status == 'charged'
+                  ? evoCustomColors.good
+                  : evoCustomColors.error,
+            )
           ],
         ),
       ),
