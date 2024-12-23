@@ -9,6 +9,7 @@ import 'package:evo/i18n/translations.g.dart';
 import 'package:evo/utils/navigation.dart';
 import 'package:evo/utils/util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
@@ -45,6 +46,10 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     ref.listen<AuthState>(authViewModelProvider, (previous, next) {
       if (next.success == true) {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
+        // We can clear it now since the user will most likely not return to the welcome screen.
+        InAppWebViewController.clearAllCache();
+
         pushAndRemoveUntilPlatformRoute(
           context,
           builder: (_) => const HomeScreen(),
