@@ -185,27 +185,23 @@ class EvoClient implements Client {
 
       _logIfError(response);
 
-      try {
-        if (response.statusCode == 401 && session != null) {
-          _logger.fine('Session expired. Trying to refresh token.');
+      if (response.statusCode == 401 && session != null) {
+        _logger.fine('Session expired. Trying to refresh token.');
 
-          final newSession = await _tryRefreshToken(session);
+        final newSession = await _tryRefreshToken(session);
 
-          if (newSession != null) {
-            _logger.fine('Got new token. Retrying request');
+        if (newSession != null) {
+          _logger.fine('Got new token. Retrying request');
 
-            _ref.read(authSessionProvider.notifier).update(newSession);
+          _ref.read(authSessionProvider.notifier).update(newSession);
 
-            final newRequest = _copyRequest(request);
-            newRequest.headers['Authorization'] = newSession.token;
+          final newRequest = _copyRequest(request);
+          newRequest.headers['Authorization'] = newSession.token;
 
-            return await _inner.send(newRequest).timeout(_defaultTimeout);
-          } else {
-            await _handleUnableToRefreshToken();
-          }
+          return await _inner.send(newRequest).timeout(_defaultTimeout);
+        } else {
+          await _handleUnableToRefreshToken();
         }
-      } catch (e, _) {
-        await _handleUnableToRefreshToken();
       }
 
       return response;
@@ -271,7 +267,6 @@ class EvoClient implements Client {
   Future<AuthSessionState?> _tryRefreshToken(
     AuthSessionState session,
   ) async {
-    throw Exception('fuck off');
     final defaultClient = _ref.read(defaultClientProvider);
 
     try {
