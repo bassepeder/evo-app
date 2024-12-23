@@ -325,25 +325,4 @@ extension MembershipStatusExtensions on MembershipStatus {
       MembershipStatus.unknown => context.t.membershipStatuses.unknown,
     };
   }
-
-  static Color color(MembershipStatus status) {
-    return switch (status) {
-      MembershipStatus.presale => const Color(0xFFF1E6FF), // Light lavender
-      MembershipStatus.inTrial => const Color(0xFF80E2B1), // Light green
-      MembershipStatus.active =>
-        const Color(0xFF00BFAE), // Mint green (complementary to primary)
-      MembershipStatus.freezed =>
-        const Color(0xFF03A9F4), // Blue (based on Material 3)
-      MembershipStatus.pendingCancellation =>
-        const Color(0xFFFFD54F), // Yellow (amber shade)
-      MembershipStatus.cancelled => const Color(0xFFF44336), // Red
-      MembershipStatus.cancelledInPresale =>
-        const Color(0xFFB71C1C), // Dark red
-      MembershipStatus.cancelledInTrial => const Color(0xFFD32F2F), // Light red
-      MembershipStatus.stopped => const Color(0xFF9E9E9E), // Gray
-      MembershipStatus.unknown => const Color(0xFFBDBDBD), // Light gray
-      _ =>
-        const Color(0xFFBDBDBD), // Default color for unknown status (fallback)
-    };
-  }
 }
