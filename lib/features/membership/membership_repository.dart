@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:evo/common/id.dart';
-import 'package:evo/features/auth/providers/auth_session.dart';
 import 'package:evo/features/membership/models/current_membership_referral.dart';
 import 'package:evo/features/membership/models/membership_details.dart';
 import 'package:evo/features/settings/models/update_primary_location_request.dart';
@@ -12,9 +11,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'membership_repository.g.dart';
 
 @riverpod
-Future<MembershipDetails?> membershipDetails(Ref ref) async {
+Future<MembershipDetails> membershipDetails(Ref ref) async {
+  /*
   final session = ref.watch(authSessionProvider);
   if (session == null) return null;
+   */
 
   return ref.withClient(
     (client) => MembershipRepository(client).getMembershipDetails(),

@@ -6,6 +6,7 @@ import 'package:evo/features/settings/brightness.dart';
 import 'package:evo/features/settings/general_preferences.dart';
 import 'package:evo/features/welcome_screen.dart';
 import 'package:evo/i18n/translations.g.dart';
+import 'package:evo/utils/navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -176,6 +177,7 @@ class _AppState extends ConsumerState<Application> {
                   );
                 }
               : null,
+          navigatorKey: ref.read(navigatorProvider),
           home: hasSession ? const HomeScreen() : const WelcomeScreen(),
         );
       },

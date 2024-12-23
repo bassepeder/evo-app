@@ -8,9 +8,14 @@ import 'package:cupertino_http/cupertino_http.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:evo/common/preloaded_data.dart';
 import 'package:evo/constants.dart';
+import 'package:evo/features/auth/models/auth_response.dart';
 import 'package:evo/features/auth/providers/auth_session.dart';
+import 'package:evo/features/welcome_screen.dart';
+import 'package:evo/i18n/translations.g.dart';
+import 'package:evo/utils/navigation.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart'
     show
@@ -191,17 +196,50 @@ class EvoClient implements Client {
   /// Checks if the session token is still valid, and delete session if it's not.
   Future<void> _checkSessionToken(AuthSessionState session) async {
     final defaultClient = _ref.read(defaultClientProvider);
-    // TODO: Implement this
-    final data = await defaultClient
-        .postReadJson(
-          evoUri('/api/token/test'),
-          mapper: (json) => json,
-          body: session.token,
-        )
-        .timeout(_defaultTimeout);
-    if (data[session.token] == null) {
-      _logger.fine('Session is not active. Deleting it.');
+
+    _logger.fine('Session is not active. Trying to re-authenticate');
+
+    try {
+      final data = await defaultClient
+          .postReadJson(
+            evoUri('api/v1/auth/authenticate'),
+            body: {
+              'username': session.email,
+              'password': session.password,
+            },
+            mapper: AuthResponse.fromJson,
+          )
+          .timeout(_defaultTimeout);
+
+      _logger.fine('Got new auth token. Token is: ${data.token}');
+
+      await _ref
+          .read(authSessionProvider.notifier)
+          .update(session.copyWith(token: data.token));
+    } catch (e, stackTrace) {
+      _logger.severe(
+        'Error while trying to re-authenticate user',
+        e,
+        stackTrace,
+      );
+
       await _ref.read(authSessionProvider.notifier).delete();
+
+      final context = _ref.read(navigatorProvider).currentContext!;
+      pushAndRemoveUntilPlatformRoute(
+        context,
+        builder: (_) => const WelcomeScreen(),
+      );
+
+      // Show snackbar with the message
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(
+            content: Text(context.t.errors.pleaseAuthenticate),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
     }
   }
 

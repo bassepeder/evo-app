@@ -19,9 +19,11 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final membership = ref.watch(membershipDetailsProvider);
 
+    /*
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(getLocationsProvider);
     });
+     */
 
     return Scaffold(
       body: membership.when(
@@ -40,7 +42,7 @@ class HomeScreen extends ConsumerWidget {
                       child: Column(
                         children: [
                           //MembershipStatusBanner(details: details!),
-                          Greeting(details: details!),
+                          Greeting(details: details),
                           const HomeShortcuts(),
                           const CurrentLocationVisits(),
                           const LocationVisitsTimeline(),

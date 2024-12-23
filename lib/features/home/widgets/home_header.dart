@@ -154,7 +154,7 @@ class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
   @override
   Widget build(BuildContext context) {
     final primaryMembershipLocationId =
-        ref.read(membershipDetailsProvider).requireValue!.location.id;
+        ref.read(membershipDetailsProvider).requireValue.location.id;
     final locationsAsync = ref.read(getLocationsProvider);
 
     // Scroll to the current location.
