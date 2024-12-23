@@ -6,6 +6,7 @@ import 'package:evo/features/settings/app_background_mode_screen.dart';
 import 'package:evo/features/settings/brightness.dart';
 import 'package:evo/features/settings/general_preferences.dart';
 import 'package:evo/features/settings/views/current_referral_screen.dart';
+import 'package:evo/features/settings/views/membership_details_screen.dart';
 import 'package:evo/features/settings/views/payment_information_screen.dart';
 import 'package:evo/features/settings/views/primary_location_screen.dart';
 import 'package:evo/features/settings/views/profile_information_screen.dart';
@@ -51,6 +52,18 @@ class SettingsScreen extends ConsumerWidget {
                   onClick: () => pushPlatformRoute(
                     context,
                     builder: (_) => const ProfileInformationScreen(),
+                  ),
+                ),
+                SettingsListItem(
+                  svgSrc: membershipIconSvg,
+                  title: context.t.settingsScreen.accountMenuItems
+                      .membershipDetails.title,
+                  subTitle: context.t.settingsScreen.accountMenuItems
+                      .membershipDetails.subtitle,
+                  currentBrightness: brightness,
+                  onClick: () => pushPlatformRoute(
+                    context,
+                    builder: (_) => const MembershipDetailsScreen(),
                   ),
                 ),
                 SettingsListItem(
@@ -300,6 +313,12 @@ class SettingsListItem extends StatelessWidget {
 const profileIconSvg = '''
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M8.66667 7.83333C8.66667 9.67428 10.1591 11.1667 12 11.1667C13.8409 11.1667 15.3333 9.67428 15.3333 7.83333C15.3333 5.99238 13.8409 4.5 12 4.5C10.1591 4.5 8.66667 5.99238 8.66667 7.83333ZM11.9861 12.8333C8.05159 12.8333 4.82355 14.8554 4.50054 18.8327C4.48295 19.0493 4.89726 19.5 5.10625 19.5H18.8722C19.4983 19.5 19.508 18.9962 19.4983 18.8333C19.2541 14.7443 15.976 12.8333 11.9861 12.8333Z" fill="#010F07"/>
+</svg>
+''';
+
+const membershipIconSvg = '''
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
 </svg>
 ''';
 
