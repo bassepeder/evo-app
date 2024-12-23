@@ -66,6 +66,10 @@ dependencies:
   decimal: ^3.0.2
   email_validator: ^3.0.0
   app_settings: ^5.1.1
+  webview_flutter: ^4.10.0
+  webview_flutter_android: ^4.2.0
+  flutter_inappwebview: ^6.1.5
+  connectivity_plus: ^6.1.1
 dev_dependencies:
   freezed: ^2.5.7
   lint: ^2.0.1
