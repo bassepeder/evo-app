@@ -17,11 +17,11 @@ class PrimaryLocationScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final membershipLocationName = ref.watch(
       membershipDetailsProvider
-          .select((membership) => membership.requireValue!.location.name),
+          .select((membership) => membership.requireValue.location.name),
     );
     final primaryMembershipLocationId = ref.watch(
       membershipDetailsProvider
-          .select((membership) => membership.requireValue!.location.id),
+          .select((membership) => membership.requireValue.location.id),
     );
     final locationsAsync = ref.read(getLocationsProvider);
 

@@ -17,6 +17,8 @@ import 'common/styles.dart';
 final RouteObserver<PageRoute<void>> rootNavPageRouteObserver =
     RouteObserver<PageRoute<void>>();
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 /// Application initialization and main entry point.
 class AppInitializationScreen extends ConsumerWidget {
   const AppInitializationScreen({super.key});
@@ -179,6 +181,7 @@ class _AppState extends ConsumerState<Application> {
                   );
                 }
               : null,
+          navigatorKey: navigatorKey,
           home: hasSession ? const HomeScreen() : const WelcomeScreen(),
           navigatorObservers: [rootNavPageRouteObserver],
         );

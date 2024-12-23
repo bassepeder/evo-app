@@ -11,7 +11,7 @@ class CurrentReferralScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final referralCode = ref.read(
       membershipDetailsProvider
-          .select((membership) => membership.requireValue!.referralCode),
+          .select((membership) => membership.requireValue.referralCode),
     );
     final currentMembershipReferral =
         ref.watch(currentMembershipReferralProvider);

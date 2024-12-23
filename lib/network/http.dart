@@ -6,11 +6,17 @@ import 'dart:math' as math;
 import 'package:cronet_http/cronet_http.dart';
 import 'package:cupertino_http/cupertino_http.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:evo/app.dart';
 import 'package:evo/common/preloaded_data.dart';
 import 'package:evo/constants.dart';
+import 'package:evo/features/auth/models/auth_response.dart';
 import 'package:evo/features/auth/providers/auth_session.dart';
+import 'package:evo/features/welcome_screen.dart';
+import 'package:evo/i18n/translations.g.dart';
+import 'package:evo/utils/navigation.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart'
     show
@@ -19,8 +25,10 @@ import 'package:http/http.dart'
         BaseResponse,
         Client,
         ClientException,
+        MultipartRequest,
         Request,
         Response,
+        StreamedRequest,
         StreamedResponse;
 import 'package:http/io_client.dart';
 import 'package:http/retry.dart';
@@ -178,7 +186,22 @@ class EvoClient implements Client {
       _logIfError(response);
 
       if (response.statusCode == 401 && session != null) {
-        _checkSessionToken(session);
+        _logger.fine('Session expired. Trying to refresh token.');
+
+        final newSession = await _tryRefreshToken(session);
+
+        if (newSession != null) {
+          _logger.fine('Got new token. Retrying request');
+
+          _ref.read(authSessionProvider.notifier).update(newSession);
+
+          final newRequest = _copyRequest(request);
+          newRequest.headers['Authorization'] = newSession.token;
+
+          return await _inner.send(newRequest).timeout(_defaultTimeout);
+        } else {
+          await _handleUnableToRefreshToken();
+        }
       }
 
       return response;
@@ -188,20 +211,80 @@ class EvoClient implements Client {
     }
   }
 
-  /// Checks if the session token is still valid, and delete session if it's not.
-  Future<void> _checkSessionToken(AuthSessionState session) async {
+  Future<void> _handleUnableToRefreshToken() async {
+    _logger.warning('Failed to refresh session token.');
+
+    await _ref.read(authSessionProvider.notifier).delete();
+
+    final context = navigatorKey.currentContext!;
+
+    pushAndRemoveUntilPlatformRoute(
+      context,
+      builder: (_) => const WelcomeScreen(),
+    );
+
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(context.t.errors.pleaseAuthenticate),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+  }
+
+  BaseRequest _copyRequest(BaseRequest request) {
+    BaseRequest requestCopy;
+
+    if (request is Request) {
+      // Create a new Request with the same method, URL, and bodyBytes
+      requestCopy = Request(request.method, request.url)
+        ..encoding = request.encoding
+        ..bodyBytes = request.bodyBytes; // Copy the bodyBytes
+    } else if (request is MultipartRequest) {
+      // Create a new MultipartRequest with the same method and URL
+      requestCopy = MultipartRequest(request.method, request.url)
+        ..fields.addAll(request.fields)
+        ..files.addAll(request.files);
+    } else if (request is StreamedRequest) {
+      // StreamedRequest cannot be copied directly
+      throw Exception('Copying streamed requests is not supported');
+    } else {
+      // For unknown types of requests
+      throw Exception('Request type is unknown, cannot copy');
+    }
+
+    // Copying other common properties
+    requestCopy
+      ..persistentConnection = request.persistentConnection
+      ..followRedirects = request.followRedirects
+      ..maxRedirects = request.maxRedirects
+      ..headers.addAll(request.headers);
+
+    return requestCopy;
+  }
+
+  Future<AuthSessionState?> _tryRefreshToken(
+    AuthSessionState session,
+  ) async {
     final defaultClient = _ref.read(defaultClientProvider);
-    // TODO: Implement this
-    final data = await defaultClient
-        .postReadJson(
-          evoUri('/api/token/test'),
-          mapper: (json) => json,
-          body: session.token,
-        )
-        .timeout(_defaultTimeout);
-    if (data[session.token] == null) {
-      _logger.fine('Session is not active. Deleting it.');
-      await _ref.read(authSessionProvider.notifier).delete();
+
+    try {
+      final data = await defaultClient
+          .postReadJson(
+            evoUri('api/v1/auth/authenticate'),
+            body: {
+              'username': session.email,
+              'password': session.password,
+            },
+            mapper: AuthResponse.fromJson,
+          )
+          .timeout(_defaultTimeout);
+
+      return session.copyWith(token: data.token);
+    } catch (e) {
+      _logger.warning('Token refresh failed: $e');
+      return null;
     }
   }
 

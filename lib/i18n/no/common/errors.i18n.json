@@ -8,5 +8,6 @@
   "failedToLoadWorkoutStatistics": "Klarte ikke å hente treningsøktene dine.",
   "failedToLoadInvoices": "Klarte ikke å hente fakturaene dine.",
   "failedToOpenUrl": "Klarte ikke å åpne URL.",
-  "failedToLoadCurrentMembershipReferral": "Klarte ikke å hente info om din vervekampanje."
+  "failedToLoadCurrentMembershipReferral": "Klarte ikke å hente info om din vervekampanje.",
+  "pleaseAuthenticate": "Klarte ikke å verifisere bruker. Logg inn på nytt."
 }

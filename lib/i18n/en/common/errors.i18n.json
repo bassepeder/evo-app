@@ -8,5 +8,6 @@
   "failedToLoadWorkoutStatistics": "Failed to load your workouts.",
   "failedToLoadInvoices": "Failed to fetch your invoices.",
   "failedToOpenUrl": "Failed to open URL.",
-  "failedToLoadCurrentMembershipReferral": "Failed to load membership referral info."
+  "failedToLoadCurrentMembershipReferral": "Failed to load membership referral info.",
+  "pleaseAuthenticate": "Unable to verify user. Please log in."
 }

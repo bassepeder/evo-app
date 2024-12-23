@@ -40,7 +40,7 @@ class HomeScreen extends ConsumerWidget {
                       child: Column(
                         children: [
                           //MembershipStatusBanner(details: details!),
-                          Greeting(details: details!),
+                          Greeting(details: details),
                           const HomeShortcuts(),
                           const CurrentLocationVisits(),
                           const LocationVisitsTimeline(),
