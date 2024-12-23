@@ -190,6 +190,7 @@ class SignInForm extends StatelessWidget {
       child: Column(
         children: <Widget>[
           TextFormField(
+            autofillHints: const [AutofillHints.email],
             controller: emailController,
             autocorrect: false,
             readOnly: isLoading,
@@ -225,6 +226,7 @@ class SignInForm extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 24),
             child: TextFormField(
+              autofillHints: const [AutofillHints.password],
               controller: passwordController,
               obscureText: true,
               readOnly: isLoading,
