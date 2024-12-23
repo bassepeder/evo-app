@@ -54,7 +54,7 @@ class _ProfileInformationScreenState
 
   @override
   Widget build(BuildContext context) {
-    final membershipDetails = ref.read(membershipDetailsProvider).requireValue!;
+    final membershipDetails = ref.read(membershipDetailsProvider).requireValue;
     final isLoading =
         ref.watch(profileControllerProvider.select((state) => state.isLoading));
 

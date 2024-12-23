@@ -14,7 +14,7 @@ part 'location_controller.g.dart';
 class LocationController extends _$LocationController {
   @override
   LocationState build() {
-    final membership = ref.read(membershipDetailsProvider).requireValue!;
+    final membership = ref.read(membershipDetailsProvider).requireValue;
 
     final initialLocation = membership.location;
     final initialState = LocationState(

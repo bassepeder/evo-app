@@ -19,7 +19,7 @@ class KeysMenu extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final keys = ref.read(membershipDetailsProvider).requireValue!.keys;
+    final keys = ref.read(membershipDetailsProvider).requireValue.keys;
     final isDarkMode = ref.watch(
       currentBrightnessProvider
           .select((brightness) => brightness == Brightness.dark),

@@ -135,7 +135,7 @@ class ProfileController extends _$ProfileController {
   }
 
   MembershipDetails getMembershipDetails() =>
-      ref.read(membershipDetailsProvider).requireValue!;
+      ref.read(membershipDetailsProvider).requireValue;
 }
 
 @freezed
