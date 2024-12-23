@@ -3,8 +3,12 @@
   "accountMenuItems": {
     "header": "Account Settings",
     "profileInformation": {
-      "title": "Account Information",
+      "title": "Account information",
       "subtitle": "Change your account information"
+    },
+    "membershipDetails": {
+      "title": "Your membership",
+      "subtitle": "Explore your membership"
     },
     "payment": {
       "title": "Payment",
@@ -15,11 +19,11 @@
       "subtitle": "Change your primary location"
     },
     "referral": {
-      "title": "Referral Campaign",
+      "title": "Referral campaign",
       "subtitle": "Get exclusive promotions"
     },
     "signOut": {
-      "title": "Sign Out",
+      "title": "Sign out",
       "subtitle": "Hope to see you again"
     }
   },
@@ -33,10 +37,6 @@
         "dark": "Dark",
         "light": "Light"
       }
-    },
-    "systemColors": {
-      "title": "Use system colors",
-      "subtitle": "Make use of the system color palette"
     },
     "locale": {
       "title": "Language",
