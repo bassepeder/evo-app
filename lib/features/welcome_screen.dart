@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:evo/app.dart';
 import 'package:evo/common/widgets/evo_elevated_button.dart';
 import 'package:evo/features/auth/views/sign_in_screen.dart';
@@ -17,6 +19,7 @@ class WelcomeScreen extends ConsumerStatefulWidget {
 
 class _WelcomeScreenState extends ConsumerState<WelcomeScreen> with RouteAware {
   InAppWebViewController? webViewController;
+  bool showWebView = false;
 
   static const String htmlData = '''
 <!DOCTYPE html>
@@ -71,6 +74,16 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> with RouteAware {
 ''';
 
   @override
+  void initState() {
+    super.initState();
+    Timer(const Duration(seconds: 1), () {
+      setState(() {
+        showWebView = true;
+      });
+    });
+  }
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     final route = ModalRoute.of(context);
@@ -100,16 +113,28 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> with RouteAware {
         children: [
           SizedBox(
             height: size.height * 0.6,
-            child: connectivityStatus.whenIs(
-              online: () => WebViewWidget(
-                htmlData: htmlData,
-                onWebViewCreated: (controller) =>
-                    webViewController = controller,
-              ),
-              offline: () => Image.asset(
-                'assets/images/showcase.jpg',
-                fit: BoxFit.cover,
-              ),
+            child: Stack(
+              children: [
+                AnimatedOpacity(
+                  opacity: showWebView ? 0 : 1,
+                  duration: const Duration(seconds: 1),
+                  child: Image.asset(
+                    'assets/images/showcase.jpg',
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: double.infinity,
+                  ),
+                ),
+                AnimatedOpacity(
+                  opacity: showWebView ? 1 : 0,
+                  duration: const Duration(seconds: 1),
+                  child: WebViewWidget(
+                    htmlData: htmlData,
+                    onWebViewCreated: (controller) =>
+                        webViewController = controller,
+                  ),
+                ),
+              ],
             ),
           ),
           const SizedBox(height: 16),
