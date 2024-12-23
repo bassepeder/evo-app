@@ -8,7 +8,9 @@ import 'package:evo/features/home/widgets/home_shortcuts.dart';
 import 'package:evo/features/home/widgets/location_visits_timeline.dart';
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/features/membership/models/membership_details.dart';
+import 'package:evo/features/settings/views/membership_details_screen.dart';
 import 'package:evo/i18n/translations.g.dart';
+import 'package:evo/utils/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -109,6 +111,7 @@ class Greeting extends StatefulWidget {
 }
 
 class _GreetingState extends State<Greeting> with WidgetsBindingObserver {
+  late String greetingIcon;
   late String greeting;
 
   @override
@@ -124,20 +127,23 @@ class _GreetingState extends State<Greeting> with WidgetsBindingObserver {
   }
 
   void updateGreeting() {
+    final data = getGreeting(context);
+
     setState(() {
-      greeting = getGreeting(context);
+      greetingIcon = data.$1;
+      greeting = data.$2;
     });
   }
 
-  String getGreeting(BuildContext context) {
+  (String, String) getGreeting(BuildContext context) {
     final hour = DateTime.now().hour;
 
     if (hour >= 5 && hour < 12) {
-      return '☀️ ${context.t.homeScreen.greetings.morning}';
+      return ('☀️', context.t.homeScreen.greetings.morning);
     } else if (hour >= 12 && hour < 17) {
-      return '🌤️ ${context.t.homeScreen.greetings.afternoon}';
+      return ('🌤️', context.t.homeScreen.greetings.afternoon);
     } else {
-      return '🌙 ${context.t.homeScreen.greetings.evening}';
+      return ('🌙', context.t.homeScreen.greetings.evening);
     }
   }
 
@@ -166,6 +172,11 @@ class _GreetingState extends State<Greeting> with WidgetsBindingObserver {
       ),
       child: Row(
         children: [
+          Text(
+            greetingIcon,
+            style: const TextStyle(fontSize: 22),
+          ),
+          const SizedBox(width: 8),
           Flexible(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -181,30 +192,36 @@ class _GreetingState extends State<Greeting> with WidgetsBindingObserver {
                       .ellipsis, // Ensures the greeting and name are truncated if too long
                 ),
                 if (showAdditionalDetails)
-                  Text.rich(
-                    TextSpan(
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: context.t.homeScreen.membershipStatus,
-                        ),
-                        TextSpan(
-                          text: ' ${MembershipStatusExtensions.translated(
-                            widget.details.membershipDetails.status,
-                            context,
-                          ).toLowerCase()}.',
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.primary,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
+                  GestureDetector(
+                    onTap: () => pushPlatformRoute(
+                      context,
+                      builder: (_) => const MembershipDetailsScreen(),
                     ),
-                    maxLines: 1,
-                    overflow: TextOverflow
-                        .ellipsis, // Ensures only additional details truncate
+                    child: Text.rich(
+                      TextSpan(
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                        children: [
+                          TextSpan(
+                            text: context.t.homeScreen.membershipStatus,
+                          ),
+                          TextSpan(
+                            text: ' ${MembershipStatusExtensions.translated(
+                              widget.details.membershipDetails.status,
+                              context,
+                            ).toLowerCase()}.',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow
+                          .ellipsis, // Ensures only additional details truncate
+                    ),
                   ),
               ],
             ),
