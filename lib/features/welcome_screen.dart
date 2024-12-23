@@ -76,7 +76,7 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> with RouteAware {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 1), () {
+    Timer(const Duration(milliseconds: 1500), () {
       setState(() {
         showWebView = true;
       });
@@ -116,8 +116,8 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> with RouteAware {
             child: Stack(
               children: [
                 AnimatedOpacity(
-                  opacity: showWebView ? 0 : 1,
-                  duration: const Duration(seconds: 1),
+                  opacity: !showWebView ? 1 : 0,
+                  duration: const Duration(milliseconds: 1500),
                   child: Image.asset(
                     'assets/images/showcase.jpg',
                     fit: BoxFit.cover,
@@ -126,12 +126,16 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> with RouteAware {
                   ),
                 ),
                 AnimatedOpacity(
-                  opacity: showWebView ? 1 : 0,
-                  duration: const Duration(seconds: 1),
+                  opacity: (showWebView &&
+                          connectivityStatus.value?.isOnline == true)
+                      ? 1
+                      : 0,
+                  duration: const Duration(milliseconds: 1500),
                   child: WebViewWidget(
                     htmlData: htmlData,
-                    onWebViewCreated: (controller) =>
-                        webViewController = controller,
+                    onWebViewCreated: (controller) {
+                      webViewController = controller;
+                    },
                   ),
                 ),
               ],
