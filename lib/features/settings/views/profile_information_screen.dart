@@ -1,7 +1,9 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:evo/constants.dart';
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/features/settings/profile_controller.dart';
 import 'package:evo/i18n/translations.g.dart';
+import 'package:evo/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:phone_form_field/phone_form_field.dart';
@@ -460,6 +462,19 @@ class TermsAndConditions extends StatelessWidget {
         Header(title: context.t.profileScreen.termsHeader),
         const SizedBox(height: 8),
         Text(terms),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: GestureDetector(
+            onTap: () => tryOpenUrlWithFeedback(kMembershipTermsUrl, context),
+            child: Text(
+              context.t.profileScreen.termsLink,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
