@@ -174,7 +174,7 @@ class _GreetingState extends State<Greeting> with WidgetsBindingObserver {
         children: [
           Text(
             greetingIcon,
-            style: const TextStyle(fontSize: 22),
+            style: const TextStyle(fontSize: 24),
           ),
           const SizedBox(width: 8),
           Flexible(
@@ -188,8 +188,11 @@ class _GreetingState extends State<Greeting> with WidgetsBindingObserver {
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
+                  softWrap: true,
+                  /*
                   overflow: TextOverflow
                       .ellipsis, // Ensures the greeting and name are truncated if too long
+                   */
                 ),
                 if (showAdditionalDetails)
                   GestureDetector(
