@@ -14,6 +14,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'common/styles.dart';
 
+final RouteObserver<PageRoute<void>> rootNavPageRouteObserver =
+    RouteObserver<PageRoute<void>>();
+
 /// Application initialization and main entry point.
 class AppInitializationScreen extends ConsumerWidget {
   const AppInitializationScreen({super.key});
@@ -177,6 +180,7 @@ class _AppState extends ConsumerState<Application> {
                 }
               : null,
           home: hasSession ? const HomeScreen() : const WelcomeScreen(),
+          navigatorObservers: [rootNavPageRouteObserver],
         );
       },
     );
