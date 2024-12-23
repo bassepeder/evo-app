@@ -469,6 +469,7 @@ class TermsAndConditions extends StatelessWidget {
             child: Text(
               context.t.profileScreen.termsLink,
               style: TextStyle(
+                fontSize: 16,
                 color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.bold,
               ),
