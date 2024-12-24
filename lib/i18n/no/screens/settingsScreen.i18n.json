@@ -6,6 +6,10 @@
       "title": "Kontoinformasjon",
       "subtitle": "Endre dine kontoopplysninger"
     },
+    "membershipDetails": {
+      "title": "Mitt medlemsskap",
+      "subtitle": "Utforsk medlemsskapet ditt"
+    },
     "payment": {
       "title": "Betaling",
       "subtitle": "Kontroller ditt betalingskort"
@@ -33,10 +37,6 @@
         "dark": "Mørk",
         "light": "Lys"
       }
-    },
-    "systemColors": {
-      "title": "Bruk systemfarger",
-      "subtitle": "Ta i bruk system fargepalett"
     },
     "locale": {
       "title": "Språk",

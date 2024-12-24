@@ -68,7 +68,7 @@ class CurrentReferralScreen extends ConsumerWidget {
                   data: (referral) {
                     return Column(
                       children: [
-                        const SizedBox(height: 64),
+                        const SizedBox(height: 48),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12),
                           child: Text(

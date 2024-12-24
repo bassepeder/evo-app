@@ -29,20 +29,6 @@ void main() async {
     await androidDisplayInitialization(widgetsBinding);
   }
 
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-
-  if (defaultTargetPlatform == TargetPlatform.android) {
-    // Sets edge-to-edge system UI mode on Android 12+
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        systemNavigationBarColor: Colors.transparent,
-        systemNavigationBarDividerColor: Colors.transparent,
-        systemNavigationBarContrastEnforced: true,
-      ),
-    );
-  }
-
   runApp(
     ProviderScope(
       observers: [

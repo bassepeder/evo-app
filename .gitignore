@@ -84,3 +84,8 @@ doc/api/
 
 # FVM Version Cache
 .fvm/
+
+
+# Signing
+lib/android/app/upload-keystore.jks
+lib/android/keystore.properties
