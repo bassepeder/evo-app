@@ -6,13 +6,13 @@ import 'package:evo/features/settings/app_background_mode_screen.dart';
 import 'package:evo/features/settings/brightness.dart';
 import 'package:evo/features/settings/general_preferences.dart';
 import 'package:evo/features/settings/views/current_referral_screen.dart';
+import 'package:evo/features/settings/views/membership_details_screen.dart';
 import 'package:evo/features/settings/views/payment_information_screen.dart';
 import 'package:evo/features/settings/views/primary_location_screen.dart';
 import 'package:evo/features/settings/views/profile_information_screen.dart';
 import 'package:evo/features/welcome_screen.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:evo/utils/navigation.dart';
-import 'package:evo/utils/system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -24,7 +24,6 @@ class SettingsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final generalPrefs = ref.watch(generalPreferencesProvider);
     final brightness = ref.watch(currentBrightnessProvider);
-    final androidVersionAsync = ref.watch(androidVersionProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -53,6 +52,18 @@ class SettingsScreen extends ConsumerWidget {
                   onClick: () => pushPlatformRoute(
                     context,
                     builder: (_) => const ProfileInformationScreen(),
+                  ),
+                ),
+                SettingsListItem(
+                  svgSrc: membershipIconSvg,
+                  title: context.t.settingsScreen.accountMenuItems
+                      .membershipDetails.title,
+                  subTitle: context.t.settingsScreen.accountMenuItems
+                      .membershipDetails.subtitle,
+                  currentBrightness: brightness,
+                  onClick: () => pushPlatformRoute(
+                    context,
+                    builder: (_) => const MembershipDetailsScreen(),
                   ),
                 ),
                 SettingsListItem(
@@ -305,6 +316,12 @@ const profileIconSvg = '''
 </svg>
 ''';
 
+const membershipIconSvg = '''
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
+</svg>
+''';
+
 const lockIconSvg = '''
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M17 10C18.1046 10 19 10.8954 19 12V18C19 19.1046 18.1046 20 17 20H7C5.89543 20 5 19.1046 5 18V12C5 10.8954 5.89543 10 7 10V9C7 6.23858 9.23858 4 12 4C14.7614 4 17 6.23858 17 9V10ZM12 6C10.3431 6 9 7.34315 9 9V10H15V9C15 7.34315 13.6569 6 12 6Z" fill="#010F07"/>
@@ -329,8 +346,11 @@ const referralIconSvg = '''
 </svg>
 ''';
 
-const signOutSvg =
-    '''<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 256 256"><path fill="currentColor" d="M112 216a8 8 0 0 1-8 8H48a16 16 0 0 1-16-16V48a16 16 0 0 1 16-16h56a8 8 0 0 1 0 16H48v160h56a8 8 0 0 1 8 8Zm109.66-93.66l-40-40a8 8 0 0 0-11.32 11.32L196.69 120H104a8 8 0 0 0 0 16h92.69l-26.35 26.34a8 8 0 0 0 11.32 11.32l40-40a8 8 0 0 0 0-11.32Z"/></svg>''';
+const signOutSvg = '''
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
+</svg>
+''';
 
 const brightnessSvg = '''
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

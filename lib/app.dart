@@ -17,6 +17,8 @@ import 'common/styles.dart';
 final RouteObserver<PageRoute<void>> rootNavPageRouteObserver =
     RouteObserver<PageRoute<void>>();
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 /// Application initialization and main entry point.
 class AppInitializationScreen extends ConsumerWidget {
   const AppInitializationScreen({super.key});
@@ -50,32 +52,11 @@ class AppInitializationScreen extends ConsumerWidget {
 ///
 /// This widget is the root of the application and is responsible for setting up
 /// the theme, locale, and other global settings.
-class Application extends ConsumerStatefulWidget {
+class Application extends ConsumerWidget {
   const Application({super.key});
 
   @override
-  ConsumerState<Application> createState() => _AppState();
-}
-
-class _AppState extends ConsumerState<Application> {
-  AppLifecycleListener? _appLifecycleListener;
-
-  @override
-  void initState() {
-    _appLifecycleListener = AppLifecycleListener(
-      onResume: () async {},
-    );
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _appLifecycleListener?.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final generalPrefs = ref.watch(generalPreferencesProvider);
     final brightness = ref.watch(currentBrightnessProvider);
 
@@ -179,6 +160,7 @@ class _AppState extends ConsumerState<Application> {
                   );
                 }
               : null,
+          navigatorKey: navigatorKey,
           home: hasSession ? const HomeScreen() : const WelcomeScreen(),
           navigatorObservers: [rootNavPageRouteObserver],
         );

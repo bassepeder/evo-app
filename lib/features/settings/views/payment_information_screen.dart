@@ -16,7 +16,7 @@ class PaymentInformationScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final membership = ref.read(membershipDetailsProvider).requireValue!;
+    final membership = ref.read(membershipDetailsProvider).requireValue;
     final invoicesAsync = ref.watch(invoicesProvider);
 
     return Scaffold(
@@ -161,7 +161,7 @@ class PreviousPaymentCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final membershipLocale =
-        ref.read(membershipDetailsProvider).requireValue!.locale;
+        ref.read(membershipDetailsProvider).requireValue.locale;
     final isDarkMode = ref.read(
       currentBrightnessProvider
           .select((brightness) => brightness == Brightness.dark),

@@ -54,7 +54,7 @@ class _ProfileInformationScreenState
 
   @override
   Widget build(BuildContext context) {
-    final membershipDetails = ref.read(membershipDetailsProvider).requireValue!;
+    final membershipDetails = ref.read(membershipDetailsProvider).requireValue;
     final isLoading =
         ref.watch(profileControllerProvider.select((state) => state.isLoading));
 
@@ -145,10 +145,6 @@ class _ProfileInformationScreenState
                   postalCodeController: postalCodeController,
                   isLoading: isLoading,
                   formKey: formKey,
-                ),
-                const SizedBox(height: 32),
-                TermsAndConditions(
-                  terms: membershipDetails.product.postSignupPresentation,
                 ),
               ],
             ),
@@ -440,27 +436,6 @@ class PersonalInformationForm extends ConsumerWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class TermsAndConditions extends StatelessWidget {
-  final String terms;
-
-  const TermsAndConditions({
-    super.key,
-    required this.terms,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Header(title: context.t.profileScreen.termsHeader),
-        const SizedBox(height: 8),
-        Text(terms),
-      ],
     );
   }
 }
