@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 class IconButtonWithCounter extends StatelessWidget {
   final String svgSrc;
   final int counter;
-  final GestureTapCallback press;
+  final GestureTapCallback onTap;
 
   const IconButtonWithCounter({
     super.key,
     required this.svgSrc,
-    required this.press,
+    required this.onTap,
     this.counter = 0,
   });
 
@@ -17,7 +17,7 @@ class IconButtonWithCounter extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(100),
-      onTap: press,
+      onTap: onTap,
       child: Stack(
         clipBehavior: Clip.none,
         children: [
