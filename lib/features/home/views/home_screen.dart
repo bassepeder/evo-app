@@ -41,7 +41,6 @@ class HomeScreen extends ConsumerWidget {
                     FadeInWidget(
                       child: Column(
                         children: [
-                          //MembershipStatusBanner(details: details!),
                           Greeting(details: details),
                           const HomeShortcuts(),
                           const CurrentLocationVisits(),
