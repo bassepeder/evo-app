@@ -31,8 +31,6 @@ Future<void> setupFirstLaunch() async {
 ///
 /// This is meant to be called once during app initialization.
 Future<void> androidDisplayInitialization(WidgetsBinding widgetsBinding) async {
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-
   // Sets edge-to-edge system UI mode on Android 12+
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   SystemChrome.setSystemUIOverlayStyle(
