@@ -321,7 +321,8 @@ class PersonalInformationForm extends ConsumerWidget {
           UserInfoEditField(
             label: context.t.forms.fields.mobile.label,
             child: PhoneInputField(
-              initialValue: ref.read(profileControllerProvider).mobile.number,
+              initialNumber: ref.read(profileControllerProvider).mobile.number,
+              initialPrefix: ref.read(profileControllerProvider).mobile.prefix,
               onPhoneNumberChanged: (number, isValid) => ref
                   .read(profileControllerProvider.notifier)
                   .updateMobile(number, isValid),
@@ -475,12 +476,14 @@ class UserInfoEditField extends StatelessWidget {
 
 class PhoneInputField extends StatefulWidget {
   final void Function(String, bool) onPhoneNumberChanged;
-  final String? initialValue;
+  final String? initialPrefix;
+  final String? initialNumber;
 
   const PhoneInputField({
     super.key,
     required this.onPhoneNumberChanged,
-    this.initialValue,
+    this.initialNumber,
+    this.initialPrefix,
   });
 
   @override
@@ -495,8 +498,9 @@ class _PhoneInputState extends State<PhoneInputField> {
   void initState() {
     super.initState();
     initialValue = PhoneNumber.parse(
-      (widget.initialValue?.isNotEmpty ?? false) && widget.initialValue != ''
-          ? widget.initialValue!
+      (widget.initialPrefix?.isNotEmpty ?? false) &&
+              (widget.initialNumber?.isNotEmpty ?? false)
+          ? '${widget.initialPrefix}${widget.initialNumber}'
           : '+47',
     );
     controller = PhoneController(initialValue: initialValue);
