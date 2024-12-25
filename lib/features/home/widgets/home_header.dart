@@ -2,10 +2,13 @@ import 'package:evo/common/id.dart';
 import 'package:evo/common/widgets/adaptive_bottom_sheet.dart';
 import 'package:evo/common/widgets/icon_button_with_counter.dart';
 import 'package:evo/common/widgets/list.dart';
+import 'package:evo/features/auth/providers/auth_session.dart';
 import 'package:evo/features/home/location_repository.dart';
 import 'package:evo/features/home/viewmodels/location_controller.dart';
 import 'package:evo/features/membership/membership_repository.dart';
+import 'package:evo/features/membership/models/membership_details.dart';
 import 'package:evo/features/settings/settings_screen.dart';
+import 'package:evo/features/welcome_screen.dart';
 import 'package:evo/i18n/translations.g.dart';
 import 'package:evo/utils/navigation.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +26,7 @@ class _HomeHeaderState extends ConsumerState<HomeHeader>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _fadeAnimation;
+  bool failedToLoadMembership = false;
 
   @override
   void initState() {
@@ -41,7 +45,6 @@ class _HomeHeaderState extends ConsumerState<HomeHeader>
     super.didChangeDependencies();
     final membership = ref.watch(membershipDetailsProvider);
 
-    // Trigger fade-in if membership is available
     if (membership.hasValue) {
       _controller.forward();
     } else {
@@ -59,6 +62,17 @@ class _HomeHeaderState extends ConsumerState<HomeHeader>
   Widget build(BuildContext context) {
     final membership = ref.watch(membershipDetailsProvider);
 
+    ref.listen<AsyncValue<MembershipDetails>>(
+      membershipDetailsProvider,
+      (previous, next) {
+        if (next.hasError) {
+          setState(() {
+            failedToLoadMembership = true;
+          });
+        }
+      },
+    );
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
@@ -73,68 +87,66 @@ class _HomeHeaderState extends ConsumerState<HomeHeader>
             ),
           ),
           const Spacer(),
-          // Fade-in effect for the buttons
-          FadeTransition(
-            opacity: _fadeAnimation,
-            child: Row(
-              children: [
-                IconButtonWithCounter(
-                  svgSrc: mapPinIcon,
-                  press: () {
-                    if (!membership.hasValue) return;
-
-                    HapticFeedback.mediumImpact();
-                    final double screenHeight =
-                        MediaQuery.sizeOf(context).height;
-
-                    showAdaptiveBottomSheet<int>(
-                      context: context,
-                      isScrollControlled: true,
-                      constraints: BoxConstraints(
-                        maxHeight: screenHeight * 0.6,
-                      ),
-                      builder: (_) => _LocationPickerMenu(
-                        currentLocationId:
-                            ref.read(locationControllerProvider).locationId!,
-                      ),
-                    );
-                  },
-                ),
-                const SizedBox(width: 8),
-                IconButtonWithCounter(
-                  svgSrc: settingsIcon,
-                  press: () {
-                    if (!membership.hasValue) return;
-
-                    HapticFeedback.mediumImpact();
-                    pushPlatformRoute(
-                      context,
-                      builder: (_) => const SettingsScreen(),
-                    );
-                  },
-                ),
-              ],
+          if (failedToLoadMembership) ...[
+            IconButtonWithCounter(
+              svgSrc: signOutSvg,
+              onTap: () {
+                ref.read(authSessionProvider.notifier).delete();
+                pushAndRemoveUntilPlatformRoute(
+                  context,
+                  builder: (_) => const WelcomeScreen(),
+                );
+              },
             ),
-          ),
+          ] else ...[
+            FadeTransition(
+              opacity: _fadeAnimation,
+              child: Row(
+                children: [
+                  IconButtonWithCounter(
+                    svgSrc: mapPinIcon,
+                    onTap: () {
+                      if (!membership.hasValue) return;
+
+                      HapticFeedback.mediumImpact();
+                      final double screenHeight =
+                          MediaQuery.sizeOf(context).height;
+
+                      showAdaptiveBottomSheet<int>(
+                        context: context,
+                        isScrollControlled: true,
+                        constraints: BoxConstraints(
+                          maxHeight: screenHeight * 0.6,
+                        ),
+                        builder: (_) => _LocationPickerMenu(
+                          currentLocationId:
+                              ref.read(locationControllerProvider).locationId!,
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(width: 8),
+                  IconButtonWithCounter(
+                    svgSrc: settingsIcon,
+                    onTap: () {
+                      if (!membership.hasValue) return;
+
+                      HapticFeedback.mediumImpact();
+                      pushPlatformRoute(
+                        context,
+                        builder: (_) => const SettingsScreen(),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
         ],
       ),
     );
   }
 }
-
-const settingsIcon = '''
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
-  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-</svg>
-''';
-
-const mapPinIcon = '''
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-</svg>
-''';
 
 class _LocationPickerMenu extends ConsumerStatefulWidget {
   final LocationId currentLocationId;
@@ -224,3 +236,23 @@ class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
     );
   }
 }
+
+const settingsIcon = '''
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+</svg>
+''';
+
+const mapPinIcon = '''
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+</svg>
+''';
+
+const signOutSvg = '''
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
+</svg>
+''';
