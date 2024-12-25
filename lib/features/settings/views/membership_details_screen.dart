@@ -52,7 +52,7 @@ class MembershipDetailsScreen extends ConsumerWidget {
                           text: ' ${MembershipStatusExtensions.translated(
                             membership.membershipDetails.status,
                             context,
-                          )}\n',
+                          )}${membership.membershipDetails.endsAt != null ? '\n' : ''}',
                           style: Theme.of(context)
                               .textTheme
                               .headlineMedium
@@ -61,11 +61,12 @@ class MembershipDetailsScreen extends ConsumerWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                         ),
-                        TextSpan(
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          text:
-                              '${context.t.membershipDetailsScreen.membershipEndsAt} ${formatDate(context, membership.membershipDetails.endsAt)}',
-                        ),
+                        if (membership.membershipDetails.endsAt != null)
+                          TextSpan(
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            text:
+                                '${context.t.membershipDetailsScreen.membershipEndsAt} ${formatDate(context, membership.membershipDetails.endsAt!)}',
+                          ),
                       ],
                     ),
                   ),

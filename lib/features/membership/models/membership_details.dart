@@ -37,7 +37,7 @@ class MembershipDetails with _$MembershipDetails {
         ),
         createdAt: pick('membership_details', 'created_at').asDateTimeOrThrow(),
         beganAt: pick('membership_details', 'began_at').asDateOrThrow(),
-        endsAt: pick('membership_details', 'ends_at').asDateOrThrow(),
+        endsAt: pick('membership_details', 'ends_at').asDateOrNull(),
         freezes: pick('membership_details', 'freezes').asListOrEmpty(
           (freezePick) => FreezePeriod.fromPick(
             freezePick.required(),
@@ -70,7 +70,7 @@ class MembershipSummary with _$MembershipSummary {
     required MembershipStatus status,
     required DateTime createdAt,
     required DateTime beganAt,
-    required DateTime endsAt,
+    required DateTime? endsAt,
     required List<dynamic> freezes,
   }) = _MembershipSummary;
 
