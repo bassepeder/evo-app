@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:evo/features/membership/membership_repository.dart';
+import 'package:evo/features/settings/brightness.dart';
 import 'package:evo/features/settings/profile_controller.dart';
 import 'package:evo/features/settings/profile_repository.dart';
 import 'package:evo/i18n/translations.g.dart';
@@ -209,6 +210,10 @@ class PersonalInformationForm extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isDarkMode = ref.watch(
+      currentBrightnessProvider
+          .select((brightness) => brightness == Brightness.dark),
+    );
     return Form(
       key: formKey,
       child: Column(
@@ -477,7 +482,9 @@ class PersonalInformationForm extends ConsumerWidget {
                     }
                   },
                   activeColor: Theme.of(context).colorScheme.primary,
-                  //activeTrackColor: Theme.of(context).colorScheme.onPrimary, // if dark mode
+                  activeTrackColor: isDarkMode
+                      ? Theme.of(context).colorScheme.onPrimary
+                      : null,
                   inactiveThumbColor: Theme.of(context).colorScheme.surface,
                   inactiveTrackColor: Theme.of(context)
                       .colorScheme
