@@ -12,11 +12,6 @@ part 'membership_repository.g.dart';
 
 @riverpod
 Future<MembershipDetails> membershipDetails(Ref ref) async {
-  /*
-  final session = ref.watch(authSessionProvider);
-  if (session == null) return null;
-   */
-
   return ref.withClient(
     (client) => MembershipRepository(client).getMembershipDetails(),
   );
