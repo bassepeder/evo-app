@@ -3,5 +3,6 @@
   "personalInformationHeader": "Personal information",
   "termsHeader": "Membership terms",
   "termsLink": "EVOs standard membership terms",
-  "updateSuccessful": "Personal information updated."
+  "updateSuccessful": "Personal information updated.",
+  "updatedGdprConsent": "Your consent has been updated."
 }
