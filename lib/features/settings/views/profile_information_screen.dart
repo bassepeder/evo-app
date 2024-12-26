@@ -1,7 +1,10 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:evo/features/membership/membership_repository.dart';
+import 'package:evo/features/settings/brightness.dart';
 import 'package:evo/features/settings/profile_controller.dart';
+import 'package:evo/features/settings/profile_repository.dart';
 import 'package:evo/i18n/translations.g.dart';
+import 'package:evo/network/http.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:phone_form_field/phone_form_field.dart';
@@ -54,7 +57,10 @@ class _ProfileInformationScreenState
 
   @override
   Widget build(BuildContext context) {
-    final membershipDetails = ref.read(membershipDetailsProvider).requireValue;
+    final gdprOptIn = ref.watch(
+      membershipDetailsProvider
+          .select((details) => details.requireValue.gdprConsentGiven),
+    );
     final isLoading =
         ref.watch(profileControllerProvider.select((state) => state.isLoading));
 
@@ -143,6 +149,7 @@ class _ProfileInformationScreenState
                   streetAddressController: streetAddressController,
                   cityController: cityController,
                   postalCodeController: postalCodeController,
+                  gdprOptIn: gdprOptIn,
                   isLoading: isLoading,
                   formKey: formKey,
                 ),
@@ -179,6 +186,7 @@ class PersonalInformationForm extends ConsumerWidget {
   final TextEditingController streetAddressController;
   final TextEditingController cityController;
   final TextEditingController postalCodeController;
+  final bool gdprOptIn;
   final bool isLoading;
   final GlobalKey<FormState> formKey;
 
@@ -195,12 +203,18 @@ class PersonalInformationForm extends ConsumerWidget {
     required this.streetAddressController,
     required this.cityController,
     required this.postalCodeController,
+    required this.gdprOptIn,
     required this.isLoading,
     required this.formKey,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isDarkMode = ref.watch(
+      currentBrightnessProvider
+          .select((brightness) => brightness == Brightness.dark),
+    );
+
     return Form(
       key: formKey,
       child: Column(
@@ -435,6 +449,65 @@ class PersonalInformationForm extends ConsumerWidget {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Row(
+              children: [
+                Text(
+                  context.t.forms.fields.gdprConsent.label,
+                  style: const TextStyle(fontSize: 16),
+                ),
+                const Spacer(),
+                Switch.adaptive(
+                  value: gdprOptIn,
+                  onChanged: (value) async {
+                    try {
+                      await ref.withClient(
+                        (client) => ProfileRepository(client)
+                            .updateProfileGdprConsent(value),
+                      );
+
+                      ref.invalidate(membershipDetailsProvider);
+
+                      final message =
+                          context.t.profileScreen.updatedGdprConsent;
+
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          SnackBar(
+                            content: Text(message),
+                            behavior: SnackBarBehavior.floating,
+                          ),
+                        );
+                    } catch (e) {
+                      final message =
+                          context.t.signInScreen.errorMessages.genericError;
+
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          SnackBar(
+                            content: Text(message),
+                            behavior: SnackBarBehavior.floating,
+                          ),
+                        );
+                    }
+                  },
+                  activeColor: Theme.of(context).colorScheme.primary,
+                  activeTrackColor: isDarkMode
+                      ? Theme.of(context).colorScheme.onPrimary
+                      : null,
+                  inactiveThumbColor: Theme.of(context).colorScheme.surface,
+                  inactiveTrackColor: Theme.of(context)
+                      .colorScheme
+                      .onSurface
+                      .withValues(alpha: 0.5),
+                  applyCupertinoTheme: true,
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -538,11 +611,6 @@ class _PhoneInputState extends State<PhoneInputField> {
         ),
       ),
       enabled: true,
-      /*
-      countrySelectorNavigator: const CountrySelectorNavigator.page(
-        favorites: [IsoCode.NO],
-      ),
-       */
       isCountryButtonPersistent: true,
       isCountrySelectionEnabled: false,
       countryButtonStyle: const CountryButtonStyle(

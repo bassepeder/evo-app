@@ -19,4 +19,18 @@ class ProfileRepository {
       throw Exception('Failed to update profile details');
     }
   }
+
+  Future<void> updateProfileGdprConsent(bool hasConsent) async {
+    final response = await client.put(
+      evoUri('api/v1/membership/profile/gdpr'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'opt_in': hasConsent,
+      }),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to update profile GDPR consent');
+    }
+  }
 }
