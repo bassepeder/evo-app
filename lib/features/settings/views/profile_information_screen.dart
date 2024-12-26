@@ -214,6 +214,7 @@ class PersonalInformationForm extends ConsumerWidget {
       currentBrightnessProvider
           .select((brightness) => brightness == Brightness.dark),
     );
+
     return Form(
       key: formKey,
       child: Column(
@@ -467,6 +468,18 @@ class PersonalInformationForm extends ConsumerWidget {
                       );
 
                       ref.invalidate(membershipDetailsProvider);
+
+                      final message =
+                          context.t.profileScreen.updatedGdprConsent;
+
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          SnackBar(
+                            content: Text(message),
+                            behavior: SnackBarBehavior.floating,
+                          ),
+                        );
                     } catch (e) {
                       final message =
                           context.t.signInScreen.errorMessages.genericError;

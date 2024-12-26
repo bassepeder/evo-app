@@ -3,5 +3,6 @@
   "personalInformationHeader": "Personlig informasjon ",
   "termsHeader": "Medlemsvilkår",
   "termsLink": "EVOs standard medlemsvilkår",
-  "updateSuccessful": "Personlig informasjon oppdatert."
+  "updateSuccessful": "Personlig informasjon oppdatert.",
+  "updatedGdprConsent": "Ditt samtykke har blitt oppdatert."
 }
