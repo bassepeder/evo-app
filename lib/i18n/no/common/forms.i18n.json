@@ -58,6 +58,9 @@
       "validation": {
         "empty": "Postnummer er påkrevd"
       }
+    },
+    "gdprConsent": {
+      "label": "Mine samtykker"
     }
   }
 }

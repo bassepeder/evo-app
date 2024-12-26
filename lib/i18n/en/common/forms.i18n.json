@@ -58,6 +58,9 @@
       "validation": {
         "empty": "This is required"
       }
+    },
+    "gdprConsent": {
+      "label": "My consents"
     }
   }
 }
