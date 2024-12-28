@@ -571,12 +571,18 @@ class _PhoneInputState extends State<PhoneInputField> {
   void initState() {
     super.initState();
     initialValue = PhoneNumber.parse(
-      (widget.initialPrefix?.isNotEmpty ?? false) &&
-              (widget.initialNumber?.isNotEmpty ?? false)
+      _shouldAppendPrefix(widget.initialPrefix, widget.initialNumber)
           ? '${widget.initialPrefix}${widget.initialNumber}'
-          : '+47',
+          : widget.initialNumber ?? '+47',
     );
     controller = PhoneController(initialValue: initialValue);
+  }
+
+  bool _shouldAppendPrefix(String? prefix, String? number) {
+    if (number == null || number.isEmpty) return true;
+    final regex =
+        RegExp(r'^\+\d{1,3}'); // Matches a "+" followed by 1 to 3 digits
+    return !regex.hasMatch(number);
   }
 
   @override
