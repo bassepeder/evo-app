@@ -16,6 +16,16 @@ Future<IList<InvoiceDetails>> invoices(Ref ref) async {
   );
 }
 
+@riverpod
+Future<SlimInvoiceDetails> nextInvoice(Ref ref) async {
+  return ref.withClientCacheFor(
+    (client) => InvoiceRepository(client).getNextInvoice(),
+    const Duration(
+      hours: 1,
+    ),
+  );
+}
+
 class InvoiceRepository {
   InvoiceRepository(this.client);
 
@@ -25,6 +35,13 @@ class InvoiceRepository {
     return client.readJsonList(
       evoUri('api/v1/invoices'),
       mapper: InvoiceDetails.fromServerJson,
+    );
+  }
+
+  Future<SlimInvoiceDetails> getNextInvoice() {
+    return client.readJson(
+      evoUri('api/v1/invoices/next'),
+      mapper: SlimInvoiceDetails.fromServerJson,
     );
   }
 }
