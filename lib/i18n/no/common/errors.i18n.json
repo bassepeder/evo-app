@@ -7,6 +7,7 @@
   "failedToLoadLocations": "Klarte ikke å hente alle EVO lokasjoner.",
   "failedToLoadWorkoutStatistics": "Klarte ikke å hente treningsøktene dine.",
   "failedToLoadInvoices": "Klarte ikke å hente fakturaene dine.",
+  "failedToLoadNextInvoice": "Klarte ikke å hente din neste faktura.",
   "failedToOpenUrl": "Klarte ikke å åpne URL.",
   "failedToLoadCurrentMembershipReferral": "Klarte ikke å hente info om din vervekampanje.",
   "pleaseAuthenticate": "Klarte ikke å verifisere bruker. Logg inn på nytt."
