@@ -37,3 +37,23 @@ class InvoiceDetails with _$InvoiceDetails {
     );
   }
 }
+
+@freezed
+class SlimInvoiceDetails with _$SlimInvoiceDetails {
+  const SlimInvoiceDetails._();
+
+  const factory SlimInvoiceDetails({
+    required Decimal amount,
+    required DateTime date,
+  }) = _SlimInvoiceDetails;
+
+  factory SlimInvoiceDetails.fromServerJson(Map<String, dynamic> json) =>
+      SlimInvoiceDetails.fromPick(pick(json).required());
+
+  factory SlimInvoiceDetails.fromPick(RequiredPick pick) {
+    return SlimInvoiceDetails(
+      date: pick('date').asDateOrThrow(),
+      amount: pick('amount').asDecimalOrThrow(),
+    );
+  }
+}

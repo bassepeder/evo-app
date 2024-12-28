@@ -16,7 +16,6 @@ class PaymentInformationScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final membership = ref.read(membershipDetailsProvider).requireValue;
-    final invoicesAsync = ref.watch(invoicesProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -38,54 +37,133 @@ class PaymentInformationScreen extends ConsumerWidget {
                 expiryYear: membership.currentPaymentMethod.expiryYear,
                 expiryMonth: membership.currentPaymentMethod.expiryMonth,
               ),
+              const SizedBox(height: 32),
+              const NextInvoice(),
               const SizedBox(height: 48),
-              Header(title: context.t.paymentScreen.previousPaymentsHeader),
-              const SizedBox(height: 8),
-              invoicesAsync.when(
-                skipLoadingOnRefresh: false,
-                data: (invoices) {
-                  return Column(
-                    children: invoices
-                        .asMap()
-                        .map((index, invoice) {
-                          return MapEntry(
-                            index,
-                            FadeInPaymentCard(invoice: invoice, index: index),
-                          );
-                        })
-                        .values
-                        .toList(),
-                  );
-                },
-                loading: () {
-                  return const Padding(
-                    padding: EdgeInsets.only(left: 4, top: 8),
-                    child: SizedBox(
-                      width: 24,
-                      height: 24,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    ),
-                  );
-                },
-                error: (_, stack) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 8),
-                      Text(context.t.errors.failedToLoadInvoices),
-                      const SizedBox(height: 32),
-                      EvoElevatedButton(
-                        onPressed: () => ref.invalidate(invoicesProvider),
-                        text: context.t.errors.generalRetryButtonText,
-                      ),
-                    ],
-                  );
-                },
-              ),
+              const PreviousPayments(),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class NextInvoice extends ConsumerWidget {
+  const NextInvoice({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final membershipLocale =
+        ref.read(membershipDetailsProvider).requireValue.locale;
+    final nextInvoiceAsync = ref.watch(nextInvoiceProvider);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Header(title: context.t.paymentScreen.nextPaymentHeader),
+        const SizedBox(height: 8),
+        nextInvoiceAsync.when(
+          skipLoadingOnRefresh: false,
+          data: (invoice) {
+            return Text(
+              context.t.paymentScreen.nextPaymentSubtitle(
+                date: formatDate(context, invoice.date),
+                amount: formatCurrencyToProfileLocale(
+                  invoice.amount.toDouble() / 100,
+                  // EVO API returns amounts in thousands for some reason...
+                  membershipLocale,
+                ),
+              ),
+              softWrap: true,
+              overflow: TextOverflow.clip,
+              style: const TextStyle(fontSize: 16),
+            );
+          },
+          loading: () {
+            return const Padding(
+              padding: EdgeInsets.only(left: 4, top: 8),
+              child: SizedBox(
+                width: 24,
+                height: 24,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              ),
+            );
+          },
+          error: (_, stack) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 8),
+                Text(context.t.errors.failedToLoadNextInvoice),
+                const SizedBox(height: 32),
+                EvoElevatedButton(
+                  onPressed: () => ref.invalidate(nextInvoiceProvider),
+                  text: context.t.errors.generalRetryButtonText,
+                ),
+              ],
+            );
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class PreviousPayments extends ConsumerWidget {
+  const PreviousPayments({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final invoicesAsync = ref.watch(invoicesProvider);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Header(title: context.t.paymentScreen.previousPaymentsHeader),
+        const SizedBox(height: 8),
+        invoicesAsync.when(
+          skipLoadingOnRefresh: false,
+          data: (invoices) {
+            return Column(
+              children: invoices
+                  .asMap()
+                  .map((index, invoice) {
+                    return MapEntry(
+                      index,
+                      FadeInPaymentCard(invoice: invoice, index: index),
+                    );
+                  })
+                  .values
+                  .toList(),
+            );
+          },
+          loading: () {
+            return const Padding(
+              padding: EdgeInsets.only(left: 4, top: 8),
+              child: SizedBox(
+                width: 24,
+                height: 24,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              ),
+            );
+          },
+          error: (_, stack) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 8),
+                Text(context.t.errors.failedToLoadInvoices),
+                const SizedBox(height: 32),
+                EvoElevatedButton(
+                  onPressed: () => ref.invalidate(invoicesProvider),
+                  text: context.t.errors.generalRetryButtonText,
+                ),
+              ],
+            );
+          },
+        ),
+      ],
     );
   }
 }

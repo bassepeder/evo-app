@@ -2,6 +2,8 @@
   "appbar": "Betaling",
   "paymentCardHeader": "Betalingskort",
   "cardExpiry": "Utløper",
+  "nextPaymentHeader": "Neste betaling",
+  "nextPaymentSubtitle": "Din neste betaling er $date på $amount.",
   "previousPaymentsHeader": "Tidligere betalinger",
   "tableHeaders": {
     "date": {
