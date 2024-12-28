@@ -213,7 +213,7 @@ abstract class Styles {
 
 /// Retrieve the default text color and apply an opacity to it.
 Color? textShade(BuildContext context, double opacity) =>
-    DefaultTextStyle.of(context).style.color?.withOpacity(opacity);
+    DefaultTextStyle.of(context).style.color?.withValues(alpha: opacity);
 
 @immutable
 class CustomColors extends ThemeExtension<CustomColors> {

@@ -11,7 +11,7 @@ class SearchField extends StatelessWidget {
         decoration: InputDecoration(
           filled: true,
           hintStyle: const TextStyle(color: Color(0xFF757575)),
-          fillColor: const Color(0xFF979797).withOpacity(0.1),
+          fillColor: const Color(0xFF979797).withValues(alpha: 0.1),
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           border: const OutlineInputBorder(
