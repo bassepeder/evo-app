@@ -39,35 +39,22 @@ class MembershipDetailsScreen extends ConsumerWidget {
                   ),
                   child: Text.rich(
                     textAlign: TextAlign.center,
-                    TextSpan(
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.onSurface,
+                    _buildMembershipText(
+                      context: context,
+                      membershipStatus: MembershipStatusExtensions.translated(
+                        membership.membershipDetails.status,
+                        context,
                       ),
-                      children: [
-                        TextSpan(
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          text: '${context.t.homeScreen.membershipStatus}\n',
-                        ),
-                        TextSpan(
-                          text: ' ${MembershipStatusExtensions.translated(
-                            membership.membershipDetails.status,
-                            context,
-                          )}${membership.membershipDetails.endsAt != null ? '\n' : ''}',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium
-                              ?.copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                                fontWeight: FontWeight.bold,
-                              ),
-                        ),
-                        if (membership.membershipDetails.endsAt != null)
-                          TextSpan(
-                            style: Theme.of(context).textTheme.bodyMedium,
-                            text:
-                                '${context.t.membershipDetailsScreen.membershipEndsAt} ${formatDate(context, membership.membershipDetails.endsAt!)}',
-                          ),
-                      ],
+                      membershipStart: formatDate(
+                        context,
+                        membership.membershipDetails.beganAt,
+                      ),
+                      membershipEnd: membership.membershipDetails.endsAt != null
+                          ? formatDate(
+                              context,
+                              membership.membershipDetails.endsAt!,
+                            )
+                          : null,
                     ),
                   ),
                 ),
@@ -82,6 +69,46 @@ class MembershipDetailsScreen extends ConsumerWidget {
       ),
     );
   }
+}
+
+InlineSpan _buildMembershipText({
+  required BuildContext context,
+  required String membershipStatus,
+  required String membershipStart,
+  String? membershipEnd,
+}) {
+  final theme = Theme.of(context);
+  final textTheme = theme.textTheme;
+
+  return TextSpan(
+    style: TextStyle(color: theme.colorScheme.onSurface),
+    children: [
+      TextSpan(
+        style: textTheme.bodyMedium,
+        text: '${context.t.homeScreen.membershipStatus}\n',
+      ),
+      TextSpan(
+        text: '$membershipStatus\n',
+        style: textTheme.headlineMedium?.copyWith(
+          color: theme.colorScheme.primary,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      TextSpan(
+        style: textTheme.bodyMedium,
+        text:
+            '${context.t.membershipDetailsScreen.membershipBeganAt} $membershipStart',
+      ),
+      if (membershipEnd != null) ...[
+        const TextSpan(text: '\n'),
+        TextSpan(
+          style: textTheme.bodyMedium,
+          text:
+              '${context.t.membershipDetailsScreen.membershipEndsAt} $membershipEnd',
+        ),
+      ],
+    ],
+  );
 }
 
 class TermsAndConditions extends StatelessWidget {
