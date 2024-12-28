@@ -62,7 +62,7 @@ class NextInvoice extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Header(title: context.t.paymentScreen.nextPaymentHeader),
-        const SizedBox(height: 4),
+        const SizedBox(height: 8),
         nextInvoiceAsync.when(
           skipLoadingOnRefresh: false,
           data: (invoice) {
