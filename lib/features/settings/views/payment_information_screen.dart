@@ -71,8 +71,7 @@ class NextInvoice extends ConsumerWidget {
               context.t.paymentScreen.nextPaymentSubtitle(
                 date: formatDate(context, invoice.date),
                 amount: formatCurrencyToProfileLocale(
-                  invoice.amount.toDouble() / 100,
-                  // EVO API returns amounts in thousands for some reason...
+                  invoice.amount.toDouble(),
                   membershipLocale,
                 ),
               ),
