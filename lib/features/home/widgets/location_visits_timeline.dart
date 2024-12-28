@@ -192,7 +192,7 @@ class Chart extends StatelessWidget {
         barTouchData: BarTouchData(
           enabled: true,
           touchTooltipData: BarTouchTooltipData(
-            getTooltipColor: (_) => Colors.black.withOpacity(0.75),
+            getTooltipColor: (_) => Colors.black.withValues(alpha: 0.75),
             getTooltipItem: (group, groupIndex, rod, rodIndex) {
               final interval = intervals[group.x];
               return BarTooltipItem(

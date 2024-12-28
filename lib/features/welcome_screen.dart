@@ -166,7 +166,10 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> with RouteAware {
             context.t.welcomeScreen.subtitle,
             textAlign: TextAlign.center,
             style: textTheme.bodyLarge!.copyWith(
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.64),
+              color: Theme.of(context)
+                  .colorScheme
+                  .onSurface
+                  .withValues(alpha: 0.64),
             ),
           ),
           const SizedBox(height: 48),
