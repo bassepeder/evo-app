@@ -70,12 +70,21 @@ String formatDate(BuildContext context, DateTime dateTime) {
 ///   - [amount]: The monetary value to format.
 ///   - [locale]: A [String] representing the locale (e.g., `en_US`, `nb_NO`).
 ///
-/// - Returns: A [String] with the formatted currency, including the currency symbol.
-///
-/// Uses the [NumberFormat.currency] formatter to include locale-specific formatting.
+/// - Returns: A [String] with the formatted currency, including the appropriate symbol.
 String formatCurrencyToProfileLocale(double amount, String locale) {
+  String? currencySymbol;
+
+  switch (locale) {
+    case 'nb-NO':
+    case 'nn-NO':
+      currencySymbol = 'kr';
+    default:
+      currencySymbol = null; // Use the default for other locales
+  }
+
   final formatter = NumberFormat.currency(
     locale: locale,
+    symbol: currencySymbol,
   );
 
   return formatter.format(amount);
