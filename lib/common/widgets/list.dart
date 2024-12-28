@@ -329,7 +329,10 @@ class PlatformListTile extends StatelessWidget {
               subtitle: subtitle,
               trailing: trailing ??
                   (selected == true
-                      ? const Icon(CupertinoIcons.check_mark_circled_solid)
+                      ? Icon(
+                          CupertinoIcons.check_mark_circled_solid,
+                          color: Theme.of(context).colorScheme.primary,
+                        )
                       : null),
               additionalInfo: additionalInfo,
               padding: padding,
