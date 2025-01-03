@@ -1,8 +1,14 @@
 {
   "appBar": "Workouts",
-  "title(rich)": "$totalWorkoutsCount workouts",
   "subtitle": "You have performed a total of",
-  "monthStatisticBar(rich)": "$workoutsCount workouts",
+  "title(rich)": {
+    "one": "$totalWorkoutsCount workout",
+    "other": "$totalWorkoutsCount workouts"
+  },
+  "monthStatisticBar(rich)": {
+    "one": "$workoutsCount workout",
+    "other": "$workoutsCount workouts"
+  },
   "encouragements": [
     "you're awesome!",
     "great job!",
