@@ -130,6 +130,7 @@ class Header extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            n: totalWorkouts,
           ),
           if (totalWorkouts > 0)
             TextSpan(
@@ -214,6 +215,7 @@ class HorizontalBarChart extends StatelessWidget {
                   workoutsCount: TextSpan(
                     text: month.totalWorkouts.toString(),
                   ),
+                  n: month.totalWorkouts,
                 ),
                 style: TextStyle(
                   color: colorScheme.onPrimary,

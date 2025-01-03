@@ -1,8 +1,14 @@
 {
   "appBar": "Treningsøkter",
-  "title(rich)": "$totalWorkoutsCount treningsøkter",
+  "title(rich)": {
+    "one": "$totalWorkoutsCount treningsøkt",
+    "other": "$totalWorkoutsCount treningsøkter"
+  },
   "subtitle": "Du har totalt utført",
-  "monthStatisticBar(rich)": "$workoutsCount økter",
+  "monthStatisticBar(rich)": {
+    "one": "$workoutsCount økt",
+    "other": "$workoutsCount økter"
+  },
   "encouragements": [
     "du er rå!",
     "bra jobba!",
