@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:math';
 
 import 'package:evo/common/widgets/error_screen.dart';
@@ -27,9 +28,16 @@ class WorkoutsScreen extends ConsumerWidget {
       body: state.workoutStatistics.when(
         data: (statistics) {
           final groupedMonths = <int, List<WorkoutMonth>>{};
-          for (final month in statistics.months) {
+          for (final month in statistics.months.where(
+            (m) => m.totalWorkouts > 0,
+          )) {
             groupedMonths.putIfAbsent(month.year, () => []).add(month);
           }
+
+          final sortedGroupedMonths = LinkedHashMap.fromEntries(
+            groupedMonths.entries.toList()
+              ..sort((a, b) => b.key.compareTo(a.key)),
+          );
 
           return SafeArea(
             child: SingleChildScrollView(
@@ -43,7 +51,7 @@ class WorkoutsScreen extends ConsumerWidget {
                   children: [
                     Header(totalWorkouts: statistics.totalWorkouts),
                     const SizedBox(height: 32),
-                    ...groupedMonths.entries
+                    ...sortedGroupedMonths.entries
                         .toList()
                         .asMap()
                         .entries
@@ -130,6 +138,7 @@ class Header extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            n: totalWorkouts,
           ),
           if (totalWorkouts > 0)
             TextSpan(
@@ -214,6 +223,7 @@ class HorizontalBarChart extends StatelessWidget {
                   workoutsCount: TextSpan(
                     text: month.totalWorkouts.toString(),
                   ),
+                  n: month.totalWorkouts,
                 ),
                 style: TextStyle(
                   color: colorScheme.onPrimary,
