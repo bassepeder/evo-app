@@ -1,7 +1,7 @@
+import 'package:evo/common/exceptions/http_exceptions.dart';
 import 'package:evo/features/auth/models/auth_response.dart';
 import 'package:evo/network/http.dart';
 
-import '../../../common/exceptions/http_exceptions.dart';
 import 'auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
