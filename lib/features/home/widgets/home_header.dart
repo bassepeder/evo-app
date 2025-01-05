@@ -151,9 +151,7 @@ class _HomeHeaderState extends ConsumerState<HomeHeader>
 class _LocationPickerMenu extends ConsumerStatefulWidget {
   final LocationId currentLocationId;
 
-  const _LocationPickerMenu({
-    required this.currentLocationId,
-  });
+  const _LocationPickerMenu({required this.currentLocationId});
 
   @override
   ConsumerState<_LocationPickerMenu> createState() =>
@@ -167,7 +165,7 @@ class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
   Widget build(BuildContext context) {
     final primaryMembershipLocationId =
         ref.read(membershipDetailsProvider).requireValue.location.id;
-    final locationsAsync = ref.read(getLocationsProvider);
+    final locationsAsync = ref.watch(getLocationsProvider);
 
     // Scroll to the current location.
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -225,13 +223,26 @@ class _LocationPickerMenuState extends ConsumerState<_LocationPickerMenu> {
           ),
         ],
       ),
-      error: (e, _) => Text(context.t.errors.failedToLoadLocations),
-      loading: () => const Column(
-        children: [
-          CircularProgressIndicator(
+      error: (e, _) => SizedBox(
+        width: double.infinity,
+        height: 125,
+        child: Center(
+          child: Text(
+            context.t.errors.failedToLoadLocations,
+            style: const TextStyle(
+              fontSize: 16,
+            ),
+          ),
+        ),
+      ),
+      loading: () => const SizedBox(
+        width: double.infinity,
+        height: 150,
+        child: Center(
+          child: CircularProgressIndicator(
             strokeWidth: 3,
           ),
-        ],
+        ),
       ),
     );
   }
