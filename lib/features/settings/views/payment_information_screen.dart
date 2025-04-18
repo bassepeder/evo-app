@@ -306,9 +306,9 @@ class PreviousPaymentCard extends ConsumerWidget {
                       context,
                     );
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.open_in_new,
-                    color: Theme.of(context).colorScheme.onSurface,
+                    size: 22,
                   ),
                 ),
               ],
