@@ -1,5 +1,6 @@
 import 'package:evo/common/styles.dart';
 import 'package:evo/common/widgets/evo_elevated_button.dart';
+import 'package:evo/constants.dart';
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/features/settings/brightness.dart';
 import 'package:evo/features/settings/invoice_repository.dart';
@@ -302,7 +303,7 @@ class PreviousPaymentCard extends ConsumerWidget {
                 IconButton(
                   onPressed: () async {
                     await tryOpenUrlWithFeedback(
-                      'https://me.evofitness.no/invoice/${invoice.id}',
+                      kInvoicePdfUrl.replaceAll(':id', invoice.id.value),
                       context,
                     );
                   },
