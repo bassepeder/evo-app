@@ -22,7 +22,6 @@ class PaymentInformationScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(context.t.paymentScreen.appbar),
-        centerTitle: true,
       ),
       body: SafeArea(
         child: SingleChildScrollView(

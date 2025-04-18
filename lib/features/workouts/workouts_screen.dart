@@ -23,7 +23,6 @@ class WorkoutsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(context.t.workoutsScreen.appBar),
-        centerTitle: true,
       ),
       body: state.workoutStatistics.when(
         data: (statistics) {
