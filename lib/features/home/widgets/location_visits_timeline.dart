@@ -151,7 +151,8 @@ class Chart extends StatelessWidget {
                 backDrawRodData: BackgroundBarChartRodData(
                   show: true,
                   toY: 100,
-                  color: Colors.grey.shade300,
+                  color:
+                      isDarkMode ? Colors.grey.shade700 : Colors.grey.shade300,
                 ),
               ),
             ],
