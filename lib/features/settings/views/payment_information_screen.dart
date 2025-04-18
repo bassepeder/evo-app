@@ -286,7 +286,6 @@ class PreviousPaymentCard extends ConsumerWidget {
                     ),
                     const SizedBox(height: 8),
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           formatCurrencyToProfileLocale(
@@ -314,17 +313,18 @@ class PreviousPaymentCard extends ConsumerWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             Chip(
               label: Text(
                 InvoiceStatusExtensions.translated(invoice.status, context),
                 style: const TextStyle(color: Colors.white),
               ),
               visualDensity: const VisualDensity(vertical: -4),
+              padding: EdgeInsets.zero,
               backgroundColor: invoice.status == InvoiceStatus.charged
                   ? evoCustomColors.good
                   : evoCustomColors.error,
-            )
+            ),
           ],
         ),
       ),
