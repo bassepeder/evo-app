@@ -26,8 +26,9 @@ class WorkoutsController extends _$WorkoutsController {
 
       state = state.copyWith(workoutStatistics: AsyncValue.data(data));
     } catch (e, stackTrace) {
-      state =
-          state.copyWith(workoutStatistics: AsyncValue.error(e, stackTrace));
+      state = state.copyWith(
+        workoutStatistics: AsyncValue.error(e, stackTrace),
+      );
     }
   }
 }
