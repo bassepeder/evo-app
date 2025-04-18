@@ -1,4 +1,6 @@
+import 'package:evo/common/styles.dart';
 import 'package:evo/common/widgets/evo_elevated_button.dart';
+import 'package:evo/constants.dart';
 import 'package:evo/features/membership/membership_repository.dart';
 import 'package:evo/features/settings/brightness.dart';
 import 'package:evo/features/settings/invoice_repository.dart';
@@ -259,54 +261,73 @@ class PreviousPaymentCard extends ConsumerWidget {
                   .withValues(alpha: 0.5),
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Row(
               children: [
-                Text.rich(
-                  style: const TextStyle(fontSize: 16),
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: formatDate(context, invoice.date),
-                        style: const TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                      const TextSpan(text: ' - '),
-                      TextSpan(
-                        text: formatDate(context, invoice.to),
-                        style: const TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Row(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      formatCurrencyToProfileLocale(
-                        invoice.amount.toDouble(),
-                        membershipLocale,
-                      ),
+                    Text.rich(
                       style: const TextStyle(fontSize: 16),
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: formatDate(context, invoice.date),
+                            style: const TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                          const TextSpan(text: ' - '),
+                          TextSpan(
+                            text: formatDate(context, invoice.to),
+                            style: const TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        Text(
+                          formatCurrencyToProfileLocale(
+                            invoice.amount.toDouble(),
+                            membershipLocale,
+                          ),
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ],
                     ),
                   ],
                 ),
+                const Spacer(),
+                IconButton(
+                  onPressed: () async {
+                    await tryOpenUrlWithFeedback(
+                      kInvoicePdfUrl.replaceAll(':id', invoice.id.value),
+                      context,
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.open_in_new,
+                    size: 22,
+                  ),
+                ),
               ],
             ),
-            const Spacer(),
-            IconButton(
-              onPressed: () async {
-                await tryOpenUrlWithFeedback(
-                  'https://me.evofitness.no/invoice/${invoice.id}',
-                  context,
-                );
-              },
-              icon: Icon(
-                Icons.open_in_new,
-                color: Theme.of(context).colorScheme.onSurface,
+            const SizedBox(height: 8),
+            Chip(
+              label: Text(
+                InvoiceStatusExtensions.translated(invoice.status, context),
+                style: const TextStyle(color: Colors.white),
               ),
+              visualDensity: const VisualDensity(vertical: -4),
+              padding: EdgeInsets.zero,
+              shape: const StadiumBorder(
+                side: BorderSide(style: BorderStyle.none),
+              ),
+              backgroundColor: invoice.status == InvoiceStatus.charged
+                  ? evoCustomColors.good
+                  : evoCustomColors.error,
             ),
           ],
         ),
