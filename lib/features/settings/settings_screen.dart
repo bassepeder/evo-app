@@ -28,7 +28,6 @@ class SettingsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(context.t.settingsScreen.appBar),
-        centerTitle: true,
       ),
       body: SafeArea(
         child: SingleChildScrollView(

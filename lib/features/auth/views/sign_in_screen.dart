@@ -77,7 +77,6 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(context.t.signInScreen.title),
-        centerTitle: true,
       ),
       body: SafeArea(
         child: Padding(

@@ -17,7 +17,6 @@ class MembershipDetailsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(context.t.membershipDetailsScreen.appbar),
-        centerTitle: true,
       ),
       body: SafeArea(
         child: SingleChildScrollView(

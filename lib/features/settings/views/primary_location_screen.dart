@@ -28,7 +28,6 @@ class PrimaryLocationScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(context.t.primaryLocationScreen.appbar),
-        centerTitle: true,
       ),
       body: locationsAsync.when(
         data: (locations) {
