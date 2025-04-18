@@ -321,6 +321,9 @@ class PreviousPaymentCard extends ConsumerWidget {
               ),
               visualDensity: const VisualDensity(vertical: -4),
               padding: EdgeInsets.zero,
+              shape: const StadiumBorder(
+                side: BorderSide(style: BorderStyle.none),
+              ),
               backgroundColor: invoice.status == InvoiceStatus.charged
                   ? evoCustomColors.good
                   : evoCustomColors.error,
