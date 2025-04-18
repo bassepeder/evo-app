@@ -165,13 +165,18 @@ class Chart extends StatelessWidget {
               getTitlesWidget: (value, meta) {
                 final index = value.toInt();
                 if (index >= 0 && index < intervals.length) {
-                  return Text(
-                    intervals[index].name,
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: colorScheme.onSurface,
-                    ),
+                  return Column(
+                    children: [
+                      const SizedBox(height: 3),
+                      Text(
+                        intervals[index].name,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: colorScheme.onSurface,
+                        ),
+                      )
+                    ],
                   );
                 }
                 return const SizedBox.shrink();
