@@ -91,7 +91,6 @@ class _ProfileInformationScreenState
     return Scaffold(
       appBar: AppBar(
         title: Text(context.t.profileScreen.appbar),
-        centerTitle: true,
         actions: [
           Consumer(
             builder: (context, ref, child) {

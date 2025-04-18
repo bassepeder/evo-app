@@ -19,7 +19,6 @@ class CurrentReferralScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(context.t.currentReferralScreen.appbar),
-        centerTitle: true,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
