@@ -317,11 +317,11 @@ class PreviousPaymentCard extends ConsumerWidget {
             const SizedBox(height: 16),
             Chip(
               label: Text(
-                'Charged',
+                InvoiceStatusExtensions.translated(invoice.status, context),
                 style: const TextStyle(color: Colors.white),
               ),
               visualDensity: const VisualDensity(vertical: -4),
-              backgroundColor: invoice.status == 'charged'
+              backgroundColor: invoice.status == InvoiceStatus.charged
                   ? evoCustomColors.good
                   : evoCustomColors.error,
             )
