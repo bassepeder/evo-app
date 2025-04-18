@@ -44,7 +44,7 @@ const _maxCacheSize = 2 * 1024 * 1024;
 const _defaultTimeout = Duration(seconds: 10);
 
 Uri evoUri(String path, [Map<String, dynamic>? queryParameters]) =>
-    Uri.https(kBaseApiUrl, path, queryParameters);
+    Uri.https(kBaseApiAddress, path, queryParameters);
 
 /// Creates the appropriate http client for the platform.
 ///
@@ -150,7 +150,7 @@ class LoggingClient extends BaseClient {
 /// EVO HTTP client.
 ///
 /// * All requests made with [head], [get], [post], [put], [patch], [delete] target
-/// the EVO server, defined in [kBaseApiUrl]. It does not apply to the low-level
+/// the EVO server, defined in [kBaseApiAddress]. It does not apply to the low-level
 /// [send] method.
 /// * Sets the Authorization header when a token has been stored.
 /// * Sets the user-agent header with the app version, build number, and device info. If the user is logged in, it also includes the user's id.
