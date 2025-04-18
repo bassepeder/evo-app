@@ -142,9 +142,9 @@ class Chart extends StatelessWidget {
             barRods: [
               BarChartRodData(
                 toY: item.percentageUsed > 100 ? 100 : item.percentageUsed,
-                width: 40,
+                width: 45,
                 borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(10),
+                  top: Radius.circular(15),
                 ),
                 color: barColor,
                 // Highlight current bar
