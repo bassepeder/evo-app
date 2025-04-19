@@ -1,4 +1,4 @@
-base_locale: no
+base_locale: nb
 namespaces: true
 fallback_strategy: base_locale
 input_directory: lib/i18n
