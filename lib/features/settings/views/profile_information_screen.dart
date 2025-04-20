@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:evo/features/membership/membership_repository.dart';
+import 'package:evo/features/membership/models/membership_details.dart';
 import 'package:evo/features/settings/brightness.dart';
 import 'package:evo/features/settings/profile_controller.dart';
 import 'package:evo/features/settings/profile_repository.dart';
@@ -140,7 +141,7 @@ class _ProfileInformationScreenState
                 Header(
                   title: context.t.profileScreen.personalInformationHeader,
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 16),
                 PersonalInformationForm(
                   firstNameController: firstNameController,
                   lastNameController: lastNameController,
@@ -526,7 +527,7 @@ class UserInfoEditField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: [
           Expanded(
@@ -537,7 +538,7 @@ class UserInfoEditField extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 3,
+            flex: 4,
             child: child,
           ),
         ],
@@ -547,7 +548,7 @@ class UserInfoEditField extends StatelessWidget {
 }
 
 class PhoneInputField extends StatefulWidget {
-  final void Function(String, bool) onPhoneNumberChanged;
+  final void Function(Mobile, bool) onPhoneNumberChanged;
   final String? initialPrefix;
   final String? initialNumber;
 
@@ -569,26 +570,16 @@ class _PhoneInputState extends State<PhoneInputField> {
   @override
   void initState() {
     super.initState();
-    initialValue = PhoneNumber.parse(
-      _shouldAppendPrefix(widget.initialPrefix, widget.initialNumber)
-          ? '${widget.initialPrefix}${widget.initialNumber}'
-          : widget.initialNumber ?? '+47',
-    );
+    initialValue =
+        PhoneNumber.parse('${widget.initialPrefix}${widget.initialNumber}');
     controller = PhoneController(initialValue: initialValue);
-  }
-
-  bool _shouldAppendPrefix(String? prefix, String? number) {
-    if (number == null || number.isEmpty) return true;
-    final regex =
-        RegExp(r'^\+\d{1,3}'); // Matches a "+" followed by 1 to 3 digits
-    return !regex.hasMatch(number);
   }
 
   @override
   Widget build(BuildContext context) {
     return PhoneFormField(
       onChanged: (value) => widget.onPhoneNumberChanged(
-        value.international,
+        Mobile(number: value.nsn, prefix: '+${value.countryCode}'),
         value.isValid(type: PhoneNumberType.mobile),
       ),
       controller: controller,
@@ -615,15 +606,9 @@ class _PhoneInputState extends State<PhoneInputField> {
           borderRadius: BorderRadius.all(Radius.circular(50)),
         ),
       ),
-      enabled: true,
-      isCountryButtonPersistent: true,
-      isCountrySelectionEnabled: false,
-      countryButtonStyle: const CountryButtonStyle(
-        showDialCode: true,
-        showFlag: true,
-        showDropdownIcon: false,
-        flagSize: 16,
-      ),
+      countrySelectorNavigator:
+          const CountrySelectorNavigator.modalBottomSheet(sortCountries: true),
+      countryButtonStyle: const CountryButtonStyle(flagSize: 16),
     );
   }
 }
