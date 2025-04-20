@@ -140,7 +140,7 @@ class _ProfileInformationScreenState
                 Header(
                   title: context.t.profileScreen.personalInformationHeader,
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 16),
                 PersonalInformationForm(
                   firstNameController: firstNameController,
                   lastNameController: lastNameController,
@@ -526,7 +526,7 @@ class UserInfoEditField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: [
           Expanded(
@@ -537,7 +537,7 @@ class UserInfoEditField extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 3,
+            flex: 4,
             child: child,
           ),
         ],
