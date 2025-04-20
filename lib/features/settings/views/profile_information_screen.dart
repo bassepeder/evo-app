@@ -606,15 +606,9 @@ class _PhoneInputState extends State<PhoneInputField> {
           borderRadius: BorderRadius.all(Radius.circular(50)),
         ),
       ),
-      enabled: true,
-      isCountryButtonPersistent: true,
-      isCountrySelectionEnabled: false,
-      countryButtonStyle: const CountryButtonStyle(
-        showDialCode: true,
-        showFlag: true,
-        showDropdownIcon: false,
-        flagSize: 16,
-      ),
+      countrySelectorNavigator:
+          const CountrySelectorNavigator.modalBottomSheet(sortCountries: true),
+      countryButtonStyle: const CountryButtonStyle(flagSize: 16),
     );
   }
 }
