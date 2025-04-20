@@ -153,6 +153,10 @@ class Mobile with _$Mobile {
     required String prefix,
   }) = _Mobile;
 
+  const Mobile._();
+
+  String get internationalNumber => '$prefix$number';
+
   factory Mobile.fromJson(Map<String, dynamic> json) => _$MobileFromJson(json);
 
   factory Mobile.fromPick(RequiredPick pick) {
