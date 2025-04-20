@@ -7,7 +7,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'profile_controller.freezed.dart';
-
 part 'profile_controller.g.dart';
 
 @riverpod
@@ -90,11 +89,12 @@ class ProfileController extends _$ProfileController {
     );
   }
 
-  void updateMobile(String mobile, bool isValid) {
+  void updateMobile(Mobile mobile, bool isValid) {
     state = state.copyWith(
-      mobile: Mobile(number: mobile, prefix: '+47'),
+      mobile: mobile,
       isValidMobile: isValid,
-      hasChanged: mobile.trim() != getMembershipDetails().profile.mobile.number,
+      hasChanged: mobile.internationalNumber.trim() !=
+          getMembershipDetails().profile.mobile.internationalNumber.trim(),
     );
   }
 
