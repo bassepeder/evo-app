@@ -71,7 +71,6 @@ class CurrentReferralScreen extends ConsumerWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12),
                           child: Text(
-                            textAlign: TextAlign.center,
                             referral.description,
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
