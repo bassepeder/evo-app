@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:phone_form_field/phone_form_field.dart';
 
 import 'common/styles.dart';
 
@@ -101,7 +102,10 @@ class Application extends ConsumerWidget {
     );
 
     return MaterialApp(
-      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        ...PhoneFieldLocalization.delegates,
+      ],
       supportedLocales: AppLocaleUtils.supportedLocales,
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (BuildContext context) => 'EVO',
