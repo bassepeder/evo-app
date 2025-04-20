@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:evo/features/membership/membership_repository.dart';
+import 'package:evo/features/membership/models/membership_details.dart';
 import 'package:evo/features/settings/brightness.dart';
 import 'package:evo/features/settings/profile_controller.dart';
 import 'package:evo/features/settings/profile_repository.dart';
@@ -547,7 +548,7 @@ class UserInfoEditField extends StatelessWidget {
 }
 
 class PhoneInputField extends StatefulWidget {
-  final void Function(String, bool) onPhoneNumberChanged;
+  final void Function(Mobile, bool) onPhoneNumberChanged;
   final String? initialPrefix;
   final String? initialNumber;
 
@@ -574,12 +575,11 @@ class _PhoneInputState extends State<PhoneInputField> {
     controller = PhoneController(initialValue: initialValue);
   }
 
-
   @override
   Widget build(BuildContext context) {
     return PhoneFormField(
       onChanged: (value) => widget.onPhoneNumberChanged(
-        value.international,
+        Mobile(number: value.nsn, prefix: '+${value.countryCode}'),
         value.isValid(type: PhoneNumberType.mobile),
       ),
       controller: controller,
