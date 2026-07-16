@@ -1,16 +1,3 @@
-# app
+# What this is
 
-Mobile app for the EVO gym.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This is a cross-platform mobile app I built for [EVO Fitness](https://evofitness.no/) as a personal learning project. It is an unofficial, fan-made application created in my free time to learn Flutter. I am not affiliated with, endorsed by, or associated with EVO Fitness in any way.
